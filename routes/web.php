@@ -19,3 +19,7 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+
+###########################  Registro de Candidatos ##########################
+Route::post('/register/insert', 'RegisterController@create')->name('create');
