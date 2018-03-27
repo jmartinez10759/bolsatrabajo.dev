@@ -110,6 +110,8 @@ mixins = {
         this.insert_general( uri, inicio,function(json){
 
             console.log(json.data);
+            $('#password').parent().parent().removeClass('has-error');
+            $('#passwordConfirm').parent().parent().removeClass('has-error');
 
         },function(json){
             

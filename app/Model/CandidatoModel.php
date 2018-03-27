@@ -6,11 +6,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class CandidatoModel extends Model
 {
-    protected $table = "cat_candidatos";
+    protected $table = "users";
     public $fillable = [
-    	'id_candidatos'
-    	,'name', 
-    	,'email', 
+    	'id'
+    	,'name'
+    	,'email'
     	,'password'
     ];
 }

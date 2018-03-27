@@ -11,7 +11,7 @@ class MasterController extends Controller
 
 	public $_client;
     public $_tipo_user;
-    public $_domain = "34.225.245.91";
+    public $_domain = "";
     protected $_tipo = "application/json";
     public $_http;
 

@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Candidatos;
 
+use App\User;
+use App\Model\MasterModel;
 use Illuminate\Http\Request;
 use App\Model\CandidatoModel;
 use Illuminate\Support\Facades\Validator;
@@ -22,18 +24,43 @@ class CandidatosController extends MasterController
 	 *@return void
 	 */
 	public static function create( Request $request ){
-		
 
-		#debuger( self::validaciones( $request->all()['datos'] ) );
 		if ( !self::validaciones( $request->all()['datos'] ) ) {
 			return self::validaciones( $request->all()['datos'] );
 		}
-		echo "llego aqui";
-		debuger($request->all());
-		#$candidatos = 	
+		$where = [];
+		foreach ($request->all()['datos'] as $key => $value) {
+			if ( $key != "passwordConfirm" && $key != "password" && $key != "name") {
+				$where[$key] = $value;
+			}
+		}
+		#se realiza la consulta para verificar si existen ese candidato en la base de datos
+		$consulta = MasterModel::show_model(['id','name'], $where , new CandidatoModel );
+		#$consulta = CandidatoModel::where($where)->select('id','name')->get();
+		debuger($consulta);
+		if( count( $consulta ) > 0 ){
+			return message(false,[],"Registro del candidato existente");
+		}
+		$data = [];
+		foreach ($request->all()['datos'] as $key => $value) {
+			
+			if ($key != "passwordConfirm") {
+				$data[$key] = $value;
 
+				if ( $key == "password") {
+					$data[$key] = bcrypt($value);
+				}
 
-
+			}
+		}
+		#se realiza la inserccion.
+		$respoose = CandidatoModel::create($request->all());
+		$response = MasterModel::insert_model( [ $data ], new CandidatoModel);
+		if ( count( $response ) > 0) {
+			return message(true,$response,"Transaccion Exitosa");
+		}else{
+			return message(false,[],"Ocurrio un error");
+		}
 
 
 	}
@@ -60,6 +87,9 @@ class CandidatosController extends MasterController
 				}
 			}
 		}
+
+		return true;
+
 
 	}
 
