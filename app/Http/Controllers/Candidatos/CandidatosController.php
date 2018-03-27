@@ -3,14 +3,16 @@
 namespace App\Http\Controllers\Candidatos;
 
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
+use App\Model\CandidatoModel;
+use Illuminate\Support\Facades\Validator;
+use App\Http\Controllers\MasterController;
 
-class CandidatosController extends Controller
+class CandidatosController extends MasterController
 {
     
 
 	public function __construct(){
-
+		parent::__construct();
 	}
 	
 	/**
@@ -20,14 +22,47 @@ class CandidatosController extends Controller
 	 *@return void
 	 */
 	public static function create( Request $request ){
-	
-		debuger($request->all()['datos']);
+		
 
-		debuger($request);
-		echo "jajaja";
+		#debuger( self::validaciones( $request->all()['datos'] ) );
+		if ( !self::validaciones( $request->all()['datos'] ) ) {
+			return self::validaciones( $request->all()['datos'] );
+		}
+		echo "llego aqui";
+		debuger($request->all());
+		#$candidatos = 	
+
+
+
 
 
 	}
+	/**
+	 *Metodo para la validacion de los campos si vienen correctamente
+	 *@access public
+	 *@param $request array [Description]
+	 *@return void
+	 **/
+	public static function validaciones( $request ){
+
+		foreach ($request as $key => $value) {
+
+			if ($key == 'password' || $key == "passwordConfirm") {
+				
+				if ( $request['password'] != $request['passwordConfirm']) {
+					 echo message(false,[],'Password');
+					 die();
+				}
+				
+				if ( strlen($request[$key]) < 6 ) {
+					echo message(false,[],'La longitud del password debe de ser mayor a 6');
+					die();
+				}
+			}
+		}
+
+	}
+
 
 
 }
