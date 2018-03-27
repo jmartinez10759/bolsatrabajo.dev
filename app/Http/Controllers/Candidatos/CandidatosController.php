@@ -21,7 +21,10 @@ class CandidatosController extends Controller
 	 */
 	public static function create( Request $request ){
 
-		debuger($request);
+	
+		debuger($request->all()['datos']);
+
+
 
 	}
 
