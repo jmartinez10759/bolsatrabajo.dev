@@ -11305,5 +11305,1605 @@ return /******/ (function(modules) { // webpackBootstrap
 ;
 //# sourceMappingURL=axios.map
 !function(e,t,n){"use strict";!function o(e,t,n){function a(s,l){if(!t[s]){if(!e[s]){var i="function"==typeof require&&require;if(!l&&i)return i(s,!0);if(r)return r(s,!0);var u=new Error("Cannot find module '"+s+"'");throw u.code="MODULE_NOT_FOUND",u}var c=t[s]={exports:{}};e[s][0].call(c.exports,function(t){var n=e[s][1][t];return a(n?n:t)},c,c.exports,o,e,t,n)}return t[s].exports}for(var r="function"==typeof require&&require,s=0;s<n.length;s++)a(n[s]);return a}({1:[function(o,a,r){var s=function(e){return e&&e.__esModule?e:{"default":e}};Object.defineProperty(r,"__esModule",{value:!0});var l,i,u,c,d=o("./modules/handle-dom"),f=o("./modules/utils"),p=o("./modules/handle-swal-dom"),m=o("./modules/handle-click"),v=o("./modules/handle-key"),y=s(v),h=o("./modules/default-params"),b=s(h),g=o("./modules/set-params"),w=s(g);r["default"]=u=c=function(){function o(e){var t=a;return t[e]===n?b["default"][e]:t[e]}var a=arguments[0];if(d.addClass(t.body,"stop-scrolling"),p.resetInput(),a===n)return f.logStr("SweetAlert expects at least 1 attribute!"),!1;var r=f.extend({},b["default"]);switch(typeof a){case"string":r.title=a,r.text=arguments[1]||"",r.type=arguments[2]||"";break;case"object":if(a.title===n)return f.logStr('Missing "title" argument!'),!1;r.title=a.title;for(var s in b["default"])r[s]=o(s);r.confirmButtonText=r.showCancelButton?"Confirm":b["default"].confirmButtonText,r.confirmButtonText=o("confirmButtonText"),r.doneFunction=arguments[1]||null;break;default:return f.logStr('Unexpected type of argument! Expected "string" or "object", got '+typeof a),!1}w["default"](r),p.fixVerticalPosition(),p.openModal(arguments[1]);for(var u=p.getModal(),v=u.querySelectorAll("button"),h=["onclick","onmouseover","onmouseout","onmousedown","onmouseup","onfocus"],g=function(e){return m.handleButton(e,r,u)},C=0;C<v.length;C++)for(var S=0;S<h.length;S++){var x=h[S];v[C][x]=g}p.getOverlay().onclick=g,l=e.onkeydown;var k=function(e){return y["default"](e,r,u)};e.onkeydown=k,e.onfocus=function(){setTimeout(function(){i!==n&&(i.focus(),i=n)},0)},c.enableButtons()},u.setDefaults=c.setDefaults=function(e){if(!e)throw new Error("userParams is required");if("object"!=typeof e)throw new Error("userParams has to be a object");f.extend(b["default"],e)},u.close=c.close=function(){var o=p.getModal();d.fadeOut(p.getOverlay(),5),d.fadeOut(o,5),d.removeClass(o,"showSweetAlert"),d.addClass(o,"hideSweetAlert"),d.removeClass(o,"visible");var a=o.querySelector(".sa-icon.sa-success");d.removeClass(a,"animate"),d.removeClass(a.querySelector(".sa-tip"),"animateSuccessTip"),d.removeClass(a.querySelector(".sa-long"),"animateSuccessLong");var r=o.querySelector(".sa-icon.sa-error");d.removeClass(r,"animateErrorIcon"),d.removeClass(r.querySelector(".sa-x-mark"),"animateXMark");var s=o.querySelector(".sa-icon.sa-warning");return d.removeClass(s,"pulseWarning"),d.removeClass(s.querySelector(".sa-body"),"pulseWarningIns"),d.removeClass(s.querySelector(".sa-dot"),"pulseWarningIns"),setTimeout(function(){var e=o.getAttribute("data-custom-class");d.removeClass(o,e)},300),d.removeClass(t.body,"stop-scrolling"),e.onkeydown=l,e.previousActiveElement&&e.previousActiveElement.focus(),i=n,clearTimeout(o.timeout),!0},u.showInputError=c.showInputError=function(e){var t=p.getModal(),n=t.querySelector(".sa-input-error");d.addClass(n,"show");var o=t.querySelector(".sa-error-container");d.addClass(o,"show"),o.querySelector("p").innerHTML=e,setTimeout(function(){u.enableButtons()},1),t.querySelector("input").focus()},u.resetInputError=c.resetInputError=function(e){if(e&&13===e.keyCode)return!1;var t=p.getModal(),n=t.querySelector(".sa-input-error");d.removeClass(n,"show");var o=t.querySelector(".sa-error-container");d.removeClass(o,"show")},u.disableButtons=c.disableButtons=function(){var e=p.getModal(),t=e.querySelector("button.confirm"),n=e.querySelector("button.cancel");t.disabled=!0,n.disabled=!0},u.enableButtons=c.enableButtons=function(){var e=p.getModal(),t=e.querySelector("button.confirm"),n=e.querySelector("button.cancel");t.disabled=!1,n.disabled=!1},"undefined"!=typeof e?e.sweetAlert=e.swal=u:f.logStr("SweetAlert is a frontend module!"),a.exports=r["default"]},{"./modules/default-params":2,"./modules/handle-click":3,"./modules/handle-dom":4,"./modules/handle-key":5,"./modules/handle-swal-dom":6,"./modules/set-params":8,"./modules/utils":9}],2:[function(e,t,n){Object.defineProperty(n,"__esModule",{value:!0});var o={title:"",text:"",type:null,allowOutsideClick:!1,showConfirmButton:!0,showCancelButton:!1,closeOnConfirm:!0,closeOnCancel:!0,confirmButtonText:"OK",confirmButtonColor:"#8CD4F5",cancelButtonText:"Cancel",imageUrl:null,imageSize:null,timer:null,customClass:"",html:!1,animation:!0,allowEscapeKey:!0,inputType:"text",inputPlaceholder:"",inputValue:"",showLoaderOnConfirm:!1};n["default"]=o,t.exports=n["default"]},{}],3:[function(t,n,o){Object.defineProperty(o,"__esModule",{value:!0});var a=t("./utils"),r=(t("./handle-swal-dom"),t("./handle-dom")),s=function(t,n,o){function s(e){m&&n.confirmButtonColor&&(p.style.backgroundColor=e)}var u,c,d,f=t||e.event,p=f.target||f.srcElement,m=-1!==p.className.indexOf("confirm"),v=-1!==p.className.indexOf("sweet-overlay"),y=r.hasClass(o,"visible"),h=n.doneFunction&&"true"===o.getAttribute("data-has-done-function");switch(m&&n.confirmButtonColor&&(u=n.confirmButtonColor,c=a.colorLuminance(u,-.04),d=a.colorLuminance(u,-.14)),f.type){case"mouseover":s(c);break;case"mouseout":s(u);break;case"mousedown":s(d);break;case"mouseup":s(c);break;case"focus":var b=o.querySelector("button.confirm"),g=o.querySelector("button.cancel");m?g.style.boxShadow="none":b.style.boxShadow="none";break;case"click":var w=o===p,C=r.isDescendant(o,p);if(!w&&!C&&y&&!n.allowOutsideClick)break;m&&h&&y?l(o,n):h&&y||v?i(o,n):r.isDescendant(o,p)&&"BUTTON"===p.tagName&&sweetAlert.close()}},l=function(e,t){var n=!0;r.hasClass(e,"show-input")&&(n=e.querySelector("input").value,n||(n="")),t.doneFunction(n),t.closeOnConfirm&&sweetAlert.close(),t.showLoaderOnConfirm&&sweetAlert.disableButtons()},i=function(e,t){var n=String(t.doneFunction).replace(/\s/g,""),o="function("===n.substring(0,9)&&")"!==n.substring(9,10);o&&t.doneFunction(!1),t.closeOnCancel&&sweetAlert.close()};o["default"]={handleButton:s,handleConfirm:l,handleCancel:i},n.exports=o["default"]},{"./handle-dom":4,"./handle-swal-dom":6,"./utils":9}],4:[function(n,o,a){Object.defineProperty(a,"__esModule",{value:!0});var r=function(e,t){return new RegExp(" "+t+" ").test(" "+e.className+" ")},s=function(e,t){r(e,t)||(e.className+=" "+t)},l=function(e,t){var n=" "+e.className.replace(/[\t\r\n]/g," ")+" ";if(r(e,t)){for(;n.indexOf(" "+t+" ")>=0;)n=n.replace(" "+t+" "," ");e.className=n.replace(/^\s+|\s+$/g,"")}},i=function(e){var n=t.createElement("div");return n.appendChild(t.createTextNode(e)),n.innerHTML},u=function(e){e.style.opacity="",e.style.display="block"},c=function(e){if(e&&!e.length)return u(e);for(var t=0;t<e.length;++t)u(e[t])},d=function(e){e.style.opacity="",e.style.display="none"},f=function(e){if(e&&!e.length)return d(e);for(var t=0;t<e.length;++t)d(e[t])},p=function(e,t){for(var n=t.parentNode;null!==n;){if(n===e)return!0;n=n.parentNode}return!1},m=function(e){e.style.left="-9999px",e.style.display="block";var t,n=e.clientHeight;return t="undefined"!=typeof getComputedStyle?parseInt(getComputedStyle(e).getPropertyValue("padding-top"),10):parseInt(e.currentStyle.padding),e.style.left="",e.style.display="none","-"+parseInt((n+t)/2)+"px"},v=function(e,t){if(+e.style.opacity<1){t=t||16,e.style.opacity=0,e.style.display="block";var n=+new Date,o=function(e){function t(){return e.apply(this,arguments)}return t.toString=function(){return e.toString()},t}(function(){e.style.opacity=+e.style.opacity+(new Date-n)/100,n=+new Date,+e.style.opacity<1&&setTimeout(o,t)});o()}e.style.display="block"},y=function(e,t){t=t||16,e.style.opacity=1;var n=+new Date,o=function(e){function t(){return e.apply(this,arguments)}return t.toString=function(){return e.toString()},t}(function(){e.style.opacity=+e.style.opacity-(new Date-n)/100,n=+new Date,+e.style.opacity>0?setTimeout(o,t):e.style.display="none"});o()},h=function(n){if("function"==typeof MouseEvent){var o=new MouseEvent("click",{view:e,bubbles:!1,cancelable:!0});n.dispatchEvent(o)}else if(t.createEvent){var a=t.createEvent("MouseEvents");a.initEvent("click",!1,!1),n.dispatchEvent(a)}else t.createEventObject?n.fireEvent("onclick"):"function"==typeof n.onclick&&n.onclick()},b=function(t){"function"==typeof t.stopPropagation?(t.stopPropagation(),t.preventDefault()):e.event&&e.event.hasOwnProperty("cancelBubble")&&(e.event.cancelBubble=!0)};a.hasClass=r,a.addClass=s,a.removeClass=l,a.escapeHtml=i,a._show=u,a.show=c,a._hide=d,a.hide=f,a.isDescendant=p,a.getTopMargin=m,a.fadeIn=v,a.fadeOut=y,a.fireClick=h,a.stopEventPropagation=b},{}],5:[function(t,o,a){Object.defineProperty(a,"__esModule",{value:!0});var r=t("./handle-dom"),s=t("./handle-swal-dom"),l=function(t,o,a){var l=t||e.event,i=l.keyCode||l.which,u=a.querySelector("button.confirm"),c=a.querySelector("button.cancel"),d=a.querySelectorAll("button[tabindex]");if(-1!==[9,13,32,27].indexOf(i)){for(var f=l.target||l.srcElement,p=-1,m=0;m<d.length;m++)if(f===d[m]){p=m;break}9===i?(f=-1===p?u:p===d.length-1?d[0]:d[p+1],r.stopEventPropagation(l),f.focus(),o.confirmButtonColor&&s.setFocusStyle(f,o.confirmButtonColor)):13===i?("INPUT"===f.tagName&&(f=u,u.focus()),f=-1===p?u:n):27===i&&o.allowEscapeKey===!0?(f=c,r.fireClick(f,l)):f=n}};a["default"]=l,o.exports=a["default"]},{"./handle-dom":4,"./handle-swal-dom":6}],6:[function(n,o,a){var r=function(e){return e&&e.__esModule?e:{"default":e}};Object.defineProperty(a,"__esModule",{value:!0});var s=n("./utils"),l=n("./handle-dom"),i=n("./default-params"),u=r(i),c=n("./injected-html"),d=r(c),f=".sweet-alert",p=".sweet-overlay",m=function(){var e=t.createElement("div");for(e.innerHTML=d["default"];e.firstChild;)t.body.appendChild(e.firstChild)},v=function(e){function t(){return e.apply(this,arguments)}return t.toString=function(){return e.toString()},t}(function(){var e=t.querySelector(f);return e||(m(),e=v()),e}),y=function(){var e=v();return e?e.querySelector("input"):void 0},h=function(){return t.querySelector(p)},b=function(e,t){var n=s.hexToRgb(t);e.style.boxShadow="0 0 2px rgba("+n+", 0.8), inset 0 0 0 1px rgba(0, 0, 0, 0.05)"},g=function(n){var o=v();l.fadeIn(h(),10),l.show(o),l.addClass(o,"showSweetAlert"),l.removeClass(o,"hideSweetAlert"),e.previousActiveElement=t.activeElement;var a=o.querySelector("button.confirm");a.focus(),setTimeout(function(){l.addClass(o,"visible")},500);var r=o.getAttribute("data-timer");if("null"!==r&&""!==r){var s=n;o.timeout=setTimeout(function(){var e=(s||null)&&"true"===o.getAttribute("data-has-done-function");e?s(null):sweetAlert.close()},r)}},w=function(){var e=v(),t=y();l.removeClass(e,"show-input"),t.value=u["default"].inputValue,t.setAttribute("type",u["default"].inputType),t.setAttribute("placeholder",u["default"].inputPlaceholder),C()},C=function(e){if(e&&13===e.keyCode)return!1;var t=v(),n=t.querySelector(".sa-input-error");l.removeClass(n,"show");var o=t.querySelector(".sa-error-container");l.removeClass(o,"show")},S=function(){var e=v();e.style.marginTop=l.getTopMargin(v())};a.sweetAlertInitialize=m,a.getModal=v,a.getOverlay=h,a.getInput=y,a.setFocusStyle=b,a.openModal=g,a.resetInput=w,a.resetInputError=C,a.fixVerticalPosition=S},{"./default-params":2,"./handle-dom":4,"./injected-html":7,"./utils":9}],7:[function(e,t,n){Object.defineProperty(n,"__esModule",{value:!0});var o='<div class="sweet-overlay" tabIndex="-1"></div><div class="sweet-alert"><div class="sa-icon sa-error">\n      <span class="sa-x-mark">\n        <span class="sa-line sa-left"></span>\n        <span class="sa-line sa-right"></span>\n      </span>\n    </div><div class="sa-icon sa-warning">\n      <span class="sa-body"></span>\n      <span class="sa-dot"></span>\n    </div><div class="sa-icon sa-info"></div><div class="sa-icon sa-success">\n      <span class="sa-line sa-tip"></span>\n      <span class="sa-line sa-long"></span>\n\n      <div class="sa-placeholder"></div>\n      <div class="sa-fix"></div>\n    </div><div class="sa-icon sa-custom"></div><h2>Title</h2>\n    <p>Text</p>\n    <fieldset>\n      <input type="text" tabIndex="3" />\n      <div class="sa-input-error"></div>\n    </fieldset><div class="sa-error-container">\n      <div class="icon">!</div>\n      <p>Not valid!</p>\n    </div><div class="sa-button-container">\n      <button class="cancel" tabIndex="2">Cancel</button>\n      <div class="sa-confirm-button-container">\n        <button class="confirm" tabIndex="1">OK</button><div class="la-ball-fall">\n          <div></div>\n          <div></div>\n          <div></div>\n        </div>\n      </div>\n    </div></div>';n["default"]=o,t.exports=n["default"]},{}],8:[function(e,t,o){Object.defineProperty(o,"__esModule",{value:!0});var a=e("./utils"),r=e("./handle-swal-dom"),s=e("./handle-dom"),l=["error","warning","info","success","input","prompt"],i=function(e){var t=r.getModal(),o=t.querySelector("h2"),i=t.querySelector("p"),u=t.querySelector("button.cancel"),c=t.querySelector("button.confirm");if(o.innerHTML=e.html?e.title:s.escapeHtml(e.title).split("\n").join("<br>"),i.innerHTML=e.html?e.text:s.escapeHtml(e.text||"").split("\n").join("<br>"),e.text&&s.show(i),e.customClass)s.addClass(t,e.customClass),t.setAttribute("data-custom-class",e.customClass);else{var d=t.getAttribute("data-custom-class");s.removeClass(t,d),t.setAttribute("data-custom-class","")}if(s.hide(t.querySelectorAll(".sa-icon")),e.type&&!a.isIE8()){var f=function(){for(var o=!1,a=0;a<l.length;a++)if(e.type===l[a]){o=!0;break}if(!o)return logStr("Unknown alert type: "+e.type),{v:!1};var i=["success","error","warning","info"],u=n;-1!==i.indexOf(e.type)&&(u=t.querySelector(".sa-icon.sa-"+e.type),s.show(u));var c=r.getInput();switch(e.type){case"success":s.addClass(u,"animate"),s.addClass(u.querySelector(".sa-tip"),"animateSuccessTip"),s.addClass(u.querySelector(".sa-long"),"animateSuccessLong");break;case"error":s.addClass(u,"animateErrorIcon"),s.addClass(u.querySelector(".sa-x-mark"),"animateXMark");break;case"warning":s.addClass(u,"pulseWarning"),s.addClass(u.querySelector(".sa-body"),"pulseWarningIns"),s.addClass(u.querySelector(".sa-dot"),"pulseWarningIns");break;case"input":case"prompt":c.setAttribute("type",e.inputType),c.value=e.inputValue,c.setAttribute("placeholder",e.inputPlaceholder),s.addClass(t,"show-input"),setTimeout(function(){c.focus(),c.addEventListener("keyup",swal.resetInputError)},400)}}();if("object"==typeof f)return f.v}if(e.imageUrl){var p=t.querySelector(".sa-icon.sa-custom");p.style.backgroundImage="url("+e.imageUrl+")",s.show(p);var m=80,v=80;if(e.imageSize){var y=e.imageSize.toString().split("x"),h=y[0],b=y[1];h&&b?(m=h,v=b):logStr("Parameter imageSize expects value with format WIDTHxHEIGHT, got "+e.imageSize)}p.setAttribute("style",p.getAttribute("style")+"width:"+m+"px; height:"+v+"px")}t.setAttribute("data-has-cancel-button",e.showCancelButton),e.showCancelButton?u.style.display="inline-block":s.hide(u),t.setAttribute("data-has-confirm-button",e.showConfirmButton),e.showConfirmButton?c.style.display="inline-block":s.hide(c),e.cancelButtonText&&(u.innerHTML=s.escapeHtml(e.cancelButtonText)),e.confirmButtonText&&(c.innerHTML=s.escapeHtml(e.confirmButtonText)),e.confirmButtonColor&&(c.style.backgroundColor=e.confirmButtonColor,c.style.borderLeftColor=e.confirmLoadingButtonColor,c.style.borderRightColor=e.confirmLoadingButtonColor,r.setFocusStyle(c,e.confirmButtonColor)),t.setAttribute("data-allow-outside-click",e.allowOutsideClick);var g=e.doneFunction?!0:!1;t.setAttribute("data-has-done-function",g),e.animation?"string"==typeof e.animation?t.setAttribute("data-animation",e.animation):t.setAttribute("data-animation","pop"):t.setAttribute("data-animation","none"),t.setAttribute("data-timer",e.timer)};o["default"]=i,t.exports=o["default"]},{"./handle-dom":4,"./handle-swal-dom":6,"./utils":9}],9:[function(t,n,o){Object.defineProperty(o,"__esModule",{value:!0});var a=function(e,t){for(var n in t)t.hasOwnProperty(n)&&(e[n]=t[n]);return e},r=function(e){var t=/^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(e);return t?parseInt(t[1],16)+", "+parseInt(t[2],16)+", "+parseInt(t[3],16):null},s=function(){return e.attachEvent&&!e.addEventListener},l=function(t){e.console&&e.console.log("SweetAlert: "+t)},i=function(e,t){e=String(e).replace(/[^0-9a-f]/gi,""),e.length<6&&(e=e[0]+e[0]+e[1]+e[1]+e[2]+e[2]),t=t||0;var n,o,a="#";for(o=0;3>o;o++)n=parseInt(e.substr(2*o,2),16),n=Math.round(Math.min(Math.max(0,n+n*t),255)).toString(16),a+=("00"+n).substr(n.length);return a};o.extend=a,o.hexToRgb=r,o.isIE8=s,o.logStr=l,o.colorLuminance=i},{}]},{},[1]),"function"==typeof define&&define.amd?define(function(){return sweetAlert}):"undefined"!=typeof module&&module.exports&&(module.exports=sweetAlert)}(window,document);
+/**
+ *@author Jorge Martinez Quezada
+ *@Creacion de funciones en js globales para utilizarlas.
+ */
+
+if(detectIE()){
+    // window.location.replace("error-ie");
+}
+$().ready(function(){
+
+});
+
+/**
+ *Se crea una funcion para debuger la ejecucion del front
+ *@access {public} 
+ *@param {element} [description]
+ *@return {json}
+ */
+ debuger = function( element ){
+
+    var salida = "";
+    for (var p in element) {
+        salida += p + ": " + element[p];
+    }
+    alert(salida);
+    alert(  JSON.stringify(element) );
+    console.log(element);
+
+ }
+
+
+
+function debug(arra){
+    alert(dump_var(arra));
+}
+
+function dump_var(arr,level) {
+    // Explota un array y regres su estructura
+    // Uso: alert(dump_var(array));
+    var dumped_text = "";
+    if(!level) level = 0;
+    //The padding given at the beginning of the line.
+    var level_padding = "";
+    for(var j=0;j<level+1;j++) level_padding += "    ";
+    if(typeof(arr) == 'object') { //Array/Hashes/Objects
+        for(var item in arr) {
+            var value = arr[item];
+            if(typeof(value) == 'object') { //If it is an array,
+                dumped_text += level_padding + "'" + item + "' ...\n";
+                dumped_text += dump_var(value,level+1);
+            } else {
+                dumped_text += level_padding + "'" + item + "' => \"" + value + "\"\n";
+            }
+        }
+    } else { //Stings/Chars/Numbers etc.
+        dumped_text = "===>"+arr+"<===("+typeof(arr)+")";
+    }
+    return dumped_text;
+}
+
+function formData(selector, template){
+    /**
+    * Descripcion:  Crea un objeto recuperando los valores ingresados en los campos INPUT
+    * Comentario:   Los elementos html deben estar dentro de un mismo <div> y tiene que
+    *               tener el atributo:data-campo="[nombre_campo]"
+    * Ejemplo:      <div id="formulario"><input id="id_orden" type="hidden" data-campo="id_orden" value="{id_orden}" /></div>
+    *               <script> var objData = formData('#formulario'); </script>
+    * @author:      Jorge Martinez
+    */
+    var data = template ? template : {}; // Valores predeterminados - Opcional
+    var c, f, r, v, m, $e, $elements = jQuery(selector).find("input, select, textarea");
+    for (var i = 0; i < $elements.length; i++){
+        $e = jQuery($elements[i]);
+        // alert($elements[i]['id']);
+        f = $e.data("campo");
+        r = $e.attr("required") ? true: false;
+        // validación de que exista un elemento
+
+        if (!f) continue;
+
+        // Recolección datos por tipo de elemento
+        v = undefined;
+        switch ($e[0].nodeName.toUpperCase()){
+            case "LABEL":
+                v = $e.text();
+                break;
+            case "INPUT":
+                var type = $e.attr("type").toUpperCase();
+                if (type == "TEXT" || type == "HIDDEN" || type == "PASSWORD"){
+                    v = jQuery.trim($e.val());
+                }
+                else if (type == "CHECKBOX"){
+                    v = $e.prop("checked");
+                }
+                else if (type == "RADIO"){
+                    if ($e.prop("checked")){
+                        v = $e.val();
+                        // alert($e.prop("id"));
+                    }
+                }
+                else if ($e.datepicker){
+                    v = $e.datepicker("getDate");
+                }
+                else{
+                    v = jQuery.trim($e.val());
+                }
+                break;
+            case "TEXTAREA":
+            default:
+                v = jQuery.trim($e.val());
+        }
+
+        // Guarda el valor en el objeto
+        if (r && (v == undefined || v == "")){
+
+            m = $e.data("mensaje");
+            if (m)
+                alert(m);
+            else
+                alert("Es necesario especificar un valor para el campo \"" + f + "\".");
+            $e.focus();
+            return null;
+        }
+        else if (v != undefined){
+                data[i] = v;
+                data[f] = v;
+        }
+
+
+    }// next
+    return data;
+}
+/**
+ *Función que devuelve una repuesta de la peticion solicitada por GET, POST
+ * @param request {object} Objeto de petición
+ * @param response {object} Objeto de respuesta HTTP
+ * @example
+ * @param callback recide el data
+ * @param pathUrl recide el controller o URL
+ * @param type recide POST, GET
+ * @param dataquery recibe los parametros que seran enviados por get o post
+ * @returns {json} Obtiene la respuesta de la peticion solicitada
+ * GET / HTTP 1.1 POST / HTT 1.1
+ * EJEMPLO:
+    requestAjaxSend('prueba/ejemplo', {id:1}, function(data){
+        console.log(data);
+    }, false, false, false, false,  'GET', 'html');
+ */
+function requestAjaxSend(pathUrl, data, success, beforeSend, error, complete, done, type, dataType, async){
+
+    var dataType = dataType? dataType : 'json',
+        type     = type? type : 'POST',
+        beforeSend = beforeSend? beforeSend : function(){},
+        error    = error? error : function(){},
+        complete = complete? complete : function(xhr) {
+            //check_status_xhr(xhr.status);
+        },
+        done     = done? done : function(){},
+        async    = async? async : true;
+     return $.ajax({
+        async:async,
+        type:type,
+        url: pathUrl,
+        data: data,
+        dataType: dataType,
+        beforeSend: function(b) {
+            beforeSend(b);
+        },
+        success : function(data) {
+            //check_session(data);
+            success(data);
+        },
+        error: function(e) {
+            error(e);
+        },
+        complete: function(c) {
+            complete(c);
+        },
+        done: function() {
+            done();
+        }
+    });
+}
+/**
+ * Verifica la sesion del usuario
+ * @param  {json} data respuesta de una llamada ajax
+ * @return {void}
+ */
+function check_session(data){
+    if(data.session_destroy){
+        swal({
+          title: sessionLang['title'],
+          text: sessionLang['content'],
+          timer: 5000,
+          showConfirmButton: true,
+          confirmButtonText: generalLang['aceptar']
+        }).then(
+            function(acept){
+                location.href= 'inicio';
+            },
+            function(dismiss) {
+                location.href= 'inicio';
+            }
+        );
+    }
+}
+/**
+*    // Envío de valores vía POST a una URL
+*    // var objData = 'simple';
+*    // var objData = new Array;    objData.push('arrelgo1'); objData.push('arrelgo2');
+*    // var objData = {id: 1, name: 'oscar', value: 'valores'};
+*/
+function send_post(data, url, target, debug){
+    if(data && url){
+        var elements, keys = false;
+        var n  = Math.floor((Math.random() * 100) + 1); //1 al 100
+        target = (!target)?'_self':target;
+        // Crea formulario
+        var form = document.createElement("form");
+        form.setAttribute("id", "frm-"+n);
+        form.setAttribute("method", "post");
+        form.setAttribute("action", url);
+        form.setAttribute("target", target);
+        // Contruccion de inputs
+        if(data.constructor === String || data.constructor === Number){
+            // Simple: un solo dato - String
+            var hiddenField = document.createElement("input");
+            hiddenField.setAttribute("type", "hidden");
+            hiddenField.setAttribute("id", "id");
+            hiddenField.setAttribute("name", "id");
+            hiddenField.setAttribute("value", data);
+            form.appendChild(hiddenField);
+        }
+        else if(data.constructor === Array){
+            // Array: arreglo simple - ['1','2','n']
+            elements = data.length;
+            var hiddenField = new Array;
+            for(var i=0; i<elements; i++){
+                hiddenField[i] = document.createElement("input");
+                hiddenField[i].setAttribute("type", "hidden");
+                hiddenField[i].setAttribute("id", "input-"+i);
+                hiddenField[i].setAttribute("name", "input-"+i);
+                hiddenField[i].setAttribute("value", data[i]);
+                form.appendChild(hiddenField[i]);
+            }
+        }
+        else if(data.constructor === Object){
+            // Object: arreglo asociativo - {id: 1, name: 'oscar', value: 'valores'}
+            elements = Object.keys(data).length;
+            keys = Object.keys(data);
+            var hiddenField = new Array;
+            for(var i=0; i<elements; i++){
+                hiddenField[i] = document.createElement("input");
+                hiddenField[i].setAttribute("type", "hidden");
+                hiddenField[i].setAttribute("id", keys[i]);
+                hiddenField[i].setAttribute("name", "data["+keys[i]+"]");
+                hiddenField[i].setAttribute("value", data[keys[i]]);
+                form.appendChild(hiddenField[i]);
+            }
+        }
+        document.body.appendChild(form); //Muestra formulario en el documento
+        if(debug){
+            return false;
+        }else{
+            form.submit();  //Envía datos a URL
+        }
+    }else{
+        return false;
+    }
+
+}
+/**
+ * Redirecciona a la url recibida
+ * @param  {txt} uri recibida
+ * @return {void}
+ */
+function redirect(url){
+    url = (url)?url:'';
+    location.href=url;
+
+}
+/**
+ * Valida formulario usando jquery.validate
+ * @param  {idObj} ID del DOM HTML
+ * @param  {rules} Objeto JSON con relgas de validación
+ * @param  {messages} Objeto JSON con mensajes para cada regla
+ * @return {void}
+ */
+function frmValidate(idObj,rules,messages){
+    // Mensajes
+    var messages_default = {
+        required:       validatorLang['required'],
+        remote:         validatorLang['remote'],
+        email:          validatorLang['email'],
+        url:            validatorLang['url'],
+        date:           validatorLang['date'],
+        dateISO:        validatorLang['dateISO'],
+        number:         validatorLang['number'],
+        digits:         validatorLang['digits'],
+        creditcard:     validatorLang['creditcard'],
+        equalTo:        validatorLang['equalTo'],
+        accept:         validatorLang['accept'],
+        maxlength:      validatorLang['maxlength'],
+        minlength:      validatorLang['minlength'],
+        rangelength:    validatorLang['rangelength'],
+        range:          validatorLang['range'],
+        max:            validatorLang['max'],
+        min:            validatorLang['min']
+    };
+    jQuery.extend(jQuery.validator.messages,messages_default);
+    if(!messages) messages = messages_default;
+    // Selects
+    // jQuery.validator.setDefaults({ ignore: ":hidden:not(select)" });
+    // Inicializa
+    jQuery(idObj).validate({
+        ignore: '.ignore, .select2-input',
+        rules: rules,
+        messages: messages,
+        errorElement : 'div',
+        errorPlacement: function(error, element) {
+          var placement = $(element).data('error');
+          if (placement) {
+            $(placement).append(error)
+          } else {
+            error.insertAfter(element);
+          }
+        }
+     });
+
+}
+// MODALES
+/**
+ *Funcion para construir un modal
+ *@param string uri [description]
+ *@return void
+ */
+function buildModal(uri){
+    if(uri){
+        $.ajax({
+            type: "POST",
+            url: uri,
+            dataType: 'json',
+            data: {},
+            success: function(data){
+                if(data.success){
+                    jQuery("#modal-custom").empty();
+                    jQuery("#modal-custom").append(data.modal);
+                    $('#'+data.id).openModal();
+                }
+            }
+        });
+    }
+}
+
+function buildModalTimeout(uri, timeout){
+    if(uri){
+        timeout = (!timeout)?2000:timeout;
+        jQuery.ajax({
+            type: "POST",
+            url: uri,
+            dataType: 'json',
+            data: {},
+            success: function(data){
+                if(data.success){
+                    jQuery("#modal-custom").empty();
+                    jQuery("#modal-custom").append(data.modal);
+                    jQuery('#'+data.id).openModal();
+                    setTimeout(function(){ jQuery('#'+data.id).closeModal(); }, timeout);
+                    setTimeout(function(){ jQuery("#modal-custom").empty();}, timeout+1000);
+                }
+            }
+        });
+    }
+}
+// Fin MODALES
+/**
+ * Contruye una notificación toast
+ * @param  {string} mensaje mensaje de la notificacion
+ * @param  {sring} clase   clase de la notifiacion
+ * @param  {int} tiempo  tiempo en mili segundos de duracion
+ * @return {void}
+ */
+function buildToast(mensaje, clase, tiempo, completeCallBack) {
+    mensaje  = mensaje? mensaje : 'Toast';
+    tiempo   = tiempo? tiempo : 5000;
+    callback = completeCallBack? completeCallBack : function(){};
+    clase   = clase? clase : 'green';
+    Materialize.toast(mensaje, tiempo, clase, callback);
+
+}
+/**
+ *Funcion para construir el sweetalert
+ *@param {titulo} [type][description]
+ *@param {mensaje} [type][description]
+ *@param {clase} [type][description]
+ */
+function buildSweetAlert(titulo, mensaje, clase) {
+    swal(
+        titulo,
+        mensaje,
+        clase
+    );
+}
+/**
+ *Funcion para construir el sweetalert
+ *@param {titulo} [type][description]
+ *@param {mensaje} [type][description]
+ *@param {clase} [type][description]
+ */
+    function pnotify( titulo, mensaje, clase ){
+
+        new PNotify({
+            title: titulo,
+            text: mensaje,
+            type: clase
+        });
+        
+    }
+
+
+/**
+ *Funcion 
+ *@param {titulo} [type][description]
+ *@param {mensaje} [type][description]
+ *@param {success} [type][description]
+ *@return void
+ */
+ function buildSweetAlertOptions( titulo, mensaje, success ){
+
+    /*swal({
+          title: titulo,
+          text: mensaje,
+          type: "warning",
+          showCancelButton: true,
+          confirmButtonColor: '#3085d6',
+          cancelButtonColor: '#d33',
+          confirmButtonText: 'Aceptar',
+          cancelButtonText: 'Cancelar',
+          confirmButtonClass: 'btn btn-success',
+          cancelButtonClass: 'btn btn-danger',
+          buttonsStyling: false,
+          allowOutsideClick: false
+    }).then(function () {
+        success();
+    }, function (dismiss) {
+        if (dismiss === 'cancel') {
+           
+        }   
+    });*/
+
+    swal({
+          title: titulo,
+          text: mensaje,
+          type: "warning",
+          showCancelButton: true,
+          confirmButtonClass: "btn-danger",
+          confirmButtonText: "Aceptar",
+          cancelButtonText: "Cancelar",
+          closeOnConfirm: true,
+          closeOnCancel: true
+        },
+        function(isConfirm) {
+          if (isConfirm) {
+            success();
+          } else {
+          }
+
+        });
+ 
+ }
+/**
+ * Carga de selects
+ * @param  {strin} url    [URL del servidor]
+ * @param  {int} id     [id del elemento]
+ * @param  {String} load   [#id del elemento donde se carga]
+ * @param  {String} select [id del select cargado]
+ * @return {Void}
+ * var url = 'entidades/get_entidades',
+        load = 'load-entidades',
+        select = 'id_entidad';
+    loadItemSelect(url, id_pais, load, select);
+ */
+var loadItemSelect = function(url, data, load, select) {
+    console.log('#'+select);
+    requestAjaxSend(url, data, function(data){
+        $('#'+load).html(data);
+        $('#'+select).material_select();
+    }, function(){
+        $('#'+load).html('<div class="progress"><div class="indeterminate"></div></div>');
+    });
+}
+/**
+ * Carga de selects dependientes
+ * @param  {strin} url    [URL del servidor]
+ * @param  {object} data     [variables en objeto]
+ * @param  {String} load   [#id del elemento donde se carga]
+ * @param  {String} select [id del select cargado]
+ * @return {Void}
+ * var  url = 'entidades/get_entidades',
+        data = {id_opcion: 1, id_cliente: 1},
+        load = 'load-entidades',
+        select = 'id_entidad';
+    loadItemSelect(url, data, load, select);
+ */
+var loadFormSelect = function(url, data, load, idselect) {
+    requestAjaxSend(url, data, function(select){
+        $('#'+load).html(select);
+        $('#'+idselect).material_select();
+    }, function(){
+        $('#'+load).html('<div class="progress"><div class="indeterminate"></div></div>');
+    });
+}
+
+/**
+ * funcion para resetear los select dependientes cargados de un formulario
+ * @param {object} data identificador del select para resetear
+ * @example valor del objeto data
+ * data = [{0:'select.sede'},{0:select#tipo_empleado}]
+ */
+var reset_select_dependientes = function (data){
+    $(data).each( function(key, obj){
+        $(obj[0]+ ' option').each( function(index, option){
+            if (index > 0) {
+                $(this).remove();
+            }
+        });
+        $(obj[0]).prop('selectedIndex', 0); //Sets the first option as selected
+        $(obj[0]).material_select();
+    });
+}
+
+var getIdsMenu = function(name) {
+    var ids_menus = [];
+    $('input[name='+name+']:checked').each(function(){
+        ids_menus.push($(this).val());
+    });
+    return ids_menus;
+}
+/**
+ *Detección de iExplorer
+ *@return integer [description]
+ */
+function detectIE() {
+    var ua = window.navigator.userAgent;
+    var msie = ua.indexOf('MSIE ');
+    if (msie > 0) {
+        // IE 10 or older => return version number
+        return parseInt(ua.substring(msie + 5, ua.indexOf('.', msie)), 10);
+    }
+    var trident = ua.indexOf('Trident/');
+    if (trident > 0) {
+        // IE 11 => return version number
+        var rv = ua.indexOf('rv:');
+        return parseInt(ua.substring(rv + 3, ua.indexOf('.', rv)), 10);
+    }
+    // var edge = ua.indexOf('Edge/');
+    // if (edge > 0) {
+    //    // IE 12 => return version number
+    //    return parseInt(ua.substring(edge + 5, ua.indexOf('.', edge)), 10);
+    // }
+    // other browser
+    return false;
+}
+
+function selects_requeridos(formulario){
+    var items_vacios = 0;
+    var padre = (formulario) ? '#'+formulario+' ' : '';
+
+    jQuery(padre+" .requerido").each(function(){
+        if(jQuery(this).prop('tagName')=='SELECT'){
+            var attr = $(this).attr('multiple');
+            if(typeof attr !== typeof undefined && attr !== false){
+                if(!jQuery.trim(jQuery("[name='"+jQuery(this).attr('name')+"'] option")).length>0){
+                    items_vacios++;
+                    ids = jQuery(this).attr('name')+'|'+ids;
+                }
+                if(!jQuery.trim(jQuery("[name='"+jQuery(this).attr('name')+"'] option:selected")).length>0){
+                    items_vacios++;
+                    ids = jQuery(this).attr('name')+'|'+ids;
+                }
+            }else{
+                var select  = jQuery("select[name='"+jQuery(this).attr('name')+"'] option:selected");
+                var select_empty = jQuery("select[name='"+jQuery(this).attr('name')+"']");
+                var select_focus = jQuery("select[name='"+jQuery(this).attr('name')+"']").closest('div');
+                var name = jQuery(this).attr('name');
+
+                var msg = '<div id="'+name+'-error" class="error-select"> '+formValidateLang.required+'</div>';
+                if(!select.val()){
+
+                    select_focus.focus();
+                    $('#'+name+'-error').remove();
+                    select_focus.append(msg);
+                    select_empty.change(function() {
+                      $('#'+name+'-error').remove();
+                    });
+                    items_vacios++
+                }
+            }
+
+        }
+    });
+    return items_vacios;
+}
+
+
+function values_enteros(formulario){
+    var padre = (formulario) ? '#'+formulario+' ' : '';
+    var enteros = true;
+
+    jQuery(padre+" .digit").each(function(){
+        var name = $(this).attr('name');
+        var msg = '<div id="'+name+'-error-input" class="error-select"> '+formValidateLang.digits+'</div>';
+        if(isInt(jQuery(this).val())){
+        }else{
+            var name = $(this).attr('name');
+            var item = $(this).closest('div');
+            $('#'+name+'-error-input').remove();
+            item.append(msg);
+            $(this).focus(function(event) {
+                $('#'+name+'-error-input').remove();
+            });
+            enteros = false;
+        }
+    });
+    return enteros;
+}
+/**
+ * Comprueba si un valor es de tipo entero
+ * @return {Boolean}   [devuelve true si es entero, false si no lo es]
+ */
+function isInt(x) {
+   var y = parseInt(x, 10);
+   return !isNaN(y) && x == y && x.toString() == y.toString();
+}
+/**
+ *Funcion para la carga de los estilos de la tabla de bootstraps
+ *@param id [description]
+ *@return void
+ */
+ function initDataTable( id ) {
+    
+    $('#'+id).DataTable({
+        /*fnInitComplete: function(a, t) {
+                var l = jQuery(this).parents(".dataTables_wrapper").eq(0);
+                l.find(".dataTables_length").addClass("input-field"), l.find(".dataTables_length label select").prependTo(l.find(".dataTables_length")), l.find(".dataTables_length select").material_select(), l.find(".dataTables_filter").addClass("input-field"), l.find(".dataTables_filter").addClass("without-search-bar"), l.find(".dataTables_filter label input").prependTo(l.find(".dataTables_filter"))
+            },*/
+        "language": {
+            "lengthMenu": "Mostrar _MENU_",
+
+            "zeroRecords": "Sin Registros",
+            "info": "Página _PAGE_ de _PAGES_",
+            "infoEmpty": "Sin Registros",
+            "infoFiltered": "(Resultado de _MAX_ registros)",
+            'search': 'Búsqueda'
+        },
+        "searching":  true,
+        "scrollX":    true,
+        "responsive": true,
+        "details":    true,
+        "dom": "<'row no-gutter'\t<'col s12 m2'l>\t<'col s12 offset-m6 m4'f>><''tr><'row no-gutter'\t<'col s12 m4'i>\t<'col s12 m8'p>>",
+        "iDisplayLength": 50,
+        "bFilter": false,
+        "aaSorting" : [[0, "asc"]],
+        fnRowCallback: function( nRow, aData, iDisplayIndex, iDisplayIndexFull ) {
+            /*if ( aData[0] % 2 == 1 ){
+                jQuery('td', nRow).css('background-color', '#ffffff');
+            }else {
+                jQuery('td', nRow).css('background-color', '#eeeeee');
+            }
+            jQuery('td', nRow).css('border-left', '1px solid #dddddd');
+            jQuery('td', nRow).css('font-size', '12px');*/
+        }
+    });
+
+ }
+/**
+ * checa el status http de la petición, por default se mandan mensajes de errores del
+ * status 500 error del servidor
+ * @param  {[type]} status      [description]
+ * @param  {[type]} title       [description]
+ * @param  {[type]} text        [description]
+ * @param  {[type]} type        [description]
+ * @param  {[type]} showMessage [description]
+ * @param  {[type]} accept      [description]
+ * @param  {[type]} dismiss     [description]
+ * @return {[type]}             [description]
+ */
+function check_status_xhr(status, title, text, type, accept) {
+
+    var showMessage = false,
+        title = title? title : generalLang['error'],
+        text  = text? text : xhrStatusLang['error500Msg'],
+        type = type? type : 'error',
+        accept = accept? accept : function(){};
+    switch(status) {
+        case 500:
+            showMessage = true;
+            break;
+    }
+
+    if(showMessage) {
+        swal({
+          title: title,
+          text: text,
+          showConfirmButton: true,
+          confirmButtonText: generalLang['aceptar'],
+          type: type,
+          allowOutsideClick: false
+        }).then(
+            function(a){
+                accept(a);
+            },
+            function(d) {
+
+            }
+        );
+    }
+
+}
+/**
+ *Funcion para validar los campos que se requieren
+ *@param array validacion [description]
+ *@return void
+ */
+    function validacion_fields(validacion){
+        
+        if ( typeof validacion == "object" ) {
+
+            for (var i = 0; i < validacion.length; i++) {
+                var valores = $('#'+validacion[i]).val();
+                if (valores == "" || valores == 0 || valores == "null") {
+                    $('#'+validacion[i]).parent().parent().addClass('has-error');
+                    //alert("Por favor de verifiar el campo de color rojo");
+                    pnotify('Campos Vacios','Favor de verificar los campos de color rojo!','error');
+                    return 'error';
+                }else{
+                    $('#'+validacion[i]).parent().parent().removeClass('has-error');
+                }
+            };
+            
+        }
+
+   
+    }
+/**
+ *Funcion para cargar los valores de cada campo
+ *@param json data [description]
+ *@return void
+ */
+    function get_values(json){
+
+        $.each(json,function(key,values){
+            $('#'+key).val(values);
+        });
+    
+    }
+/**
+ *Funcion para cargar los valores de cada campo
+ *@param array arreglo [description]
+ *@return void
+ */
+    function clear_values( arreglo ){
+
+        for (var i = 0; i < arreglo.length; i++) {
+            $('#'+arreglo[i]).val('');
+            $('.'+arreglo[i]).val('');
+            
+        }
+    
+    }
+/**
+ *Funcion para la carga de archivos al servidor por medio de dropzone
+ *@param id [type] [description]
+ *@param url [type][description]
+ *@param maxfile [type][description]
+ *@param type_file [type][description]
+ *@param methods [type][description]
+ *@return void
+ */
+    upload_file = function (id, path_url, maxfile, type_file, methods){
+        //path_url = "Upload/Upload_file";
+        $('#modal_dialog').css('width','60%');
+        Dropzone.autoDiscover = false;
+        $('#div_dropzone_file').html('<div class="dropzone" id="dropzone_xlsx_file" height="20px"><div class="fallback"><input name="file" type="file"/></div></div>').ready(function(){
+            var jsonResponse;
+                $("#dropzone_xlsx_file").dropzone({
+                            uploadMultiple: true,
+                            url: path_url,
+                            maxFiles: maxfile,
+                            paramName: "file",
+                            acceptedFiles: type_file,
+                            dictDefaultMessage: "Favor de Cargar o arrastrar archivo",
+                            dictFallbackMessage: "layoutLang['mjs_navegador']",
+                            dictFileTooBig: "layoutLang['file_size']",
+                            dictInvalidFileType: "layoutLang['file_type']",
+                            dictResponseError: "layoutLang['error_server']",
+                            dictCancelUpload: "layoutLang['cancel']",
+                            dictCancelUploadConfirmation: "layoutLang['confirmacion']",
+                            dictRemoveFile: "layoutLang['eliminar_file']",
+                            dictMaxFilesExceeded: "No se puede subir mas archivos de los permitidos",
+                            headers: {
+                                'usuario': $('#id_usuario').val()
+                                ,'token':  $('#token').val()
+                                ,'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                            },
+                            //dictRemoveFile:true,
+                            success:function( data, datos ) {
+                                var jsonRequest = JSON.parse(datos);
+                                   if (jsonRequest.success === true) {
+                                        pnotify('Archivo Cargado.!','El archivo seleccionado se cargo con exito','success');
+                                   }else{
+                                        pnotify('No se Cargado Correctamente.!','El archivo no se cargo con exito','error');
+                                   }
+                                   methods(jsonRequest);
+
+                            },
+                            accept: function(file, done){
+                                if (file.name == "imagen.jpg") {done("Archivo Incorrecto");}else {done();}
+                            },
+                            sending: function(parmt1,parmt2,data){
+                                    data.append('id', id );
+                                    //$('.loader').show();
+                                    //$('#dropzone_div').hide();
+                            },
+                            init: function() {
+                                this.on("complete", function(file) {
+                                    //this.removeAllFiles(true);
+                                });
+                            },
+                            complete: function(data) {
+                                //pnotify('Archivo Cargado.!','El archivo seleccionado se cargo con exito','success');
+                                    /* swal(
+                                      'Archivo Cargado Correctamente.!',
+                                      datos.response.mgs,
+                                      'success'
+                                    );*/
+                            }
+
+                        });
+
+                });
+
+    }
+    /**
+     *Funcion para crear la descarga del layout en general
+     *@param [type] [description]
+     *@param [type] [description]
+     *@return void 
+     */
+    function download_layout_general(url,data){
+        var fields = {'data' : data};
+        send_post(fields,url,false,false);
+    }
+    /**
+     *Funcion para crear la descarga del pdf en general
+     *@param [type] [description]
+     *@param [type] [description]
+     *@return void 
+     */
+    function download_pdf_general(url,data,success ){
+        var fields = {'data' : data};
+        //send_post(fields,url,false,false);
+        requestAjaxSend( url,fields,function(mgs) {
+            success(mgs);
+        });
+    }
+    /**
+     *Funcion para contar los dias trancurridos
+     *@param fecha1
+     *@param fecha2
+     *@return date
+     */
+    restaFechas = function(fecha1,fecha2){
+
+        var aFecha1 = fecha1.split('-'); 
+        var aFecha2 = fecha2.split('-'); 
+        /*formato de aaaa/mm/dd */
+        var fFecha1 = Date.UTC(aFecha1[2],aFecha1[1]-1,aFecha1[0]); 
+        var fFecha2 = Date.UTC(aFecha2[2],aFecha2[1]-1,aFecha2[0]); 
+        var dif = fFecha2 - fFecha1;
+        var dias = Math.floor(dif / (1000 * 60 * 60 * 24)); 
+        return dias;
+    
+    }
+    /**
+     *Funcion para contar los dias trancurridos
+     *@param fecha1
+     *@param fecha2
+     *@return date
+     */
+    convert_date = function( fecha ){
+        var fechas = fecha.split('-');
+        var anio = fechas[0]; 
+        var mes = fechas[1];
+        var dia = fechas[2];
+        var fnew = dia+"-"+mes+"-"+anio;
+        return fnew;
+    }
+    /**
+     *Funcion para validar si las fecha inicial es menor a la final
+     *@param fecha1 [description]
+     *@param fecha2 [description]
+     *@return json
+     */
+    validate_date =  function( fecha1, fecha2 ){
+
+        var fecha_inicial = new Date(fecha1);
+        var fecha_fin = new Date(fecha2);
+
+        if ( fecha2 < fecha1 ) {
+            return false;
+        }else{
+            return true;
+        }
+
+    }
+    /**
+     *Funcion para regresar a la vista anterior
+     *@param url [description]
+     *@return void
+     */
+    back_button = function( object ){
+
+          var ruta = $('#return').val();
+          $('#button_back_general').removeAttr('url');
+          $('#button_back_general').attr('url',ruta);
+          $('#button_back_general').attr('disabled',false);
+          load_views(object);
+          
+    }
+    /**
+     *Function creada para la creacion de LocalStorage y SessionStorage
+     *@param 
+     *@return object
+     */
+    $myLocalStorage = (function(){
+        var name = null;
+        return {
+            set: function(k, value){
+                localStorage.setItem(k, JSON.stringify(value));
+            },
+            get: function(k){
+                var data = localStorage[k];
+                
+                if(data === undefined) throw 'Clave No Localizada';
+                
+                return JSON.parse(data);
+            },
+            remove: function(k){
+                localStorage.removeItem(k);
+            }
+        };
+    })();
+    /**
+     *Funcion para generar una cadena en un arreglo de varios registros
+     *@access public
+     *@param table [description]
+     *@param identificador [description]
+     *@return array[description]
+     */
+     table_matrix = function( table, identificador ){
+
+        var matrix = [];
+        var conteo = 0;
+
+        $('#'+table+' tbody').find('tr').each(function(){
+            var response = "";
+            response += $(this).attr(identificador)+"|";
+
+            $(this).find('td').each(function(){
+                console.log($(this).text());
+                response += $(this).text()+"|";
+            });
+            matrix[conteo] =  response;
+            conteo++;
+        });
+        return matrix;        
+
+     }
+     /**
+     *Funcion para obtener el dominio actual.
+     *@access public
+     *@param table [description]
+     *@param identificador [description]
+     *@return array[description]
+     */
+     domain = function( url ){
+
+        var path_url = window.location.protocol+"//"+window.location.host+"/"+url;
+        return path_url;
+
+     }
+     /**
+     *Funcion para generar una tabla dinamica por medio de un json.
+     *@access public
+     *@param json [description]
+     *@param id_table [description]
+     *@return html[description]
+     */
+     data_table_general = function( json, id_table ){
+
+        var tbody = '';
+        $.each(json,function(key,value){
+            tbody += '<tr>';
+            $.each(value,function(keys,values){
+                tbody += '<td>'+values+'</td>';
+            });
+            tbody += '</tr>';
+
+        });
+
+        $('#'+id_table+' tbody').html('');
+        $('#'+id_table+' tbody').html(tbody);
+     }
+     /**
+      *Funcion para la carga de registros
+      *return void
+      */
+      loader_msj = function(){
+            $('#loader-msj').show();
+            $('#container-views').hide();
+      }
+      /**
+       *Funcion para ocultar el mensaje generado.
+       *@return void
+       */
+       loader_hide_msj = function(){
+            $('#container-views').show();
+            $('#loader-msj').hide();
+       }
+      /**
+       *Funcion para dar formato a un numero
+       *@param amount
+       *@param decimals
+       *@return numeber
+       */
+        number_format = function(amount, decimals) {
+
+            amount += ''; // por si pasan un numero en vez de un string
+            amount = parseFloat(amount.replace(/[^0-9\.]/g, '')); // elimino cualquier cosa que no sea numero o punto
+
+            decimals = decimals || 0; // por si la variable no fue fue pasada
+
+            // si no es un numero o es igual a cero retorno el mismo cero
+            if (isNaN(amount) || amount === 0) 
+                return parseFloat(0).toFixed(decimals);
+
+            // si es mayor o menor que cero retorno el valor formateado como numero
+            amount = '' + amount.toFixed(decimals);
+
+            var amount_parts = amount.split('.'),
+                regexp = /(\d+)(\d{3})/;
+
+            while (regexp.test(amount_parts[0]))
+                amount_parts[0] = amount_parts[0].replace(regexp, '$1' + ',' + '$2');
+
+            return amount_parts.join('.');
+        }
+        /**
+         *Funcion de Jquery donde impide utilizar letras en campos de numero
+         *@param array [description]
+         *@return
+         */
+         function numerico(object){
+
+                object.value = (object.value + '').replace(/[^0-9]/g, '');            
+
+         }
+         /**
+          *Funcion de jquery para colocar un valor predeterminado
+          *@param
+          */
+        function value_inputs( object ){
+            $(object).val('');
+        }
+        /**
+         *Metodo para mostrar y/o ocultar secciones
+         *@param mostrar [descritption]
+         *@param ocultar [description]
+         *@return void
+         */
+        function mostrar_elements( mostrar, ocultar){
+            
+            for (var i = 0; i < mostrar.length; i++) {
+                //$('#'+mostrar[i]).toggle('slow');
+                $('#'+mostrar[i]).show('slow');
+                $('.'+mostrar[i]).show('slow');
+
+            }
+            for (var i = 0; i < ocultar.length; i++) {
+                console.log(ocultar[i]);
+                //$('#'+ocultar[i]).toggle('slow');
+                $('#'+ocultar[i]).hide('slow');
+                $('.'+ocultar[i]).hide('slow');
+
+            }
+
+        }
+    /**
+     *Metodo para mostrar y/o ocultar secciones
+     *@param mostrar [descritption]
+     *@param ocultar [description]
+     *@return void
+     */
+    function toggle_mostrar(identificador){
+
+        for (var i = 0; i < identificador.length; i++) {
+            $('#'+identificador[i]).toggle('slow');
+            $('.'+identificador[i]).toggle('slow');
+
+        }
+
+    }
+    /**
+     *Funcion que valida si el dato es mayor a un numero y agrega un indice
+     *@return indice
+     */ 
+    addZero = function( i ){
+        
+        return ( i < 10 )? '0'+i: i;
+
+    }
+    /**
+     *Funcion para obtener la fecha y horas
+     *@return date fecha[descripcion]
+     */    
+    get_actual_fulldate = function( sign = '-', sign_hrs = ":" ) {
+        var d = new Date();
+        var day = addZero(d.getDate());
+        var month = addZero(d.getMonth()+1);
+        var year = addZero(d.getFullYear());
+        var h = addZero(d.getHours());
+        var m = addZero(d.getMinutes());
+        var s = addZero(d.getSeconds());
+        return day + sign + month + sign + year + " (" + h + sign_hrs + m + sign_hrs + s + ")";
+    }
+    /**
+     *Funcion para obtener las horas
+     *@return date fecha[descripcion]
+     */    
+    get_actual_hour = function( sign = ':' ) {
+        var d = new Date();
+        var h = addZero(d.getHours());
+        var m = addZero(d.getMinutes());
+        var s = addZero(d.getSeconds());
+        return h + sign  + m + sign  + s;
+    }
+    /**
+     *Funcion para obtener la fecha
+     *@return date fecha[descripcion]
+     */ 
+    get_actual_date = function( sign, format ) {
+
+        sign    = ( !sign )? "-": sign;
+        var d = new Date();
+        var day = addZero(d.getDate());
+        var month = addZero(d.getMonth()+1);
+        var year = addZero(d.getFullYear());
+        if (format) {
+            return year + sign + month + sign + day;
+        }else{
+            return day + sign + month + sign + year;
+        }
+
+    }
+    /* 
+     * To change this license header, choose License Headers in Project Properties.
+     * To change this template file, choose Tools | Templates
+     * and open the template in the editor.
+     */
+
+
+    		
+    function utf8_decode(str_data) {
+      //  discuss at: http://phpjs.org/functions/utf8_decode/
+      // original by: Webtoolkit.info (http://www.webtoolkit.info/)
+      //    input by: Aman Gupta
+      //    input by: Brett Zamir (http://brett-zamir.me)
+      // improved by: Kevin van Zonneveld (http://kevin.vanzonneveld.net)
+      // improved by: Norman "zEh" Fuchs
+      // bugfixed by: hitwork
+      // bugfixed by: Onno Marsman
+      // bugfixed by: Kevin van Zonneveld (http://kevin.vanzonneveld.net)
+      // bugfixed by: kirilloid
+      //   example 1: utf8_decode('Kevin van Zonneveld');
+      //   returns 1: 'Kevin van Zonneveld'
+
+      var tmp_arr = [],
+        i = 0,
+        ac = 0,
+        c1 = 0,
+        c2 = 0,
+        c3 = 0,
+        c4 = 0;
+
+      str_data += '';
+
+      while (i < str_data.length) {
+        c1 = str_data.charCodeAt(i);
+        if (c1 <= 191) {
+          tmp_arr[ac++] = String.fromCharCode(c1);
+          i++;
+        } else if (c1 <= 223) {
+          c2 = str_data.charCodeAt(i + 1);
+          tmp_arr[ac++] = String.fromCharCode(((c1 & 31) << 6) | (c2 & 63));
+          i += 2;
+        } else if (c1 <= 239) {
+          // http://en.wikipedia.org/wiki/UTF-8#Codepage_layout
+          c2 = str_data.charCodeAt(i + 1);
+          c3 = str_data.charCodeAt(i + 2);
+          tmp_arr[ac++] = String.fromCharCode(((c1 & 15) << 12) | ((c2 & 63) << 6) | (c3 & 63));
+          i += 3;
+        } else {
+          c2 = str_data.charCodeAt(i + 1);
+          c3 = str_data.charCodeAt(i + 2);
+          c4 = str_data.charCodeAt(i + 3);
+          c1 = ((c1 & 7) << 18) | ((c2 & 63) << 12) | ((c3 & 63) << 6) | (c4 & 63);
+          c1 -= 0x10000;
+          tmp_arr[ac++] = String.fromCharCode(0xD800 | ((c1 >> 10) & 0x3FF));
+          tmp_arr[ac++] = String.fromCharCode(0xDC00 | (c1 & 0x3FF));
+          i += 4;
+        }
+      }
+
+      return tmp_arr.join('');
+    
+    }
+
+
+    function utf8_encode(argString) {
+      //  discuss at: http://phpjs.org/functions/utf8_encode/
+      // original by: Webtoolkit.info (http://www.webtoolkit.info/)
+      // improved by: Kevin van Zonneveld (http://kevin.vanzonneveld.net)
+      // improved by: sowberry
+      // improved by: Jack
+      // improved by: Yves Sucaet
+      // improved by: kirilloid
+      // bugfixed by: Onno Marsman
+      // bugfixed by: Onno Marsman
+      // bugfixed by: Ulrich
+      // bugfixed by: Rafal Kukawski
+      // bugfixed by: kirilloid
+      //   example 1: utf8_encode('Kevin van Zonneveld');
+      //   returns 1: 'Kevin van Zonneveld'
+
+      if (argString === null || typeof argString === 'undefined') {
+        return '';
+      }
+
+      var string = (argString + ''); // .replace(/\r\n/g, "\n").replace(/\r/g, "\n");
+      var utftext = '',
+        start, end, stringl = 0;
+
+      start = end = 0;
+      stringl = string.length;
+      for (var n = 0; n < stringl; n++) {
+        var c1 = string.charCodeAt(n);
+        var enc = null;
+
+        if (c1 < 128) {
+          end++;
+        } else if (c1 > 127 && c1 < 2048) {
+          enc = String.fromCharCode(
+            (c1 >> 6) | 192, (c1 & 63) | 128
+          );
+        } else if ((c1 & 0xF800) != 0xD800) {
+          enc = String.fromCharCode(
+            (c1 >> 12) | 224, ((c1 >> 6) & 63) | 128, (c1 & 63) | 128
+          );
+        } else { // surrogate pairs
+          if ((c1 & 0xFC00) != 0xD800) {
+            throw new RangeError('Unmatched trail surrogate at ' + n);
+          }
+          var c2 = string.charCodeAt(++n);
+          if ((c2 & 0xFC00) != 0xDC00) {
+            throw new RangeError('Unmatched lead surrogate at ' + (n - 1));
+          }
+          c1 = ((c1 & 0x3FF) << 10) + (c2 & 0x3FF) + 0x10000;
+          enc = String.fromCharCode(
+            (c1 >> 18) | 240, ((c1 >> 12) & 63) | 128, ((c1 >> 6) & 63) | 128, (c1 & 63) | 128
+          );
+        }
+        if (enc !== null) {
+          if (end > start) {
+            utftext += string.slice(start, end);
+          }
+          utftext += enc;
+          start = end = n + 1;
+        }
+      }
+
+      if (end > start) {
+        utftext += string.slice(start, stringl);
+      }
+
+      return utftext;
+    
+    }
+    		
+
+
+        //Función MD5
+
+
+    function MD5(str) {
+      //  discuss at: http://phpjs.org/functions/md5/
+      // original by: Webtoolkit.info (http://www.webtoolkit.info/)
+      // improved by: Michael White (http://getsprink.com)
+      // improved by: Jack
+      // improved by: Kevin van Zonneveld (http://kevin.vanzonneveld.net)
+      //    input by: Brett Zamir (http://brett-zamir.me)
+      // bugfixed by: Kevin van Zonneveld (http://kevin.vanzonneveld.net)
+      //  depends on: utf8_encode
+      //   example 1: md5('Kevin van Zonneveld');
+      //   returns 1: '6e658d4bfcb59cc13f96c14450ac40b9'
+
+      var xl;
+
+      var rotateLeft = function(lValue, iShiftBits) {
+        return (lValue << iShiftBits) | (lValue >>> (32 - iShiftBits));
+      };
+
+      var addUnsigned = function(lX, lY) {
+        var lX4, lY4, lX8, lY8, lResult;
+        lX8 = (lX & 0x80000000);
+        lY8 = (lY & 0x80000000);
+        lX4 = (lX & 0x40000000);
+        lY4 = (lY & 0x40000000);
+        lResult = (lX & 0x3FFFFFFF) + (lY & 0x3FFFFFFF);
+        if (lX4 & lY4) {
+          return (lResult ^ 0x80000000 ^ lX8 ^ lY8);
+        }
+        if (lX4 | lY4) {
+          if (lResult & 0x40000000) {
+            return (lResult ^ 0xC0000000 ^ lX8 ^ lY8);
+          } else {
+            return (lResult ^ 0x40000000 ^ lX8 ^ lY8);
+          }
+        } else {
+          return (lResult ^ lX8 ^ lY8);
+        }
+      };
+
+      var _F = function(x, y, z) {
+        return (x & y) | ((~x) & z);
+      };
+      var _G = function(x, y, z) {
+        return (x & z) | (y & (~z));
+      };
+      var _H = function(x, y, z) {
+        return (x ^ y ^ z);
+      };
+      var _I = function(x, y, z) {
+        return (y ^ (x | (~z)));
+      };
+
+      var _FF = function(a, b, c, d, x, s, ac) {
+        a = addUnsigned(a, addUnsigned(addUnsigned(_F(b, c, d), x), ac));
+        return addUnsigned(rotateLeft(a, s), b);
+      };
+
+      var _GG = function(a, b, c, d, x, s, ac) {
+        a = addUnsigned(a, addUnsigned(addUnsigned(_G(b, c, d), x), ac));
+        return addUnsigned(rotateLeft(a, s), b);
+      };
+
+      var _HH = function(a, b, c, d, x, s, ac) {
+        a = addUnsigned(a, addUnsigned(addUnsigned(_H(b, c, d), x), ac));
+        return addUnsigned(rotateLeft(a, s), b);
+      };
+
+      var _II = function(a, b, c, d, x, s, ac) {
+        a = addUnsigned(a, addUnsigned(addUnsigned(_I(b, c, d), x), ac));
+        return addUnsigned(rotateLeft(a, s), b);
+      };
+
+      var convertToWordArray = function(str) {
+        var lWordCount;
+        var lMessageLength = str.length;
+        var lNumberOfWords_temp1 = lMessageLength + 8;
+        var lNumberOfWords_temp2 = (lNumberOfWords_temp1 - (lNumberOfWords_temp1 % 64)) / 64;
+        var lNumberOfWords = (lNumberOfWords_temp2 + 1) * 16;
+        var lWordArray = new Array(lNumberOfWords - 1);
+        var lBytePosition = 0;
+        var lByteCount = 0;
+        while (lByteCount < lMessageLength) {
+          lWordCount = (lByteCount - (lByteCount % 4)) / 4;
+          lBytePosition = (lByteCount % 4) * 8;
+          lWordArray[lWordCount] = (lWordArray[lWordCount] | (str.charCodeAt(lByteCount) << lBytePosition));
+          lByteCount++;
+        }
+        lWordCount = (lByteCount - (lByteCount % 4)) / 4;
+        lBytePosition = (lByteCount % 4) * 8;
+        lWordArray[lWordCount] = lWordArray[lWordCount] | (0x80 << lBytePosition);
+        lWordArray[lNumberOfWords - 2] = lMessageLength << 3;
+        lWordArray[lNumberOfWords - 1] = lMessageLength >>> 29;
+        return lWordArray;
+      };
+
+      var wordToHex = function(lValue) {
+        var wordToHexValue = '',
+          wordToHexValue_temp = '',
+          lByte, lCount;
+        for (lCount = 0; lCount <= 3; lCount++) {
+          lByte = (lValue >>> (lCount * 8)) & 255;
+          wordToHexValue_temp = '0' + lByte.toString(16);
+          wordToHexValue = wordToHexValue + wordToHexValue_temp.substr(wordToHexValue_temp.length - 2, 2);
+        }
+        return wordToHexValue;
+      };
+
+      var x = [],
+        k, AA, BB, CC, DD, a, b, c, d, S11 = 7,
+        S12 = 12,
+        S13 = 17,
+        S14 = 22,
+        S21 = 5,
+        S22 = 9,
+        S23 = 14,
+        S24 = 20,
+        S31 = 4,
+        S32 = 11,
+        S33 = 16,
+        S34 = 23,
+        S41 = 6,
+        S42 = 10,
+        S43 = 15,
+        S44 = 21;
+
+      str = this.utf8_encode(str);
+      x = convertToWordArray(str);
+      a = 0x67452301;
+      b = 0xEFCDAB89;
+      c = 0x98BADCFE;
+      d = 0x10325476;
+
+      xl = x.length;
+      for (k = 0; k < xl; k += 16) {
+        AA = a;
+        BB = b;
+        CC = c;
+        DD = d;
+        a = _FF(a, b, c, d, x[k + 0], S11, 0xD76AA478);
+        d = _FF(d, a, b, c, x[k + 1], S12, 0xE8C7B756);
+        c = _FF(c, d, a, b, x[k + 2], S13, 0x242070DB);
+        b = _FF(b, c, d, a, x[k + 3], S14, 0xC1BDCEEE);
+        a = _FF(a, b, c, d, x[k + 4], S11, 0xF57C0FAF);
+        d = _FF(d, a, b, c, x[k + 5], S12, 0x4787C62A);
+        c = _FF(c, d, a, b, x[k + 6], S13, 0xA8304613);
+        b = _FF(b, c, d, a, x[k + 7], S14, 0xFD469501);
+        a = _FF(a, b, c, d, x[k + 8], S11, 0x698098D8);
+        d = _FF(d, a, b, c, x[k + 9], S12, 0x8B44F7AF);
+        c = _FF(c, d, a, b, x[k + 10], S13, 0xFFFF5BB1);
+        b = _FF(b, c, d, a, x[k + 11], S14, 0x895CD7BE);
+        a = _FF(a, b, c, d, x[k + 12], S11, 0x6B901122);
+        d = _FF(d, a, b, c, x[k + 13], S12, 0xFD987193);
+        c = _FF(c, d, a, b, x[k + 14], S13, 0xA679438E);
+        b = _FF(b, c, d, a, x[k + 15], S14, 0x49B40821);
+        a = _GG(a, b, c, d, x[k + 1], S21, 0xF61E2562);
+        d = _GG(d, a, b, c, x[k + 6], S22, 0xC040B340);
+        c = _GG(c, d, a, b, x[k + 11], S23, 0x265E5A51);
+        b = _GG(b, c, d, a, x[k + 0], S24, 0xE9B6C7AA);
+        a = _GG(a, b, c, d, x[k + 5], S21, 0xD62F105D);
+        d = _GG(d, a, b, c, x[k + 10], S22, 0x2441453);
+        c = _GG(c, d, a, b, x[k + 15], S23, 0xD8A1E681);
+        b = _GG(b, c, d, a, x[k + 4], S24, 0xE7D3FBC8);
+        a = _GG(a, b, c, d, x[k + 9], S21, 0x21E1CDE6);
+        d = _GG(d, a, b, c, x[k + 14], S22, 0xC33707D6);
+        c = _GG(c, d, a, b, x[k + 3], S23, 0xF4D50D87);
+        b = _GG(b, c, d, a, x[k + 8], S24, 0x455A14ED);
+        a = _GG(a, b, c, d, x[k + 13], S21, 0xA9E3E905);
+        d = _GG(d, a, b, c, x[k + 2], S22, 0xFCEFA3F8);
+        c = _GG(c, d, a, b, x[k + 7], S23, 0x676F02D9);
+        b = _GG(b, c, d, a, x[k + 12], S24, 0x8D2A4C8A);
+        a = _HH(a, b, c, d, x[k + 5], S31, 0xFFFA3942);
+        d = _HH(d, a, b, c, x[k + 8], S32, 0x8771F681);
+        c = _HH(c, d, a, b, x[k + 11], S33, 0x6D9D6122);
+        b = _HH(b, c, d, a, x[k + 14], S34, 0xFDE5380C);
+        a = _HH(a, b, c, d, x[k + 1], S31, 0xA4BEEA44);
+        d = _HH(d, a, b, c, x[k + 4], S32, 0x4BDECFA9);
+        c = _HH(c, d, a, b, x[k + 7], S33, 0xF6BB4B60);
+        b = _HH(b, c, d, a, x[k + 10], S34, 0xBEBFBC70);
+        a = _HH(a, b, c, d, x[k + 13], S31, 0x289B7EC6);
+        d = _HH(d, a, b, c, x[k + 0], S32, 0xEAA127FA);
+        c = _HH(c, d, a, b, x[k + 3], S33, 0xD4EF3085);
+        b = _HH(b, c, d, a, x[k + 6], S34, 0x4881D05);
+        a = _HH(a, b, c, d, x[k + 9], S31, 0xD9D4D039);
+        d = _HH(d, a, b, c, x[k + 12], S32, 0xE6DB99E5);
+        c = _HH(c, d, a, b, x[k + 15], S33, 0x1FA27CF8);
+        b = _HH(b, c, d, a, x[k + 2], S34, 0xC4AC5665);
+        a = _II(a, b, c, d, x[k + 0], S41, 0xF4292244);
+        d = _II(d, a, b, c, x[k + 7], S42, 0x432AFF97);
+        c = _II(c, d, a, b, x[k + 14], S43, 0xAB9423A7);
+        b = _II(b, c, d, a, x[k + 5], S44, 0xFC93A039);
+        a = _II(a, b, c, d, x[k + 12], S41, 0x655B59C3);
+        d = _II(d, a, b, c, x[k + 3], S42, 0x8F0CCC92);
+        c = _II(c, d, a, b, x[k + 10], S43, 0xFFEFF47D);
+        b = _II(b, c, d, a, x[k + 1], S44, 0x85845DD1);
+        a = _II(a, b, c, d, x[k + 8], S41, 0x6FA87E4F);
+        d = _II(d, a, b, c, x[k + 15], S42, 0xFE2CE6E0);
+        c = _II(c, d, a, b, x[k + 6], S43, 0xA3014314);
+        b = _II(b, c, d, a, x[k + 13], S44, 0x4E0811A1);
+        a = _II(a, b, c, d, x[k + 4], S41, 0xF7537E82);
+        d = _II(d, a, b, c, x[k + 11], S42, 0xBD3AF235);
+        c = _II(c, d, a, b, x[k + 2], S43, 0x2AD7D2BB);
+        b = _II(b, c, d, a, x[k + 9], S44, 0xEB86D391);
+        a = addUnsigned(a, AA);
+        b = addUnsigned(b, BB);
+        c = addUnsigned(c, CC);
+        d = addUnsigned(d, DD);
+      }
+
+      var temp = wordToHex(a) + wordToHex(b) + wordToHex(c) + wordToHex(d);
+
+      return temp.toLowerCase();
+    
+    }
+
+
+    Number.prototype.formatMoney = function(c, d, t){
+      var n = this, 
+        c = isNaN(c = Math.abs(c)) ? 2 : c, 
+        d = d == undefined ? "." : d, 
+        t = t == undefined ? "," : t, 
+        s = n < 0 ? "-" : "", 
+        i = parseInt(n = Math.abs(+n || 0).toFixed(c)) + "", 
+        j = (j = i.length) > 3 ? j % 3 : 0;
+       return s + (j ? i.substr(0, j) + t : "") + i.substr(j).replace(/(\d{3})(?=\d)/g, "$1" + t) + (c ? d + Math.abs(n - i).toFixed(c).slice(2) : "");
+    
+    };
+
+
+   // $('textarea.autosize').autosize({append: "\n"});
+
+    function updateTable(selector, jsonResponse){
+        var $trSelector = $(selector);
+        $('td', $trSelector).each(function() {
+            $td =  $(this);
+            if( $td.attr('field')!==undefined ){
+              if( $td.attr('fieldType')!==undefined ){
+                if( $td.attr('fieldType')=='boolean')
+                 var $activo = $td.text(jsonResponse[''+$td.attr('field')]==1?'Si':'No');
+                if( $td.attr('fieldType')=='currency')
+                  $td.text( accounting.formatMoney(jsonResponse[''+$td.attr('field')]));
+              }else
+                var text = jsonResponse[''+$td.attr('field')]!=null?jsonResponse[''+$td.attr('field')]:"";
+                //$td.text(utf8_decode(text));
+                $td.text(text);
+            }
+        });
+        
+        var $activo = $trSelector.find("td").eq(0).html();
+        var $tipo   = $trSelector.find("td").eq(5).html();
+
+        if ($tipo=="Jefe de Oficina") {$trSelector.addClass("warning");}else{$trSelector.removeClass("warning");}
+        if($activo=="No"){$trSelector.addClass("danger");}else{$trSelector.removeClass("danger");}
+
+        $trSelector.effect("highlight");
+        
+    }
+
+    function UpdateTable(selector, jsonResponse){
+        var $trSelector = $(selector);
+        $('td', $trSelector).each(function() {
+            $td =  $(this);
+            if( $td.attr('field')!==undefined ){
+              if( $td.attr('fieldType')!==undefined ){
+                if( $td.attr('fieldType')=='boolean')
+                 $td.text(jsonResponse[''+$td.attr('field')]==1?'Si':'No');            
+                if( $td.attr('fieldType')=='currency')
+                  $td.text( accounting.formatMoney(jsonResponse[''+$td.attr('field')]));
+              }else
+                var text = jsonResponse[''+$td.attr('field')]!=null?jsonResponse[''+$td.attr('field')]:"";
+                //$td.text(utf8_decode(text));
+                $td.text(text);
+            }
+        });
+
+       $trSelector.find("td").eq(0).html('<div class="btn-group" id="status" data-toggle="buttons">'+
+                                      '<label class="btn btn-default btn-on-1 btn-sm active disabled">'+
+                                      '<input type="radio" value="1" name="conf" checked="checked">SI</label>'+
+
+                                     '<label class="btn btn-default btn-off-1 btn-sm disabled" >'+
+                                     '<input type="radio" value="0" name="conf">NO</label>'+
+                                  '</div>');
+        $trSelector.effect("highlight");
+    }
+
+
+
+    $('body').on("click", ".fn-clear-form", function(e) {
+        var selector = $(this).attr('selector');
+        $("#"+selector+" input, textarea").val('');
+        $("#"+selector+" select").val(0);
+        $(".has-error").removeClass('has-error');
+    });
+
+    $('body').on("focus", ".has-error", function(e) {
+        $(this).removeClass('has-error');
+      });
 //variable global para cargar el vue
 var mixins = {};

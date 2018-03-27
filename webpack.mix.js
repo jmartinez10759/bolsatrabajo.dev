@@ -18,6 +18,8 @@ mix.scripts([
 	'resources/assets/js/vue.js',
 	'resources/assets/js/axios.js',
 	'resources/assets/js/sweetalert.js',
+	'resources/assets/js/global.system.js',
+	'resources/assets/js/tools-manager.js',
 	'resources/assets/js/app.js',
 	], 'public/js/app.js')
 	.styles([

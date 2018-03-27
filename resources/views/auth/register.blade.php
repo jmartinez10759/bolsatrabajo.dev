@@ -57,7 +57,7 @@
                             <label for="password-confirm" class="col-md-4 control-label">Confirmar Contraseña</label>
 
                             <div class="col-md-6">
-                                <input id="password-confirm" type="password" class="form-control" required>
+                                <input id="passwordConfirm" type="password" class="form-control" v-model="newKeep.passwordConfirm" required>
                             </div>
                         </div>
 
@@ -89,13 +89,34 @@ mixins = {
   },*/
   data: {
     datos: [],
-    newKeep: { 'name': '','email': '','password': '' },
-    fillKeep: { 'id': '' ,'name': '' ,'email': '' ,'password': '' },
+    newKeep: { 
+         'name': ''
+        ,'email': ''
+        ,'password': ''
+        , 'passwordConfirm': '' 
+    },
+    fillKeep: { 
+        'id': ''
+        ,'name': '' 
+        ,'email': '' 
+        ,'password': ''
+        ,'passwordConfirm': ''
+    },
+
   },
   methods:{
     insertar: function( uri ){
-        
-        this.insert_general( uri, inicio );
+
+        this.insert_general( uri, inicio,function(json){
+
+            console.log(json.data);
+
+        },function(json){
+            
+            $('#password').parent().parent().addClass('has-error');
+            $('#passwordConfirm').parent().parent().addClass('has-error');
+
+        });
     }
   }
 }
