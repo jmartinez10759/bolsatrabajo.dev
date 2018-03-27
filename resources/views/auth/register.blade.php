@@ -54,12 +54,25 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="password-confirm" class="col-md-4 control-label">Confirmar Contraseña</label>
+                            <label for="passwordConfirm" class="col-md-4 control-label">Confirmar Contraseña</label>
 
                             <div class="col-md-6">
                                 <input id="passwordConfirm" type="password" class="form-control" v-model="newKeep.passwordConfirm" required>
                             </div>
                         </div>
+
+                        <div class="form-group">
+
+                            <div class="col-sm-offset-4">
+
+                                <input id="terminos" type="checkbox" checked="">
+                                <a data-toggle="modal" data-target="#myModal" style="cursor: pointer;">
+                                    Terminos y Condiciones
+                                </a>
+                            </div>
+                        </div>
+
+
 
                         <div class="form-group">
                             <div class="col-md-6 col-md-offset-4">
@@ -74,6 +87,29 @@
         </div>
     </div>
 </div>
+
+ <!-- Modal -->
+  <div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog modal-lg">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <center><h2 class="modal-title">Términos y Condiciones</h2></center>
+        </div>
+        <div class="modal-body" style="overflow:scroll; height:400px;">
+          @include('termino.termino')
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+
+
 @endsection
 
 @push('scripts')
@@ -109,7 +145,6 @@ mixins = {
 
         this.insert_general( uri, inicio,function(json){
 
-            console.log(json.data);
             $('#password').parent().parent().removeClass('has-error');
             $('#passwordConfirm').parent().parent().removeClass('has-error');
 
