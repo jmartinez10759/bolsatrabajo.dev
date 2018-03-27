@@ -22,7 +22,7 @@ class CandidatosController extends Controller
 	public static function create( Request $request ){
 
 		debuger($request);
-		echo "string";
+		echo "jajaj";
 
 	}
 
