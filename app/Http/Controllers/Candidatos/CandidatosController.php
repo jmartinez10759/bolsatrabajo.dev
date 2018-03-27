@@ -20,10 +20,11 @@ class CandidatosController extends Controller
 	 *@return void
 	 */
 	public static function create( Request $request ){
-
 	
 		debuger($request->all()['datos']);
 
+		debuger($request);
+		echo "jajaja";
 
 
 	}
