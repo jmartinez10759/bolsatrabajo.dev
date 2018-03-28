@@ -16,10 +16,10 @@ class MasterController extends Controller
     public $_http;
 
     public function __construct(){
-
+    	
         $this->_client = new Client();
-        $this->_domain = $_SERVER['HTTP_HOST'];
-        $this->_http   = $_SERVER['REQUEST_SCHEME'];
+        #$this->_domain = $_SERVER['HTTP_HOST'];
+        #$this->_http   = $_SERVER['REQUEST_SCHEME'];
     }
     /**
      *Verifica si tiene acceso a esta parte del menu por cada accion
