@@ -35,9 +35,8 @@ class CandidatosController extends MasterController
 			}
 		}
 		#se realiza la consulta para verificar si existen ese candidato en la base de datos
-		$consulta = MasterModel::show_model(['id','name'], $where , new CandidatoModel );
-		#$consulta = CandidatoModel::where($where)->select('id','name')->get();
 
+		$consulta = MasterModel::show_model([], $where , new CandidatoModel );
 		if( count( $consulta ) > 0 ){
 			return message(false,[],"Registro del candidato existente");
 		}
@@ -54,7 +53,6 @@ class CandidatosController extends MasterController
 			}
 		}
 		#se realiza la inserccion.
-		$respoose = CandidatoModel::create($request->all());
 		$response = MasterModel::insert_model( [ $data ], new CandidatoModel);
 		if ( count( $response ) > 0) {
 			return message(true,$response,"Transaccion Exitosa");
