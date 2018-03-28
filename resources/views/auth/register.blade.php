@@ -12,7 +12,7 @@
                         {{ csrf_field() }}
 
                         <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
-                            <label for="name" class="col-md-4 control-label">Nombre</label>
+                            <label for="name" class="col-md-4 control-label">Nombre *</label>
 
                             <div class="col-md-6">
                                 <input id="name" type="text" class="form-control" v-model="newKeep.name" required autofocus>
@@ -26,7 +26,7 @@
                         </div>
 
                         <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
-                            <label for="email" class="col-md-4 control-label">E-Mail</label>
+                            <label for="email" class="col-md-4 control-label">E-Mail *</label>
 
                             <div class="col-md-6">
                                 <input id="email" type="email" class="form-control" v-model="newKeep.email" required>
@@ -40,7 +40,7 @@
                         </div>
 
                         <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
-                            <label for="password" class="col-md-4 control-label">Contraseña</label>
+                            <label for="password" class="col-md-4 control-label">Contraseña *</label>
 
                             <div class="col-md-6">
                                 <input id="password" type="password" class="form-control" v-model="newKeep.password" required>
@@ -54,7 +54,7 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="passwordConfirm" class="col-md-4 control-label">Confirmar Contraseña</label>
+                            <label for="passwordConfirm" class="col-md-4 control-label">Confirmar Contraseña *</label>
 
                             <div class="col-md-6">
                                 <input id="passwordConfirm" type="password" class="form-control" v-model="newKeep.passwordConfirm" required>
@@ -62,10 +62,24 @@
                         </div>
 
                         <div class="form-group">
+                            <label for="curp" class="col-md-4 control-label">Curp *</label>
+                            <div class="col-sm-6">
+                                <input id="curp" type="text" class="form-control" v-model="newKeep.curp" required>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="nss" class="col-md-4 control-label">NSS *</label>
+                            <div class="col-sm-6">
+                                <input id="nss" type="text" class="form-control" v-model="newKeep.nss" required>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
 
                             <div class="col-sm-offset-4">
 
-                                <input id="terminos" type="checkbox" checked="">
+                                <input id="terminos" type="checkbox" checked="" v-model="newKeep.terminos">
                                 <a data-toggle="modal" data-target="#myModal" style="cursor: pointer;">
                                     Terminos y Condiciones
                                 </a>
@@ -130,6 +144,9 @@ mixins = {
         ,'email': ''
         ,'password': ''
         , 'passwordConfirm': '' 
+        , 'curp': '' 
+        , 'nss': '' 
+        , 'terminos': '' 
     },
     fillKeep: { 
         'id': ''
@@ -137,6 +154,9 @@ mixins = {
         ,'email': '' 
         ,'password': ''
         ,'passwordConfirm': ''
+        ,'curp': ''
+        ,'nss': ''
+        ,'terminos': ''
     },
 
   },
