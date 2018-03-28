@@ -25,6 +25,8 @@ class CandidatosController extends MasterController
 	 */
 	public static function create( Request $request ){
 
+		debuger($request->all());
+
 		if ( !self::validaciones( $request->all()['datos'] ) ) {
 			return self::validaciones( $request->all()['datos'] );
 		}
