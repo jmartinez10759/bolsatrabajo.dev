@@ -21,6 +21,7 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/index', 'ListadoController@index');
+Route::get('/listado', 'ListadoController@listado');
 
 ###########################  Registro de Candidatos ##############################
 Route::post('/register/insert', 'Candidatos\CandidatosController@create')->name('create');

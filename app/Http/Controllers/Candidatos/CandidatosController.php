@@ -37,6 +37,7 @@ class CandidatosController extends MasterController
 			}
 		}
 		#se realiza la consulta para verificar si existen ese candidato en la base de datos
+
 		$consulta = MasterModel::show_model([], $where , new CandidatoModel );
 		if( count( $consulta ) > 0 ){
 			return message(false,[],"Registro del candidato existente");
