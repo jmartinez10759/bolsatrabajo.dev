@@ -10,9 +10,5 @@
         @include('listado.section')
         @include('listado.footer')
 	</div>
-
-	<script type="text/javascript">
-		
-	</script>
 </body>
 </html>

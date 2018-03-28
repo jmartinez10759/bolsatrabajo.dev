@@ -111,6 +111,8 @@
 					</div>
 					<!--/.row-->
 					<div class="row">
+						@foreach($listado as $list)  
+         
 						<a href="job-detail.html" class="item-click">
 						<article>
 							<div class="brows-job-list">
@@ -122,8 +124,8 @@
 								
 								<div class="col-md-6 col-sm-5">
 									<div class="brows-job-position">
-										<h3>Senior front-end Developer</h3>
-										<p><span>Autodesk</span><span class="brows-job-sallery"><i class="fa fa-money"></i>$750 - 800</span></p>
+										<h3>{{$list->name}}</h3>
+										<p><span>{{$list->email}}</span><span class="brows-job-sallery"><i class="fa fa-money"></i>{{$list->password}}</span></p>
 									</div>
 								</div>
 								
@@ -142,146 +144,9 @@
 							</div>
 						</article>
 						</a>
-					
-						<a href="job-detail.html" class="item-click">
-							<article>
-								<div class="brows-job-list">
-									<div class="col-md-1 col-sm-2 small-padding">
-										<div class="brows-job-company-img">
-											<img src="http://via.placeholder.com/150x150" class="img-responsive" alt="" />
-										</div>
-									</div>
-									<div class="col-md-6 col-sm-5">
-										<div class="brows-job-position">
-											<h3>Senior front-end Developer</h3>
-											<p><span>Google</span><span class="brows-job-sallery"><i class="fa fa-money"></i>$810 - 900</span></p>
-										</div>
-									</div>
-									<div class="col-md-3 col-sm-3">
-										<div class="brows-job-location">
-											<p><i class="fa fa-map-marker"></i>QBL Park, C40</p>
-										</div>
-									</div>
-									<div class="col-md-2 col-sm-2">
-										<div class="brows-job-type">
-											<span class="part-time">Part Time</span>
-										</div>
-									</div>
-								</div>
-							</article>
-						</a>
+						 @endforeach 
 						
-						<a href="job-detail.html" class="item-click">
-							<article>
-								<div class="brows-job-list">
-									<div class="col-md-1 col-sm-2 small-padding">
-										<div class="brows-job-company-img">
-											<img src="http://via.placeholder.com/150x150" class="img-responsive" alt="" />
-										</div>
-									</div>
-									<div class="col-md-6 col-sm-5">
-										<div class="brows-job-position">
-											<h3>Senior front-end Developer</h3>
-											<p><span>Honda</span><span class="brows-job-sallery"><i class="fa fa-money"></i>$800 - 910</span></p>
-										</div>
-									</div>
-									<div class="col-md-3 col-sm-3">
-										<div class="brows-job-location">
-											<p><i class="fa fa-map-marker"></i>QBL Park, C40</p>
-										</div>
-									</div>
-									<div class="col-md-2 col-sm-2">
-										<div class="brows-job-type">
-											<span class="freelanc">Freelancer</span>
-										</div>
-									</div>
-								</div>
-							</article>
-						</a>
 						
-						<a href="job-detail.html" class="item-click">
-							<article>
-								<div class="brows-job-list">
-									<div class="col-md-1 col-sm-2 small-padding">
-										<div class="brows-job-company-img">
-											<img src="http://via.placeholder.com/150x150" class="img-responsive" alt="" />
-										</div>
-									</div>
-									<div class="col-md-6 col-sm-5">
-										<div class="brows-job-position">
-											<h3>Senior front-end Developer</h3>
-											<p><span>Microsoft</span><span class="brows-job-sallery"><i class="fa fa-money"></i>$580 - 600</span></p>
-										</div>
-									</div>
-									<div class="col-md-3 col-sm-3">
-										<div class="brows-job-location">
-											<p><i class="fa fa-map-marker"></i>QBL Park, C40</p>
-										</div>
-									</div>
-									<div class="col-md-2 col-sm-2">
-										<div class="brows-job-type">
-											<span class="full-time">Full Time</span>
-										</div>
-									</div>
-								</div>
-							</article>
-						</a>
-						
-						<a href="job-detail.html" class="item-click">
-							<article>
-								<div class="brows-job-list">
-									<div class="col-md-1 col-sm-2 small-padding">
-										<div class="brows-job-company-img">
-											<img src="http://via.placeholder.com/150x150" class="img-responsive" alt="" />
-										</div>
-									</div>
-									<div class="col-md-6 col-sm-5">
-										<div class="brows-job-position">
-											<h3>Senior front-end Developer</h3>
-											<p><span>Autodesk</span><span class="brows-job-sallery"><i class="fa fa-money"></i>$800 - 900</span></p>
-										</div>
-									</div>
-									<div class="col-md-3 col-sm-3">
-										<div class="brows-job-location">
-											<p><i class="fa fa-map-marker"></i>QBL Park, C40</p>
-										</div>
-									</div>
-									<div class="col-md-2 col-sm-2">
-										<div class="brows-job-type">
-											<span class="enternship">Enternship</span>
-										</div>
-									</div>
-								</div>
-							</article>
-						</a>
-						
-						<a href="job-detail.html" class="item-click">
-							<article>
-								<div class="brows-job-list">
-									<div class="col-md-1 col-sm-2 small-padding">
-										<div class="brows-job-company-img">
-											<img src="http://via.placeholder.com/150x150" class="img-responsive" alt="" />
-										</div>
-									</div>
-									<div class="col-md-6 col-sm-5">
-										<div class="brows-job-position">
-											<h3>Senior front-end Developer</h3>
-											<p><span>Google</span><span class="brows-job-sallery"><i class="fa fa-money"></i>$510 - 700</span></p>
-										</div>
-									</div>
-									<div class="col-md-3 col-sm-3">
-										<div class="brows-job-location">
-											<p><i class="fa fa-map-marker"></i>QBL Park, C40</p>
-										</div>
-									</div>
-									<div class="col-md-2 col-sm-2">
-										<div class="brows-job-type">
-											<span class="full-time">Full Time</span>
-										</div>
-									</div>
-								</div>
-							</article>
-						</a>
 						
 						<a href="job-detail.html" class="item-click">
 							<article>
