@@ -3,6 +3,7 @@ var success_mgs = "Registro insertado corretamente.";
 var error_mgs   = "Ocurrio un error, Favor de verificar";
 var title_error = "Registros Incorrectos";
 var update      = "Registro actualizado corretamente.";
+var validate    = "Favor de Verificar los campos color Rojo";
 
 new Vue({
     mixins : [mixins],
@@ -12,12 +13,14 @@ new Vue({
                 //console.log( response.data.tasks );return;
                 this.datos = response.data.result
             });
+        
         },
         edit_general: function( obj ) {
             for ( var i in this.fillKeep){
                 this.fillKeep[i] = obj[i];
             }
             $('#edit_form').modal('show');
+        
         },
         insert_general: function( uri, url, funcion , errors ) {
 
@@ -36,7 +39,6 @@ new Vue({
                     funcion( response.data );
 
                 }else{
-                    console.log(response);
                     toastr.error( response.data.message,title_error );
                     errors( response.data );
                 }
@@ -46,6 +48,7 @@ new Vue({
             }).catch(error => {
                 toastr.error( error,title_error );
             });
+        
         },
         update_general: function( uri,url ) {
             
@@ -63,6 +66,7 @@ new Vue({
                 toastr.error( error, title_error );
 
             });
+        
         },
         delete_general: function( uri ,refresh ,keep ) {
 
@@ -76,7 +80,18 @@ new Vue({
                     toastr.error( error, title_error );
                 });
 
+        },
+        validate_form: function(){
+
+            $.each(this.newKeep,function(key, value){
+                if (value == "" || value == false) {
+                    $('#'+key).parent().parent().addClass('has-error');
+                    return;
+                }
+            });
+
         }
+
 
     }
 });

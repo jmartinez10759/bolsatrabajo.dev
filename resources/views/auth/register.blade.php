@@ -16,12 +16,6 @@
 
                             <div class="col-md-6">
                                 <input id="name" type="text" class="form-control" v-model="newKeep.name" required autofocus>
-
-                                @if ($errors->has('name'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('name') }}</strong>
-                                    </span>
-                                @endif
                             </div>
                         </div>
 
@@ -30,12 +24,6 @@
 
                             <div class="col-md-6">
                                 <input id="email" type="email" class="form-control" v-model="newKeep.email" required>
-
-                                @if ($errors->has('email'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('email') }}</strong>
-                                    </span>
-                                @endif
                             </div>
                         </div>
 
@@ -44,12 +32,6 @@
 
                             <div class="col-md-6">
                                 <input id="password" type="password" class="form-control" v-model="newKeep.password" required>
-
-                                @if ($errors->has('password'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('password') }}</strong>
-                                    </span>
-                                @endif
                             </div>
                         </div>
 
@@ -79,7 +61,7 @@
 
                             <div class="col-sm-offset-4">
 
-                                <input id="terminos" type="checkbox" checked="" v-model="newKeep.terminos">
+                                <input id="terminos" type="checkbox" v-model="newKeep.terminos">
                                 <a data-toggle="modal" data-target="#myModal" style="cursor: pointer;">
                                     Terminos y Condiciones
                                 </a>
@@ -116,7 +98,7 @@
           @include('termino.termino')
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-default" data-dismiss="modal"> Cerrar </button>
         </div>
       </div>
       
@@ -127,57 +109,5 @@
 @endsection
 
 @push('scripts')
-
-<script type="text/javascript">
-
-var inicio = "/register";
-
-mixins = {
-  el: "#vue-candidate",
-  /*created: function () {
-    //this.get_general( inicio );
-  },*/
-  data: {
-    datos: [],
-    newKeep: { 
-         'name': ''
-        ,'email': ''
-        ,'password': ''
-        , 'passwordConfirm': '' 
-        , 'curp': '' 
-        , 'nss': '' 
-        , 'terminos': '' 
-    },
-    fillKeep: { 
-        'id': ''
-        ,'name': '' 
-        ,'email': '' 
-        ,'password': ''
-        ,'passwordConfirm': ''
-        ,'curp': ''
-        ,'nss': ''
-        ,'terminos': ''
-    },
-
-  },
-  methods:{
-    insertar: function( uri ){
-
-        this.insert_general( uri, inicio,function(json){
-
-            $('#password').parent().parent().removeClass('has-error');
-            $('#passwordConfirm').parent().parent().removeClass('has-error');
-
-        },function(json){
-            
-            $('#password').parent().parent().addClass('has-error');
-            $('#passwordConfirm').parent().parent().addClass('has-error');
-
-        });
-    }
-  }
-}
-
-</script>
-        
+    <script type="text/javascript" src="{{asset('js/candidatos/register.js')}}"></script>
 @endpush

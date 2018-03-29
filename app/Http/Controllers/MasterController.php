@@ -16,8 +16,9 @@ class MasterController extends Controller
     public $_http;
 
     public function __construct(){
-    	
+
         $this->_client = new Client();
+        #$this->middleware('guest');
         #$this->_domain = $_SERVER['HTTP_HOST'];
         #$this->_http   = $_SERVER['REQUEST_SCHEME'];
     }
