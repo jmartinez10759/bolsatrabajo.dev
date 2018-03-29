@@ -24,4 +24,5 @@ Route::get('/index', 'ListadoController@index')->name('carga');
 Route::get('/listado', 'ListadoController@listado')->name('get_list');
 
 ###########################  Registro de Candidatos ##############################
-Route::post('/register/insert', 'Candidatos\CandidatosController@create')->name('create');
+Route::post('register/insert', 'Candidatos\CandidatosController@create')->name('create');
+Route::post('candidate/login', 'Candidatos\CandidatosController@store')->name('store');

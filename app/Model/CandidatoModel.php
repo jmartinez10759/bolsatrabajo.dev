@@ -12,5 +12,9 @@ class CandidatoModel extends Model
     	,'name'
     	,'email'
     	,'password'
+    	,'curp'
+    	,'nss'
+    	,'remember_token'
+    	,'api_token'
     ];
 }
