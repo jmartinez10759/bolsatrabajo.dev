@@ -50,7 +50,7 @@ class CandidatosController extends MasterController
 				$data[$key] = $value;
 
 				if ( $key == "password") {
-					$data[$key] = bcrypt($value);
+					$data[$key] = sha1($value);
 				}
 
 			}
@@ -113,19 +113,15 @@ class CandidatosController extends MasterController
 		$where = [];
 		foreach ($request->all()['datos'] as $key => $value) {
 			$where[$key] = $value;
-			/*if ( $key == "password" ) {
-				$where[$key] = $value;
-			}*/
+			if ( $key == "password" ) {
+				$where[$key] = sha1($value);
+			}
 		}
-
-		/*if (strcmp($where) === 0) {
-			echo "llego aqyui sonso";
-		}*/
 		#se realiza la consulta para verificar si existen ese candidato en la base de datos
 		$consulta = MasterModel::show_model([], $where , new CandidatoModel );
-			debuger( $consulta );
 		if( count( $consulta ) > 0 ){
-			return message(true,$candidato,"Transaccion Exitosa");
+			return redirect()->route('home');
+			//return message(true,$candidato,"Transaccion Exitosa");
 		}
 
 
