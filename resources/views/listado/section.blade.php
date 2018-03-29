@@ -104,16 +104,16 @@
 			<!-- Top Features Section End-->
 			
 			<!-- ========== Begin: Brows job Category ===============  -->
-			<section class="brows-job-category">
+			<section class="brows-job-category" id="vue-listado">
 				<div class="container">
 					<div class="row">
 						<h2>Hemos encontrado 477 resultados de vacantes, estás viendo 7 a 27</h2>
 					</div>
 					<!--/.row-->
 					<div class="row">
-						@foreach($listado as $list)  
-         
-						<a href="job-detail.html" class="item-click">
+					
+
+						<a href="job-detail.html" class="item-click" v-for="data in datos">
 						<article>
 							<div class="brows-job-list">
 								<div class="col-md-1 col-sm-2 small-padding">
@@ -124,8 +124,8 @@
 								
 								<div class="col-md-6 col-sm-5">
 									<div class="brows-job-position">
-										<h3>{{$list->name}}</h3>
-										<p><span>{{$list->email}}</span><span class="brows-job-sallery"><i class="fa fa-money"></i>{{$list->password}}</span></p>
+										<h3>@{{ data.name }}</h3>
+										<p><span>@{{ data.email }}</span><span class="brows-job-sallery"><i class="fa fa-money"></i>@{{ data.password }}</span></p>
 									</div>
 								</div>
 								
@@ -143,37 +143,6 @@
 								
 							</div>
 						</article>
-						</a>
-						 @endforeach 
-						
-						
-						
-						<a href="job-detail.html" class="item-click">
-							<article>
-								<div class="brows-job-list">
-									<div class="col-md-1 col-sm-2 small-padding">
-										<div class="brows-job-company-img">
-											<img src="http://via.placeholder.com/150x150" class="img-responsive" alt="" />
-										</div>
-									</div>
-									<div class="col-md-6 col-sm-5">
-										<div class="brows-job-position">
-											<h3>Senior front-end Developer</h3>
-											<p><span>Honda</span><span class="brows-job-sallery"><i class="fa fa-money"></i>$700 - 800</span></p>
-										</div>
-									</div>
-									<div class="col-md-3 col-sm-3">
-										<div class="brows-job-location">
-											<p><i class="fa fa-map-marker"></i>QBL Park, C40</p>
-										</div>
-									</div>
-									<div class="col-md-2 col-sm-2">
-										<div class="brows-job-type">
-											<span class="part-time">Part Time</span>
-										</div>
-									</div>
-								</div>
-							</article>
 						</a>
 						
 					</div>
@@ -270,3 +239,27 @@
 				</div>
 			</section>
 			<!-- testimonial section End -->
+@push('scripts')
+
+<script type="text/javascript">
+
+var inicio = "listado";
+
+mixins = {
+  el: "#vue-listado",
+  created: function () {
+    this.get_general( inicio );
+  },
+  data: {
+    datos: [],
+    newKeep: { },
+    fillKeep: { },
+  },
+  methods:{
+
+  }
+}
+
+</script>
+        
+@endpush

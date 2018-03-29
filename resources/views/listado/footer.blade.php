@@ -152,6 +152,7 @@
 			
 			<!-- START JAVASCRIPT -->
 			<!-- Placed at the end of the document so the pages load faster -->
+			<script src="{{ asset('js/app.js') }}"></script>
 			<script type="text/javascript" src="{{ asset('js/js/jquery.min.js') }}"></script>
 			<script src="{{ asset('plugins/bootstrap/js/bootstrap.min.js') }}"></script>
 			<script src="{{ asset('js/js/bootsnav.js') }}"></script>
@@ -167,4 +168,9 @@
 			
 			<!-- Custom Js -->
 			<script src="{{ asset('js/js/custom.js') }}"></script>
+			
+    		<!-- script desarrollador -->
+    		@stack('scripts')
+    		<!-- script master vue -->
+    		<script type="text/javascript" src="{{asset('js/master_vue.js')}}"></script>
 		</div>

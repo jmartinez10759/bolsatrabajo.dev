@@ -85,6 +85,7 @@
 							<li><a href="blog.html">Blog</a></li>
 						</ul>
 						<ul class="nav navbar-nav navbar-right" data-in="fadeInDown" data-out="fadeOutUp">
+							<li><a href="{{ route('login') }}"><i class="fa fa-sign-in" aria-hidden="true"></i>login</a></li>
 							<li><a href="pricing.html"><i class="fa fa-sign-in" aria-hidden="true"></i>Paquetes</a></li>
 							<li class="left-br"><a href="javascript:void(0)"  data-toggle="modal" data-target="#signup" class="signin">Acceso Usuarios	</a></li>
 						</ul>
