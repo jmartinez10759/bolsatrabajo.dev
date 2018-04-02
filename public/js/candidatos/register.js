@@ -9,22 +9,28 @@ mixins = {
     datos: [],
     newKeep: { 
          'name': ''
+        ,'first_surname': ''
+        ,'second_surname': ''
+        ,'curp': '' 
+        ,'numero_credito_infonavit': '' 
         ,'email': ''
         ,'password': ''
-        , 'passwordConfirm': '' 
-        , 'curp': '' 
-        , 'nss': '' 
-        , 'terminos': true 
+        ,'passwordConfirm': '' 
+        ,'nss': '' 
+        //,'terminos': true 
     },
     fillKeep: { 
         'id': ''
-        ,'name': '' 
-        ,'email': '' 
+        ,'name': ''
+        ,'first_surname': ''
+        ,'second_surname': ''
+        ,'curp': '' 
+        ,'numero_credito_infonavit': '' 
+        ,'email': ''
         ,'password': ''
-        ,'passwordConfirm': ''
-        ,'curp': ''
-        ,'nss': ''
-        ,'terminos': true
+        ,'passwordConfirm': '' 
+        ,'nss': '' 
+        //,'terminos': true
     },
 
   },

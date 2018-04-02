@@ -5,7 +5,8 @@ namespace App\Http\Controllers\Candidatos;
 #use App\User;
 use App\Model\MasterModel;
 use Illuminate\Http\Request;
-use App\Model\CandidatoModel;
+#use App\Model\CandidatoModel;
+use App\Model\RequestUserModel;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
@@ -37,23 +38,23 @@ class CandidatosController extends MasterController
 	 */
 	public static function create( Request $request ){
 
-		if ( !self::validaciones( $request->all()['datos'] ) ) {
-			return self::validaciones( $request->all()['datos'] );
+		if ( !self::validaciones( $request->all() ) ) {
+			return self::validaciones( $request->all() );
 		}
-
 		$where = [];
-		foreach ($request->all()['datos'] as $key => $value) {
-			if ( $key == "email" ) {
+		foreach ($request->all() as $key => $value) {
+			if ( $key == "email" || $key == "curp" ) {
 				$where[$key] = $value;
 			}
 		}
 		#se realiza la consulta para verificar si existen ese candidato en la base de datos
-		$consulta = MasterModel::show_model([], $where , new CandidatoModel );
+		$consulta = MasterModel::show_model([], $where , new RequestUserModel );
+		#debuger($consulta);
 		if( count( $consulta ) > 0 ){
 			return message(false,[],"Registro del candidato existente");
 		}
 		$data = [];
-		foreach ($request->all()['datos'] as $key => $value) {
+		foreach ($request->all() as $key => $value) {
 			
 			if ($key != "passwordConfirm") {
 				$data[$key] = $value;
@@ -66,8 +67,9 @@ class CandidatosController extends MasterController
 		}
 		$data['remember_token'] = str_random(50);
 		$data['api_token'] = str_random(50);
+		#debuger($data);
 		#se realiza la inserccion.
-		$response = MasterModel::insert_model( [ $data ], new CandidatoModel);
+		$response = MasterModel::insert_model( [ $data ], new RequestUserModel);
 		if ( count( $response ) > 0) {
 
 			return message(true,$response,"Transaccion Exitosa");
@@ -100,14 +102,14 @@ class CandidatosController extends MasterController
 				}
 
 			}
-			if ($key == 'terminos') {
+			/*if ($key == 'terminos') {
 				
 				if ( $value == false ) {
 					echo message(false,[],'Debe de Aceptar los Terminos y Condiciones');
 					die();
 				}
 
-			}
+			}*/
 
 		}
 		return true;

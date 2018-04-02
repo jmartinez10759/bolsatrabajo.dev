@@ -11,7 +11,7 @@
                     <form class="form-horizontal" method="POST" v-on:submit.prevent="insertar('register/insert')" >
                         {{ csrf_field() }}
 
-                        <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
+                        <div class="form-group">
                             <label for="name" class="col-md-4 control-label">Nombre *</label>
 
                             <div class="col-md-6">
@@ -19,7 +19,39 @@
                             </div>
                         </div>
 
-                        <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
+                         <div class="form-group">
+                            <label for="first_surname" class="col-md-4 control-label">Primer Apellido *</label>
+
+                            <div class="col-md-6">
+                                <input id="first_surname" type="text" class="form-control" v-model="newKeep.first_surname" required autofocus>
+                            </div>
+                        </div>
+
+                         <div class="form-group">
+                            <label for="second_surname" class="col-md-4 control-label">Segundo Apellido</label>
+
+                            <div class="col-md-6">
+                                <input id="second_surname" type="text" class="form-control" v-model="newKeep.second_surname">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="curp" class="col-md-4 control-label">Curp *</label>
+                            <div class="col-sm-6">
+                                <input id="curp" type="text" class="form-control" v-model="newKeep.curp" required>
+                            </div>
+                        </div>
+
+                         <div class="form-group">
+                            <label for="numero_credito_infonavit" class="col-md-4 control-label">Credito Infonavit *</label>
+
+                            <div class="col-md-6">
+                                <input id="numero_credito_infonavit" type="checkbox" v-model="newKeep.numero_credito_infonavit">
+                            </div>
+                        </div>
+
+
+                        <div class="form-group">
                             <label for="email" class="col-md-4 control-label">Correo *</label>
 
                             <div class="col-md-6">
@@ -27,7 +59,7 @@
                             </div>
                         </div>
 
-                        <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
+                        <div class="form-group">
                             <label for="password" class="col-md-4 control-label">Password *</label>
 
                             <div class="col-md-6">
@@ -43,12 +75,7 @@
                             </div>
                         </div>
 
-                        <div class="form-group">
-                            <label for="curp" class="col-md-4 control-label">Curp *</label>
-                            <div class="col-sm-6">
-                                <input id="curp" type="text" class="form-control" v-model="newKeep.curp" required>
-                            </div>
-                        </div>
+                        
 
                         <div class="form-group">
                             <label for="nss" class="col-md-4 control-label">NSS *</label>
@@ -57,7 +84,7 @@
                             </div>
                         </div>
 
-                        <div class="form-group">
+                        <!-- <div class="form-group">
 
                             <div class="col-sm-offset-4">
 
@@ -66,7 +93,7 @@
                                     Terminos y Condiciones
                                 </a>
                             </div>
-                        </div>
+                        </div> -->
 
 
 
