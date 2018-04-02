@@ -4,13 +4,15 @@ var error_mgs   = "Ocurrio un error, Favor de verificar";
 var title_error = "Registros Incorrectos";
 var update      = "Registro actualizado corretamente.";
 var validate    = "Favor de Verificar los campos color Rojo";
+var params = {};
 
 new Vue({
     mixins : [mixins],
     methods: {
-        get_general: function( url ) {
-            axios.get(url).then(response => {
-                //console.log( response.data.tasks );return;
+        get_general: function( url, data ) {
+            params = data;
+            axios.get(url, params ).then(response => {
+                console.log( response.data.result );
                 this.datos = response.data.result
             });
         
@@ -23,10 +25,8 @@ new Vue({
         
         },
         insert_general: function( uri, url, funcion , errors ) {
-
-            axios.post(uri, {
-                datos: this.newKeep
-            }).then(response => {
+            
+            axios.post(uri, this.newKeep).then(response => {
                 
                 if (response.data.success == true) {
 

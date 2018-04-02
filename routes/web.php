@@ -15,9 +15,25 @@ Route::get('/', function () {
     return view('index');
     #return view('welcome');
 });
-Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+#Auth::routes();
+
+####################################SE CREA LAS RUTAS PARA INICIAR SESION #######################################################
+Route::get('/login', 'Auth\AuthController@showLogin')->name('login');
+Route::post('/login', 'Auth\AuthController@authLogin')->name('login');
+Route::post('/logout', 'Auth\AuthController@logout')->name('logout');
+Route::get('/password', 'Auth\AuthController@password')->name('password.request');
+Route::get('/register', 'Candidatos\CandidatosController@index')->name('register');
+
+Route::post('register/insert', 'Candidatos\CandidatosController@create')->name('create');
+
+
+Route::group(['middleware' => ['auth.session']], function() {
+
+	Route::get('/home', 'HomeController@index')->name('home');
+
+});
+	#Route::get('/home', 'HomeController@index')->name('home');
 
 /*Llamadas al controlador Candidate*/
 /*Route::get('login', 'Candidatos\CandidatosController@get_login')->name('login'); // Mostrar login
@@ -52,9 +68,4 @@ Route::get('/index', 'ListadoController@index')->name('carga');
 Route::get('/listado', 'ListadoController@listado')->name('get_list');
 
 ###########################  Registro de Candidatos ##############################
-Route::post('register/insert', 'Candidatos\CandidatosController@create')->name('create');
-Route::post('candidate/login', 'Candidatos\CandidatosController@store')->name('store');
-
-Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');
+#Route::post('candidate/login', 'Candidatos\CandidatosController@store')->name('store');

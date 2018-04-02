@@ -277,7 +277,7 @@ class MasterController extends Controller
         $datos = [
             "success"   => true
             ,"message"   => "Transaccion exitosa."
-            ,"code"      => "CPA-".$code
+            ,"code"      => "BLM-".$code
             ,"result"    => $data
         ];
 
