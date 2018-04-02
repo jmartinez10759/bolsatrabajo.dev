@@ -1,3 +1,4 @@
+
 var inicio = "/register";
 mixins = {
   el: "#vue-candidate",

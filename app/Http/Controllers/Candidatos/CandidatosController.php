@@ -17,23 +17,16 @@ class CandidatosController extends MasterController
 
 	public function __construct(){
 		#parent::__construct();
-		$this->middleware('guest');
+		#$this->middleware('guest');
 	}
 	/**
 	 *Metodo para mostrar la pagina de login.
 	 *@access public
 	 *@return void
 	 */
-	public static function get_login(){
+	public static function index(){
 
-		// Verificamos si hay sesión activa
-        if (Auth::check())
-        {
-            // Si tenemos sesión activa mostrará la página de inicio
-            return Redirect::to('/home');
-        }
-        // Si no hay sesión activa mostramos el formulario
-        return view('auth.login');
+		return View('auth.register');
 
 	}
 	/**
@@ -76,6 +69,7 @@ class CandidatosController extends MasterController
 		#se realiza la inserccion.
 		$response = MasterModel::insert_model( [ $data ], new CandidatoModel);
 		if ( count( $response ) > 0) {
+
 			return message(true,$response,"Transaccion Exitosa");
 		}else{
 			return message(false,[],"Ocurrio un error");
