@@ -56,6 +56,8 @@ mixins = {
                 $('#'+key).parent().parent().removeClass('has-error');
             });
             $('#signup').modal('hide');
+            location.href=domain('home');
+
         },function(json){
             
             $.each(this.newKeep,function(key, value){
