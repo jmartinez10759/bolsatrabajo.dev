@@ -24,7 +24,6 @@ Route::post('/login', 'Auth\AuthController@authLogin')->name('login');
 Route::post('/logout', 'Auth\AuthController@logout')->name('logout');
 Route::get('/password', 'Auth\AuthController@password')->name('password.request');
 Route::get('/register', 'Candidatos\CandidatosController@index')->name('register');
-
 Route::post('register/insert', 'Candidatos\CandidatosController@create')->name('create');
 
 
