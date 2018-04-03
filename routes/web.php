@@ -66,6 +66,6 @@ Route::group(['before' => 'auth'], function(){
 
 Route::get('/index', 'ListadoController@index')->name('carga');
 Route::get('/listado', 'ListadoController@listado')->name('get_list');
-
+Route::get('/api/items', 'ListadoController@index')->name('home');
 ###########################  Registro de Candidatos ##############################
 #Route::post('candidate/login', 'Candidatos\CandidatosController@store')->name('store');
