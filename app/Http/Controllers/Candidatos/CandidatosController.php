@@ -5,12 +5,12 @@ namespace App\Http\Controllers\Candidatos;
 #use App\User;
 use App\Model\MasterModel;
 use Illuminate\Http\Request;
-#use App\Model\CandidatoModel;
 use App\Model\RequestUserModel;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
 use App\Http\Controllers\MasterController;
+use App\Http\Controllers\Auth\AuthController;
 
 class CandidatosController extends MasterController
 {
@@ -43,35 +43,33 @@ class CandidatosController extends MasterController
 		}
 		$where = [];
 		foreach ($request->all() as $key => $value) {
-			if ( $key == "email" || $key == "curp" ) {
+			if ( $key == "curp" ) {
 				$where[$key] = $value;
 			}
 		}
+		$where['email'] = $request->correo;
 		#se realiza la consulta para verificar si existen ese candidato en la base de datos
-		debuger(new RequestUserModel);
 		$consulta = MasterModel::show_model([], $where , new RequestUserModel );
+		#return AuthController::getData( $consulta[0] );
 		if( count( $consulta ) > 0 ){
 			return message(false,[],"Registro del candidato existente");
 		}
 		$data = [];
 		foreach ($request->all() as $key => $value) {
 			
-			if ($key != "passwordConfirm") {
+			if ($key != "passwordConfirm" && $key != "pass" && $key != "correo") {
 				$data[$key] = $value;
-
-				if ( $key == "password") {
-					$data[$key] = sha1($value);
-				}
-
 			}
 		}
 		$data['remember_token'] = str_random(50);
-		$data['api_token'] = str_random(50);
-		debuger($data);
+		$data['api_token'] 		= str_random(50);
+		$data['email'] 			= $request->correo;
+		$data['password'] 		= sha1( $request->pass );
+		#debuger($data);
 		#se realiza la inserccion.
 		$response = MasterModel::insert_model( [ $data ], new RequestUserModel);
 		if ( count( $response ) > 0) {
-
+			AuthController::getData( $response[0] );
 			return message(true,$response,"Transaccion Exitosa");
 		}else{
 			return message(false,[],"Ocurrio un error");
@@ -89,9 +87,9 @@ class CandidatosController extends MasterController
 
 		foreach ($request as $key => $value) {
 
-			if ($key == 'password' || $key == "passwordConfirm") {
+			if ($key == 'pass' || $key == "passwordConfirm") {
 				
-				if ( $request['password'] != $request['passwordConfirm']) {
+				if ( $request['pass'] != $request['passwordConfirm']) {
 					 echo message(false,[],'Password');
 					 die();
 				}
@@ -121,42 +119,40 @@ class CandidatosController extends MasterController
 	 *@param Request $request [Description]
 	 *@return void
 	 */
-	public static function store( Request $request ){
+	/*public static function store( Request $request ){
 
-		 // Obtenemos los datos del formulario
-        $data = $request->only(['email','password']);
-        // Verificamos los datos
-        if (Auth::attempt($data)) {
-            // Si nuestros datos son correctos mostramos la página de inicio
-            return redirect()->route('home');
-        }
-        // Si los datos no son los correctos volvemos al login y mostramos un error
-        return redirect()->route('login');
+			// Obtenemos los datos del formulario
+	        $data = $request->only(['email','password']);
+	        // Verificamos los datos
+	        if (Auth::attempt($data)) {
+	            // Si nuestros datos son correctos mostramos la página de inicio
+	            return redirect()->route('home');
+	        }
+	        // Si los datos no son los correctos volvemos al login y mostramos un error
+	        return redirect()->route('login');
 
 
-		/*$where = [];
-		foreach ($request->all() as $key => $value) {
-			if ($key != "_token") {
-				$where[$key] = $value;
+			$where = [];
+			foreach ($request->all() as $key => $value) {
+				if ($key != "_token") {
+					$where[$key] = $value;
+				}
+				if ( $key == "password" ) {
+					$where[$key] = sha1($value);
+				}
 			}
-			if ( $key == "password" ) {
-				$where[$key] = sha1($value);
+			#se realiza la consulta para verificar si existen ese candidato en la base de datos
+			$consulta = MasterModel::show_model([], $where , new CandidatoModel );
+			#debuger($consulta);
+			if( count( $consulta ) > 0 ){
+				#Session::put($consulta[0]);
+				return redirect()->route('home');
+				//return view('home');
+				//return message(true,$candidato,"Transaccion Exitosa");
 			}
-		}
-		#se realiza la consulta para verificar si existen ese candidato en la base de datos
-		$consulta = MasterModel::show_model([], $where , new CandidatoModel );
-		#debuger($consulta);
-		if( count( $consulta ) > 0 ){
-			#Session::put($consulta[0]);
-			return redirect()->route('home');
-			//return view('home');
-			//return message(true,$candidato,"Transaccion Exitosa");
-		}*/
-
-
 
 	}
-
+*/
 
 
 

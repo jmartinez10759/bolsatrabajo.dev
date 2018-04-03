@@ -1,5 +1,7 @@
-	  <!-- Scripts -->
+	 <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script>
+	<!-- Custom Js -->
+	<script src="{{ asset('js/js/custom.js') }}"></script>
     <!-- script desarrollador -->
     @stack('scripts')
     <!-- script master vue -->

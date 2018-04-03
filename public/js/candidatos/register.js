@@ -1,5 +1,5 @@
 
-var inicio = "/register";
+var inicio = "/home";
 mixins = {
   el: "#vue-candidate",
   /*created: function () {
@@ -13,8 +13,8 @@ mixins = {
         ,'second_surname': ''
         ,'curp': '' 
         ,'numero_credito_infonavit': '' 
-        ,'email': ''
-        ,'password': ''
+        ,'correo': ''
+        ,'pass': ''
         ,'passwordConfirm': '' 
         ,'nss': '' 
         //,'terminos': true 
@@ -26,8 +26,8 @@ mixins = {
         ,'second_surname': ''
         ,'curp': '' 
         ,'numero_credito_infonavit': '' 
-        ,'email': ''
-        ,'password': ''
+        ,'correo': ''
+        ,'pass': ''
         ,'passwordConfirm': '' 
         ,'nss': '' 
         //,'terminos': true
@@ -37,6 +37,7 @@ mixins = {
   methods:{
     
     insertar: function( uri ){
+
         //se realiza las validaciones de los datos de NSS y CURP
         if ( !nssValido(this.newKeep.nss) ) {
             toastr.error( validate ,"NSS Incorrecto" );
@@ -54,7 +55,7 @@ mixins = {
             $.each(this.newKeep,function(key, value){
                 $('#'+key).parent().parent().removeClass('has-error');
             });
-
+            $('#signup').modal('hide');
         },function(json){
             
             $.each(this.newKeep,function(key, value){

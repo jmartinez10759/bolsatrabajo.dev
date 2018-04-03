@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class RequestUserModel extends Model
 {
     protected $table = "request_users";
-    protected $fillable = [
+    public $fillable = [
     	'id'
     	,'name'
 		,'first_surname'

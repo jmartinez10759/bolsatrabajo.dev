@@ -18,9 +18,11 @@ class MasterModel extends Model
 	public static function show_model( $params = array(), $where= array(), $clase= false ){
 		
 		if ( $where ) {
-			
-			if ( $params) { $response = $clase::where( $where )->select( $params )->get();}
-			else{ $response = $clase::where( $where )->get(); }
+			if ( $params) { 
+				$response = $clase::where( $where )->select( $params )->get();
+			}else{ 
+				$response = $clase::where( $where )->get(); 
+			}
 
 		}else{ $response = $clase::all(); }
 
