@@ -48,8 +48,8 @@ class CandidatosController extends MasterController
 			}
 		}
 		#se realiza la consulta para verificar si existen ese candidato en la base de datos
+		debuger(new RequestUserModel);
 		$consulta = MasterModel::show_model([], $where , new RequestUserModel );
-		#debuger($consulta);
 		if( count( $consulta ) > 0 ){
 			return message(false,[],"Registro del candidato existente");
 		}
@@ -67,7 +67,7 @@ class CandidatosController extends MasterController
 		}
 		$data['remember_token'] = str_random(50);
 		$data['api_token'] = str_random(50);
-		#debuger($data);
+		debuger($data);
 		#se realiza la inserccion.
 		$response = MasterModel::insert_model( [ $data ], new RequestUserModel);
 		if ( count( $response ) > 0) {

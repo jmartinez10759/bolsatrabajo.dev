@@ -21,7 +21,7 @@ class RequestUserModel extends Model
 		,'password'
 		,'remember_token'
 		,'api_token'
-		,'created_at'
-		,'updated_at'
+		#,'created_at'
+		#,'updated_at'
     ];
 }
