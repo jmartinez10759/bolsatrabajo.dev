@@ -17,6 +17,7 @@ class ListadoController extends Controller
 	{
        
         $response=Listado::all();
+        
         if ( count( $response ) > 0) {
 			return message(true,$response,"Datos correctos");
 		}else{
