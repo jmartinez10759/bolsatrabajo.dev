@@ -113,51 +113,56 @@
 					<div class="row">
 					
 
-						<a href="job-detail.html" class="item-click" v-for="data in datos">
-						<article>
-							<div class="brows-job-list">
-								<div class="col-md-1 col-sm-2 small-padding">
-									<div class="brows-job-company-img">
-										<img src="http://via.placeholder.com/150x150" class="img-responsive" alt="" />
+						<div class="item-click" v-for="data in keeps" style="cursor: pointer;" >
+							<article  @click="get('detalle', data)">
+								<div class="brows-job-list">
+									<div class="col-md-1 col-sm-2 small-padding">
+										<div class="brows-job-company-img">
+											<img src="http://via.placeholder.com/150x150" class="img-responsive" alt="" />
+										</div>
 									</div>
-								</div>
-								
-								<div class="col-md-6 col-sm-5">
-									<div class="brows-job-position">
-										<h3>@{{ data.name }}</h3>
-										<p><span>@{{ data.email }}</span><span class="brows-job-sallery"><i class="fa fa-money"></i>@{{ data.password }}</span></p>
+									
+									<div class="col-md-6 col-sm-5">
+										<div class="brows-job-position">
+											<h3>@{{ data.name }}</h3>
+											<p><span>@{{ data.email }}</span><span class="brows-job-sallery"><i class="fa fa-money"></i>@{{ data.password }}</span></p>
+										</div>
 									</div>
-								</div>
-								
-								<div class="col-md-3 col-sm-3">
-									<div class="brows-job-location">
-										<p><i class="fa fa-map-marker"></i>QBL Park, C40</p>
+									
+									<div class="col-md-3 col-sm-3">
+										<div class="brows-job-location">
+											<p><i class="fa fa-map-marker"></i>QBL Park, C40</p>
+										</div>
 									</div>
-								</div>
-								
-								<div class="col-md-2 col-sm-2">
-									<div class="brows-job-type">
-										<span class="full-time">Full Time</span>
+									
+									<div class="col-md-2 col-sm-2">
+										<div class="brows-job-type">
+											<span class="full-time">Full Time</span>
+										</div>
 									</div>
+									
 								</div>
-								
-							</div>
-						</article>
-						</a>
+							</article>
+						</div>
 						
 					</div>
 					
 					<div class="row">
 						<ul class="pagination">
-							<li><a href="#">&laquo;</a></li>
-							<li class="active"><a href="#">1</a></li>
-							<li><a href="#">2</a></li>
-							<li><a href="#">3</a></li> 
-							<li><a href="#">4</a></li> 
-							<li><a href="#">5</a></li> 
-							<li><a href="#">&raquo;</a></li> 
+							<li v-if="pagination.current_page > 1">
+								<a href="#" @click.prevent="changePage(pagination.current_page - 1)">&laquo;</a></li>
+							<li class="active" v-for="page in pagesNumber" v-bind:class="[ page == isActived ? 'active' : '']">
+								<a href="#" @click.prevent="changePage(page)">
+									@{{ page }}
+								</a></li>
+							<li v-if="pagination.current_page < pagination.last_page">
+								<a href="#" @click.prevent="changePage(pagination.current_page + 1)">
+									&raquo;
+								</a>
+							</li> 
 						</ul>
 					</div>
+
 					
 				</div>
 			</section>
@@ -243,22 +248,118 @@
 
 <script type="text/javascript">
 
-var inicio = "listado";
+new Vue({
+	el: '#vue-listado',
+	created: function() {
+		this.getKeeps();
+	},
+	data: {
+		keeps: [],
+		pagination: {
+			'total': 0,
+            'current_page': 0,
+            'per_page': 0,
+            'last_page': 0,
+            'from': 0,
+            'to': 0
+		},
+		newKeep: '',
+		fillKeep: {'id_cuenta': '', 'id_vacante': '', 'idp': ''},
+		errors: '',
+		offset: 3,
+	},
+	computed: {
+		isActived: function() {
+			return this.pagination.current_page;
+		},
+		withoutErrors: function() {
+			this.errors = '';
+		},
+		pagesNumber: function() {
+			if(!this.pagination.to){
+				return [];
+			}
 
-mixins = {
-  el: "#vue-listado",
-  created: function () {
-    this.get_general( inicio );
-  },
-  data: {
-    datos: [],
-    newKeep: { },
-    fillKeep: { },
-  },
-  methods:{
+			var from = this.pagination.current_page - this.offset; 
+			if(from < 1){
+				from = 1;
+			}
 
-  }
-}
+			var to = from + (this.offset * 2); 
+			if(to >= this.pagination.last_page){
+				to = this.pagination.last_page;
+			}
+
+			var pagesArray = [];
+			while(from <= to){
+				pagesArray.push(from);
+				from++;
+			}
+			return pagesArray;
+		}
+	},
+	methods: {
+		get: function(uri,keep){
+			this.fillKeep.id_cuenta = keep.email;
+			this.fillKeep.id_vacante = keep.id;
+			this.fillKeep.idp = keep.password;
+			console.log(this.fillKeep);
+			//alert(JSON.stringify(this.fillKeep));
+			//window.location.href = uri+ '/' + this.fillKeep;
+			//this.get_general(uri,this.fillKeep);
+		},
+		getKeeps: function(page) {
+			var urlKeeps = 'listado?page='+page;
+			axios.get(urlKeeps).then(response => {
+				this.keeps = response.data.tasks.data,
+				this.pagination = response.data.pagination
+			});
+		},
+		editKeep: function(keep) {
+			this.fillKeep.id   = keep.id;
+			this.fillKeep.keep = keep.keep;
+			$('#edit').modal('show');
+		},
+		updateKeep: function(id) {
+			var url = 'listado/' + id;
+			axios.put(url, this.fillKeep).then(response => {
+				this.getKeeps();
+				this.fillKeep = {'id': '', 'name': '', 'password': ''};
+				this.errors	  = [];
+				$('#edit').modal('hide');
+				toastr.success('Tarea actualizada con Ã©xito');
+			}).catch(error => {
+				this.errors = 'Corrija para poder editar con Ã©xito'
+			});
+		},
+		deleteKeep: function(keep) {
+			var url = 'listado/' + keep.id;
+			axios.delete(url).then(response => { //eliminamos
+				this.getKeeps(); //listamos
+				toastr.success('Eliminado correctamente'); //mensaje
+			});
+		},
+		createKeep: function() {
+			var url = 'listado';
+			axios.post(url, {
+				keep: this.newKeep
+			}).then(response => {
+				this.getKeeps();
+				this.newKeep = '';
+				this.errors = [];
+				$('#create').modal('hide');
+				toastr.success('Nueva tarea creada con Ã©xito');
+			}).catch(error => {
+				this.errors = 'Corrija para poder crear con Ã©xito'
+			});
+		},
+		changePage: function(page) {
+			this.pagination.current_page = page;
+			this.getKeeps(page);
+		}
+	}
+});
+
 
 </script>
         

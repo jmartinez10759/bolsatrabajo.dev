@@ -65,7 +65,9 @@ Route::group(['before' => 'auth'], function(){
 ###################################### GRUPO DE RUTAS SIN AUTH ############################
 
 Route::get('/index', 'ListadoController@index')->name('carga');
-Route::get('/listado', 'ListadoController@listado')->name('get_list');
-Route::get('/api/items', 'ListadoController@index')->name('home');
+Route::get('listado', 'ListadoController@index')->name('get_list');
 ###########################  Registro de Candidatos ##############################
 #Route::post('candidate/login', 'Candidatos\CandidatosController@store')->name('store');
+
+############################ Busqueda de vacantes ##################################
+Route::get('search', 'SearchController@index')->name('get_search');
