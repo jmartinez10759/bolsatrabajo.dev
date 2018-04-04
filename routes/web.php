@@ -70,4 +70,4 @@ Route::get('listado', 'ListadoController@index')->name('get_list');
 #Route::post('candidate/login', 'Candidatos\CandidatosController@store')->name('store');
 
 ############################ Busqueda de vacantes ##################################
-Route::get('search', 'SearchController@index')->name('get_search');
+Route::post('vacantes', 'BusquedaController@scope')->name('get_search');

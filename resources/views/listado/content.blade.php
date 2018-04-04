@@ -4,7 +4,7 @@
 					<div class="banner-caption">
 						<div class="col-md-12 col-sm-12 banner-text">
 							<h1> Más de 5 mil empresas registradas</h1>
-							<form class="form-horizontal" method="POST" action="{{ route('login') }}">
+							<form class="form-horizontal" method="POST" action="{{URL::to('vacantes')}}">
 								{{ csrf_field() }}
 								<div class="col-md-4 no-padd">
 									 <div class="input-group">

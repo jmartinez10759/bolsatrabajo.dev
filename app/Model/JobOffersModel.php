@@ -4,14 +4,14 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class JobOfertsModel extends Model
+class JobOffersModel extends Model
 {
      protected $table = "job_offers";
     protected $fillable = [
     	'id'
 		,'name'
 		,'title'
-		,'code'
+		#,'code'
 		,'responsible_user_id'
 		,'created_by_user_id'
 		,'account_id'
@@ -35,8 +35,8 @@ class JobOfertsModel extends Model
 		,'contract_type_id'
 		,'salary_min'
 		,'salary_max'
-		,'payment_period_id'
-		,'count'
+		#,'payment_period_id'
+		#,'count'
 		#,'created'
 		#,'modified'
     ];
