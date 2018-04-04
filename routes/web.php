@@ -45,9 +45,14 @@ Route::post('/register/insert', [
     ]);
 Route::group(['middleware' => ['auth.session']], function() {
 
-    Route::get('/home', [
-        'uses'      => 'HomeController@index'
-        ,'as'       => 'home'
+    Route::get('/details', [
+        'uses'      => 'Candidatos\DetailCandidateController@index'
+        ,'as'       => 'details'
+    ]);
+
+    Route::get('/cv', [
+        'uses'      => 'Curriculum\CurriculumController@index'
+        ,'as'       => 'upload_cv'
     ]);
 
 });

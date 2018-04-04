@@ -9,6 +9,7 @@ var params = {};
 new Vue({
     mixins : [mixins],
     methods: {
+
         get_general: function( url, data ) {
             params = data;
             axios.get(url, params ).then(response => {
@@ -91,7 +92,6 @@ new Vue({
             });
 
         }
-
 
     }
 });

@@ -18,7 +18,7 @@
                         <ul class="nav navbar-nav navbar-left" data-in="fadeInDown" data-out="fadeOutUp">
                             <li class="">
                                 <!-- <input type="text" class="form-control" placeholder="Find Freelancer"> -->
-                                <!-- <a href="{{route('home')}}">Bienvenid@ {{ Session::get('name') }} {{ Session::get('first_surname') }}</a> -->
+                                <!-- <a href="{{route('details')}}">Bienvenid@ {{ Session::get('name') }} {{ Session::get('first_surname') }}</a> -->
                             </li>
                             <li class="dropdown megamenu-fw"><a href="#" class="dropdown-toggle" data-toggle="dropdown">Brows</a>
                                 <ul class="dropdown-menu megamenu-content" role="menu">
@@ -89,7 +89,7 @@
                             <li><a href="blog.html">Blog</a></li>
                         </ul>
                         <ul class="nav navbar-nav navbar-right" data-in="fadeInDown" data-out="fadeOutUp">
-                            <!-- <li><a href="{{route('home')}}">Bienvenid@ {{ Session::get('name') }}</a></li> -->
+                            <!-- <li><a href="{{route('details')}}">Bienvenid@ {{ Session::get('name') }}</a></li> -->
                             <li><a href="pricing.html"><i class="fa fa-sign-in" aria-hidden="true"></i>Paquetes</a></li>
                             @if( !Session::has('name') )
                                 <li class="left-br">
@@ -97,7 +97,7 @@
                                 </li>
                             @else
                                 <li class="">
-                                    <a href="{{route('home')}}">Bienvenid@ {{ Session::get('name') }} {{ Session::get('first_surname') }}</a>
+                                    <a href="{{route('details')}}">Bienvenid@ {{ Session::get('name') }} {{ Session::get('first_surname') }}</a>
                                 </li> 
                                 <li class="left-br">
                                     <a href="{{ route('logout') }}" onclick="event.preventDefault();

@@ -12,6 +12,8 @@ use App\Http\Controllers\MasterController;
 class AuthController extends MasterController
 {
     
+    private static $_ruta = "details";
+
     public function __construct(){
 
     }
@@ -76,9 +78,9 @@ class AuthController extends MasterController
             foreach ($consulta[0] as $key => $value) {
                 $session[$key] = $value;
             }
-            #debuger($session);
+            #debuger(self::$_ruta);
             Session::put( $session );
-            return redirect()->route('home');
+            return redirect()->route( self::$_ruta );
         }
         return redirect()->route('/');
 

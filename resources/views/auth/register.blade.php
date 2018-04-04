@@ -108,6 +108,12 @@
 
 </div>
 
+<div id="vue-proof">
+  <!-- this will no longer update `foo`! -->
+  <button v-on:click="foo()">Change it</button>
+
+</div>
+
 <!-- Modal -->
   <div class="modal fade" id="myModal" role="dialog">
     <div class="modal-dialog modal-lg">
@@ -130,5 +136,62 @@
   </div>
 
 @push('scripts')
-    <script type="text/javascript" src="{{asset('js/candidatos/register.js')}}"></script>
+    <script type="text/javascript" src="{{asset('js/candidatos/register.js')}}" id="registros"></script>
+    <script type="text/javascript">
+        
+
+mixins = {
+  el: "#vue-proofs",
+  created: function () {
+    //this.get_general( inicio );
+  },
+  data: {
+    datos: [],
+    newKeep: { 
+        
+    },
+    fillKeep: { 
+        
+    },
+
+  },
+  methods:{
+    
+    foo: function(  ){
+        alert();
+    }
+
+
+  }
+
+
+}
+
+mixins = {
+  el: "#vue-proof",
+  created: function () {
+    //this.get_general( inicio );
+  },
+  data: {
+    datos: [],
+    newKeep: { 
+        
+    },
+    fillKeep: { 
+        
+    },
+
+  },
+  methods:{
+    
+    foo: function(  ){
+        alert('aldiablo vue');
+    }
+
+
+  }
+
+
+}
+    </script>
 @endpush

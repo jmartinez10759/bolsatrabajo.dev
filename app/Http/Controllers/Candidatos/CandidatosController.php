@@ -113,46 +113,6 @@ class CandidatosController extends MasterController
 		return true;
 	
 	}
-	/**
-	 *Metodo para iniciar session eh ingresar con el candidato loggeado.
-	 *@access public
-	 *@param Request $request [Description]
-	 *@return void
-	 */
-	/*public static function store( Request $request ){
-
-			// Obtenemos los datos del formulario
-	        $data = $request->only(['email','password']);
-	        // Verificamos los datos
-	        if (Auth::attempt($data)) {
-	            // Si nuestros datos son correctos mostramos la página de inicio
-	            return redirect()->route('home');
-	        }
-	        // Si los datos no son los correctos volvemos al login y mostramos un error
-	        return redirect()->route('login');
-
-
-			$where = [];
-			foreach ($request->all() as $key => $value) {
-				if ($key != "_token") {
-					$where[$key] = $value;
-				}
-				if ( $key == "password" ) {
-					$where[$key] = sha1($value);
-				}
-			}
-			#se realiza la consulta para verificar si existen ese candidato en la base de datos
-			$consulta = MasterModel::show_model([], $where , new CandidatoModel );
-			#debuger($consulta);
-			if( count( $consulta ) > 0 ){
-				#Session::put($consulta[0]);
-				return redirect()->route('home');
-				//return view('home');
-				//return message(true,$candidato,"Transaccion Exitosa");
-			}
-
-	}
-*/
 
 
 
