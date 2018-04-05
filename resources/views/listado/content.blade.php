@@ -21,8 +21,8 @@
 									 <div class="input-group">
 										<select class="form-control" name="edo">
 											    <option>Seleccione su ciudad</option>
-												<option>Aguascalientes</option>
-												<option>Baja California</option>
+												<option value='9'>Aguascalientes</option>
+												<option value="2">Baja California</option>
 
 												<option>Baja California Sur</option>
 
