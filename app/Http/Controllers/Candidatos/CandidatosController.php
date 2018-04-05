@@ -38,19 +38,20 @@ class CandidatosController extends MasterController
 	 */
 	public static function create( Request $request ){
 
+
 		if ( !self::validaciones( $request->all() ) ) {
 			return self::validaciones( $request->all() );
 		}
-		$where = [];
-		foreach ($request->all() as $key => $value) {
+		#$where = [];
+		/*foreach ($request->all() as $key => $value) {
 			if ( $key == "curp" ) {
 				$where[$key] = $value;
 			}
-		}
+		}*/
 		$where['email'] = $request->correo;
 		#se realiza la consulta para verificar si existen ese candidato en la base de datos
 		$consulta = MasterModel::show_model([], $where , new RequestUserModel );
-		#return AuthController::getData( $consulta[0] );
+		#debuger($consulta);
 		if( count( $consulta ) > 0 ){
 			return message(false,[],"Registro del candidato existente");
 		}

@@ -28,7 +28,7 @@
                             <span class="designation"></span>
                             <ul>
                                 <!-- <li><strong class="j-applied">570</strong>Job Like</li> -->
-                                <li><strong class="j-view">{{$postulaciones}}</strong>Postulaciones</li>
+                                <li><strong class="j-view">{{ $postulaciones }}</strong>Postulaciones</li>
                                 <!-- <li><strong class="j-shared">210</strong>Job Shared</li> -->
                             </ul>
                         </div>
@@ -75,9 +75,7 @@
 								<!-- Start About Sec -->
 								<div id="about" class="tab-pane fade">
 									<h3>Acerca de {{ $nombre_completo }}</h3>
-									<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-									<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-									<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla interdum sed diam ac fermentum. Mauris nec pellentesque neque. Cras nec diam euismod, congue sapien eu, fermentum libero. Vestibulum quis sem.</p>
+									
 								</div>
 								<!-- End About Sec -->
 								
@@ -575,14 +573,14 @@
         </section>
 		<div class="clearfix"></div>
 
-		<div id="vue-proofs">
-     <p>@{{ foo }}</p>
-  <!-- this will no longer update `foo`! -->
-  <button v-on:click="foo()">Change it</button>
-</div>
+		<div id="vue-proof">
+		     <p>@{{ newKeep.msg }}</p>
+		  <button v-on:click="foo()">Change it</button>
+		</div>
 
 </div>
 @stop
 
 @push('scripts')
+<script type="text/javascript" src="{{asset('js/candidatos/details_candidate.js')}}" ></script>
 @endpush

@@ -192,7 +192,7 @@
 						<form>
 							<h2 class="detail-title">Curriculum</h2>
 							<div class="col-md-12 col-sm-12">
-								<textarea class="form-control textarea" placeholder=""></textarea>
+								<textarea class="form-control" placeholder="Curriculum" rows="8"></textarea>
 							</div>	
 							
 						</form>
@@ -213,21 +213,21 @@
 										
 										<div class="col-md-6 col-sm-6">
 											<div class="input-group">
-												<span class="input-group-addon">Fecha De</span>
+												<span class="input-group-addon">Fecha desde</span>
 												<input type="text" id="edu-start" data-lang="en" data-large-mode="true" data-min-year="2015" data-max-year="2020" data-disabled-days="08/17/2017,08/18/2017" data-id="datedropper-0" data-theme="my-style" class="form-control" readonly="">
 											</div>
 										</div>
 										
 										<div class="col-md-6 col-sm-6">
 											<div class="input-group">
-												<span class="input-group-addon">Fecha A</span>
+												<span class="input-group-addon">Fecha hasta</span>
 												<input type="text" id="edu-end" data-lang="en" data-large-mode="true" data-min-year="2017" data-max-year="2020" data-disabled-days="08/17/2017,08/18/2017" data-id="datedropper-0" data-theme="my-style" class="form-control" readonly="">
 											</div>
 										</div>
 										
-										<div class="col-md-12 col-sm-12">
+										<!-- <div class="col-md-12 col-sm-12">
 											<textarea class="form-control textarea" placeholder="Notes"></textarea>
-										</div>
+										</div> -->
 										
 										<button type="button" class="btn remove-field">Quitar</button>
 									</div>
@@ -253,20 +253,20 @@
 										
 										<div class="col-md-6 col-sm-6">
 											<div class="input-group">
-												<span class="input-group-addon">Fecha De</span>
+												<span class="input-group-addon">Fecha Desde</span>
 												<input type="text" id="exp-start" data-lang="en" data-large-mode="true" data-min-year="2017" data-max-year="2020" data-disabled-days="08/17/2017,08/18/2017" data-id="datedropper-0" data-theme="my-style" class="form-control" readonly="">
 											</div>
 										</div>
 										
 										<div class="col-md-6 col-sm-6">
 											<div class="input-group">
-												<span class="input-group-addon">Fecha A</span>
+												<span class="input-group-addon">Fecha Hasta</span>
 												<input type="text" id="exp-end" data-lang="en" data-large-mode="true" data-min-year="2017" data-max-year="2020" data-disabled-days="08/17/2017,08/18/2017" data-id="datedropper-0" data-theme="my-style" class="form-control" readonly="">
 											</div>
 										</div>
 										
 										<div class="col-md-12 col-sm-12">
-											<textarea class="form-control textarea" placeholder="Notes"></textarea>
+											<textarea class="form-control" placeholder="Notes" rows="8"></textarea>
 										</div>
 										
 										<button type="button" class="btn remove-field">Quitar</button>
