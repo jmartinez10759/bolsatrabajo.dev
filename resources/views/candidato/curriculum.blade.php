@@ -93,28 +93,28 @@
 							<div class="col-md-6 col-sm-6">
 								<div class="input-group">
 									<span class="input-group-addon"><i class="fa fa-envelope"></i></span>
-									<input type="text" class="form-control" placeholder="Email Address">
+									<input type="text" class="form-control" placeholder="Email">
 								</div>	
 							</div>
 							
 							<div class="col-md-6 col-sm-6">
 								<div class="input-group">
 									<span class="input-group-addon"><i class="fa fa-phone"></i></span>
-									<input type="text" class="form-control" placeholder="Phone Number">
+									<input type="text" class="form-control" placeholder="Telefono">
 								</div>	
 							</div>
 							
-							<div class="col-md-6 col-sm-6">
+							<!-- <div class="col-md-6 col-sm-6">
 								<div class="input-group">
 									<span class="input-group-addon"><i class="fa fa-globe"></i></span>
 									<input type="text" class="form-control" placeholder="Website Address">
 								</div>	
-							</div>
+							</div> -->
 							
 							<div class="col-md-6 col-sm-6">
 								<div class="input-group">
 									<span class="input-group-addon"><i class="fa fa-map-marker"></i></span>
-									<input type="text" class="form-control" placeholder="Location: London UK, Newyork..">
+									<input type="text" class="form-control" placeholder="Direccion">
 								</div>	
 							</div>
 							
@@ -140,7 +140,7 @@
 							
 						</form>
 					</div>
-					
+					<!-- 
 					<div class="row bottom-mrg extra-mrg">
 						<form>
 							<h2 class="detail-title">Perfil Social</h2>
@@ -188,7 +188,7 @@
 							</div>
 							
 						</form>
-					</div>
+					</div> -->
 					
 					<div class="row bottom-mrg extra-mrg">
 						<form>
@@ -314,19 +314,41 @@
 				</div>
 			</section>
 			<!-- full detail SetionStart-->	
+			<div id="vue-curriculum">
+				@{{}}
+			</div>
+
+
 
 @stop
 @push('scripts')
-<script type="text/javascript" src="{{ asset('plugins/date-dropper/datedropper.js') }}"></script>
-<script type="text/javascript">
-	$('#dob').dateDropper();
-	$('#exp-start').dateDropper();
-	$('#exp-end').dateDropper();
-	$('#edu-start').dateDropper();
-	$('#edu-end').dateDropper();
-</script>
 
 <script type="text/javascript" src="{{asset('js/curriculum/curriculum.js')}}" ></script>
+
+<script type="text/javascript" src="{{ asset('plugins/date-dropper/datedropper.js') }}"></script>
+<script type="text/javascript">
+
+	var formato = {
+		format: 'y-m-d', // Formato de la fecha 2016-16-01
+        lang: 'es',
+        placeholder: 'Haz click aquí',
+        minYear: '2016',
+        animation: 'bounce' // La opciones son: fadeIn, dropdown y bounce
+	}
+
+	$('#dob').dateDropper({
+		format: 'y-m-d', // Formato de la fecha 2016-16-01
+        lang: 'es',
+        placeholder: 'Haz click aquí',
+        minYear: '2016',
+        animation: 'bounce' // La opciones son: fadeIn, dropdown y bounce	
+	});
+	$('#exp-start').dateDropper(formato);
+	$('#exp-end').dateDropper(formato);
+	$('#edu-start').dateDropper(formato);
+	$('#edu-end').dateDropper(formato);
+</script>
+
 
 
 @endpush
