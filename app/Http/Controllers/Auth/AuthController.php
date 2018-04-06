@@ -78,7 +78,7 @@ class AuthController extends MasterController
             foreach ($consulta[0] as $key => $value) {
                 $session[$key] = $value;
             }
-            #debuger(self::$_ruta);
+            #debuger($session);
             Session::put( $session );
             return redirect()->route( self::$_ruta );
         }

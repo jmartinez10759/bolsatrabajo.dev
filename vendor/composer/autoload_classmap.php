@@ -17,6 +17,7 @@ return array(
     'App\\Http\\Controllers\\Candidatos\\DetailCandidateController' => $baseDir . '/app/Http/Controllers/Candidatos/DetailCandidateController.php',
     'App\\Http\\Controllers\\Controller' => $baseDir . '/app/Http/Controllers/Controller.php',
     'App\\Http\\Controllers\\Curriculum\\CurriculumController' => $baseDir . '/app/Http/Controllers/Curriculum/CurriculumController.php',
+    'App\\Http\\Controllers\\EstructuraController' => $baseDir . '/app/Http/Controllers/EstructuraController.php',
     'App\\Http\\Controllers\\HomeController' => $baseDir . '/app/Http/Controllers/HomeController.php',
     'App\\Http\\Controllers\\ListadoController' => $baseDir . '/app/Http/Controllers/ListadoController.php',
     'App\\Http\\Controllers\\MasterController' => $baseDir . '/app/Http/Controllers/MasterController.php',

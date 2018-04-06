@@ -45,15 +45,37 @@ Route::post('/register/insert', [
     ]);
 Route::group(['middleware' => ['auth.session']], function() {
 
+
+######################################## RUTAS DE DETALLES DEL CANDIDATO  #################################
+
     Route::get('/details', [
         'uses'      => 'Candidatos\DetailCandidateController@index'
         ,'as'       => 'details'
     ]);
 
+    Route::get('/details/show', [
+        'uses'      => 'Candidatos\DetailCandidateController@show'
+        ,'as'       => 'details.show'
+    ]);
+
+     Route::post('/details/insert', [
+        'uses'      => 'Candidatos\DetailCandidateController@store'
+        ,'as'       => 'details.insert'
+    ]);
+
+######################################## RUTAS DEL CURRICULUM  #########################################
+   
     Route::get('/cv', [
         'uses'      => 'Curriculum\CurriculumController@index'
         ,'as'       => 'upload_cv'
     ]);
+
+    Route::get('/cv/show', [
+        'uses'      => 'Curriculum\CurriculumController@show'
+        ,'as'       => 'cv.show'
+    ]);
+
+
 
 });
 Route::get('/', function () {

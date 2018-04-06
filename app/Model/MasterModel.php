@@ -83,6 +83,7 @@ class MasterModel extends Model
 		$clase::where( $where )->update( $data );
 		$response = self::show_model( [], $where, $clase );
 		return $response;
+	
 	}
 	/**
 	 *Metodo Model donde se hace la eliminacion de los registros

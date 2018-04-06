@@ -13,10 +13,10 @@ new Vue({
 
         get_general: function( url, data ) {
             
-            params = data;
+            params = ( data == false )? {} :data;
             axios.get( url, params, csrf_token ).then(response => {
                 console.log( response.data.result );
-                this.datos = response.data.result
+                this.datos = response.data.result;
             });
         
         },
@@ -96,3 +96,29 @@ new Vue({
 
     }
 });
+
+/*
+
+mixins = {
+  el: "#vue-curriculum",
+  created: function () {
+    this.get_general();
+  },
+  data: {
+    datos: [],
+    newKeep: { 
+        
+    },
+    fillKeep: { 
+
+    },
+
+  },
+  methods:{
+
+  }
+
+
+}
+
+*/

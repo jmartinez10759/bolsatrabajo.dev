@@ -1,7 +1,6 @@
 @extends('layouts.app')
 
 @section('content')
-<div id="vue-details">
 			<div class="clearfix"></div>
 			
 			<!-- Title Header Start -->
@@ -56,7 +55,6 @@
 				
             </div>
         </section>
-		
         <section class="full-detail-description full-detail gray-bg">
             <div class="container">
                 <div class="col-md-12 col-sm-12">
@@ -71,11 +69,12 @@
 								<li class="active"><a href="#settings">Configuracion</a></li>
 							</ul>
 							<!-- Start All Sec -->
-							<div class="tab-content">
+
+							<div class="tab-content" id="vue-details">
 								<!-- Start About Sec -->
 								<div id="about" class="tab-pane fade">
 									<h3>Acerca de {{ $nombre_completo }}</h3>
-									
+									<p>@{{datos.descripcion}}</p>
 								</div>
 								<!-- End About Sec -->
 								
@@ -83,14 +82,14 @@
 								<div id="address" class="tab-pane fade">
 									<h3>Detalles </h3>
 									<ul class="job-detail-des">
-										<li><span>Direccion:</span>SCO 210, Neez Plaza</li>
-										<li><span>Ciudad:</span>Mohali</li>
-										<li><span>Estado:</span>Punjab</li>
-										<li><span>Pais:</span>India</li>
-										<li><span>CP:</span>520 548</li>
-										<li><span>Telefono:</span>+91 123 456 7854</li>
-										<li><span>Celular:</span>(622) 123 456</li>
-										<li><span>Email:</span>youremail@gmail.com</li>
+										<li><span>Nombre:</span>@{{ datos.name  }}</li>
+										<li><span>Primer Apellido:</span>@{{ datos.first_surname  }}</li>
+										<li><span>Curp:</span>@{{ datos.curp  }}</li>
+										<li><span>NSS:</span>@{{ datos.nss  }}</li>
+										<li><span>Cargo:</span>@{{ datos.cargo  }}</li>
+										<li><span>CP:</span>@{{ datos.codigo }}</li>
+										<li><span>Telefono:</span>@{{ datos.telefono }}</li>
+										<li><span>Email:</span>@{{ datos.email}}</li>
 									</ul>
 								</div>
 								<!-- End Address Sec -->
@@ -476,59 +475,66 @@
 										<div class="edit-pro">
 											<div class="col-md-4 col-sm-6">
 												<label>Nombre</label>
-												<input type="text" class="form-control" v-model="newKeep.nombre">
+												<input type="text" class="form-control" v-model="datos.name" >
 											</div>
 											<div class="col-md-4 col-sm-6">
 												<label>Primer Apellido</label>
-												<input type="text" class="form-control" v-model="newKeep.">
+												<input type="text" class="form-control" v-model="datos.first_surname" >
 											</div>
 											<div class="col-md-4 col-sm-6">
 												<label>Segundo Apellido</label>
-												<input type="text" class="form-control" v-model="">
+												<input type="text" class="form-control" v-model="datos.second_surname" >
 											</div>
 											<div class="col-md-4 col-sm-6">
 												<label>Email</label>
-												<input type="email" class="form-control" v-model="">
+												<input type="email" class="form-control" v-model="datos.email" disabled="">
 											</div>
 											<div class="col-md-4 col-sm-6">
 												<label>Telefono</label>
-												<input type="text" class="form-control" v-model="">
+												<input type="text" class="form-control" v-model="datos.telefono">
 											</div>
 											<div class="col-md-4 col-sm-6">
 												<label>Codigo Postal</label>
-												<input type="text" class="form-control" maxlength="5" v-model="">
+												<input type="text" class="form-control" maxlength="5" v-model="datos.codigo">
 											</div>
 											<div class="col-md-4 col-sm-6">
 												<label>Direccion</label>
-												<input type="text" class="form-control" v-model="">
+												<input type="text" class="form-control" v-model="datos.direccion">
 											</div>
 											<div class="col-md-4 col-sm-6">
-												<label>Direccion 2</label>
-												<input type="text" class="form-control" v-model="">
+												<label>Curp*</label>
+												<input type="text" id="curp" class="form-control" v-model="datos.curp">
+											</div>
+											<div class="col-md-4 col-sm-6">
+												<label>NSS</label>
+												<input type="text" id="nss" class="form-control" v-model="datos.nss">
 											</div>
 											<div class="col-md-4 col-sm-6">
 												<label>Cargo</label>
-												<input type="text" class="form-control" v-model="">
+												<input type="text" class="form-control" v-model="datos.cargo">
 											</div>
-											<div class="col-md-4 col-sm-6">
+											<!-- <div class="col-md-4 col-sm-6">
 												<label>Ciudad</label>
-												<input type="text" class="form-control" v-model="">
-											</div>
+												<input type="text" class="form-control" v-model="datos.ciudad">
+											</div>-->
 											<div class="col-md-4 col-sm-6">
 												<label>Estado</label>
-												<input type="text" class="form-control" v-model="">
-											</div>
-											<div class="col-md-4 col-sm-6">
+												<select class="form-control" v-model="datos.id_state">
+													<option value="0">Seleccione estado</option>
+													<option value="1">Estado de Mexico</option>
+												</select>
+											</div> 
+											<!-- <div class="col-md-4 col-sm-6">
 												<label>Pais</label>
-												<input type="text" class="form-control" v-model="">
-											</div>
+												<input type="text" class="form-control" v-model="datos.pais">
+											</div> -->
 											<!-- <div class="col-md-4 col-sm-6">
 												<label>Old Password</label>
 												<input type="password" class="form-control" >
 											</div> -->
 											<div class="col-md-4 col-sm-6">
 												<label>Nuevo Password</label>
-												<input type="password" class="form-control" v-model="">
+												<input type="password" class="form-control" v-model="datos.password">
 											</div>
 											<!-- <div class="col-md-4 col-sm-6">
 												<label>Old Password</label>
@@ -536,7 +542,7 @@
 											</div> -->
 											<div class="col-md-4 col-sm-6">
 												<label>Acerca de </label>
-												<textarea class="form-control" v-model=""></textarea>
+												<textarea class="form-control" v-model="datos.descripcion"></textarea>
 											</div>
 											<!-- <div class="col-md-4 col-sm-6">
 												<label>Subir Foto de Perfil</label>
@@ -558,7 +564,8 @@
 												</form>
 											</div> -->
 											<div class="col-sm-12">
-												<button type="button" class="update-btn">Actualizar</button>
+												<button type="button" class="update-btn" v-on:click.prevent="insert()">Actualizar
+												</button>
 											</div>
 										</div>
 									</div>
@@ -571,14 +578,13 @@
                 </div>
             </div>
         </section>
+
 		<div class="clearfix"></div>
 
-		<div id="vue-proof">
-		     <p>@{{ newKeep.msg }}</p>
-		  <button v-on:click="foo()">Change it</button>
-		</div>
 
-</div>
+
+
+
 @stop
 
 @push('scripts')

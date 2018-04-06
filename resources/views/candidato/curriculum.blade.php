@@ -17,6 +17,7 @@
 			
 			<!-- General Detail Start -->
 			<div class="section detail-desc">
+
 				<div class="container white-shadow">
 				
 					<div class="row">
@@ -32,19 +33,19 @@
 						<form class="add-feild">
 							<div class="col-md-6 col-sm-6">
 								<div class="input-group">
-									<input type="text" class="form-control" placeholder="Your Name">
+									<input type="text" class="form-control" placeholder="Nombre" v-model="datos.name">
 								</div>
 							</div>
 							
 							<div class="col-md-6 col-sm-6">
 								<div class="input-group">
-									<input type="email" class="form-control" placeholder="Your Email">
+									<input type="email" class="form-control" placeholder="Email" v-model="datos.email">
 								</div>
 							</div>
 							
 							<div class="col-md-6 col-sm-6">
 								<div class="input-group">
-									<input type="text" class="form-control" placeholder="Professional Title">
+									<input type="text" class="form-control" placeholder="Titulo Profesional" v-model="">
 								</div>
 							</div>
 							
@@ -61,13 +62,13 @@
 							</div>
 							
 							<div class="col-md-12 col-sm-12">
-								<textarea class="form-control" placeholder="About Notes"></textarea>
+								<textarea class="form-control" placeholder="Notas"></textarea>
 							</div>
 							
 						</form>
 					</div>
 					
-					<div class="row no-padd">
+					<!-- <div class="row no-padd">
 						<div class="detail pannel-footer">
 							<div class="col-md-12 col-sm-12">
 								<div class="detail-pannel-footer-btn pull-right">
@@ -75,7 +76,7 @@
 								</div>
 							</div>
 						</div>
-					</div>
+					</div> -->
 					
 				</div>
 			</div>
@@ -83,6 +84,7 @@
 			
 			<!-- full detail SetionStart-->
 			<section class="full-detail">
+
 				<div class="container">
 					<div class="row bottom-mrg extra-mrg">
 						<form>
@@ -323,4 +325,8 @@
 	$('#edu-start').dateDropper();
 	$('#edu-end').dateDropper();
 </script>
+
+<script type="text/javascript" src="{{asset('js/curriculum/curriculum.js')}}" ></script>
+
+
 @endpush

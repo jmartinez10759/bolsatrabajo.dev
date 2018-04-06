@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Model\MasterModel;
 use GuzzleHttp\Client;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -14,10 +15,12 @@ class MasterController extends Controller
     public $_domain = "";
     protected $_tipo = "application/json";
     public $_http;
+    public static $_model;
 
     public function __construct(){
 
         $this->_client = new Client();
+        self::$_model = new MasterModel();
         #$this->middleware('guest');
         #$this->_domain = $_SERVER['HTTP_HOST'];
         #$this->_http   = $_SERVER['REQUEST_SCHEME'];
