@@ -71,3 +71,4 @@ Route::get('listado', 'ListadoController@index')->name('get_list');
 
 ############################ Busqueda de vacantes ##################################
 Route::post('vacantes', 'BusquedaController@scope')->name('get_search');
+Route::get('busqueda', 'BusquedaController@index')->name('get_list_busqueda');

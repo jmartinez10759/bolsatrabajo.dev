@@ -19,7 +19,12 @@ class BusquedaController extends Controller
         $response = Listado::where( 'name','LIKE',"%".$vacantes."%" )->orwhere('curp','LIKE',"%". $edo."%")
         					->get();
 
-        return view("busqueda.form", ["name" => $response ]);
+        return view("busqueda.busqueda", ["name" => $response ]);
+    }
+
+    public function index(Request $request)
+    {        
+        return view('busqueda.form');
     }
 
 }
