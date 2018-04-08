@@ -21,7 +21,7 @@ class CreateUsersTable extends Migration
             $table->string('curp');
             $table->string('nss');
             $table->rememberToken();
-            $table->string('api_token')->unique();
+            $table->string('api_token');
             $table->timestamps();
         });
     }

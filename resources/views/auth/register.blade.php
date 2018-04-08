@@ -56,7 +56,7 @@
                 <label for="correo" class="col-md-4 control-label">Correo *</label>
 
                 <div class="col-md-6">
-                    <input id="correo" type="email" class="form-control" v-model="newKeep.correo" required>
+                    <input id="correo" type="email  " class="form-control" v-model="newKeep.correo" required>
                 </div>
             </div>
 
@@ -131,30 +131,4 @@
   </div>
 @push('scripts')
     <script type="text/javascript" src="{{asset('js/candidatos/register.js')}}" ></script>
-<!--     <script type="text/javascript">
-        
-mixins = {
-  el: "#vue-proof",
-  created: function () {
-    this.get_general('');
-  },
-  data: {
-    datos: [],
-    newKeep: { 
-    
-    },
-    fillKeep: { 
-     
-    },
-
-  },
-  methods:{
-    
-  }
-
-
-}
-
-
-    </script> -->
 @endpush

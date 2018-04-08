@@ -66,6 +66,8 @@ class AuthController extends MasterController
      */
     public static function getData( $where ){
 
+        #debuger(phpinfo());
+
         $condicion = [];
         if ( isset($where->email) && isset($where->password)) {
             $condicion['email'] = $where->email;

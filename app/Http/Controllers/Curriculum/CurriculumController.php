@@ -31,7 +31,12 @@ class CurriculumController extends MasterController
      */
     public static function show(){
 
-    	debuger('llego para obtener los datos del candidato');
+        #se realiza la consulta para obtener los datos del Candidato que subira el CV.
+        $data = [
+            'name' => Session::get('name')
+            ,'email' => Session::get('email')
+        ];
+        return message(true,$data,"Transaccion exitosa");
 
     }
 
