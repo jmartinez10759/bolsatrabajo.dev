@@ -75,6 +75,11 @@ Route::group(['middleware' => ['auth.session']], function() {
         ,'as'       => 'cv.show'
     ]);
 
+     Route::post('/cv/insert', [
+        'uses'      => 'Curriculum\CurriculumController@store'
+        ,'as'       => 'cv.insert'
+    ]);
+     
 
 
 });

@@ -75,7 +75,7 @@ class DetailCandidateController extends MasterController
     	}
     		$fields['name'] 			=  $data['name']; 
     		$fields['first_surname'] 	=  $data['first_surname'] ;
-    		$fields['second_surname'] =  $data['second_surname'] ;
+    		$fields['second_surname']   =  $data['second_surname'] ;
     		$fields['email'] 			=  $data['email'] ;
     		$fields['password'] 	    =  "" ;
 

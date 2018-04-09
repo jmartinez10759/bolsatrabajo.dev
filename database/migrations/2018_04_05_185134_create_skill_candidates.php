@@ -16,8 +16,8 @@ class CreateSkillCandidates extends Migration
         Schema::create('blm_skills_candidate', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('id_cv');
-            $table->string('habilidad');
-            $table->integer('porcentaje');
+            $table->string('habilidad')->nullable();
+            $table->integer('porcentaje')->nullable();
             $table->timestamps();
         });
     }

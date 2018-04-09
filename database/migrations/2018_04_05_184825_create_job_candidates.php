@@ -16,11 +16,11 @@ class CreateJobCandidates extends Migration
         Schema::create('blm_jobs_candidate', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('id_cv');
-            $table->string('empresa');
-            $table->string('puesto');
-            $table->string('descripcion',350);
-            $table->date('fecha_inicio');
-            $table->date('fecha_final');
+            $table->string('empresa')->nullable();
+            $table->string('puesto')->nullable();
+            $table->string('descripcion',350)->nullable();
+            $table->date('fecha_inicio')->nullable();
+            $table->date('fecha_final')->nullable();
             $table->timestamps();
         });
     }

@@ -16,10 +16,10 @@ class CreateStudyCandidates extends Migration
         Schema::create('blm_study_candidate', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('id_cv');
-            $table->integer('id_nivel');
-            $table->string('escuela');
-            $table->date('fecha_inicio');
-            $table->date('fecha_final');
+            $table->integer('id_nivel')->nullable();
+            $table->string('escuela')->nullable();
+            $table->date('fecha_inicio')->nullable();
+            $table->date('fecha_final')->nullable();
             $table->timestamps();
         });
     }

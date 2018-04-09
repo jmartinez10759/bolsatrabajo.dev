@@ -19,15 +19,15 @@ class CreateBlmCurriculum extends Migration
             $table->integer('id_users');
             $table->integer('id_state');
             $table->integer('id_categoria');
-            $table->string('email');
-            $table->string('email2');
-            $table->string('nombre');
-            $table->string('puesto');
-            $table->string('descripcion',350);
-            $table->integer('telefono');
-            $table->string('direccion');
-            $table->date('fecha_nacimiento');
-            $table->string('url_cv');
+            $table->string('email')->nullable();
+            $table->string('email2')->nullable();
+            $table->string('nombre')->nullable();
+            $table->string('puesto')->nullable();
+            $table->string('descripcion')->nullable();
+            $table->bigInteger('telefono')->nullable();
+            $table->string('direccion')->nullable();
+            $table->date('fecha_nacimiento')->nullable();
+            $table->string('url_cv')->nullable();
             $table->timestamps();
         });
     }
