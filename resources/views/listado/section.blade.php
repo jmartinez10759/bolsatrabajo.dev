@@ -9,7 +9,7 @@
 									<i class="fa fa-desktop"></i>
 								</div>
 								<div class="feature-caption">
-									<h5>Web Developer</h5>
+									<h5>DESARROLLADOR WEB</h5>
 									<p>At vero eos et accusamus et iusto odio dignissimos ducimus.</p>
 								</div>
 							</div>
@@ -21,7 +21,7 @@
 									<i class="fa fa-mobile"></i>
 								</div>
 								<div class="feature-caption">
-									<h5>Mobile Developer</h5>
+									<h5>DESARROLLADOR MÓVIL</h5>
 									<p>At vero eos et accusamus et iusto odio dignissimos ducimus.</p>
 								</div>
 							</div>
@@ -32,7 +32,7 @@
 									<i class="fa fa-lightbulb-o"></i>
 								</div>
 								<div class="feature-caption">
-									<h5>Creative Designer</h5>
+									<h5>DISEÑADOR CREATIVO</h5>
 									<p>At vero eos et accusamus et iusto odio dignissimos ducimus.</p>
 								</div>
 							</div>
@@ -44,7 +44,7 @@
 									<i class="fa fa-file-text"></i>
 								</div>
 								<div class="feature-caption">
-									<h5>Content Writer</h5>
+									<h5>ESCRITOR DE CONTENIDO</h5>
 									<p>At vero eos et accusamus et iusto odio dignissimos ducimus.</p>
 								</div>
 							</div>
@@ -56,7 +56,7 @@
 									<i class="fa fa-hdd-o"></i>
 								</div>
 								<div class="feature-caption">
-									<h5>Manager</h5>
+									<h5>GERENTE</h5>
 									<p>At vero eos et accusamus et iusto odio dignissimos ducimus.</p>
 								</div>
 							</div>
@@ -67,7 +67,7 @@
 									<i class="fa fa-bullhorn"></i>
 								</div>
 								<div class="feature-caption">
-									<h5>Sales & Marketing</h5>
+									<h5>VENTAS Y MARKETING</h5>
 									<p>At vero eos et accusamus et iusto odio dignissimos ducimus.</p>
 								</div>
 							</div>
@@ -79,7 +79,7 @@
 									<i class="fa fa-credit-card"></i>
 								</div>
 								<div class="feature-caption">
-									<h5>Accountant</h5>
+									<h5>CONTADOR</h5>
 									<p>At vero eos et accusamus et iusto odio dignissimos ducimus.</p>
 								</div>
 							</div>
@@ -91,7 +91,7 @@
 									<i class="fa fa-user"></i>
 								</div>
 								<div class="feature-caption">
-									<h5>Management / HR</h5>
+									<h5>GERENCIA / RECURSOS HUMANOS</h5>
 									<p>At vero eos et accusamus et iusto odio dignissimos ducimus.</p>
 								</div>
 							</div>

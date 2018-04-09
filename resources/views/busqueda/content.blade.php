@@ -1,4 +1,4 @@
-			<section class="inner-header-title" style="background-image:url(https://pixabay.com/get/ea37b30b2ef0023ed1534705fb0938c9bd22ffd41cb3124197f5c77da7/paper-3224643_1920.jpg);">
+			<section class="inner-header-title" style="background-image:url(https://pixabay.com/get/ea34b4082bfd043ed1584d05fb0938c9bd22ffd41cb312439df5c378a5/wood-3157395_1280.jpg);">
 				<div class="container">
 					<h1>Buscar Empleos</h1>
 				</div>
