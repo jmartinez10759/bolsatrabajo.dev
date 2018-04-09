@@ -443,7 +443,7 @@
 						</div>
 					</section>
 					<!-- full detail SetionStart-->	
-
+<input type="text" name="" v-model="datos.id_cv">
 
 <!-- SE CREA LA PARTE DE LOS MODALES -->
 
@@ -462,7 +462,7 @@
 						  <div class="form-group">
 						    <label class="control-label col-sm-2" for="email">Escuela</label>
 						    <div class="col-sm-10">
-						      <input type="text" class="form-control" placeholder="Nombre de la escuela">
+						      <input type="text" class="form-control" placeholder="Nombre de la escuela" v-model="datos.escuela">
 						    </div>
 						  </div>
 
@@ -477,11 +477,11 @@
 						  <div class="form-group">
 						    <label class="control-label col-sm-2" for="pwd">Fecha Inicio</label>
 						    <div class="col-sm-4">
-						      <input type="text" class="form-control" placeholder="">
+						      <input type="text" class="form-control" placeholder="" v-model="datos.fecha_inicio">
 						    </div>
 						    <label class="control-label col-sm-2" for="pwd">Fecha Final</label>
 						    <div class="col-sm-4">
-						      <input type="text" class="form-control" placeholder="">
+						      <input type="text" class="form-control" placeholder="" v-model="datos.fecha_final">
 						    </div>
 						  </div>
 

@@ -20,7 +20,6 @@ class CurriculumController extends MasterController
 
     public function __construct(){
     	parent::__construct();
-
     }
     /**
      *Metodo para obtener la vista de los detalles del candidato que se registro al portal.
@@ -61,47 +60,41 @@ class CurriculumController extends MasterController
     			}
 
     		}
-
     		$where = [ 'id_cv'	=>  $data['id'] ];
     		$study 			= self::$_model::show_model( [], $where , new BlmStudyModel );
 	    	$jobs 			= self::$_model::show_model( [], $where , new BlmJobsModel );
 	    	$skills 		= self::$_model::show_model( [], $where , new BlmSkillModel );
 
-
-    		$data['nombre'] 		= $candidate[0]->name." ".$candidate[0]->first_surname." ".$candidate[0]->second_surname;
-    		$data['puesto'] 		= $detalles[0]->cargo;
-    		$data['descripcion'] 	= $detalles[0]->descripcion;
     		$data['status'] 		= 1;
-    		$data['categorias'] 	= $categorias;
-    		$data['niveles'] 		= $nivel;
     		$data['study'] 			= $study;
     		$data['jobs'] 			= $jobs;
     		$data['skill'] 			= $skills;
     		$data['id_nivel'] 		= 3;
+    		$data['id_cv'] 			= $data['id'];
 
     	}else{
 
 	        $data = [
-	             'nombre'		=> $candidate[0]->name." ".$candidate[0]->first_surname." ".$candidate[0]->second_surname
-	            ,'email'		=> $candidate[0]->email
-	            ,'puesto'		=> $detalles[0]->cargo
-	            ,'descripcion'	=> $detalles[0]->descripcion
-	            ,'telefono'		=> $detalles[0]->telefono
+	            'telefono'		=> $detalles[0]->telefono
 	            ,'direccion'	=> $detalles[0]->direccion
 	            ,'id_state'		=> $detalles[0]->id_state
 	            ,'email2'		=> ""
 	            ,'id_categoria'	=> 1
 	            ,'status'		=> 0
-	            ,'categorias' 	=> $categorias
 	        ];
 
 	        $data['study'] 		= [];
     		$data['jobs'] 		= [];
     		$data['skill'] 		= [];
-    		$data['niveles'] 	= $nivel;
     		$data['id_nivel'] 	= 3;
+    		$data['id_cv'] 		= "";
     		
     	}
+    	$data['nombre'] 		= $candidate[0]->name." ".$candidate[0]->first_surname." ".$candidate[0]->second_surname;
+		$data['puesto'] 		= $detalles[0]->cargo;
+		$data['descripcion'] 	= $detalles[0]->descripcion;
+    	$data['categorias'] 	= $categorias;
+    	$data['niveles'] 		= $nivel;
     	#debuger($data);
         return message( true,$data,"Transaccion exitosa" );
 
@@ -155,11 +148,11 @@ class CurriculumController extends MasterController
      *@param Request $request [description]
      *@return void
      */
-    public static function create( Request $request ){
+    /*public static function create( Request $request ){
 
     	debuger(Session::get('id_cv'));
     	debuger($request);
-    }
+    }*/
 
 
 
