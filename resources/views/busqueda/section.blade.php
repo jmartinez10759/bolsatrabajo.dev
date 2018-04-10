@@ -15,68 +15,71 @@
 								<div class="col-md-3 col-sm-3">
 									  <select class="form-control" name="edo">
 											    <option>Seleccione su ciudad</option>
-												<option value='9'>Aguascalientes</option>
+
+												<option value="1">Aguascalientes</option>
+
 												<option value="2">Baja California</option>
 
-												<option>Baja California Sur</option>
+												<option value="3">Baja California Sur</option>
 
-												<option>Campeche</option>
+												<option value="4">Campeche</option>
 
-												<option>Coahuila </option>
+												<option value="5">Coahuila de Zaragoza</option>
 
-												<option>Colima</option>
+												<option value="6">Colima</option>
 
-												<option>Chiapas</option>
+												<option value="7">Chiapas</option>
 
-												<option>Chihuahua</option>
+												<option value="8">Chihuahua</option>
 
-												<option>Ciudad de México</option>
+												<option value="9">Ciudad de México</option>
 
-												<option>Durango</option>
+												<option value="10">Durango</option>
 
-												<option>Guanajuato</option>
+												<option value="11">Guanajuato</option>
 
-												<option>Guerrero</option>
+												<option value="12">Guerrero</option>
 
-												<option>Hidalgo</option>
+												<option value="13">Hidalgo</option>
 
-												<option>Jalisco</option>
+												<option value="14">Jalisco</option>
 
-												<option>Estado de México</option>
+												<option value="15">México</option>
 
-												<option>Michoacán de Ocampo</option>
+												<option value="16">Michoacán de Ocampo</option>
 
-												<option>Morelos</option>
+												<option value="17">Morelos</option>
 
-												<option>Nayarit</option>
+												<option value="18">Nayarit</option>
 
-												<option>Nuevo León</option>
+												<option value="19">Nuevo León</option>
 
-												<option>Oaxaca</option>
+												<option value="20">Oaxaca</option>
 
-												<option>Puebla</option>
+												<option value="21">Puebla</option>
 
-												<option>Querétaro</option>
+												<option value="22">Querétaro</option>
 
-												<option>Quintana Roo</option>
+												<option value="23">Quintana Roo</option>
 
-												<option>San Luis Potosí</option>
+												<option value="24">San Luis Potosí</option>
 
-												<option>Sinaloa</option>
+												<option value="25">Sinaloa</option>
 
-												<option>Sonora</option>
+												<option value="26">Sonora</option>
 
-												<option>Tabasco</option>
+												<option value="27">Tabasco</option>
 
-												<option>Tamaulipas</option>
+												<option value="28">Tamaulipas</option>
 
-												<option>Tlaxcala</option>
+												<option value="29">Tlaxcala</option>
 
-												<option>Veracruz</option>
+												<option value="30">Veracruz de Ignacio de la Llave</option>
 
-												<option>Yucatán</option>
+												<option value="31">Yucatán</option>
 
-												<option>Zacatecas</option>
+												<option value="32">Zacatecas</option>
+
 										</select>
 								</div>
 								<div class="col-md-2 col-sm-2">
@@ -86,6 +89,8 @@
 						</div>
 					</div>
 					<!-- Company Searrch Filter End -->
+					<h2>Hemos encontrado {{ count($name) }} resultados de vacantes</h2>
+					@if(count($name))
 					@foreach ($name as $data)  
 					<a href="{{ url('detalle/'.$data->id) }}" class="item-click">
 						<article>
@@ -98,7 +103,7 @@
 								<div class="col-md-6 col-sm-5">
 									<div class="brows-job-position">
 										<h3>{{ $data->name }}</h3>
-										<p><span>{{ $data->email}}</span><span class="brows-job-sallery"><i class="fa fa-money"></i>$510 - 700</span></p>
+										<p><span>{{ $data->title}}</span><span class="brows-job-sallery"><i class="fa fa-money"></i>${{ $data->salary_min }} - {{ $data->salary_max }}</span></p>
 									</div>
 								</div>
 								<div class="col-md-3 col-sm-3">
@@ -115,7 +120,13 @@
 						</article>
 					</a>
 					@endforeach
-
+					@else
+							<div class="alert alert-dismissable alert-warning">
+							  <button type="button" class="close" data-dismiss="alert">×</button>
+							  <h4>Alerta!</h4>
+							  <p>No se encuentran registros para este periodo.</p>
+							</div>
+					@endif
 					{{ $name->links() }}
 		
 					

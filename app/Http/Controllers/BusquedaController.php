@@ -17,8 +17,8 @@ class BusquedaController extends Controller
        /* $result = DB::select('SELECT * FROM users where name like :vacantes or curp like :curp',['vacantes' 	 => $vacantes,'curp' =>$edo] );
         debuger($result);*/
 
-        $response = Listado::where( 'departament','LIKE',"%".$vacantes."%" )->orwhere('state_id','LIKE',"%". $edo."%")								 ->orderBy('id', 'DESC')->paginate(3);
-
+        $response = Listado::where( 'name','LIKE',"%".$vacantes."%" )->where('state_id','LIKE',"%". $edo."%")								->orderBy('id', 'DESC')->paginate(5);
+        #debuger($response);
         return view("busqueda.busqueda", ["name" => $response ]);
     }
 
