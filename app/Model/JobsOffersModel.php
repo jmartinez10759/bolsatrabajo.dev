@@ -1,21 +1,21 @@
 <?php
 
-namespace App;
+namespace App\Model;
 
 use Illuminate\Database\Eloquent\Model;
 
-class JobOffersModel extends Model
+class JobsOffersModel extends Model
 {
-     protected $table = "joboffers";
-    protected $fillable = [
+    protected $table = "JobOffers";
+    public $fillable = [
     	'id'
 		,'name'
 		,'title'
-		#,'code'
+		,'code'
 		,'responsible_user_id'
 		,'created_by_user_id'
 		,'account_id'
-		#,'account_client_id'
+		,'account_client_id'
 		,'departament'
 		,'picture'
 		,'email'
@@ -26,8 +26,8 @@ class JobOffersModel extends Model
 		,'date_from'
 		,'date_to'
 		,'is_active'
-		#,'published'
-		#,'priority'
+		,'published'
+		,'priority'
 		,'quantity'
 		,'state_id'
 		,'county'
@@ -35,9 +35,9 @@ class JobOffersModel extends Model
 		,'contract_type_id'
 		,'salary_min'
 		,'salary_max'
-		#,'payment_period_id'
-		#,'count'
-		#,'created'
-		#,'modified'
+		,'payment_period_id'
+		,'count'
+		,'created'
+		,'modified'
     ];
 }
