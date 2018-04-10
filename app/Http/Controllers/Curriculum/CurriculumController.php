@@ -44,8 +44,7 @@ class CurriculumController extends MasterController
     	$candidate  	= self::$_model::show_model([],$where, new RequestUserModel);
     	$categorias 	= self::$_model::show_model( [], [] , new CategoriaModel );
     	$nivel 			= self::$_model::show_model( [], [] , new NivelAcademicoModel );
-
-    	#debuger($candidate);
+    	#debuger($detalles);
     	$where = ['id_users' => Session::get('id')];
     	$curriculum = self::$_model::show_model([],$where, new BlmCurriculumModel);
     	$data = [];
@@ -68,17 +67,14 @@ class CurriculumController extends MasterController
     		$data['status'] 		= 1;
             $data['id_nivel']       = 3;
             $data['id_cv']          = $data['id'];
-            $data['study']          = $study;
+            $data['study']          = self::_nivel_educativo( $study );
             $data['jobs']           = $jobs;
             $data['skills']         = $skills;
 
     	}else{
 
 	        $data = [
-	            'telefono'		=> $detalles[0]->telefono
-	            ,'direccion'	=> $detalles[0]->direccion
-	            ,'id_state'		=> $detalles[0]->id_state
-	            ,'email2'		=> ""
+	            'email2'		=> ""
 	            ,'id_categoria'	=> 1
 	            ,'status'		=> 0
 	        ];
@@ -90,10 +86,14 @@ class CurriculumController extends MasterController
     		$data['id_cv'] 		= "";
     		
     	}
+    	//Datos que deben de existir siempre.
         $data['nombre']         = $candidate[0]->name." ".$candidate[0]->first_surname." ".$candidate[0]->second_surname;
     	$data['email'] 		    = $candidate[0]->email;
 		$data['puesto'] 		= $detalles[0]->cargo;
 		$data['descripcion'] 	= $detalles[0]->descripcion;
+		$data['telefono']		= $detalles[0]->telefono;
+		$data['direccion']		= $detalles[0]->direccion;
+		$data['id_state']		= $detalles[0]->id_state;
     	$data['categorias'] 	= $categorias;
     	$data['niveles'] 		= $nivel;
         #seccion de estudios
@@ -101,16 +101,16 @@ class CurriculumController extends MasterController
         $data['fecha_inicio']   = date('Y-m-d');
         $data['fecha_final']    = date('Y-m-d');
         #seccion de trabajos
-        $data['empresa']        = "";            
-        $data['puesto']         = "";         
-        $data['descripcion']    = "";            
-        $data['fecha_inicio']   = date('Y-m-d');           
-        $data['fecha_final']    = date('Y-m-d');            
+        $data['jobs_empresa']        = "";            
+        $data['jobs_puesto']        = "";         
+        $data['jobs_descripcion']    = "";            
+        $data['jobs_fecha_inicio']   = date('Y-m-d');           
+        $data['jobs_fecha_final']    = date('Y-m-d');            
         #seccion de habilidades
         $data['habilidad'] = "";
         $data['porcentaje'] = "";
     	#debuger($data);
-        return message( true,$data,"Transaccion exitosa" );
+        return message( true, $data ,"Transaccion exitosa" );
 
     }
     /**
@@ -125,9 +125,15 @@ class CurriculumController extends MasterController
     	$where = ['id_users' => Session::get('id')];
     	$curriculum = self::$_model::show_model([],$where, new BlmCurriculumModel);
     	if ( count($curriculum) > 0 ) {
-    		#debuger( $curriculum[0]->id );
+    		$register = [];
+    		foreach ($request->all() as $key => $value) {
+    			if ($value != null) {
+    				$register[$key] = $value;
+    			}
+    		}
+    		#debuger($register);
     		$where = ['id' => $curriculum[0]->id ];
-    		$response = self::$_model::update_model( $where, $request->all(), new BlmCurriculumModel );
+    		$response = self::$_model::update_model( $where, $register, new BlmCurriculumModel );
     		if (count($response) > 0) {
 	    		return message(true,$response,"Transaccion exitosa");
 	    	}else{
@@ -157,16 +163,33 @@ class CurriculumController extends MasterController
 
     }
     /**
-     *Metodo para insertar los datos del CV y generar un id para poder insertarlo en las demas tablas
-     *@access public
-     *@param Request $request [description]
+     *Metodo para niveles academicos
+     *@access private
+     *@param $data array [description]
      *@return void
      */
-    /*public static function create( Request $request ){
+   	private static function _nivel_educativo( $data = array() ){
 
-    	debuger(Session::get('id_cv'));
-    	debuger($request);
-    }*/
+   		$nivel = [];
+   		if (count( $data ) > 0 ) {
+   			for ($i=0; $i < sizeof( $data ); $i++) { 
+	   			
+	   			foreach ($data[$i] as $key => $value) {
+	   				if ($key == "id_nivel") {
+	   					$nivel[$i]['nivel'] = self::$_model::show_model([],['id' => $value], new NivelAcademicoModel )[0]->nombre;	
+	   				}
+	   				$nivel[$i][$key] = $value; 
+	   			}
+   				
+   			}
+
+   			return $nivel;
+   		}
+
+   		return $nivel;
+
+
+   	}
 
 
 

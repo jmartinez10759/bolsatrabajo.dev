@@ -224,18 +224,18 @@
 										</thead>
 										<tbody>
 											<tr v-for="study in datos.study">
-												<td></td>
+												<td>@{{ study.id }}</td>
 												<td>@{{ study.escuela }}</td>
-												<td>@{{ study.id_nivel }}</td>
+												<td>@{{ study.nivel }}</td>
 												<td>@{{ study.fecha_inicio }}</td>
 												<td>@{{ study.fecha_final }}</td>
 												<td>
-													<button class="btn btn" type="button" v-on:click.prevent="">
+													<button class="btn btn" type="button" v-on:click.prevent="edit_general(study,'modal-edit-educacion')">
 														Detalles
 													</button>
 												</td>
 												<td>
-													<button class="btn" type="button" v-on:click.prevent="">
+													<button class="btn" type="button" v-on:click.prevent="delete_study(study)">
 														Quitar
 													</button>
 												</td>
@@ -307,20 +307,20 @@
 											</tr>
 										</thead>
 										<tbody>
-											<tr>
-												<td></td>
-												<td></td>
-												<td></td>
-												<td></td>
-												<td></td>
-												<td></td>
+											<tr v-for="jobs in datos.jobs">
+												<td>@{{ jobs.id }}</td>
+												<td>@{{ jobs.jobs_empresa }}</td>
+												<td>@{{ jobs.jobs_puesto }}</td>
+												<td>@{{ jobs.jobs_fecha_inicio }}</td>
+												<td>@{{ jobs.jobs_fecha_final }}</td>
+												<td>@{{ jobs.jobs_descripcion }}</td>
 												<td>
-													<button class="btn btn" type="button" v-on:click="">
+													<button class="btn btn" type="button" v-on:click.prevent="edit_general(jobs,'modal-edit-experiencia')">
 														Detalles
 													</button>
 												</td>
 												<td>
-													<button class="btn" type="button" v-on:click="">
+													<button class="btn" type="button" v-on:click.prevent="delete_jobs(jobs)">
 														Quitar
 													</button>
 												</td>
@@ -375,7 +375,7 @@
 								
 								<div class="table-responsive">
 									<div class="pull-right">
-										<button type="button" class="btn add-field" data-toggle="modal" data-target="#modal-skill">Skill</button>
+										<button type="button" class="btn add-field" data-toggle="modal" data-target="#modal-skill">Agregar Skill</button>
 									</div>
 									<table class="table table-responsive table-hover">
 										<thead>
@@ -388,17 +388,17 @@
 											</tr>
 										</thead>
 										<tbody>
-											<tr>
-												<td></td>
-												<td></td>
-												<td></td>
+											<tr v-for="skills in datos.skills">
+												<td> @{{ skills.id }} </td>
+												<td> @{{ skills.habilidad }} </td>
+												<td> @{{ skills.porcentaje }} </td>
 												<td>
-													<button class="btn btn" type="button" v-on:click="">
+													<button class="btn btn" type="button" v-on:click.prevent="edit_general(skills,'modal-edit-skill')">
 														Detalles
 													</button>
 												</td>
 												<td>
-													<button class="btn" type="button" v-on:click="">
+													<button class="btn" type="button" v-on:click.prevent="delete_skills(skills)">
 														Quitar
 													</button>
 												</td>
@@ -443,7 +443,7 @@
 						</div>
 					</section>
 					<!-- full detail SetionStart-->	
-<input type="text" name="" v-model="datos.id_cv">
+<input type="hidden" name="" v-model="datos.id_cv">
 
 <!-- SE CREA LA PARTE DE LOS MODALES -->
 
@@ -497,8 +497,10 @@
 
             </div>
         </div>
+    
     </div>   
     <!-- End Sign Up Window -->
+    
     <!-- Sign Up Window Code -->
     <div class="modal fade" id="modal-experiencia" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog modal-lg">
@@ -512,34 +514,34 @@
                    	
                    	<form class="form-horizontal" >
 						  <div class="form-group">
-						    <label class="control-label col-sm-2" for="email">Empresa</label>
+						    <label class="control-label col-sm-2" >Empresa</label>
 						    <div class="col-sm-10">
-						      <input type="text" class="form-control" placeholder="Nombre de la Empresa">
+						      <input type="text" name="jobs_empresa" class="form-control" placeholder="Nombre de la Empresa" v-model="datos.jobs_empresa">
 						    </div>
 						  </div>
 
 						  <div class="form-group">
-						    <label class="control-label col-sm-2" for="pwd">Puesto</label>
+						    <label class="control-label col-sm-2" >Puesto</label>
 						    <div class="col-sm-10">
-						      <input type="text" class="form-control" placeholder="Puesto Desempeñado">
+						      <input type="text" name="jobs_puesto" class="form-control" placeholder="Puesto Desempeñado" v-model="datos.jobs_puesto">
 						    </div>
 						  </div>
 
 						  <div class="form-group">
-						    <label class="control-label col-sm-2" for="pwd">Fecha Inicio</label>
+						    <label class="control-label col-sm-2" >Fecha Inicio</label>
 						    <div class="col-sm-4">
-						      <input type="text" class="form-control" placeholder="">
+						      <input type="text" name="jobs_fecha_inicio" class="form-control" placeholder="" v-model="datos.jobs_fecha_inicio">
 						    </div>
-						    <label class="control-label col-sm-2" for="pwd">Fecha Final</label>
+						    <label class="control-label col-sm-2" >Fecha Final</label>
 						    <div class="col-sm-4">
-						      <input type="text" class="form-control" placeholder="">
+						      <input type="text" name="jobs_fecha_inicio" class="form-control" placeholder="" v-model="datos.jobs_fecha_final">
 						    </div>
 						  </div>
 
 						   <div class="form-group">
 						    <label class="control-label col-sm-2" for="pwd">Notas</label>
 						    <div class="col-sm-10">
-						      <textarea class="form-control" placeholder="Notas" ></textarea>
+						      <textarea class="form-control" name="jobs_descripcion" placeholder="Notas" v-model="datos.jobs_descripcion"></textarea>
 						    </div>
 						  </div>
 						  
@@ -548,14 +550,16 @@
                 </div>
 
                 <div class="modal-footer">
-			        <button type="button" class="btn btn-default" data-dismiss="modal">Agregar</button>
-			        <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+			        <button type="button" class="btn btn" v-on:click.prevent="insert_jobs()">Agregar</button>
+			        <button type="button" class="btn btn" data-dismiss="modal">Cancelar</button>
 			    </div>
 
             </div>
         </div>
+    
     </div>   
     <!-- End Sign Up Window -->
+    
     <!-- Sign Up Window Code -->
     <div class="modal fade" id="modal-skill" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog modal-lg">
@@ -571,14 +575,14 @@
 						  <div class="form-group">
 						    <label class="control-label col-sm-2" for="email">Habilidad</label>
 						    <div class="col-sm-10">
-						      <input type="text" class="form-control" placeholder="Nombre de la Habilidad">
+						      <input type="text" name="habilidad" class="form-control" placeholder="Habilidad" v-model="datos.habilidad">
 						    </div>
 						  </div>
 
 						  <div class="form-group">
 						    <label class="control-label col-sm-2" for="pwd">Porcentaje</label>
 						    <div class="col-sm-10">
-						      <input type="text" class="form-control" placeholder="Porcentaje de la Habilidad">
+						      <input type="text" name="porcentaje" class="form-control" placeholder="Porcenteje" v-model="datos.porcentaje">
 						    </div>
 						  </div>						  
 					</form> 
@@ -586,19 +590,27 @@
                 </div>
 
                 <div class="modal-footer">
-			        <button type="button" class="btn btn-default" data-dismiss="modal">Agregar</button>
-			        <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+			        <button type="button" class="btn btn" v-on:click.prevent="insert_skills()">Agregar</button>
+			        <button type="button" class="btn btn" data-dismiss="modal">Cancelar</button>
 			    </div>
 
             </div>
         </div>
+    
     </div>   
     <!-- End Sign Up Window -->
 
+@include('candidato.edicionCurriculum')
 
 </div>
 
+
+
+
+
+
 <!-- END VUE-CURRICULUM -->
+
 
 
 

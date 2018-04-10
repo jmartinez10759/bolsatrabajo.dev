@@ -62,7 +62,7 @@
                       <div class="deatil-tab-employ tool-tab">
 							<ul class="nav simple nav-tabs" id="simple-design-tab">
 								<li class=""><a href="#about">Acerca de </a></li>
-								<li><a href="#address">Direccion</a></li>
+								<li><a href="#address">Detalles</a></li>
 								<li><a href="#post-job">Postulaciones</a></li>
 								<!-- <li><a href="#friends">Friends</a></li>
 								<li><a href="#messages">Messages <span class="info-bar">6</span></a></li> -->

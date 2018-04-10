@@ -10,12 +10,9 @@ mixins = {
          'name': ''
         ,'first_surname': ''
         ,'second_surname': ''
-        //,'curp': '' 
-        //,'numero_credito_infonavit': '' 
         ,'correo': ''
         ,'pass': ''
         ,'passwordConfirm': '' 
-        //,'nss': '' 
         //,'terminos': true 
     },
     fillKeep: { 
@@ -23,12 +20,9 @@ mixins = {
         ,'name': ''
         ,'first_surname': ''
         ,'second_surname': ''
-        //,'curp': '' 
-        //,'numero_credito_infonavit': '' 
         ,'correo': ''
         ,'pass': ''
         ,'passwordConfirm': '' 
-        //,'nss': '' 
         //,'terminos': true
     },
 
@@ -47,6 +41,12 @@ mixins = {
             $('#curp').parent().parent().addClass('has-error');
             return;
         }*/
+        if ( !emailValidate(this.newKeep.correo) ) {
+            toastr.error( validate ,"Correo Incorrecto" );
+            $('#correo').parent().parent().addClass('has-error');
+            return;
+        }
+
         //se manda a llamar la funcion de insertar de vue master_vue.js
         this.insert_general( uri, inicio ,function(json){
 
@@ -54,7 +54,8 @@ mixins = {
                 $('#'+key).parent().parent().removeClass('has-error');
             });
             $('#signup').modal('hide');
-            location.href=domain('details');
+            redirect( domain('details') );
+            //location.href=domain('details');
 
         },function(json){
             
@@ -65,7 +66,9 @@ mixins = {
             });
 
         });
+
     }
+
 
 
   }

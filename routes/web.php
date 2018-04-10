@@ -43,6 +43,9 @@ Route::post('/register/insert', [
         'uses'      => 'Candidatos\CandidatosController@create'
         ,'as'       => 'create'
     ]);
+
+######################################## MIDDLEWARE SESSION  ################################################
+
 Route::group(['middleware' => ['auth.session']], function() {
 
 
@@ -63,7 +66,7 @@ Route::group(['middleware' => ['auth.session']], function() {
         ,'as'       => 'details.insert'
     ]);
 
-######################################## RUTAS DEL CURRICULUM  #########################################
+########################################## RUTAS DEL CURRICULUM  #################################################
    
     Route::get('/cv', [
         'uses'      => 'Curriculum\CurriculumController@index'
@@ -79,18 +82,62 @@ Route::group(['middleware' => ['auth.session']], function() {
         'uses'      => 'Curriculum\CurriculumController@store'
         ,'as'       => 'cv.insert'
     ]);
+
     Route::post('/study/insert', [
         'uses'      => 'Curriculum\StudyController@store'
         ,'as'       => 'study.insert'
     ]);
-     
 
+    Route::put('study/update', [
+        'uses'      => 'Curriculum\StudyController@update'
+        ,'as'       => 'study.update'
+    ]);
+
+    Route::delete('study/delete/{id}', [
+        'uses'      => 'Curriculum\StudyController@destroy'
+        ,'as'       => 'study.delete'
+    ]);
+
+    Route::post('/jobs/insert', [
+        'uses'      => 'Curriculum\JobController@store'
+        ,'as'       => 'jobs.insert'
+    ]);
+
+    Route::put('jobs/update', [
+        'uses'      => 'Curriculum\JobController@update'
+        ,'as'       => 'jobs.update'
+    ]);
+    
+    Route::delete('jobs/delete/{id}', [
+        'uses'      => 'Curriculum\JobController@destroy'
+        ,'as'       => 'jobs.delete'
+    ]);
+
+    Route::post('/skills/insert', [
+        'uses'      => 'Curriculum\SkillController@store'
+        ,'as'       => 'skills.insert'
+    ]);
+    
+    Route::put('skills/update', [
+        'uses'      => 'Curriculum\SkillController@update'
+        ,'as'       => 'skills.update'
+    ]);
+
+    Route::delete('skills/delete/{id}', [
+        'uses'      => 'Curriculum\SkillController@destroy'
+        ,'as'       => 'skills.delete'
+    ]);
+     
+     
+    
 
 });
+
+###################################### GRUPO DE RUTAS SIN AUTH ############################
+
 Route::get('/', function () {
     return view('listados.listado_busqueda');
 })->name('/');
-###################################### GRUPO DE RUTAS SIN AUTH ############################
 
 Route::get('/index', 'ListadoController@index')->name('carga');
 Route::get('/listado', 'ListadoController@listado')->name('get_list');

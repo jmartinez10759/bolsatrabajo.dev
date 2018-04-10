@@ -36,7 +36,41 @@ class StudyController extends MasterController
         }
 
     }
-    
+    /**
+     *Metodo para la actualizacion de los campos 
+     *@access public
+     *@param Request $request [Description]
+     *@return void
+     */
+    public static function update( Request $request ){
+
+    	$where = ['id' => $request->id];
+    	$response = self::$_model::update_model( $where, $request->all(), new BlmStudyModel);
+    	if (count($response) > 0 ) {
+    		return message(true, $response[0], "Actualizacion Correcta");
+    	}else{
+    		return message(false, $response[0], "Ocurrio un error");
+    	}
+
+    }
+    /**
+     *Metodo para borrar el registro
+     *@access public
+     *@param Request $request [ Descripcion ]
+     *@return void
+     */
+    public static function destroy( $id ){
+    	
+    	$where = ['id' => $id];
+    	$response = self::$_model::delete_model($where, new BlmStudyModel );
+    	if (count( $response ) == 0) {
+    		return message(true,$response,'Registro eliminado correctamente');
+    	}else{
+    		return message(false,[],'Ocurrio un error');
+    	}
+
+
+    }	
 
 
 }

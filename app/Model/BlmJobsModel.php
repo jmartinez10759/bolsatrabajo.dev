@@ -10,10 +10,10 @@ class BlmJobsModel extends Model
     public $fillable = [
     	'id'
         ,'id_cv'
-        ,'empresa'
-        ,'puesto'
-        ,'descripcion'
-        ,'fecha_inicio'
-        ,'fecha_final'
+        ,'jobs_empresa'
+        ,'jobs_puesto'
+        ,'jobs_descripcion'
+        ,'jobs_fecha_inicio'
+        ,'jobs_fecha_final'
     ];
 }

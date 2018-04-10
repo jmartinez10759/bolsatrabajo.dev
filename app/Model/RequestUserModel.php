@@ -16,6 +16,7 @@ class RequestUserModel extends Model
 		,'password'
 		,'remember_token'
 		,'api_token'
+		,'status'
     ];
 
 

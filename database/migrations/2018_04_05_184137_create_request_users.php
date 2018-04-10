@@ -22,6 +22,7 @@ class CreateRequestUsers extends Migration
             $table->string('password');
             $table->string('remember_token');
             $table->string('api_token');
+            $table->boolean('status');
             $table->timestamps();
         });
 

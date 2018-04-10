@@ -25,7 +25,7 @@ class DetailCandidateController extends MasterController
     		'nombre_completo' =>  Session::get('name')." ".Session::get('first_surname')
     		,'photo_profile'  =>  ( Session::get('profile') != false )? Session::get('profile'): asset('images/profile/profile.png')
     		,'activo'		  =>  ( Session::get('status') != false )? "Activo": "Desactivado"
-    		,'postulaciones'  =>  2
+    		,'postulaciones'  =>  1
     	];
 
     	return view('candidato.detailCandidato',$data);

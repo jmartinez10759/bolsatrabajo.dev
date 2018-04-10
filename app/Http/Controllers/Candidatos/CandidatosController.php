@@ -66,6 +66,7 @@ class CandidatosController extends MasterController
 		$data['api_token'] 		= str_random(50);
 		$data['email'] 			= $request->correo;
 		$data['password'] 		= sha1( $request->pass );
+		$data['status'] 		= 1;
 		#debuger($data);
 		#se realiza la inserccion.
 		$response = MasterModel::insert_model( [ $data ], new RequestUserModel);

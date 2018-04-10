@@ -20,11 +20,13 @@ new Vue({
             });
         
         },
-        edit_general: function( obj ) {
+        edit_general: function( obj, modal ) {
+
+            console.log(obj);
             for ( var i in this.fillKeep){
                 this.fillKeep[i] = obj[i];
             }
-            $('#edit_form').modal('show');
+            $('#'+modal).modal('show');
         
         },
         insert_general: function( uri, url, function_success , function_errors ) {
@@ -52,7 +54,7 @@ new Vue({
             });
         
         },
-        update_general: function( uri, url ) {
+        update_general: function( uri, url, modal ) {
             
             axios.put(uri, this.fillKeep, csrf_token ).then(response => {
 
@@ -60,7 +62,7 @@ new Vue({
                 for( var i in this.newKeep ){ 
                     this.newKeep[i] = ""; 
                 }
-                $('#edit_form').modal('hide');
+                $('#'+modal).modal('hide');
                 toastr.info(update,title);
 
             }).catch(error => {
@@ -71,8 +73,8 @@ new Vue({
         
         },
         delete_general: function( uri ,refresh ,keep ) {
-
-             var url = uri +"/"+keep;
+             
+              var url = uri +"/"+keep;
               axios.delete(url, params, csrf_token).then(response => { //eliminamos
                     
                     this.get_general(refresh, params ); //listamos
