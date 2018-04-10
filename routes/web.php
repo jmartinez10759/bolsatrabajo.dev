@@ -10,48 +10,124 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-
-Route::get('/', function () {
-    return view('index');
-    #return view('welcome');
-});
-
 #Auth::routes();
+Route::get('/login', [
+        'uses'      => 'Auth\AuthController@showLogin'
+        ,'as'       => 'login'
+    ]);
+Route::post('/login', [
+        'uses'      => 'Auth\AuthController@authLogin'
+        ,'as'       => 'login'
+    ]);
+Route::post('/logout', [
+        'uses'      => 'Auth\AuthController@logout'
+        ,'as'       => 'logout'
+    ]);
+Route::get('/password', [
+        'uses'      => 'Auth\AuthController@password'
+        ,'as'       => 'password.request'
+    ]);
+Route::get('/register', [
+        'uses'      => 'Candidatos\CandidatosController@index'
+        ,'as'       => 'register'
+    ]);
+Route::post('/register/insert', [
+        'uses'      => 'Candidatos\CandidatosController@create'
+        ,'as'       => 'create'
+    ]);
 
-####################################SE CREA LAS RUTAS PARA INICIAR SESION #######################################################
-Route::get('/login', 'Auth\AuthController@showLogin')->name('login');
-Route::post('/login', 'Auth\AuthController@authLogin')->name('login');
-Route::post('/logout', 'Auth\AuthController@logout')->name('logout');
-Route::get('/password', 'Auth\AuthController@password')->name('password.request');
-Route::get('/register', 'Candidatos\CandidatosController@index')->name('register');
-Route::post('register/insert', 'Candidatos\CandidatosController@create')->name('create');
+######################################## MIDDLEWARE SESSION  ################################################
 Route::group(['middleware' => ['auth.session']], function() {
 
-	Route::get('/home', 'HomeController@index')->name('home');
 
+######################################## RUTAS DE DETALLES DEL CANDIDATO  #################################
+
+    Route::get('/details', [
+        'uses'      => 'Candidatos\DetailCandidateController@index'
+        ,'as'       => 'details'
+    ]);
+
+    Route::get('/details/show', [
+        'uses'      => 'Candidatos\DetailCandidateController@show'
+        ,'as'       => 'details.show'
+    ]);
+
+     Route::post('/details/insert', [
+        'uses'      => 'Candidatos\DetailCandidateController@store'
+        ,'as'       => 'details.insert'
+    ]);
+
+########################################## RUTAS DEL CURRICULUM  #################################################
+   
+    Route::get('/cv', [
+        'uses'      => 'Curriculum\CurriculumController@index'
+        ,'as'       => 'upload_cv'
+    ]);
+
+    Route::get('/cv/show', [
+        'uses'      => 'Curriculum\CurriculumController@show'
+        ,'as'       => 'cv.show'
+    ]);
+
+    Route::post('/cv/insert', [
+        'uses'      => 'Curriculum\CurriculumController@store'
+        ,'as'       => 'cv.insert'
+    ]);
+
+    Route::post('/study/insert', [
+        'uses'      => 'Curriculum\StudyController@store'
+        ,'as'       => 'study.insert'
+    ]);
+
+    Route::put('study/update', [
+        'uses'      => 'Curriculum\StudyController@update'
+        ,'as'       => 'study.update'
+    ]);
+
+    Route::delete('study/delete/{id}', [
+        'uses'      => 'Curriculum\StudyController@destroy'
+        ,'as'       => 'study.delete'
+    ]);
+
+    Route::post('/jobs/insert', [
+        'uses'      => 'Curriculum\JobController@store'
+        ,'as'       => 'jobs.insert'
+    ]);
+
+    Route::put('jobs/update', [
+        'uses'      => 'Curriculum\JobController@update'
+        ,'as'       => 'jobs.update'
+    ]);
+    
+    Route::delete('jobs/delete/{id}', [
+        'uses'      => 'Curriculum\JobController@destroy'
+        ,'as'       => 'jobs.delete'
+    ]);
+
+    Route::post('/skills/insert', [
+        'uses'      => 'Curriculum\SkillController@store'
+        ,'as'       => 'skills.insert'
+    ]);
+    
+    Route::put('skills/update', [
+        'uses'      => 'Curriculum\SkillController@update'
+        ,'as'       => 'skills.update'
+    ]);
+
+    Route::delete('skills/delete/{id}', [
+        'uses'      => 'Curriculum\SkillController@destroy'
+        ,'as'       => 'skills.delete'
+    ]);
+     
 });
-	#Route::get('/home', 'HomeController@index')->name('home');
-
-/*Llamadas al controlador Candidate*/
-/*Route::get('login', 'Candidatos\CandidatosController@get_login')->name('login'); // Mostrar login
-Route::post('login', 'Candidatos\CandidatosController@store')->name('login'); // Verificar datos
-#Route::get('logout', 'AuthController@logOut'); // Finalizar sesión
-
-//Rutas privadas solo para usuarios autenticados
-Route::group(['before' => 'auth'], function(){
-
-    Route::get('/home', [
-    	'uses' 		=> 'HomeController@index'
-    	,'as' 		=> 'home'
-	]);
-
-});*/
 
 ###################################### GRUPO DE RUTAS SIN AUTH ############################
 
+Route::get('/', function () {
+    return view('listados.listado_busqueda');
+})->name('/');
+
 Route::get('/index', 'ListadoController@index')->name('carga');
 Route::get('/listado', 'ListadoController@listado')->name('get_list');
-Route::get('/api/items', 'ListadoController@index')->name('home');
-
 ###########################  Registro de Candidatos ##############################
 #Route::post('candidate/login', 'Candidatos\CandidatosController@store')->name('store');

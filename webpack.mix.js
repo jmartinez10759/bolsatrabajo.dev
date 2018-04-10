@@ -20,10 +20,28 @@ mix.scripts([
 	'resources/assets/js/sweetalert.js',
 	'resources/assets/js/global.system.js',
 	'resources/assets/js/tools-manager.js',
+	'resources/assets/js/plugins/dropzone.js',
+	'resources/assets/js/plugins/bootsnav.js',
+	'resources/assets/js/plugins/viewportchecker.js',
+	'resources/assets/js/plugins/bootstrap-select.min.js',
+	'resources/assets/js/plugins/wysihtml5-0.3.0.js',
+	'resources/assets/js/plugins/bootstrap-wysihtml5.js',
+	'resources/assets/js/plugins/owl.carousel.min.js',
+	//'resources/assets/js/plugins/custom.js',
 	'resources/assets/js/app.js',
 	], 'public/js/app.js')
 	.styles([
 	'resources/assets/css/bootstrap.css',
 	'resources/assets/css/toastr.css',
 	'resources/assets/css/sweetalert.css',
+	'resources/assets/css/plugins/dropzone.css',
+	'resources/assets/css/plugins/bootstrap-select.min.css',
+	'resources/assets/css/plugins/bootstrap-theme.min.css',
+	'resources/assets/css/plugins/bootstrap-wysihtml5.css',
+	'resources/assets/css/plugins/owl.carousel.css',
+	'resources/assets/css/plugins/owl.theme.css',
+	'resources/assets/css/plugins/animate.css',
+	'resources/assets/css/plugins/bootsnav.css',
+	/*'resources/assets/css/plugins/style.css',
+	'resources/assets/css/plugins/responsiveness.css',*/
 	], 'public/css/app.css');

@@ -7,21 +7,17 @@ use Illuminate\Database\Eloquent\Model;
 class RequestUserModel extends Model
 {
     protected $table = "request_users";
-    protected $fillable = [
+    public $fillable = [
     	'id'
-    	,'name'
+		,'name'
 		,'first_surname'
 		,'second_surname'
-		,'full_name'
-		,'nombre_completo'
-		,'numero_credito_infonavit'
 		,'email'
-		,'curp'
-		,'nss'
 		,'password'
 		,'remember_token'
 		,'api_token'
-		#,'created_at'
-		#,'updated_at'
+		,'status'
     ];
+
+
 }

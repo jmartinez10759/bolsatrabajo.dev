@@ -6,7 +6,7 @@
 <body>
     <div id="app" class="container-fluid">
         @include('layouts.page-header')
-        <main class="container">
+        <main class="container-fluid">
             @yield('content')
         </main>
         @include('layouts.page-footer')

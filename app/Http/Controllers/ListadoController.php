@@ -10,7 +10,8 @@ class ListadoController extends Controller
     public function index()
     {
     	
-        return view('index');
+        #return view('index');
+        return view('listados.listado_busqueda');
     }
 
 	public function listado()

@@ -1,22 +1,18 @@
-
-var inicio = "/register";
+//var inicio = "/home";
 mixins = {
   el: "#vue-candidate",
-  /*created: function () {
-    //this.get_general( inicio );
-  },*/
+  created: function () {
+    //this.get_general('');
+  },
   data: {
     datos: [],
     newKeep: { 
          'name': ''
         ,'first_surname': ''
         ,'second_surname': ''
-        ,'curp': '' 
-        ,'numero_credito_infonavit': '' 
-        ,'email': ''
-        ,'password': ''
+        ,'correo': ''
+        ,'pass': ''
         ,'passwordConfirm': '' 
-        ,'nss': '' 
         //,'terminos': true 
     },
     fillKeep: { 
@@ -24,12 +20,9 @@ mixins = {
         ,'name': ''
         ,'first_surname': ''
         ,'second_surname': ''
-        ,'curp': '' 
-        ,'numero_credito_infonavit': '' 
-        ,'email': ''
-        ,'password': ''
+        ,'correo': ''
+        ,'pass': ''
         ,'passwordConfirm': '' 
-        ,'nss': '' 
         //,'terminos': true
     },
 
@@ -38,7 +31,7 @@ mixins = {
     
     insertar: function( uri ){
         //se realiza las validaciones de los datos de NSS y CURP
-        if ( !nssValido(this.newKeep.nss) ) {
+        /*if ( !nssValido(this.newKeep.nss) ) {
             toastr.error( validate ,"NSS Incorrecto" );
             $('#nss').parent().parent().addClass('has-error');
             return;
@@ -47,13 +40,22 @@ mixins = {
             toastr.error( validate ,"Curp Incorrecto" );
             $('#curp').parent().parent().addClass('has-error');
             return;
+        }*/
+        if ( !emailValidate(this.newKeep.correo) ) {
+            toastr.error( validate ,"Correo Incorrecto" );
+            $('#correo').parent().parent().addClass('has-error');
+            return;
         }
+
         //se manda a llamar la funcion de insertar de vue master_vue.js
-        this.insert_general( uri, inicio,function(json){
+        this.insert_general( uri, inicio ,function(json){
 
             $.each(this.newKeep,function(key, value){
                 $('#'+key).parent().parent().removeClass('has-error');
             });
+            $('#signup').modal('hide');
+            redirect( domain('details') );
+            //location.href=domain('details');
 
         },function(json){
             
@@ -64,7 +66,9 @@ mixins = {
             });
 
         });
+
     }
+
 
 
   }

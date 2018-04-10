@@ -1247,3 +1247,19 @@ function check_status_xhr(status, title, text, type, accept) {
         return true; //Validado
     
     }
+    /**
+     *Funcion que se encarga de validar el email. correspondiente.
+     *{{@param}} {{ email }}
+     *{{@return}} {{ void }}
+     */ 
+    emailValidate = function( email ){
+
+        const re = /^[-\w.%+]{1,64}@(?:[A-Z0-9-]{1,63}\.){1,125}[A-Z]{2,63}$/i;
+        var valido = email.match(re);
+        if (!valido) {
+            return false
+        }
+
+        return true;
+
+    }
