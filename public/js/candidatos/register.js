@@ -48,7 +48,7 @@ mixins = {
         }
 
         //se manda a llamar la funcion de insertar de vue master_vue.js
-        this.insert_general( uri, inicio ,function(json){
+        this.insert_general( uri, '' ,function(json){
 
             $.each(this.newKeep,function(key, value){
                 $('#'+key).parent().parent().removeClass('has-error');
