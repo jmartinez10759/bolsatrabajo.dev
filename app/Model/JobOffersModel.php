@@ -4,9 +4,9 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Listado extends Model
+class JobOffersModel extends Model
 {
-  	  protected $table = "joboffers";
+     protected $table = "joboffers";
     protected $fillable = [
     	'id'
 		,'name'

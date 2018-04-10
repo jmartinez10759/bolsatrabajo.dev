@@ -129,5 +129,8 @@ Route::get('/', function () {
 
 Route::get('/index', 'ListadoController@index')->name('carga');
 Route::get('/listado', 'ListadoController@listado')->name('get_list');
-###########################  Registro de Candidatos ##############################
-#Route::post('candidate/login', 'Candidatos\CandidatosController@store')->name('store');
+############################ Busqueda de vacantes ##################################
+Route::post('vacantes', 'BusquedaController@scope')->name('get_search');
+Route::get('vacantes', 'BusquedaController@scope')->name('get_searchh');
+Route::get('detalle/{id}', 'BusquedaController@show')->where(['id' => '[0-9]+'])->name('get_detalle');
+Route::get('busqueda', 'BusquedaController@index')->name('get_list_busqueda');
