@@ -20,8 +20,20 @@ class StudyController extends MasterController
      *@return void
      */
     public static function store( Request $request ){
-
-    	debuger( $request->all() );
+        
+        $data = [];
+        foreach ($request->all() as $key => $value) {
+            if ( $value != null ) {
+                $data[$key] = $value;        
+            }
+        }
+        $response = self::$_model::insert_model([$data], new BlmStudyModel);
+        
+        if (count($response) > 0) {
+            return message(true,$response[0],"Transaccion Exitosa");
+        }else{
+            return message(false,[],"Ocurrio Un Error");
+        }
 
     }
     

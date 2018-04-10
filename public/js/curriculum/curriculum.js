@@ -17,6 +17,11 @@ mixins = {
         ,'descripcion': ''
         ,'telefono': ''
         ,'direccion': ''
+        ,'id_cv': ''
+        ,'escuela': ''
+        ,'id_nivel': ''
+        ,'fecha_inicio': ''
+        ,'fecha_final': ''
         //,'url_cv': ''
     },
     fillKeep: { 
@@ -49,7 +54,27 @@ mixins = {
           $('#seccion-cv').hide('slow');
         });
     
+    },
+    insert_study: function(){
+
+      var url = domain('study/insert');
+      var uri = domain('cv/show');
+      this.newKeep.id_cv        = this.datos.id_cv;
+      this.newKeep.escuela      = this.datos.escuela;
+      this.newKeep.id_nivel     = this.datos.id_nivel;
+      this.newKeep.fecha_inicio = this.datos.fecha_inicio;
+      this.newKeep.fecha_final  = this.datos.fecha_final;
+
+       this.insert_general(url,uri,function(json){
+          $('#modal-educacion').modal('hide');
+        },function(json){
+          $('#modal-educacion').modal('hide');
+        });
+
+
+
     }
+
 
   }
 

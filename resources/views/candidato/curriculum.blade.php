@@ -223,19 +223,19 @@
 											</tr>
 										</thead>
 										<tbody>
-											<tr>
+											<tr v-for="study in datos.study">
 												<td></td>
-												<td></td>
-												<td></td>
-												<td></td>
-												<td></td>
+												<td>@{{ study.escuela }}</td>
+												<td>@{{ study.id_nivel }}</td>
+												<td>@{{ study.fecha_inicio }}</td>
+												<td>@{{ study.fecha_final }}</td>
 												<td>
-													<button class="btn btn" type="button" v-on:click="">
+													<button class="btn btn" type="button" v-on:click.prevent="">
 														Detalles
 													</button>
 												</td>
 												<td>
-													<button class="btn" type="button" v-on:click="">
+													<button class="btn" type="button" v-on:click.prevent="">
 														Quitar
 													</button>
 												</td>
@@ -462,7 +462,7 @@
 						  <div class="form-group">
 						    <label class="control-label col-sm-2" for="email">Escuela</label>
 						    <div class="col-sm-10">
-						      <input type="text" class="form-control" placeholder="Nombre de la escuela" v-model="datos.escuela">
+						      <input type="text" id="escuela" class="form-control" placeholder="Nombre de la escuela" v-model="datos.escuela">
 						    </div>
 						  </div>
 
@@ -475,13 +475,13 @@
 						    </div>
 						  </div>
 						  <div class="form-group">
-						    <label class="control-label col-sm-2" for="pwd">Fecha Inicio</label>
+						    <label class="control-label col-sm-2" >Fecha Inicio</label>
 						    <div class="col-sm-4">
-						      <input type="text" class="form-control" placeholder="" v-model="datos.fecha_inicio">
+						      <input type="text" id="fecha_inicio" class="form-control" placeholder="" v-model="datos.fecha_inicio">
 						    </div>
-						    <label class="control-label col-sm-2" for="pwd">Fecha Final</label>
+						    <label class="control-label col-sm-2" >Fecha Final</label>
 						    <div class="col-sm-4">
-						      <input type="text" class="form-control" placeholder="" v-model="datos.fecha_final">
+						      <input type="text" id="fecha_final" class="form-control" placeholder="" v-model="datos.fecha_final">
 						    </div>
 						  </div>
 
@@ -491,8 +491,8 @@
                 </div>
 
                 <div class="modal-footer">
-			        <button type="button" class="btn btn-default" data-dismiss="modal">Agregar</button>
-			        <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+			        <button type="button" class="btn btn" v-on:click.prevent="insert_study()" >Agregar</button>
+			        <button type="button" class="btn btn" data-dismiss="modal">Cancelar</button>
 			    </div>
 
             </div>

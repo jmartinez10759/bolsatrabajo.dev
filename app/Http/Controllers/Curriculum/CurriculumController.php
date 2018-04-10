@@ -66,11 +66,11 @@ class CurriculumController extends MasterController
 	    	$skills 		= self::$_model::show_model( [], $where , new BlmSkillModel );
 
     		$data['status'] 		= 1;
-    		$data['study'] 			= $study;
-    		$data['jobs'] 			= $jobs;
-    		$data['skill'] 			= $skills;
-    		$data['id_nivel'] 		= 3;
-    		$data['id_cv'] 			= $data['id'];
+            $data['id_nivel']       = 3;
+            $data['id_cv']          = $data['id'];
+            $data['study']          = $study;
+            $data['jobs']           = $jobs;
+            $data['skills']         = $skills;
 
     	}else{
 
@@ -85,16 +85,30 @@ class CurriculumController extends MasterController
 
 	        $data['study'] 		= [];
     		$data['jobs'] 		= [];
-    		$data['skill'] 		= [];
+    		$data['skills'] 	= [];
     		$data['id_nivel'] 	= 3;
     		$data['id_cv'] 		= "";
     		
     	}
-    	$data['nombre'] 		= $candidate[0]->name." ".$candidate[0]->first_surname." ".$candidate[0]->second_surname;
+        $data['nombre']         = $candidate[0]->name." ".$candidate[0]->first_surname." ".$candidate[0]->second_surname;
+    	$data['email'] 		    = $candidate[0]->email;
 		$data['puesto'] 		= $detalles[0]->cargo;
 		$data['descripcion'] 	= $detalles[0]->descripcion;
     	$data['categorias'] 	= $categorias;
     	$data['niveles'] 		= $nivel;
+        #seccion de estudios
+        $data['escuela']        = "";
+        $data['fecha_inicio']   = date('Y-m-d');
+        $data['fecha_final']    = date('Y-m-d');
+        #seccion de trabajos
+        $data['empresa']        = "";            
+        $data['puesto']         = "";         
+        $data['descripcion']    = "";            
+        $data['fecha_inicio']   = date('Y-m-d');           
+        $data['fecha_final']    = date('Y-m-d');            
+        #seccion de habilidades
+        $data['habilidad'] = "";
+        $data['porcentaje'] = "";
     	#debuger($data);
         return message( true,$data,"Transaccion exitosa" );
 
