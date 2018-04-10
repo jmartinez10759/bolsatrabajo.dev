@@ -47,7 +47,7 @@
                         </div>
                         <div class="col-md-7 col-sm-7">
                            <div class="detail-pannel-footer-btn pull-right"><!--<a href="javascript:void(0)" data-toggle="modal" data-target="#apply-job" class="footer-btn grn-btn" title="">Edit Now</a>-->
-                           	<a href="{{ route('upload_cv') }}" class="footer-btn blu-btn" title="">Crear Curriculum</a>
+                           	<a href="{{ route('upload_cv') }}" class="footer-btn blu-btn" title="" v-show="">Crear Curriculum</a>
                            </div>
                         </div>
                     </div>
