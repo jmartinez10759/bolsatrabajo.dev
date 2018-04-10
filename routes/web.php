@@ -24,10 +24,7 @@ Route::post('/login', 'Auth\AuthController@authLogin')->name('login');
 Route::post('/logout', 'Auth\AuthController@logout')->name('logout');
 Route::get('/password', 'Auth\AuthController@password')->name('password.request');
 Route::get('/register', 'Candidatos\CandidatosController@index')->name('register');
-
 Route::post('register/insert', 'Candidatos\CandidatosController@create')->name('create');
-
-
 Route::group(['middleware' => ['auth.session']], function() {
 
 	Route::get('/home', 'HomeController@index')->name('home');
@@ -50,25 +47,10 @@ Route::group(['before' => 'auth'], function(){
 
 });*/
 
-################################# Se crea un grupo de rutas que se necesita estar loggeado ######################################
-/*Route::group(['middleware' => 'auth'], function () {
-
-    Route::get('home', [
-    	'uses' 		=> 'HomeController@index'
-    	,'as' 		=> 'home'
-	]);
-
-
-
-});*/
-
 ###################################### GRUPO DE RUTAS SIN AUTH ############################
 
 Route::get('/index', 'ListadoController@index')->name('carga');
 Route::get('listado', 'ListadoController@index')->name('get_list');
-###########################  Registro de Candidatos ##############################
-#Route::post('candidate/login', 'Candidatos\CandidatosController@store')->name('store');
-
 ############################ Busqueda de vacantes ##################################
 Route::post('vacantes', 'BusquedaController@scope')->name('get_search');
 Route::get('vacantes', 'BusquedaController@scope')->name('get_searchh');
