@@ -126,8 +126,7 @@
 										<div class="input-group">
 											<span class="input-group-addon"><i class="fa fa-flag"></i></span>
 											<select class="form-control" v-model="datos.id_state" disabled="">
-												<option value="0">Seleccione estado</option>
-												<option value="1">Estado de Mexico</option>
+												<option v-for="estado in datos.estados" :value="estado.id_state">@{{estado.state}}</option>
 											</select>
 										</div>	
 									</div>

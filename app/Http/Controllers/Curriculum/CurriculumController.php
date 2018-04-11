@@ -7,6 +7,7 @@ use App\Model\BlmSkillModel;
 use App\Model\BlmStudyModel;
 use Illuminate\Http\Request;
 use App\Model\CategoriaModel;
+use App\Model\BlmEstadosModel;
 use App\Model\RequestUserModel;
 use App\Model\BlmCurriculumModel;
 use App\Model\NivelAcademicoModel;
@@ -44,6 +45,7 @@ class CurriculumController extends MasterController
     	$candidate  	= self::$_model::show_model([],$where, new RequestUserModel);
     	$categorias 	= self::$_model::show_model( [], [] , new CategoriaModel );
     	$nivel 			= self::$_model::show_model( [], [] , new NivelAcademicoModel );
+    	$estados 			= self::$_model::show_model( [], [] , new BlmEstadosModel );
     	#debuger($detalles);
     	$where = ['id_users' => Session::get('id')];
     	$curriculum = self::$_model::show_model([],$where, new BlmCurriculumModel);
@@ -107,8 +109,9 @@ class CurriculumController extends MasterController
         $data['jobs_fecha_inicio']   = date('Y-m-d');           
         $data['jobs_fecha_final']    = date('Y-m-d');            
         #seccion de habilidades
-        $data['habilidad'] = "";
-        $data['porcentaje'] = "";
+        $data['habilidad'] 			= "";
+        $data['porcentaje'] 		= "";
+        $data['estados'] 			= $estados;
     	#debuger($data);
         return message( true, $data ,"Transaccion exitosa" );
 

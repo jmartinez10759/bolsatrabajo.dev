@@ -84,10 +84,10 @@
 									<ul class="job-detail-des">
 										<li><span>Nombre:</span>@{{ datos.name  }}</li>
 										<li><span>Primer Apellido:</span>@{{ datos.first_surname  }}</li>
-										<li><span>Curp:</span>@{{ datos.curp  }}</li>
+										<li><span>CURP:</span>@{{ datos.curp  }}</li>
 										<li><span>NSS:</span>@{{ datos.nss  }}</li>
 										<li><span>Cargo:</span>@{{ datos.cargo  }}</li>
-										<li><span>CP:</span>@{{ datos.codigo }}</li>
+										<li><span>C.P:</span>@{{ datos.codigo }}</li>
 										<li><span>Telefono:</span>@{{ datos.telefono }}</li>
 										<li><span>Email:</span>@{{ datos.email}}</li>
 									</ul>
@@ -520,8 +520,7 @@
 											<div class="col-md-4 col-sm-6">
 												<label>Estado</label>
 												<select class="form-control" v-model="datos.id_state">
-													<option value="0">Seleccione estado</option>
-													<option value="1">Estado de Mexico</option>
+													<option v-for="estado in datos.estados" :value="estado.id_state">@{{estado.state}}</option>
 												</select>
 											</div> 
 											<!-- <div class="col-md-4 col-sm-6">
