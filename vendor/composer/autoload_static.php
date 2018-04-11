@@ -383,6 +383,7 @@ class ComposerStaticInitc389e67f513f2d647bc325cf1bcc0c1f
         'App\\Http\\Middleware\\TrimStrings' => __DIR__ . '/../..' . '/app/Http/Middleware/TrimStrings.php',
         'App\\Http\\Middleware\\TrustProxies' => __DIR__ . '/../..' . '/app/Http/Middleware/TrustProxies.php',
         'App\\Http\\Middleware\\VerifyCsrfToken' => __DIR__ . '/../..' . '/app/Http/Middleware/VerifyCsrfToken.php',
+        'App\\JobOffersModel' => __DIR__ . '/../..' . '/app/Model/JobOffersModel.php',
         'App\\Listado' => __DIR__ . '/../..' . '/app/Listado.php',
         'App\\Model\\BlmCurriculumModel' => __DIR__ . '/../..' . '/app/Model/BlmCurriculumModel.php',
         'App\\Model\\BlmJobsModel' => __DIR__ . '/../..' . '/app/Model/BlmJobsModel.php',
