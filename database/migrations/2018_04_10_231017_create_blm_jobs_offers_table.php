@@ -13,7 +13,7 @@ class CreateBlmJobsOffersTable extends Migration
      */
     public function up()
     {
-        Schema::create('blm_jobs_offers', function (Blueprint $table) {
+        Schema::create('joboffers', function (Blueprint $table) {
 
             $table->increments('id');
             $table->string('name',100)->nullable();
