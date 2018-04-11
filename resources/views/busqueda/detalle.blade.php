@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html lang="{{ app()->getLocale() }}">
 <head>
-   @include('listado.header')
+   @include('layouts.includes-header')
 </head>
 <body>
     <div id="app" class="wrapper">
-        @include('listado.nav')
+        @include('layouts.page-header')
         @include('busqueda.form')
-        @include('listado.footer')
+        @include('layouts.page-footer')
 	</div>
 </body>
 </html>
