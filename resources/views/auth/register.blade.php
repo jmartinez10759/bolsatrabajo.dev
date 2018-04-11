@@ -43,13 +43,6 @@
                 </div>
             </div> -->
 
-            <!--  <div class="form-group">
-                <label for="numero_credito_infonavit" class="col-md-4 control-label">Credito Infonavit *</label>
-
-                <div class="col-md-6">
-                    <input id="numero_credito_infonavit" type="checkbox" v-model="newKeep.numero_credito_infonavit">
-                </div>
-            </div> -->
 
 
             <div class="form-group">
@@ -73,6 +66,13 @@
 
                 <div class="col-md-6">
                     <input id="passwordConfirm" type="password" class="form-control" v-model="newKeep.passwordConfirm" required>
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label class="col-md-4 control-label">¿Cuenta con NSS ?</label>
+                <div class="col-md-6">
+                    <input id="confirmed_nss" type="checkbox" v-model="newKeep.confirmed_nss">
                 </div>
             </div>
 

@@ -13,6 +13,7 @@ mixins = {
         ,'correo': ''
         ,'pass': ''
         ,'passwordConfirm': '' 
+        ,'confirmed_nss': true 
         //,'terminos': true 
     },
     fillKeep: { 
@@ -23,6 +24,7 @@ mixins = {
         ,'correo': ''
         ,'pass': ''
         ,'passwordConfirm': '' 
+        ,'confirmed_nss': true 
         //,'terminos': true
     },
 
@@ -54,8 +56,8 @@ mixins = {
                 $('#'+key).parent().parent().removeClass('has-error');
             });
             $('#signup').modal('hide');
-            redirect( domain('details') );
-            //location.href=domain('details');
+            //redirect( domain('details') );
+            location.href=domain('details');
 
         },function(json){
             

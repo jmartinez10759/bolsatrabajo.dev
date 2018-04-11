@@ -13,7 +13,7 @@ class CreateRequestUsers extends Migration
      */
     public function up()
     {
-        Schema::create('request_users', function (Blueprint $table) {
+        Schema::create('blm_request_users', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
             $table->string('first_surname');
@@ -23,6 +23,8 @@ class CreateRequestUsers extends Migration
             $table->string('remember_token');
             $table->string('api_token');
             $table->boolean('status');
+            $table->boolean('confirmed')->default(0);
+            $table->string('confirmed_code')->nullable();
             $table->timestamps();
         });
 
@@ -35,6 +37,6 @@ class CreateRequestUsers extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('request_users');
+        Schema::dropIfExists('blm_request_users');
     }
 }

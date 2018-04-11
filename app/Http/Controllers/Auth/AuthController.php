@@ -66,7 +66,7 @@ class AuthController extends MasterController
      */
     public static function getData( $where ){
 
-        #debuger(phpinfo());
+        debuger($where);
 
         $condicion = [];
         if ( isset($where->email) && isset($where->password)) {
@@ -88,7 +88,36 @@ class AuthController extends MasterController
 
 
     }
+    /**
+     *Metodo donde verifica el token generado para validar y redireccionar
+     *@access public
+     *@param $confirmed_code [description]
+     *@return void
+     */
+    public static function verify_code( $confirmed_code ){
 
+        if ($confirmed_code) {
+            
+            $condicion = ['confirmed_code' => $confirmed_code ];
+            $consulta = MasterModel::show_model([], $condicion , new RequestUserModel );
+            debuger($consulta);
+        if( count( $consulta ) > 0 ){
+            $session = [];
+            foreach ($consulta[0] as $key => $value) {
+                $session[$key] = $value;
+            }
+            #debuger($session);
+            Session::put( $session );
+            return redirect()->route( self::$_ruta );
+        }
+        return redirect()->route('/');
+
+
+
+        }
+
+
+    }
 
 
 

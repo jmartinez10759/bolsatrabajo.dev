@@ -67,7 +67,11 @@ class CandidatosController extends MasterController
 		$data['email'] 			= $request->correo;
 		$data['password'] 		= sha1( $request->pass );
 		$data['status'] 		= 1;
-		#debuger($data);
+		$data['confirmed'] 		= true;
+		$data['confirmed_code'] = str_random(25);
+		$data['confirmed_nss']  = $request->confirmed_nss;
+
+		debuger($data);
 		#se realiza la inserccion.
 		$response = MasterModel::insert_model( [ $data ], new RequestUserModel);
 		if ( count( $response ) > 0) {
