@@ -7,10 +7,16 @@ use App\Listado;
 class ListadoController extends Controller
 {
 
+    /**
+     *Metodo donde hace la consulta del listado de las vacantes
+     *@access public
+     *@param Request $request [ Description ]
+     *@return void [ Description ]
+     */
     public function index(Request $request)
     {
+        #SE REALIZA LA CONSULTA PARA LAS VACANTES.
         $tasks = Listado::orderBy('id', 'DESC')->paginate(3);
-
         return [
             'pagination' => [
                 'total'         => $tasks->total(),
@@ -24,11 +30,12 @@ class ListadoController extends Controller
         ];
         
     }
-
+    
 	public function listado()
 	{
-       
+        #realiza la consulta del listado de vacantes disponibles.
         $response=Listado::all();
+
         if ( count( $response ) > 0) {
 			return message(true,$response,"Datos correctos");
 		}else{

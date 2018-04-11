@@ -59,6 +59,6 @@ class CreateBlmJobsOffersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('blm_jobs_offers');
+        Schema::dropIfExists('joboffers');
     }
 }
