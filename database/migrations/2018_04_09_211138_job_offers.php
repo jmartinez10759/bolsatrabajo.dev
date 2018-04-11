@@ -13,7 +13,7 @@ class JobOffers extends Migration
      */
     public function up()
     {
-        Schema::create('JobOffers', function (Blueprint $table) {
+        Schema::create('joboffers', function (Blueprint $table) {
             $table->increments('id');//
             $table->string('name',100)->nullable();
             $table->string('title',100)->nullable();
@@ -29,8 +29,8 @@ class JobOffers extends Migration
             $table->string('description_large',270)->nullable();
             $table->string('other_details',100)->nullable();
             $table->string('requirements',150)->nullable();
-            $table->datetime('date_from')->nullable();
-            $table->datetime('date_to')->nullable();
+            $table->string('date_from')->nullable();
+            $table->string('date_to')->nullable();
             $table->string('is_active',10)->nullable();
             $table->string('published',100)->nullable();
             $table->string('priority',120)->nullable();
