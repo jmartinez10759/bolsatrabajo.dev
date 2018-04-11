@@ -11,14 +11,6 @@
 |
 */
 #Auth::routes();
-################################### SE CREA LAS RUTAS PARA INICIAR SESION  ####################################################
-/*Route::get('login', 'Auth\AuthController@showLogin')->name('login');
-Route::post('login', 'Auth\AuthController@authLogin')->name('login');
-Route::post('logout', 'Auth\AuthController@logout')->name('logout');
-Route::get('password', 'Auth\AuthController@password')->name('password.request');
-Route::get('register', 'Candidatos\CandidatosController@index')->name('register');
-Route::post('register/insert', 'Candidatos\CandidatosController@create')->name('create');*/
-
 Route::get('/login', [
         'uses'      => 'Auth\AuthController@showLogin'
         ,'as'       => 'login'
@@ -45,7 +37,6 @@ Route::post('/register/insert', [
     ]);
 
 ######################################## MIDDLEWARE SESSION  ################################################
-
 Route::group(['middleware' => ['auth.session']], function() {
 
 
@@ -128,9 +119,6 @@ Route::group(['middleware' => ['auth.session']], function() {
         ,'as'       => 'skills.delete'
     ]);
      
-     
-    
-
 });
 
 ###################################### GRUPO DE RUTAS SIN AUTH ############################
@@ -141,7 +129,8 @@ Route::get('/', function () {
 
 Route::get('/index', 'ListadoController@index')->name('carga');
 Route::get('/listado', 'ListadoController@listado')->name('get_list');
-
-#Route::get('/api/items', 'ListadoController@index')->name('home');
-###########################  Registro de Candidatos ##############################
-#Route::post('candidate/login', 'Candidatos\CandidatosController@store')->name('store');
+############################ Busqueda de vacantes ##################################
+Route::post('vacantes', 'BusquedaController@scope')->name('get_search');
+Route::get('vacantes', 'BusquedaController@scope')->name('get_searchh');
+Route::get('detalle/{id}', 'BusquedaController@show')->where(['id' => '[0-9]+'])->name('get_detalle');
+Route::get('busqueda', 'BusquedaController@index')->name('get_list_busqueda');

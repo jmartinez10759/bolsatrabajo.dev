@@ -153,8 +153,8 @@
 			<!-- START JAVASCRIPT -->
 			<!-- Placed at the end of the document so the pages load faster -->
 			<script src="{{ asset('js/app.js') }}"></script>
-			<script type="text/javascript" src="{{ asset('js/js/jquery.min.js') }}"></script>
-			<script src="{{ asset('plugins/bootstrap/js/bootstrap.min.js') }}"></script>
+			<!--<script type="text/javascript" src=" asset('js/js/jquery.min.js') }}"></script>
+			<script src="asset('plugins/bootstrap/js/bootstrap.min.js') }}"></script>-->
 			<script src="{{ asset('js/js/bootsnav.js') }}"></script>
 			<script src="{{ asset('js/js/viewportchecker.js') }}"></script>
 			<script src="{{ asset('plugins/bootstrap/js/bootstrap-select.min.js') }}"></script>

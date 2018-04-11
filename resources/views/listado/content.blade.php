@@ -4,84 +4,86 @@
 					<div class="banner-caption">
 						<div class="col-md-12 col-sm-12 banner-text">
 							<h1> Más de 5 mil empresas registradas</h1>
-							<form class="form-horizontal">
+							<form class="form-horizontal" method="POST" action="{{URL::to('vacantes')}}">
+								{{ csrf_field() }}
 								<div class="col-md-4 no-padd">
 									 <div class="input-group">
-										 <input type="text" class="form-control right-bor" placeholder="Habilidades, Vacantes, Compañias">
+										 <input type="text" name="vacantes" class="form-control right-bor" placeholder="Habilidades, Vacantes, Compañias">
 									 </div>
 								</div>
 								<div class="col-md-3 no-padd">
 									 <div class="input-group">
-										 <input type="text" class="form-control right-bor" placeholder="Búsqueda por localidad">
+										 <input type="text" id="autocomplete" name="localidad" class="form-control right-bor" placeholder="Búsqueda por localidad">
 									 </div>
 								</div>
 								
 								<div class="col-md-3 no-padd">
 									 <div class="input-group">
-										<select class="form-control">
-										  <option>Seleccione su ciudad</option>
-										 <option>Aguascalientes</option>
-<option>Baja California</option>
+										<select class="form-control" name="edo">
+											    <option>Seleccione su ciudad</option>
+												<option value="1">Aguascalientes</option>
 
-<option>Baja California Sur</option>
+												<option value="2">Baja California</option>
 
-<option>Campeche</option>
+												<option value="3">Baja California Sur</option>
 
-<option>Coahuila </option>
+												<option value="4">Campeche</option>
 
-<option>Colima</option>
+												<option value="5">Coahuila de Zaragoza</option>
 
-<option>Chiapas</option>
+												<option value="6">Colima</option>
 
-<option>Chihuahua</option>
+												<option value="7">Chiapas</option>
 
-<option>Ciudad de México</option>
+												<option value="8">Chihuahua</option>
 
-<option>Durango</option>
+												<option value="9">Ciudad de México</option>
 
-<option>Guanajuato</option>
+												<option value="10">Durango</option>
 
-<option>Guerrero</option>
+												<option value="11">Guanajuato</option>
 
-<option>Hidalgo</option>
+												<option value="12">Guerrero</option>
 
-<option>Jalisco</option>
+												<option value="13">Hidalgo</option>
 
-<option>Estado de México</option>
+												<option value="14">Jalisco</option>
 
-<option>Michoacán de Ocampo</option>
+												<option value="15">México</option>
 
-<option>Morelos</option>
+												<option value="16">Michoacán de Ocampo</option>
 
-<option>Nayarit</option>
+												<option value="17">Morelos</option>
 
-<option>Nuevo León</option>
+												<option value="18">Nayarit</option>
 
-<option>Oaxaca</option>
+												<option value="19">Nuevo León</option>
 
-<option>Puebla</option>
+												<option value="20">Oaxaca</option>
 
-<option>Querétaro</option>
+												<option value="21">Puebla</option>
 
-<option>Quintana Roo</option>
+												<option value="22">Querétaro</option>
 
-<option>San Luis Potosí</option>
+												<option value="23">Quintana Roo</option>
 
-<option>Sinaloa</option>
+												<option value="24">San Luis Potosí</option>
 
-<option>Sonora</option>
+												<option value="25">Sinaloa</option>
 
-<option>Tabasco</option>
+												<option value="26">Sonora</option>
 
-<option>Tamaulipas</option>
+												<option value="27">Tabasco</option>
 
-<option>Tlaxcala</option>
+												<option value="28">Tamaulipas</option>
 
-<option>Veracruz</option>
+												<option value="29">Tlaxcala</option>
 
-<option>Yucatán</option>
+												<option value="30">Veracruz de Ignacio de la Llave</option>
 
-<option>Zacatecas</option>
+												<option value="31">Yucatán</option>
+
+												<option value="32">Zacatecas</option>
 										</select>
 									 </div>
 								</div>
