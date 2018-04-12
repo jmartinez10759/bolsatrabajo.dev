@@ -57,7 +57,7 @@ mixins = {
             });
             $('#signup').modal('hide');
             //redirect( domain('details') );
-            location.href=domain('details');
+            //location.href=domain('details');
 
         },function(json){
             

@@ -1,4 +1,3 @@
-
 mixins = {
   el: "#vue-curriculum",
   created: function () {

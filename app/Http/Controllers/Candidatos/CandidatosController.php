@@ -5,8 +5,10 @@ namespace App\Http\Controllers\Candidatos;
 #use App\User;
 use App\Model\MasterModel;
 use Illuminate\Http\Request;
+use Illuminate\Mail\Message;
 use App\Model\RequestUserModel;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
 use App\Http\Controllers\MasterController;
@@ -38,7 +40,7 @@ class CandidatosController extends MasterController
 	 */
 	public static function create( Request $request ){
 
-
+		#debuger($request->all());
 		if ( !self::validaciones( $request->all() ) ) {
 			return self::validaciones( $request->all() );
 		}
@@ -67,16 +69,23 @@ class CandidatosController extends MasterController
 		$data['email'] 			= $request->correo;
 		$data['password'] 		= sha1( $request->pass );
 		$data['status'] 		= 1;
-		$data['confirmed'] 		= true;
-		$data['confirmed_code'] = str_random(25);
+		$data['confirmed'] 		= false;
+		$data['confirmed_code'] = str_random(50);
 		$data['confirmed_nss']  = $request->confirmed_nss;
-
-		debuger($data);
+		#debuger($data);
 		#se realiza la inserccion.
 		$response = MasterModel::insert_model( [ $data ], new RequestUserModel);
 		if ( count( $response ) > 0) {
-			AuthController::getData( $response[0] );
-			return message(true,$response,"Transaccion Exitosa");
+			#envio de correo para validar si existe el correo antes ingresado.
+		    Mail::send('emails.confirmation_code', $data, function($message) use ($data) {
+		        $message->to($data['email'], $data['name'])
+		        		->from('jorge.martinez@burolaboralmexico.com','Buro Laboral Mexico')
+		        		->subject('Por favor confirma tu correo');
+		    });
+
+			return message(true,$response[0],"Favor de verificar su correo, para continuar");
+			#return redirect()->route('/');
+			#AuthController::getData( $response[0] );
 		}else{
 			return message(false,[],"Ocurrio un error");
 		}

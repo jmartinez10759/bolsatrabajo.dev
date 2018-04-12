@@ -19,6 +19,7 @@ class RequestUserModel extends Model
 		,'status'
 		,'confirmed'
 		,'confirmed_code'
+		,'confirmed_nss'
     ];
 
 

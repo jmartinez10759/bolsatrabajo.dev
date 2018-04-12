@@ -20,7 +20,7 @@ class StudyController extends MasterController
      *@return void
      */
     public static function store( Request $request ){
-        
+    	
         $data = [];
         foreach ($request->all() as $key => $value) {
             if ( $value != null ) {

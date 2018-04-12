@@ -1,8 +1,10 @@
 @extends('layouts.app')
 @section('content')
 @push('styles')
-	<link href="{{ asset('plugins/date-dropper/datedropper.css') }}" rel="stylesheet">
+	<!-- <link href="{{ asset('plugins/date-dropper/datedropper.css') }}" rel="stylesheet"> -->
+	<!-- <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"> -->
 @endpush
+
 
 	<div class="clearfix"></div>
 			
@@ -329,11 +331,11 @@
 						  <div class="form-group">
 						    <label class="control-label col-sm-2" >Fecha Inicio</label>
 						    <div class="col-sm-4">
-						      <input type="text" id="fecha_inicio" class="form-control" placeholder="" v-model="datos.fecha_inicio">
+						      <input type="date" id="fecha_inicio" class="form-control" placeholder="" v-model="datos.fecha_inicio">
 						    </div>
 						    <label class="control-label col-sm-2" >Fecha Final</label>
 						    <div class="col-sm-4">
-						      <input type="text" id="fecha_final" class="form-control" placeholder="" v-model="datos.fecha_final">
+						      <input type="date" id="fecha_final" class="form-control" placeholder="" v-model="datos.fecha_final">
 						    </div>
 						  </div>
 
@@ -382,11 +384,11 @@
 						  <div class="form-group">
 						    <label class="control-label col-sm-2" >Fecha Inicio</label>
 						    <div class="col-sm-4">
-						      <input type="text" name="jobs_fecha_inicio" class="form-control" placeholder="" v-model="datos.jobs_fecha_inicio">
+						      <input type="date" name="jobs_fecha_inicio" class="form-control" placeholder="" v-model="datos.jobs_fecha_inicio">
 						    </div>
 						    <label class="control-label col-sm-2" >Fecha Final</label>
 						    <div class="col-sm-4">
-						      <input type="text" name="jobs_fecha_inicio" class="form-control" placeholder="" v-model="datos.jobs_fecha_final">
+						      <input type="date" name="jobs_fecha_inicio" class="form-control" placeholder="" v-model="datos.jobs_fecha_final">
 						    </div>
 						  </div>
 
@@ -453,9 +455,8 @@
     <!-- End Sign Up Window -->
 
 @include('candidato.edicionCurriculum')
-
+<!-- <data-picker></data-picker> -->
 </div>
-
 
 
 
@@ -469,6 +470,7 @@
 @stop
 @push('scripts')
 <!-- <script type="text/javascript" src="{{ asset('plugins/date-dropper/datedropper.js') }}"></script> -->
+<!-- <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script> -->
 <script type="text/javascript">
 
 /*	var formato = {
@@ -484,9 +486,9 @@
 	$('#exp-end').dateDropper();
 	$('#edu-start').dateDropper();
 	$('#edu-end').dateDropper();*/
+	/*$('#fecha_inicio').datepicker();*/
 </script>
 
 <script type="text/javascript" src="{{asset('js/curriculum/curriculum.js')}}" ></script>
-
 
 @endpush

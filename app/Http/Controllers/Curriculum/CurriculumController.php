@@ -41,7 +41,7 @@ class CurriculumController extends MasterController
 
         #se realiza la consulta para obtener los datos del Candidato que subira el CV.
     	$where = ['id' => Session::get('id')];
-    	$detalles 		= self::$_model::show_model([],$where, new DetailCandidateModel);
+    	$detalles 		= self::$_model::show_model([],['id_users' => Session::get('id')], new DetailCandidateModel);
     	$candidate  	= self::$_model::show_model([],$where, new RequestUserModel);
     	$categorias 	= self::$_model::show_model( [], [] , new CategoriaModel );
     	$nivel 			= self::$_model::show_model( [], [] , new NivelAcademicoModel );
@@ -156,7 +156,6 @@ class CurriculumController extends MasterController
 	    	#debuger($data);
 	    	$response = self::$_model::insert_model([$data], new BlmCurriculumModel);
 	    	if (count($response) > 0) {
-	    		#Session::put(['id_cv' => $response[0]->id]);
 	    		return message(true,$response,"Transaccion exitosa");
 	    	}else{
 	    		return message(false,[],"Ocurrio un Error");

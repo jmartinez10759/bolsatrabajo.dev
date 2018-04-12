@@ -15,7 +15,7 @@ class AuthController extends MasterController
     private static $_ruta = "details";
 
     public function __construct(){
-
+        parent::__construct();
     }
     /**
      *Metodo para visuzalizar para iniciar session
@@ -66,8 +66,7 @@ class AuthController extends MasterController
      */
     public static function getData( $where ){
 
-        debuger($where);
-
+        #debuger($where);
         $condicion = [];
         if ( isset($where->email) && isset($where->password)) {
             $condicion['email'] = $where->email;
@@ -84,6 +83,7 @@ class AuthController extends MasterController
             Session::put( $session );
             return redirect()->route( self::$_ruta );
         }
+        #echo "<script>alert('Favor de Verificar Tu correo para iniciar session.')</script>";
         return redirect()->route('/');
 
 
@@ -96,26 +96,26 @@ class AuthController extends MasterController
      */
     public static function verify_code( $confirmed_code ){
 
-        if ($confirmed_code) {
+        if ( $confirmed_code ) {
             
-            $condicion = ['confirmed_code' => $confirmed_code ];
-            $consulta = MasterModel::show_model([], $condicion , new RequestUserModel );
-            debuger($consulta);
-        if( count( $consulta ) > 0 ){
-            $session = [];
-            foreach ($consulta[0] as $key => $value) {
-                $session[$key] = $value;
-            }
-            #debuger($session);
-            Session::put( $session );
-            return redirect()->route( self::$_ruta );
+                $condicion = ['confirmed_code' => $confirmed_code ];
+                $consulta = MasterModel::show_model([], $condicion , new RequestUserModel );
+                #debuger($consulta);
+                if( count( $consulta ) > 0 ){
+                    $session = [];
+                    foreach ($consulta[0] as $key => $value) {
+                        $session[$key] = $value;
+                    }
+                    #debuger($session);
+                    $datos = [ 'confirmed_code' => null, 'confirmed' => true ];
+                    MasterModel::update_model( $condicion,$datos, new RequestUserModel );
+                    Session::put( $session );
+                    return redirect()->route( self::$_ruta );
+                }
+                return redirect()->route('/');
+
         }
         return redirect()->route('/');
-
-
-
-        }
-
 
     }
 
