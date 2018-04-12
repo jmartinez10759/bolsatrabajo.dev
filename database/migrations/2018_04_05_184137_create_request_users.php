@@ -25,6 +25,7 @@ class CreateRequestUsers extends Migration
             $table->boolean('status');
             $table->boolean('confirmed')->default(0);
             $table->string('confirmed_code')->nullable();
+            $table->boolean('confirmed_nss')->default(0);
             $table->timestamps();
         });
 
