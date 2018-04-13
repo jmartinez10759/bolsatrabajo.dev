@@ -66,12 +66,11 @@ class AuthController extends MasterController
      */
     public static function getData( $where ){
 
-        #debuger($where);
         $condicion = [];
         if ( isset($where->email) && isset($where->password)) {
             $condicion['email'] = $where->email;
             $condicion['password'] = $where->password;
-                
+            $condicion['confirmed'] = true;    
         }
         $consulta = MasterModel::show_model([], $condicion , new RequestUserModel );
         if( count( $consulta ) > 0 ){
@@ -83,8 +82,9 @@ class AuthController extends MasterController
             Session::put( $session );
             return redirect()->route( self::$_ruta );
         }
-        #echo "<script>alert('Favor de Verificar Tu correo para iniciar session.')</script>";
         return redirect()->route('/');
+        #echo "<script>alert('Favor de Verificar Tu correo para iniciar session.')</script>";
+        #return message(false,[],"Ingrese correctamente tus datos");
 
 
     }

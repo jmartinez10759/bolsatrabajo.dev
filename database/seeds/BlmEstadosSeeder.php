@@ -42,17 +42,19 @@ class BlmEstadosSeeder extends Seeder
 			,'Tabasco'
 			,'Tamaulipas'
 			,'Tlaxcala'
-			,'Veracruz de Ignacio de la Llave'
+			,'Veracruz'
 			,'Yucatán'
 			,'Zacatecas'
     	];
 
-
+    	$conteo = 1;
         for ($i=0; $i < count($estados); $i++) { 
         	
-	        App\Model\BlmEstadosModel::create([
-	        	'state' => $estados[$i]
+	        App\Model\BlmEstadosModel::insert([
+	        	'id' => $conteo
+	        	,'nombre' => $estados[$i]
 	        ]);
+	        $conteo++;
         }
 
     }

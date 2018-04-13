@@ -1,3 +1,22 @@
+Vue.component('date-picker', {
+  template: '<input type="text" class="form-control" />',
+  props: [ 'dateFormat' ],
+  mounted: function() {
+  var self = this;
+  $(this.$el).dateDropper({
+    dateFormat: this.dateFormat,
+    onSelect: function(date) {
+      self.$emit('update-date', date);
+    }
+  });
+  },
+  beforeDestroy: function() {
+    $(this.$el).dateDropper('hide').dateDropper('destroy');
+  }
+});
+
+
+
 mixins = {
   el: "#vue-curriculum",
   created: function () {

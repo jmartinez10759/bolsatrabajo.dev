@@ -43,6 +43,7 @@ class DetailCandidateController extends MasterController
     	$where = ['id_users' => Session::get('id')];
     	$response = self::$_model::show_model( [], $where, new DetailCandidateModel);
     	$estados  = self::$_model::show_model( [], [], new BlmEstadosModel);
+    	#debuger($estados);
     	$data = [
     		'name' 				=>  Session::get('name')
 			,'first_surname'	=>  Session::get('first_surname')
@@ -96,6 +97,15 @@ class DetailCandidateController extends MasterController
 
     	$request_users = [];
     	$blm_details = [];
+    	#se realiza la validacion de NSS
+    	if ( Session::get('confirmed_nss') == 1 ) {
+    		
+    		if ( empty($request->nss) ) {
+    			return message(false,[],'No puede estar Vacio el campo de NSS.');
+    		}
+    		
+    	}
+
     	foreach ($request->all() as $key => $value) {
     		
     		if ( $key == "name" || $key == "first_surname" || $key == "second_surname"  || $key == "email") {

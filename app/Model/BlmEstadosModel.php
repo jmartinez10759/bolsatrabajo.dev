@@ -6,10 +6,13 @@ use Illuminate\Database\Eloquent\Model;
 
 class BlmEstadosModel extends Model
 {
-    protected $table = "blm_estados";
+    protected $table = "estados";
     public $fillable = [
-    	'id_state'
-        ,'state'
+    	'id'
+    	,'country_id'
+        ,'nombre'
+        ,'abreviatura'
+        ,'eri_id'
     ];
     
 }

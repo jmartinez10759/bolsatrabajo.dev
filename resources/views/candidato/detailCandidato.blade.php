@@ -520,7 +520,7 @@
 											<div class="col-md-4 col-sm-6">
 												<label>Estado</label>
 												<select class="form-control" v-model="datos.id_state">
-													<option v-for="estado in datos.estados" :value="estado.id_state">@{{estado.state}}</option>
+													<option v-for="estado in datos.estados" :value="estado.id">@{{estado.nombre}}</option>
 												</select>
 											</div> 
 										

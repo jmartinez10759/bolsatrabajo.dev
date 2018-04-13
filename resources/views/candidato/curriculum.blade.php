@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @section('content')
 @push('styles')
-	<!-- <link href="{{ asset('plugins/date-dropper/datedropper.css') }}" rel="stylesheet"> -->
+	<link href="{{ asset('plugins/date-dropper/datedropper.css') }}" rel="stylesheet">
 	<!-- <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"> -->
 @endpush
 
@@ -128,7 +128,7 @@
 										<div class="input-group">
 											<span class="input-group-addon"><i class="fa fa-flag"></i></span>
 											<select class="form-control" v-model="datos.id_state" disabled="">
-												<option v-for="estado in datos.estados" :value="estado.id_state">@{{estado.state}}</option>
+												<option v-for="estado in datos.estados" :value="estado.id">@{{estado.nombre}}</option>
 											</select>
 										</div>	
 									</div>
@@ -455,7 +455,7 @@
     <!-- End Sign Up Window -->
 
 @include('candidato.edicionCurriculum')
-<!-- <data-picker></data-picker> -->
+ <date-picker color="green lighten-1" v-once></date-picker>
 </div>
 
 
@@ -469,10 +469,9 @@
 
 @stop
 @push('scripts')
-<!-- <script type="text/javascript" src="{{ asset('plugins/date-dropper/datedropper.js') }}"></script> -->
+<script type="text/javascript" src="{{ asset('plugins/date-dropper/datedropper.js') }}"></script>
 <!-- <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script> -->
 <script type="text/javascript">
-
 /*	var formato = {
 		format: 'y-m-d', // Formato de la fecha 2016-16-01
         lang: 'es',
