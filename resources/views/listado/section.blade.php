@@ -125,7 +125,7 @@
 									<div class="col-md-6 col-sm-5">
 										<div class="brows-job-position">
 											<h3>@{{ data.name }}</h3>
-											<p><span>@{{ data.email }}</span><span class="brows-job-sallery"><i class="fa fa-money"></i>@{{ data.password }}</span></p>
+											<p><span>@{{ data.title }}</span><span class="brows-job-sallery"><i class="fa fa-money"></i>$@{{ data.salary_min }} - @{{ data.salary_max }}</span></p>
 										</div>
 									</div>
 									
@@ -264,7 +264,7 @@ new Vue({
             'to': 0
 		},
 		newKeep: '',
-		fillKeep: {'id_cuenta': '', 'id_vacante': '', 'idp': ''},
+		fillKeep: {'id_cuenta': '', 'id_vacante': ''},
 		errors: '',
 		offset: 3,
 	},
@@ -300,9 +300,8 @@ new Vue({
 	},
 	methods: {
 		get: function(uri,keep){
-			this.fillKeep.id_cuenta = keep.email;
+			this.fillKeep.id_cuenta = keep.account_id;
 			this.fillKeep.id_vacante = keep.id;
-			this.fillKeep.idp = keep.password;
 			console.log(this.fillKeep);
 			//alert(JSON.stringify(this.fillKeep));
 			//window.location.href = uri+ '/' + this.fillKeep;
