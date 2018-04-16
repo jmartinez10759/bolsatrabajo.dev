@@ -136,10 +136,11 @@ Route::get('/', function () {
     return view('listados.listado_busqueda');
 })->name('/');
 
-Route::get('/listado', 'ListadoController@index')->name('carga');
-//Route::get('/index', 'ListadoController@listado')->name('get_list');
+Route::get('/index', 'ListadoController@index')->name('carga');
+Route::get('/listado', 'ListadoController@index')->name('get_list');
 ############################ Busqueda de vacantes ##################################
 Route::post('vacantes', 'BusquedaController@scope')->name('get_search');
 Route::get('vacantes', 'BusquedaController@scope')->name('get_searchh');
 Route::get('detalle/{id}', 'BusquedaController@show')->where(['id' => '[0-9]+'])->name('get_detalle');
 Route::get('busqueda', 'BusquedaController@index')->name('get_list_busqueda');
+Route::get('autocomplete','BusquedaController@autocomplete')->name('get_autocomplete');

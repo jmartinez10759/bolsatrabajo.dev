@@ -32,5 +32,14 @@ class BusquedaController extends Controller
 	    $response = Listado::where( 'id',$id)->get();
 	    return view("busqueda.detalle", ["datos" => $response ]);
 	}
+    public function autocomplete(Request $request)
+    {
+        $term = $request->input('query');
+        $data = Listado::select('name')
+                        ->where( 'name', 'LIKE', "%".$term."%" )
+                        ->groupBy('name')
+                        ->get();
+        return response()->json($data);
+    }
 
 }

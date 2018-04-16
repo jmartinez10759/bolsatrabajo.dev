@@ -7,7 +7,7 @@
 							<form method="POST" action="{{URL::to('vacantes')}}">
 								{{ csrf_field() }}
 								<div class="col-md-4 col-sm-4">
-									<input type="text" name="vacantes" class="form-control" placeholder="Palabras clave">
+									<input type="text" name="vacantes" class="typeahead form-control" placeholder="Palabras clave" autocomplete="off">
 								</div>
 								<div class="col-md-3 col-sm-3">
 									<input type="text" ame="localidad" class="form-control" placeholder="Ubicación">
@@ -144,3 +144,26 @@
 				</div>
 			</section>
 			<!-- ========== Begin: Brows job Category End ===============  -->
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-3-typeahead/4.0.1/bootstrap3-typeahead.min.js"></script>  
+
+<script type="text/javascript">
+    var path = "autocomplete";
+    $('input.typeahead').typeahead({
+        source:  function (query, process) {
+
+            /*var data = [
+            {'name': 'desarrollador'},
+            {'name': 'ventas'},
+            {'name': 'administracion'}];
+
+            $myLocalStorage.set('name',data);
+            localStorage.setItem("titulo", "Curso de Angular avanzado - Víctor Robles");
+              return process(data);*/
+
+        return $.get(path, { query: query }, function (data) {
+                return process(data);
+            });
+        }
+    });
+</script>

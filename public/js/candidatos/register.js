@@ -56,7 +56,7 @@ mixins = {
                 $('#'+key).parent().parent().removeClass('has-error');
             });
             $('#signup').modal('hide');
-            //redirect( domain('details') );
+                redirect( 'details' );
             //location.href=domain('details');
 
         },function(json){
