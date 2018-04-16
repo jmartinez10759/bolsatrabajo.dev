@@ -152,14 +152,14 @@
     $('input.typeahead').typeahead({
         source:  function (query, process) {
 
-            var data = [
+            /*var data = [
             {'name': 'desarrollador'},
             {'name': 'ventas'},
             {'name': 'administracion'}];
 
             $myLocalStorage.set('name',data);
             localStorage.setItem("titulo", "Curso de Angular avanzado - Víctor Robles");
-              return process(data);
+              return process(data);*/
 
         return $.get(path, { query: query }, function (data) {
                 return process(data);
