@@ -32,8 +32,9 @@ class AuthController extends MasterController
      *@access public
      *@return void
      */
-    public static function authLogin( Request $request){
+    public static function authLogin( Request $request ){
 
+        debuger( $request->all() );
     	$where = [];
 		foreach ($request->all() as $key => $value) {
 			if ($key != "_token") {
