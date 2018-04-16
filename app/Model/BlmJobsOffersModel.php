@@ -16,7 +16,7 @@ class BlmJobsOffersModel extends Model
         ,'created_by_user_id'
         ,'account_id'
         ,'account_client_id'
-        ,'departament'
+        ,'department'
         ,'picture'
         ,'email'
         ,'description_short'

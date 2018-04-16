@@ -11,10 +11,9 @@ new Vue({
     mixins : [mixins],
     methods: {
 
-        get_general: function( url, data ) {
+        get_general: function( url, fields ) {
             
-            params = ( data == false )? {} :data;
-            axios.get( url, params, csrf_token ).then(response => {
+            axios.get( url, { params: fields }, csrf_token ).then(response => {
                 console.log( response.data.result );
                 this.datos = response.data.result;
             });

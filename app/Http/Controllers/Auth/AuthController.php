@@ -34,8 +34,6 @@ class AuthController extends MasterController
      */
     public static function authLogin( Request $request ){
 
-        debuger( $request->all() );
-        
     	$where = [];
 		foreach ($request->all() as $key => $value) {
 			if ($key != "_token") {
@@ -82,11 +80,11 @@ class AuthController extends MasterController
             }
             #debuger($session);
             Session::put( $session );
-            return redirect()->route( self::$_ruta );
+            #return redirect()->route( self::$_ruta );
+            return message( true,$consulta[0],'Usuario Inicio Sesion correctamente.');
         }
-        return redirect()->route('/');
-        #echo "<script>alert('Favor de Verificar Tu correo para iniciar session.')</script>";
-        #return message(false,[],"Ingrese correctamente tus datos");
+        #return redirect()->route('/');
+        return message(false,[],'Por favor Verificar la informacion ingresada');
 
 
     }

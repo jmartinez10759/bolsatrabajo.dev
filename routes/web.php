@@ -45,6 +45,15 @@ Route::post('/register/insert', [
         'uses'      => 'Candidatos\CandidatosController@create'
         ,'as'       => 'create'
     ]);
+#RUTA PARA OBTENER EL DETALLE DE LA VACANTE 
+Route::get('/details/vacante', [
+        'uses'      => 'Vacantes\DetailsJobsController@index'
+        ,'as'       => 'details.vacante'
+    ]);
+Route::get('/details/vacante/show', [
+        'uses'      => 'Vacantes\DetailsJobsController@show'
+        ,'as'       => 'details.vacante.show'
+    ]);
 
 ######################################## MIDDLEWARE SESSION  ################################################
 Route::group(['middleware' => ['auth.session']], function() {

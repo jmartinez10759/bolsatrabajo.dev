@@ -297,15 +297,23 @@ new Vue({
 			}
 			return pagesArray;
 		}
+	
 	},
 	methods: {
 		get: function(uri,keep){
+			
+			var url = "/details/vacante";
 			this.fillKeep.id_cuenta = keep.account_id;
 			this.fillKeep.id_vacante = keep.id;
-			console.log(this.fillKeep);
-			//alert(JSON.stringify(this.fillKeep));
-			//window.location.href = uri+ '/' + this.fillKeep;
-			//this.get_general(uri,this.fillKeep);
+			//se mete en localstorage el id de vacante para poder hacer la consulta.
+			$myLocalStorage.set('id_vacante', keep.id );
+			redirect( url );
+
+			/*axios.get( url, {params: this.fillKeep}, csrf_token ).then(response => {
+				$myLocalStorage.set('id_vacante', keep.id_vacante );
+               	redirect('/details/vacante');
+            });*/
+
 		},
 		getKeeps: function(page) {
 			var urlKeeps = 'listado?page='+page;
@@ -356,6 +364,8 @@ new Vue({
 			this.pagination.current_page = page;
 			this.getKeeps(page);
 		}
+
+
 	}
 });
 
