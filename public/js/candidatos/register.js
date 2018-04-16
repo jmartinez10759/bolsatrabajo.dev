@@ -77,3 +77,41 @@ mixins = {
 
 
 }
+
+
+
+mixins = {
+  el: "#vue-login",
+  created: function () {
+    
+  },
+  data: {
+    datos: [],
+    newKeep: { 
+        'email': ''
+        ,'password': ''
+    },
+    fillKeep: { 
+        'email': '' 
+        ,'password': ''
+    },
+
+  },
+  methods:{
+
+    inicio_sesion: function(){
+        var url = "/login";
+        this.insert_general(url,'',function(obj){
+
+        },function(obj){
+
+        });
+
+    }
+    
+
+  }
+
+
+}
+

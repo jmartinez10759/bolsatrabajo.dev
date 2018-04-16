@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class BlmJobsOffersModel extends Model
 {
-    protected $table = "joboffers";
+    protected $table = "job_offers";
     public $fillable = [
     	'id'
         ,'name'

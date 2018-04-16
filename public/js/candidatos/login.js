@@ -1,9 +1,8 @@
-var inicio = "home";
 mixins = {
   el: "#vue-login",
-  /*created: function () {
-    //this.get_general( inicio );
-  },*/
+  created: function () {
+    
+  },
   data: {
     datos: [],
     newKeep: { 
@@ -18,8 +17,8 @@ mixins = {
   },
   methods:{
 
-    inicio_sesion: function( uri, inicio ){
-        this.insert_general(uri,inicio,function(response){},function(response){});
+    inicio_sesion: function(){
+        alert();
     }
 
   }
