@@ -16,6 +16,8 @@ new Vue({
             axios.get( url, { params: fields }, csrf_token ).then(response => {
                 console.log( response.data.result );
                 this.datos = response.data.result;
+            }).catch(error => {
+                toastr.error( error, title_error );
             });
         
         },
@@ -93,6 +95,20 @@ new Vue({
                 }
             });
 
+        },
+        show_general: function( url, fields, function_success, function_errors){
+
+            axios.get( url, { params: fields }, csrf_token ).then( response => {
+                console.log( response.data.result );
+                if (response.data.success == true) {
+                    function_success(response.data.result);
+                }else{
+                    function_errors();
+                }
+
+            }).catch(error => {
+                toastr.error( error, title_error );
+            }); 
         }
 
     }

@@ -35,22 +35,26 @@ class DetailsJobsController extends MasterController
     	$response = self::$_model::show_model([],$where, new Listado );
     	$data = [];
     	if ( sizeof( $response ) > 0 ) {
+    		$empresa = self::$_model::show_model(['id','name','postal_code','website_url'],['id' => $response[0]->account_id], new AccountsModel )[0];
     		$data = [
-    			'id' => $response[0]->id
-    			,'name' => $response[0]->name
-    			,'title' => $response[0]->title
-    			,'description_large' => $response[0]->description_large
-    			,'description_short' => $response[0]->description_short
-    			,'email' => $response[0]->email
-    			,'is_active' => $response[0]->is_active
-    			,'salary_max' => $response[0]->salary_max
-    			,'salary_min' => $response[0]->salary_min
-    			,'account_id' => self::$_model::show_model(['name','postal_code','website_url'],['id' => $response[0]->account_id], new AccountsModel )[0];
+    			'id' 					=> $response[0]->id
+    			,'name' 				=> $response[0]->name
+    			,'title' 				=> $response[0]->title
+    			,'description_large' 	=> $response[0]->description_large
+    			,'description_short' 	=> $response[0]->description_short
+    			,'email' 				=> $response[0]->email
+    			,'is_active' 			=> $response[0]->is_active
+    			,'salary_max' 			=> $response[0]->salary_max
+    			,'salary_min' 			=> $response[0]->salary_min
+    			,'account_id' 			=> $empresa->id
+    			,'account_name' 		=> $empresa->name
+    			,'account_postal_code' 	=> $empresa->postal_code
+    			,'account_website_url' 	=> $empresa->website_url
     		];
 
-    		debuger($data);
+    		#debuger($data);
 
-    		return message(true,$response[0],"Trasaccion Existosa");
+    		return message(true,$data,"Trasaccion Existosa");
     	}
     	return message(false,[],'Ocurrio un error al cargar la informacion');
 

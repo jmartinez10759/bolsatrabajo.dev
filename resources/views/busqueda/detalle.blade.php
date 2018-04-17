@@ -14,8 +14,9 @@
 <div class="clearfix"></div>
 <!-- Title Header End -->
 <!-- Job Detail Start -->
-<section class="detail-desc" id="vue-datails-offers">
-	<input type="text" v-model="datos.id">
+<div id="vue-datails-offers">
+
+<section class="detail-desc">
 	<div class="container white-shadow">
 	
 		<div class="row">
@@ -38,8 +39,8 @@
 					<span class="designation">@{{datos.name}}</span>
 					<p>@{{datos.description_short}}</p>
 					<ul>
-						<li><i class="fa fa-briefcase"></i><span>Full time</span></li>
-						<li><i class="fa fa-flask"></i><span>3 Year Experience</span></li>
+						<li><i class="fa fa-briefcase"></i><span>Tiempo Completo</span></li>
+						<li><i class="fa fa-flask"></i><span>3 Años de Experecia</span></li>
 					</ul>
 				</div>
 			</div>
@@ -48,11 +49,11 @@
 				<div class="get-touch">
 					<h4>Contactanos</h4>
 					<ul>
-						<li><i class="fa fa-map-marker"></i><span>Menlo Park, CA</span></li>
+						<li><i class="fa fa-map-marker"></i><span></span></li>
 						<li><i class="fa fa-envelope"></i><span>@{{datos.email}}</span></li>
-						<li><i class="fa fa-globe"></i><span>microft.com</span></li>
-						<li><i class="fa fa-phone"></i><span>0 123 456 7859</span></li>
-						<li><i class="fa fa-money"></i><span>@{{datos.salary_min}} @{{datos.salary_max}}</span></li>
+						<li><i class="fa fa-globe"></i><span>@{{datos.account_website_url}}</span></li>
+						<li><i class="fa fa-phone"></i><span></span></li>
+						<li><i class="fa fa-money"></i><span>@{{datos.salary_min}} - @{{datos.salary_max}} MX</span></li>
 					</ul>
 				</div>
 			</div>
@@ -73,8 +74,8 @@
 				
 				<div class="col-md-7 col-sm-7">
 					<div class="detail-pannel-footer-btn pull-right">
-						<a href="#" class="footer-btn grn-btn" title="">Quick Apply</a>
-						<a href="#" class="footer-btn blu-btn" title="">Save Draft</a>
+						<a data-toggle="modal" data-target="#terminos" style="cursor: pointer;" class="footer-btn grn-btn" title="">Postularse</a>
+						<a v-on:click.prevent="busqueda_vacantes()" style="cursor: pointer;" class="footer-btn blu-btn" title="">Listado de Vacantes</a>
 					</div>
 				</div>
 			</div>
@@ -87,43 +88,73 @@
 <section class="full-detail-description full-detail">
 	<div class="container">
 		<div class="row row-bottom">
-			<h2 class="detail-title">Job Responsibilities</h2>
-			<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-			<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+			<h2 class="detail-title">Responsabilidades laborales</h2>
+			<p> </p>
 		</div>
 		
 		<div class="row row-bottom">
-			<h2 class="detail-title">Skill Requirement</h2>
-			<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+			<h2 class="detail-title">Requisito de habilidad</h2>
+			<p></p>
 			<ul class="detail-list">
-				<li>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor</li>
-				<li>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod.</li>
-				<li>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod.</li>
-				<li>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod.</li>
-				<li>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod.</li>
-				<li>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do.</li>
-				<li>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do.</li>
+				<li></li>
+				<li></li>
+				<li></li>
+				<li></li>
+				<li></li>
+				<li></li>
+				<li></li>
 			</ul>
 		</div>
 		
 		<div class="row row-bottom">
-			<h2 class="detail-title">Qualification</h2>
-			<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+			<h2 class="detail-title">Calificación</h2>
+			<p></p>
 			<ul class="detail-list">
-				<li>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor</li>
-				<li>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod.</li>
-				<li>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod.</li>
-				<li>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod.</li>
-				<li>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod.</li>
-				<li>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do.</li>
-				<li>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do.</li>
-				<li>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</li>
+				<li></li>
+				<li></li>
+				<li></li>
+				<li></li>
+				<li></li>
+				<li></li>
+				<li></li>
+				<li></li>
 			</ul>
 		</div>
 		
 	</div>
 </section>
 <!-- Job full detail End -->
+<!-- Modal -->
+  <div class="modal fade" id="terminos" role="dialog">
+    <div class="modal-dialog modal-lg">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <center><h2 class="modal-title">Términos y Condiciones</h2></center>
+        </div>
+        <div class="modal-body" style="overflow-y:scroll; height:500px;">
+          	<div class="col-sm-12">
+          		<center>
+          			@include('termino.termino')
+          		</center>
+          	</div>
+        </div>
+        <div class="modal-footer">
+        	<div class="pull-left">
+	           <label>¿Acepta terminos y Condiciones?</label>
+	           <input type="checkbox" id="terminos_condiciones" v-model="newKeep.terminos_condiciones">
+        	</div>
+        	<button type="button" class="btn btn-success" v-on:click.prevent="postulacion()">Aceptar Terminos</button>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+
+</div>
+
 @stop
 
 @push('scripts')

@@ -108,27 +108,6 @@
     </form>
 
 </div>
-
-<!-- Modal -->
-  <div class="modal fade" id="myModal" role="dialog">
-    <div class="modal-dialog modal-lg">
-    
-      <!-- Modal content-->
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <center><h2 class="modal-title">Términos y Condiciones</h2></center>
-        </div>
-        <div class="modal-body" style="overflow:scroll; height:400px;">
-          @include('termino.termino')
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal"> Cerrar </button>
-        </div>
-      </div>
-      
-    </div>
-  </div>
 @push('scripts')
     <script type="text/javascript" src="{{asset('js/candidatos/register.js')}}" ></script>
 @endpush

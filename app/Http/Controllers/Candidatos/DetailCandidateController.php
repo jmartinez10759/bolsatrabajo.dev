@@ -41,8 +41,9 @@ class DetailCandidateController extends MasterController
     public static function show(){
 
     	$where = ['id_users' => Session::get('id')];
-    	$response = self::$_model::show_model( [], $where, new DetailCandidateModel);
-    	$estados  = self::$_model::show_model( [], [], new BlmEstadosModel);
+    	$response  =  self::$_model::show_model( [], $where, new DetailCandidateModel);
+    	$candidato =  self::$_model::show_model( [], ['id' => Session::get('id')], new RequestUserModel);
+    	$estados   =  self::$_model::show_model( [], [], new BlmEstadosModel);
     	#debuger($estados);
     	$data = [
     		'name' 				=>  Session::get('name')
@@ -80,6 +81,7 @@ class DetailCandidateController extends MasterController
     		$fields['first_surname'] 	=  $data['first_surname'] ;
     		$fields['second_surname']   =  $data['second_surname'] ;
     		$fields['email'] 			=  $data['email'] ;
+    		$fields['confirmed_nss'] 	=  $candidato[0]->confirmed_nss;
     		$fields['password'] 	    =  "" ;
     		$fields['estados'] 	    	=  $estados;
 
