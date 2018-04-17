@@ -47,7 +47,7 @@
                         </div>
                         <div class="col-md-7 col-sm-7">
                            <div class="detail-pannel-footer-btn pull-right"><!--<a href="javascript:void(0)" data-toggle="modal" data-target="#apply-job" class="footer-btn grn-btn" title="">Edit Now</a>-->
-                           	<a href="{{ route('upload_cv') }}" class="footer-btn blu-btn" title="" v-show="">Crear Curriculum</a>
+                           		<a href="{{ route('upload_cv') }}" id="upload_cv" class="footer-btn blu-btn" title="" style="display: none">Crear Curriculum</a>
                            </div>
                         </div>
                     </div>
@@ -84,10 +84,10 @@
 									<ul class="job-detail-des">
 										<li><span>Nombre:</span>@{{ datos.name  }}</li>
 										<li><span>Primer Apellido:</span>@{{ datos.first_surname  }}</li>
-										<li><span>Curp:</span>@{{ datos.curp  }}</li>
+										<li><span>CURP:</span>@{{ datos.curp  }}</li>
 										<li><span>NSS:</span>@{{ datos.nss  }}</li>
 										<li><span>Cargo:</span>@{{ datos.cargo  }}</li>
-										<li><span>CP:</span>@{{ datos.codigo }}</li>
+										<li><span>C.P:</span>@{{ datos.codigo }}</li>
 										<li><span>Telefono:</span>@{{ datos.telefono }}</li>
 										<li><span>Email:</span>@{{ datos.email}}</li>
 									</ul>
@@ -475,31 +475,31 @@
 										<div class="edit-pro">
 											<div class="col-md-4 col-sm-6">
 												<label>Nombre</label>
-												<input type="text" class="form-control" v-model="datos.name" >
+												<input type="text" id="name" class="form-control" v-model="datos.name" >
 											</div>
 											<div class="col-md-4 col-sm-6">
 												<label>Primer Apellido</label>
-												<input type="text" class="form-control" v-model="datos.first_surname" >
+												<input type="text" id="first_surname" class="form-control" v-model="datos.first_surname" >
 											</div>
 											<div class="col-md-4 col-sm-6">
 												<label>Segundo Apellido</label>
-												<input type="text" class="form-control" v-model="datos.second_surname" >
+												<input type="text" id="second_surname" class="form-control" v-model="datos.second_surname" >
 											</div>
 											<div class="col-md-4 col-sm-6">
 												<label>Email</label>
-												<input type="email" class="form-control" v-model="datos.email" disabled="">
+												<input type="email" id="email" class="form-control" v-model="datos.email" disabled="">
 											</div>
 											<div class="col-md-4 col-sm-6">
 												<label>Telefono</label>
-												<input type="text" class="form-control" v-model="datos.telefono">
+												<input type="text" id="telefono" class="form-control" v-model="datos.telefono">
 											</div>
 											<div class="col-md-4 col-sm-6">
 												<label>Codigo Postal</label>
-												<input type="text" class="form-control" maxlength="5" v-model="datos.codigo">
+												<input type="text" id="codigo" class="form-control" maxlength="5" v-model="datos.codigo">
 											</div>
 											<div class="col-md-4 col-sm-6">
 												<label>Direccion</label>
-												<input type="text" class="form-control" v-model="datos.direccion">
+												<input type="text" id="direccion" class="form-control" v-model="datos.direccion">
 											</div>
 											<div class="col-md-4 col-sm-6">
 												<label>Curp*</label>
@@ -511,7 +511,7 @@
 											</div>
 											<div class="col-md-4 col-sm-6">
 												<label>Cargo</label>
-												<input type="text" class="form-control" v-model="datos.cargo">
+												<input type="text" id="cargo" class="form-control" v-model="datos.cargo">
 											</div>
 											<!-- <div class="col-md-4 col-sm-6">
 												<label>Ciudad</label>
@@ -520,29 +520,18 @@
 											<div class="col-md-4 col-sm-6">
 												<label>Estado</label>
 												<select class="form-control" v-model="datos.id_state">
-													<option value="0">Seleccione estado</option>
-													<option value="1">Estado de Mexico</option>
+													<option v-for="estado in datos.estados" :value="estado.id">@{{estado.nombre}}</option>
 												</select>
 											</div> 
-											<!-- <div class="col-md-4 col-sm-6">
-												<label>Pais</label>
-												<input type="text" class="form-control" v-model="datos.pais">
-											</div> -->
-											<!-- <div class="col-md-4 col-sm-6">
-												<label>Old Password</label>
-												<input type="password" class="form-control" >
-											</div> -->
+										
 											<div class="col-md-4 col-sm-6">
 												<label>Nuevo Password</label>
 												<input type="password" class="form-control" v-model="datos.password">
 											</div>
-											<!-- <div class="col-md-4 col-sm-6">
-												<label>Old Password</label>
-												<input type="password" class="form-control" >
-											</div> -->
+										
 											<div class="col-md-4 col-sm-6">
 												<label>Acerca de </label>
-												<textarea class="form-control" v-model="datos.descripcion"></textarea>
+												<textarea class="form-control" id="descripcion" v-model="datos.descripcion"></textarea>
 											</div>
 											<!-- <div class="col-md-4 col-sm-6">
 												<label>Subir Foto de Perfil</label>

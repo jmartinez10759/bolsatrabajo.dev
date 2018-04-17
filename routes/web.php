@@ -15,30 +15,48 @@ Route::get('/login', [
         'uses'      => 'Auth\AuthController@showLogin'
         ,'as'       => 'login'
     ]);
+
+Route::get('/register/verify/{code}', [
+        'uses'      => 'Auth\AuthController@verify_code'
+        ,'as'       => 'register.verify'
+    ]);
+
 Route::post('/login', [
         'uses'      => 'Auth\AuthController@authLogin'
         ,'as'       => 'login'
     ]);
+
 Route::post('/logout', [
         'uses'      => 'Auth\AuthController@logout'
         ,'as'       => 'logout'
     ]);
+
 Route::get('/password', [
         'uses'      => 'Auth\AuthController@password'
         ,'as'       => 'password.request'
     ]);
+
 Route::get('/register', [
         'uses'      => 'Candidatos\CandidatosController@index'
         ,'as'       => 'register'
     ]);
+
 Route::post('/register/insert', [
         'uses'      => 'Candidatos\CandidatosController@create'
         ,'as'       => 'create'
     ]);
+#RUTA PARA OBTENER EL DETALLE DE LA VACANTE 
+Route::get('/details/vacante', [
+        'uses'      => 'Vacantes\DetailsJobsController@index'
+        ,'as'       => 'details.vacante'
+    ]);
+Route::get('/details/vacante/show', [
+        'uses'      => 'Vacantes\DetailsJobsController@show'
+        ,'as'       => 'details.vacante.show'
+    ]);
 
 ######################################## MIDDLEWARE SESSION  ################################################
 Route::group(['middleware' => ['auth.session']], function() {
-
 
 ######################################## RUTAS DE DETALLES DEL CANDIDATO  #################################
 

@@ -13,7 +13,7 @@ mixins = {
         ,'correo': ''
         ,'pass': ''
         ,'passwordConfirm': '' 
-        //,'terminos': true 
+        ,'confirmed_nss': true 
     },
     fillKeep: { 
         'id': ''
@@ -23,7 +23,7 @@ mixins = {
         ,'correo': ''
         ,'pass': ''
         ,'passwordConfirm': '' 
-        //,'terminos': true
+        ,'confirmed_nss': true 
     },
 
   },
@@ -54,8 +54,7 @@ mixins = {
                 $('#'+key).parent().parent().removeClass('has-error');
             });
             $('#signup').modal('hide');
-            //redirect( domain('details') );
-            location.href=domain('details');
+                redirect( 'details' );
 
         },function(json){
             
@@ -75,3 +74,45 @@ mixins = {
 
 
 }
+
+/*PARA INICAR SESION DESDE EL ARCHIVO REGISTER*/
+
+mixins = {
+  el: "#vue-login",
+  created: function () {
+    
+  },
+  data: {
+    datos: [],
+    newKeep: { 
+        'email': ''
+        ,'password': ''
+    },
+    fillKeep: { 
+        'email': '' 
+        ,'password': ''
+    },
+
+  },
+  methods:{
+
+    inicio_sesion: function(){
+
+        var url = "/login";
+        this.insert_general(url,'',function(obj){
+            redirect('details');
+        },function(obj){
+            $('#email').parent().parent().addClass('has-error');
+            $('#password').parent().parent().addClass('has-error');
+
+        });
+
+
+    }
+    
+
+  }
+
+
+}
+

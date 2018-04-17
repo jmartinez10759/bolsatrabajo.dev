@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Candidatos;
 
 use Illuminate\Http\Request;
+use App\Model\BlmEstadosModel;
 use App\Model\RequestUserModel;
 use App\Model\DetailCandidateModel;
 use Illuminate\Support\Facades\Session;
@@ -41,6 +42,8 @@ class DetailCandidateController extends MasterController
 
     	$where = ['id_users' => Session::get('id')];
     	$response = self::$_model::show_model( [], $where, new DetailCandidateModel);
+    	$estados  = self::$_model::show_model( [], [], new BlmEstadosModel);
+    	#debuger($estados);
     	$data = [
     		'name' 				=>  Session::get('name')
 			,'first_surname'	=>  Session::get('first_surname')
@@ -58,7 +61,7 @@ class DetailCandidateController extends MasterController
 				,'nss' 				=> ""
 				,'cargo' 			=> ""
 				,'descripcion' 		=> ""
-				,'id_state' 	    => 1
+				,'id_state' 	    => 9
     		];
 
     	}else{
@@ -78,6 +81,7 @@ class DetailCandidateController extends MasterController
     		$fields['second_surname']   =  $data['second_surname'] ;
     		$fields['email'] 			=  $data['email'] ;
     		$fields['password'] 	    =  "" ;
+    		$fields['estados'] 	    	=  $estados;
 
     	return message(true, $fields , 'Trasaccion exitosa');
 
@@ -93,6 +97,15 @@ class DetailCandidateController extends MasterController
 
     	$request_users = [];
     	$blm_details = [];
+    	#se realiza la validacion de NSS
+    	if ( Session::get('confirmed_nss') == 1 ) {
+    		
+    		if ( empty($request->nss) ) {
+    			return message(false,[],'No puede estar Vacio el campo de NSS.');
+    		}
+    		
+    	}
+
     	foreach ($request->all() as $key => $value) {
     		
     		if ( $key == "name" || $key == "first_surname" || $key == "second_surname"  || $key == "email") {

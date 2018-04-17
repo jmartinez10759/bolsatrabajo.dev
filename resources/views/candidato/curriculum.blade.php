@@ -2,7 +2,9 @@
 @section('content')
 @push('styles')
 	<link href="{{ asset('plugins/date-dropper/datedropper.css') }}" rel="stylesheet">
+	<!-- <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"> -->
 @endpush
+
 
 	<div class="clearfix"></div>
 			
@@ -126,8 +128,7 @@
 										<div class="input-group">
 											<span class="input-group-addon"><i class="fa fa-flag"></i></span>
 											<select class="form-control" v-model="datos.id_state" disabled="">
-												<option value="0">Seleccione estado</option>
-												<option value="1">Estado de Mexico</option>
+												<option v-for="estado in datos.estados" :value="estado.id">@{{estado.nombre}}</option>
 											</select>
 										</div>	
 									</div>
@@ -141,55 +142,6 @@
 								</div>
 								
 							</div>	
-							<!-- 
-							<div class="row bottom-mrg extra-mrg">
-								<form>
-									<h2 class="detail-title">Perfil Social</h2>
-									
-									<div class="col-md-6 col-sm-6">
-										<div class="input-group">
-											<span class="input-group-addon"><i class="fa fa-facebook"></i></span>
-											<input type="text" class="form-control" placeholder="Profile Link">
-										</div>	
-									</div>
-									
-									<div class="col-md-6 col-sm-6">
-										<div class="input-group">
-											<span class="input-group-addon"><i class="fa fa-google-plus"></i></span>
-											<input type="text" class="form-control" placeholder="Profile Link">
-										</div>	
-									</div>
-									
-									<div class="col-md-6 col-sm-6">
-										<div class="input-group">
-											<span class="input-group-addon"><i class="fa fa-twitter"></i></span>
-											<input type="text" class="form-control" placeholder="Profile Link">
-										</div>	
-									</div>
-									
-									<div class="col-md-6 col-sm-6">
-										<div class="input-group">
-											<span class="input-group-addon"><i class="fa fa-instagram"></i></span>
-											<input type="text" class="form-control" placeholder="Profile Link">
-										</div>	
-									</div>
-									
-									<div class="col-md-6 col-sm-6">
-										<div class="input-group">
-											<span class="input-group-addon"><i class="fa fa-linkedin"></i></span>
-											<input type="text" class="form-control" placeholder="Profile Link">
-										</div>	
-									</div>
-									
-									<div class="col-md-6 col-sm-6">
-										<div class="input-group">
-											<span class="input-group-addon"><i class="fa fa-dribbble"></i></span>
-											<input type="text" class="form-control" placeholder="Profile Link">
-										</div>	
-									</div>
-									
-								</form>
-							</div> -->
 							
 							<!-- <div class="row bottom-mrg extra-mrg">
 								<form>
@@ -230,13 +182,13 @@
 												<td>@{{ study.fecha_inicio }}</td>
 												<td>@{{ study.fecha_final }}</td>
 												<td>
-													<button class="btn btn" type="button" v-on:click.prevent="edit_general(study,'modal-edit-educacion')">
-														Detalles
+													<button class="btn btn-lg" type="button" v-on:click.prevent="edit_general(study,'modal-edit-educacion')" data-toggle="tooltip" title="Editar Registro">
+														<i class="fa fa-edit"></i>
 													</button>
 												</td>
 												<td>
-													<button class="btn" type="button" v-on:click.prevent="delete_study(study)">
-														Quitar
+													<button class="btn btn-lg" type="button" v-on:click.prevent="delete_study(study)" data-toggle="tooltip" title="Eliminar Registro">
+														<i class="fa fa-trash"></i>
 													</button>
 												</td>
 											</tr>
@@ -244,44 +196,6 @@
 									</table>
 
 								</div>
-
-								 <!-- <form> 
-									<h2 class="detail-title">Educación</h2>
-									<div class="extra-field-box">
-										<div class="multi-box">	
-											<div class="dublicat-box">
-												<div class="col-md-12 col-sm-12">
-													<input type="text" class="form-control" placeholder="Nombre de la escuela">
-												</div>
-												
-												<div class="col-md-12 col-sm-12">
-													<input type="text" class="form-control" placeholder="Qualification, e.g. Master Of Arts">
-												</div>
-												
-												<div class="col-md-6 col-sm-6">
-													<div class="input-group">
-														<span class="input-group-addon">Fecha desde</span>
-														<input type="text" id="edu-start" data-lang="en" data-large-mode="true" data-min-year="2015" data-max-year="2020" data-disabled-days="08/17/2017,08/18/2017" data-id="datedropper-0" data-theme="my-style" class="form-control" readonly="">
-													</div>
-												</div>
-												
-												<div class="col-md-6 col-sm-6">
-													<div class="input-group">
-														<span class="input-group-addon">Fecha hasta</span>
-														<input type="text" id="edu-end" data-lang="en" data-large-mode="true" data-min-year="2017" data-max-year="2020" data-disabled-days="08/17/2017,08/18/2017" data-id="datedropper-0" data-theme="my-style" class="form-control" readonly="">
-													</div>
-												</div>
-												
-												 <div class="col-md-12 col-sm-12">
-													<textarea class="form-control textarea" placeholder="Notes"></textarea>
-												</div> 
-												
-												<button type="button" class="btn remove-field">Quitar</button>
-											</div>
-										</div>									
-										<button type="button" class="add-field">Agregar</button>
-									</div>
-								</form> -->
 							
 							</div>
 							
@@ -315,13 +229,13 @@
 												<td>@{{ jobs.jobs_fecha_final }}</td>
 												<td>@{{ jobs.jobs_descripcion }}</td>
 												<td>
-													<button class="btn btn" type="button" v-on:click.prevent="edit_general(jobs,'modal-edit-experiencia')">
-														Detalles
+													<button class="btn btn-lg" type="button" v-on:click.prevent="edit_general(jobs,'modal-edit-experiencia')" data-toggle="tooltip" title="Editar Registro">
+														<i class="fa fa-edit"></i>
 													</button>
 												</td>
 												<td>
-													<button class="btn" type="button" v-on:click.prevent="delete_jobs(jobs)">
-														Quitar
+													<button class="btn btn-lg" type="button" v-on:click.prevent="delete_jobs(jobs)" data-toggle="tooltip" title="Eliminar Registro">
+														<i class="fa fa-trash"></i>
 													</button>
 												</td>
 											</tr>
@@ -329,43 +243,6 @@
 									</table>
 
 								</div>
-								<!-- <form>
-									<h2 class="detail-title">Experencia Laboral</h2>
-									<div class="extra-field-box">
-										<div class="multi-box">	
-											<div class="dublicat-box">
-												<div class="col-md-12 col-sm-12">
-													<input type="text" class="form-control" placeholder="Employer">
-												</div>
-												
-												<div class="col-md-12 col-sm-12">
-													<input type="text" class="form-control" placeholder="Position, e.g. Web Designer">
-												</div>
-												
-												<div class="col-md-6 col-sm-6">
-													<div class="input-group">
-														<span class="input-group-addon">Fecha Desde</span>
-														<input type="text" id="exp-start" data-lang="en" data-large-mode="true" data-min-year="2017" data-max-year="2020" data-disabled-days="08/17/2017,08/18/2017" data-id="datedropper-0" data-theme="my-style" class="form-control" readonly="">
-													</div>
-												</div>
-												
-												<div class="col-md-6 col-sm-6">
-													<div class="input-group">
-														<span class="input-group-addon">Fecha Hasta</span>
-														<input type="text" id="exp-end" data-lang="en" data-large-mode="true" data-min-year="2017" data-max-year="2020" data-disabled-days="08/17/2017,08/18/2017" data-id="datedropper-0" data-theme="my-style" class="form-control" readonly="">
-													</div>
-												</div>
-												
-												<div class="col-md-12 col-sm-12">
-													<textarea class="form-control" placeholder="Notes" rows="8"></textarea>
-												</div>
-												
-												<button type="button" class="btn remove-field">Quitar</button>
-											</div>
-										</div>									
-										<button type="button" class="add-field">Agregar</button>
-									</div>
-								</form> -->
 
 							</div>
 							
@@ -393,13 +270,13 @@
 												<td> @{{ skills.habilidad }} </td>
 												<td> @{{ skills.porcentaje }} </td>
 												<td>
-													<button class="btn btn" type="button" v-on:click.prevent="edit_general(skills,'modal-edit-skill')">
-														Detalles
+													<button class="btn btn-lg" type="button" v-on:click.prevent="edit_general(skills,'modal-edit-skill')" data-toggle="tooltip" title="Editar Registro">
+														<i class="fa fa-edit"></i>
 													</button>
 												</td>
 												<td>
-													<button class="btn" type="button" v-on:click.prevent="delete_skills(skills)">
-														Quitar
+													<button class="btn btn-lg" type="button" v-on:click.prevent="delete_skills(skills)" data-toggle="tooltip" title="Eliminar Registro">
+														<i class="fa fa-trash"></i>
 													</button>
 												</td>
 											</tr>
@@ -407,29 +284,6 @@
 									</table>
 
 								</div>
-								<!-- <form>
-									<div class="extra-field-box">
-										<h2 class="detail-title">Habilidades</h2>
-										<div class="multi-box">	
-											<div class="dublicat-box">
-											
-												<div class="col-md-12 col-sm-12">
-													<input type="text" class="form-control" placeholder="Skills, e.g. Css, Html...">
-												</div>
-												
-												<div class="col-md-12 col-sm-12">
-													<div class="input-group">
-													<span class="input-group-addon">%</span>
-														<input type="text" class="form-control" placeholder="85%">
-													</div>
-												</div>
-													
-												<button type="button" class="btn remove-field">Quitar</button>
-											</div>
-										</div>									
-										<button type="button" class="add-field">Agregar</button>
-									</div>
-								</form> -->
 							
 							</div>
 						</div>	
@@ -477,11 +331,11 @@
 						  <div class="form-group">
 						    <label class="control-label col-sm-2" >Fecha Inicio</label>
 						    <div class="col-sm-4">
-						      <input type="text" id="fecha_inicio" class="form-control" placeholder="" v-model="datos.fecha_inicio">
+						      <input type="date" id="fecha_inicio" class="form-control" placeholder="" v-model="datos.fecha_inicio">
 						    </div>
 						    <label class="control-label col-sm-2" >Fecha Final</label>
 						    <div class="col-sm-4">
-						      <input type="text" id="fecha_final" class="form-control" placeholder="" v-model="datos.fecha_final">
+						      <input type="date" id="fecha_final" class="form-control" placeholder="" v-model="datos.fecha_final">
 						    </div>
 						  </div>
 
@@ -530,11 +384,11 @@
 						  <div class="form-group">
 						    <label class="control-label col-sm-2" >Fecha Inicio</label>
 						    <div class="col-sm-4">
-						      <input type="text" name="jobs_fecha_inicio" class="form-control" placeholder="" v-model="datos.jobs_fecha_inicio">
+						      <input type="date" name="jobs_fecha_inicio" class="form-control" placeholder="" v-model="datos.jobs_fecha_inicio">
 						    </div>
 						    <label class="control-label col-sm-2" >Fecha Final</label>
 						    <div class="col-sm-4">
-						      <input type="text" name="jobs_fecha_inicio" class="form-control" placeholder="" v-model="datos.jobs_fecha_final">
+						      <input type="date" name="jobs_fecha_inicio" class="form-control" placeholder="" v-model="datos.jobs_fecha_final">
 						    </div>
 						  </div>
 
@@ -601,9 +455,8 @@
     <!-- End Sign Up Window -->
 
 @include('candidato.edicionCurriculum')
-
+ <date-picker color="green lighten-1" v-once></date-picker>
 </div>
-
 
 
 
@@ -616,9 +469,9 @@
 
 @stop
 @push('scripts')
-<!-- <script type="text/javascript" src="{{ asset('plugins/date-dropper/datedropper.js') }}"></script> -->
+<script type="text/javascript" src="{{ asset('plugins/date-dropper/datedropper.js') }}"></script>
+<!-- <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script> -->
 <script type="text/javascript">
-
 /*	var formato = {
 		format: 'y-m-d', // Formato de la fecha 2016-16-01
         lang: 'es',
@@ -632,9 +485,9 @@
 	$('#exp-end').dateDropper();
 	$('#edu-start').dateDropper();
 	$('#edu-end').dateDropper();*/
+	/*$('#fecha_inicio').datepicker();*/
 </script>
 
 <script type="text/javascript" src="{{asset('js/curriculum/curriculum.js')}}" ></script>
-
 
 @endpush

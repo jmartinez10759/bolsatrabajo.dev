@@ -28,7 +28,8 @@
 						  <div class="form-group">
 						    <label class="control-label col-sm-2" >Fecha Inicio</label>
 						    <div class="col-sm-4">
-						      <input type="text" id="fecha_inicio" class="form-control" placeholder="" v-model="fillKeep.fecha_inicio">
+						      <input type="date" id="fecha_inicio" class="form-control" placeholder="" v-model="fillKeep.fecha_inicio">
+
 						    </div>
 						    <label class="control-label col-sm-2" >Fecha Final</label>
 						    <div class="col-sm-4">

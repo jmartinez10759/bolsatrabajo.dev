@@ -15,7 +15,7 @@ class AuthController extends MasterController
     private static $_ruta = "details";
 
     public function __construct(){
-
+        parent::__construct();
     }
     /**
      *Metodo para visuzalizar para iniciar session
@@ -32,7 +32,7 @@ class AuthController extends MasterController
      *@access public
      *@return void
      */
-    public static function authLogin( Request $request){
+    public static function authLogin( Request $request ){
 
     	$where = [];
 		foreach ($request->all() as $key => $value) {
@@ -66,13 +66,11 @@ class AuthController extends MasterController
      */
     public static function getData( $where ){
 
-        #debuger(phpinfo());
-
         $condicion = [];
         if ( isset($where->email) && isset($where->password)) {
             $condicion['email'] = $where->email;
             $condicion['password'] = $where->password;
-                
+            $condicion['confirmed'] = true;    
         }
         $consulta = MasterModel::show_model([], $condicion , new RequestUserModel );
         if( count( $consulta ) > 0 ){
@@ -82,13 +80,44 @@ class AuthController extends MasterController
             }
             #debuger($session);
             Session::put( $session );
-            return redirect()->route( self::$_ruta );
+            #return redirect()->route( self::$_ruta );
+            return message( true,$consulta[0],'Usuario Inicio Sesion correctamente.');
         }
-        return redirect()->route('/');
+        #return redirect()->route('/');
+        return message(false,[],'Por favor Verificar la informacion ingresada');
 
 
     }
+    /**
+     *Metodo donde verifica el token generado para validar y redireccionar
+     *@access public
+     *@param $confirmed_code [description]
+     *@return void
+     */
+    public static function verify_code( $confirmed_code ){
 
+        if ( $confirmed_code ) {
+            
+                $condicion = ['confirmed_code' => $confirmed_code ];
+                $consulta = MasterModel::show_model([], $condicion , new RequestUserModel );
+                #debuger($consulta);
+                if( count( $consulta ) > 0 ){
+                    $session = [];
+                    foreach ($consulta[0] as $key => $value) {
+                        $session[$key] = $value;
+                    }
+                    #debuger($session);
+                    $datos = [ 'confirmed_code' => null, 'confirmed' => true ];
+                    MasterModel::update_model( $condicion,$datos, new RequestUserModel );
+                    Session::put( $session );
+                    return redirect()->route( self::$_ruta );
+                }
+                return redirect()->route('/');
+
+        }
+        return redirect()->route('/');
+
+    }
 
 
 

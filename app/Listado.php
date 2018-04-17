@@ -6,17 +6,19 @@ use Illuminate\Database\Eloquent\Model;
 
 class Listado extends Model
 {
-  	  protected $table = "job_offers";
-    protected $fillable = [
+
+  	protected $table = "job_offers";
+    public $fillable = [
+
     	'id'
 		,'name'
 		,'title'
-		#,'code'
+		,'code'
 		,'responsible_user_id'
 		,'created_by_user_id'
 		,'account_id'
-		#,'account_client_id'
-		,'departament'
+		,'account_client_id'
+		,'department'
 		,'picture'
 		,'email'
 		,'description_short'
@@ -26,8 +28,8 @@ class Listado extends Model
 		,'date_from'
 		,'date_to'
 		,'is_active'
-		#,'published'
-		#,'priority'
+		,'published'
+		,'priority'
 		,'quantity'
 		,'state_id'
 		,'county'
@@ -35,9 +37,9 @@ class Listado extends Model
 		,'contract_type_id'
 		,'salary_min'
 		,'salary_max'
-		#,'payment_period_id'
-		#,'count'
-		#,'created'
-		#,'modified'
+		,'payment_period_id'
+		,'count'
+		,'created'
+		,'modified'
     ];
 }

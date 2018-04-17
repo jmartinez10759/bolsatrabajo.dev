@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class RequestUserModel extends Model
 {
-    protected $table = "request_users";
+    protected $table = "blm_request_users";
     public $fillable = [
     	'id'
 		,'name'
@@ -17,6 +17,9 @@ class RequestUserModel extends Model
 		,'remember_token'
 		,'api_token'
 		,'status'
+		,'confirmed'
+		,'confirmed_code'
+		,'confirmed_nss'
     ];
 
 

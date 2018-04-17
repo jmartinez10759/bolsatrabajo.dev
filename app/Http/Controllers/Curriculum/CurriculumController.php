@@ -7,6 +7,7 @@ use App\Model\BlmSkillModel;
 use App\Model\BlmStudyModel;
 use Illuminate\Http\Request;
 use App\Model\CategoriaModel;
+use App\Model\BlmEstadosModel;
 use App\Model\RequestUserModel;
 use App\Model\BlmCurriculumModel;
 use App\Model\NivelAcademicoModel;
@@ -40,10 +41,11 @@ class CurriculumController extends MasterController
 
         #se realiza la consulta para obtener los datos del Candidato que subira el CV.
     	$where = ['id' => Session::get('id')];
-    	$detalles 		= self::$_model::show_model([],$where, new DetailCandidateModel);
+    	$detalles 		= self::$_model::show_model([],['id_users' => Session::get('id')], new DetailCandidateModel);
     	$candidate  	= self::$_model::show_model([],$where, new RequestUserModel);
     	$categorias 	= self::$_model::show_model( [], [] , new CategoriaModel );
     	$nivel 			= self::$_model::show_model( [], [] , new NivelAcademicoModel );
+    	$estados 			= self::$_model::show_model( [], [] , new BlmEstadosModel );
     	#debuger($detalles);
     	$where = ['id_users' => Session::get('id')];
     	$curriculum = self::$_model::show_model([],$where, new BlmCurriculumModel);
@@ -107,8 +109,9 @@ class CurriculumController extends MasterController
         $data['jobs_fecha_inicio']   = date('Y-m-d');           
         $data['jobs_fecha_final']    = date('Y-m-d');            
         #seccion de habilidades
-        $data['habilidad'] = "";
-        $data['porcentaje'] = "";
+        $data['habilidad'] 			= "";
+        $data['porcentaje'] 		= "";
+        $data['estados'] 			= $estados;
     	#debuger($data);
         return message( true, $data ,"Transaccion exitosa" );
 
@@ -153,7 +156,6 @@ class CurriculumController extends MasterController
 	    	#debuger($data);
 	    	$response = self::$_model::insert_model([$data], new BlmCurriculumModel);
 	    	if (count($response) > 0) {
-	    		#Session::put(['id_cv' => $response[0]->id]);
 	    		return message(true,$response,"Transaccion exitosa");
 	    	}else{
 	    		return message(false,[],"Ocurrio un Error");
