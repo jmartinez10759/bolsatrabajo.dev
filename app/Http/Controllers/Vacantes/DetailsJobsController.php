@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Vacantes;
 
 use App\Listado;
+use App\Model\AccountsModel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use App\Http\Controllers\MasterController;
@@ -44,7 +45,7 @@ class DetailsJobsController extends MasterController
     			,'is_active' => $response[0]->is_active
     			,'salary_max' => $response[0]->salary_max
     			,'salary_min' => $response[0]->salary_min
-    			,'account_id' => self::$_model::show_model(['name','postal_code','website_url'],['id' => $response[0]->account_id], new  )[0];
+    			,'account_id' => self::$_model::show_model(['name','postal_code','website_url'],['id' => $response[0]->account_id], new AccountsModel )[0];
     		];
 
     		debuger($data);
