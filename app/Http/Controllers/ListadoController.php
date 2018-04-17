@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Listado;
+use App\Model\BlmEstadosModel;
 
 class ListadoController extends Controller
 {
@@ -29,6 +30,12 @@ class ListadoController extends Controller
             'tasks' => $tasks
         ];
         
+    }
+
+    public function estados()
+    {
+        return $estados = BlmEstadosModel::all();
+         
     }
     
 	public function listado()
