@@ -1,15 +1,5 @@
-<!-- 
-<div class="container" id="vue-candidate">
-    <div class="row">
-        <div class="col-md-8 col-md-offset-2">
-            <div class="panel panel-default">
-                <div class="panel-heading">Registro de Candidato</div>
+<!-- <div class="vue-candidate"> -->
 
-                <div class="panel-body"> -->
-<div id="vue-candidate">
-    
-    <!-- <form class="form-horizontal" method="POST" v-on:submit.prevent="insertar('register/insert')" > -->
-        <!-- {{ csrf_field() }} -->
         <form class="form-horizontal">
 
             <div class="form-group">
@@ -35,16 +25,12 @@
                     <input id="second_surname" type="text" class="form-control" v-model="newKeep.second_surname">
                 </div>
             </div>
-
             <!-- <div class="form-group">
                 <label for="curp" class="col-md-4 control-label">Curp *</label>
                 <div class="col-sm-6">
                     <input id="curp" type="text" class="form-control" v-model="newKeep.curp" required>
                 </div>
             </div> -->
-
-
-
             <div class="form-group">
                 <label for="correo" class="col-md-4 control-label">Correo *</label>
 
@@ -95,9 +81,6 @@
                     </a>
                 </div>
             </div> -->
-
-
-
             <div class="form-group">
                 <div class="col-md-6 col-md-offset-4">
                     <button type="button" class="btn btn-primary" v-on:click.prevent="insertar('register/insert')">
@@ -107,7 +90,7 @@
             </div>
     </form>
 
-</div>
+<!-- </div> -->
 @push('scripts')
     <script type="text/javascript" src="{{asset('js/candidatos/register.js')}}" ></script>
 @endpush

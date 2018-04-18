@@ -1,9 +1,9 @@
 
-mixins = {
+new Vue({
   el: "#vue-details",
   created: function () {
     var url = '/details/show';
-    this.get_general( url );
+    this.get_general(url,{});
   },
   data: {
     datos: [],
@@ -40,8 +40,9 @@ mixins = {
     },
 
   },
-  methods:{    
-    
+  mixins : [mixins],
+  methods:{ 
+
     insert: function(){
 
         var url = "/details/insert";
@@ -64,14 +65,14 @@ mixins = {
             return;
         }
 
-      this.insert_general(url,uri, function( obj ){
-        
-        $('#upload_cv').show('slow');
+        this.insert_general(url, uri, function( obj ){
+          
+          $('#upload_cv').show('slow');
 
-      },function( obj ){ });
+        },function( obj ){ });
 
     }
 
   }
 
-}
+});

@@ -1,5 +1,3 @@
-<div id="vue-login">
-
     <form class="form-horizontal" method="POST" v-on:submit.prevent="inicio_sesion()">
 
         <div class="form-group">
@@ -40,8 +38,7 @@
 
     </form>
 
-</div>
 
 @push('scripts')
-    <script type="text/javascript" src="{{asset('js/candidatos/register.js')}}" ></script>
+    
 @endpush

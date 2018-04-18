@@ -90,10 +90,12 @@
 				</div>
 				<div class="row copyright">
 					<div class="container">
-						<p>©</p>
+						<p>©Copyright Buro Laboral Mexico © {{date('Y')}}. Todos los Derechos Reservados</p>
 					</div>
 				</div>
 			</footer>
 			<div class="clearfix"></div>
 			<!-- Footer Section End -->
 		</div>
+
+		@include('auth.sesion')

@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Vacantes;
 use App\Listado;
 use App\Model\AccountsModel;
 use Illuminate\Http\Request;
+use App\Model\RequestUserModel;
+use App\Model\DetailCandidateModel;
 use Illuminate\Support\Facades\Session;
 use App\Http\Controllers\MasterController;
 
@@ -52,14 +54,31 @@ class DetailsJobsController extends MasterController
     			,'account_website_url' 	=> $empresa->website_url
     		];
 
-    		#debuger($data);
+    		if ( Session::has('email') ) {
+	    		$candidato =  self::$_model::show_model( ['confirmed_nss'], ['id' => Session::get('id')], new RequestUserModel)[0];
+	    		$details  =  self::$_model::show_model( ['curp','nss'], ['id_users' => Session::get('id')], new DetailCandidateModel)[0];
+	    	}
+	    	$data['confirmed_nss'] = isset($candidato->confirmed_nss)?$candidato->confirmed_nss: null;
+	    	$data['nss'] 		   = isset($details->nss)? $details->nss : null;
+	    	$data['curp'] 		   = isset($details->curp)? $details->curp: null;
 
     		return message(true,$data,"Trasaccion Existosa");
     	}
     	return message(false,[],'Ocurrio un error al cargar la informacion');
 
-
-
     }
+    /**
+     *Metodo para insertar los datos de la postulacion en sus respectivas tablas
+     *@access public
+     *@param Request $request[ Description ]
+     *@return void 
+     */
+    public static function store( Request $request ){
+
+    	#se realiza la consulta a la tabla de postulaciones
+
+    	debuger($request->all());
+    }
+
 
 }

@@ -101,7 +101,7 @@
 										<article>
 											<div class="mng-company">
 												<div class="col-md-2 col-sm-2">
-													<div class="mng-company-pic"><img src="assets/img/com-1.jpg" class="img-responsive" alt=""></div>
+													<div class="mng-company-pic"><img src="" class="img-responsive" alt=""></div>
 												</div>
 												
 												<div class="col-md-5 col-sm-5">
@@ -475,19 +475,19 @@
 										<div class="edit-pro">
 											<div class="col-md-4 col-sm-6">
 												<label>Nombre</label>
-												<input type="text" id="name" class="form-control" v-model="datos.name" >
+												<input type="text" class="form-control" v-model="datos.name" >
 											</div>
 											<div class="col-md-4 col-sm-6">
 												<label>Primer Apellido</label>
-												<input type="text" id="first_surname" class="form-control" v-model="datos.first_surname" >
+												<input type="text" class="form-control" v-model="datos.first_surname" >
 											</div>
 											<div class="col-md-4 col-sm-6">
 												<label>Segundo Apellido</label>
-												<input type="text" id="second_surname" class="form-control" v-model="datos.second_surname" >
+												<input type="text" class="form-control" v-model="datos.second_surname" >
 											</div>
 											<div class="col-md-4 col-sm-6">
 												<label>Email</label>
-												<input type="email" id="email" class="form-control" v-model="datos.email" disabled="">
+												<input type="email" class="form-control" v-model="datos.email" disabled="">
 											</div>
 											<div class="col-md-4 col-sm-6">
 												<label>Telefono</label>

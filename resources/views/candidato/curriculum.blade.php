@@ -455,7 +455,7 @@
     <!-- End Sign Up Window -->
 
 @include('candidato.edicionCurriculum')
- <date-picker color="green lighten-1" v-once></date-picker>
+ <!-- <date-picker color="green lighten-1" v-once></date-picker> -->
 </div>
 
 
