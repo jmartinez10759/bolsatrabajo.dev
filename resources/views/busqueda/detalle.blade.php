@@ -6,7 +6,7 @@
 <!-- End Navigation -->
 <div class="clearfix"></div>
 <!-- Title Header Start -->
-<section class="inner-header-title" style="background-image:url(http://via.placeholder.com/1920x850);">
+<section class="inner-header-title" style="background-image:url({{ asset('images/img/chess-3325010_1280.jpg') }});">
 	<div class="container">
 		<h1>Detalles de la Vacante </h1>
 	</div>
