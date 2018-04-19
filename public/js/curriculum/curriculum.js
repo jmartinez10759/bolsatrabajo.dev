@@ -1,4 +1,4 @@
-Vue.component('date-picker', {
+/*Vue.component('date-picker', {
   template: '<input type="text" class="form-control" />',
   props: [ 'dateFormat' ],
   mounted: function() {
@@ -14,14 +14,12 @@ Vue.component('date-picker', {
     $(this.$el).dateDropper('hide').dateDropper('destroy');
   }
 });
-
-
-
-mixins = {
+*/
+new Vue ({
   el: "#vue-curriculum",
   created: function () {
     var url = "/cv/show";
-    this.get_general(url);
+    this.get_general(url,{});
   },
   data: {
     datos: [],
@@ -76,6 +74,7 @@ mixins = {
     },
 
   },
+  mixins: [mixins],
   methods:{
 
     insert_detalles: function(){
@@ -195,4 +194,4 @@ mixins = {
   }
 
 
-}
+});

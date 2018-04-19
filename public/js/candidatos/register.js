@@ -1,6 +1,5 @@
-//var inicio = "/home";
-mixins = {
-  el: "#vue-candidate",
+new Vue({
+  el: ".vue-candidate",
   created: function () {
     //this.get_general('');
   },
@@ -13,7 +12,9 @@ mixins = {
         ,'correo': ''
         ,'pass': ''
         ,'passwordConfirm': '' 
-        ,'confirmed_nss': true 
+        ,'confirmed_nss': true
+        ,'email': ''
+        ,'password': ''
     },
     fillKeep: { 
         'id': ''
@@ -24,9 +25,12 @@ mixins = {
         ,'pass': ''
         ,'passwordConfirm': '' 
         ,'confirmed_nss': true 
+        ,'email': ''
+        ,'password': ''
     },
 
   },
+  mixins:[mixins],
   methods:{
     
     insertar: function( uri ){
@@ -54,9 +58,9 @@ mixins = {
                 $('#'+key).parent().parent().removeClass('has-error');
             });
             $('#signup').modal('hide');
-                redirect( 'details' );
+                redirect( '/details' );
 
-        },function(json){
+        },function(){
             
             $.each(this.newKeep,function(key, value){
                 if (key == "password" || key == "passwordConfirm") {
@@ -66,42 +70,13 @@ mixins = {
 
         });
 
-    }
-
-
-
-  }
-
-
-}
-
-/*PARA INICAR SESION DESDE EL ARCHIVO REGISTER*/
-
-mixins = {
-  el: "#vue-login",
-  created: function () {
-    
-  },
-  data: {
-    datos: [],
-    newKeep: { 
-        'email': ''
-        ,'password': ''
     },
-    fillKeep: { 
-        'email': '' 
-        ,'password': ''
-    },
-
-  },
-  methods:{
-
     inicio_sesion: function(){
 
         var url = "/login";
-        this.insert_general(url,'',function(obj){
-            redirect('details');
-        },function(obj){
+        this.insert_general(url,'',function( obj ){
+            redirect('/details');
+        },function(){
             $('#email').parent().parent().addClass('has-error');
             $('#password').parent().parent().addClass('has-error');
 
@@ -109,10 +84,10 @@ mixins = {
 
 
     }
-    
+
+
 
   }
 
 
-}
-
+});

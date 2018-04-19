@@ -245,9 +245,7 @@
 			</section>
 			<!-- testimonial section End -->
 @push('scripts')
-
 <script type="text/javascript" src="{{asset('js/listado/listado_vacantes.js')}}" ></script>
-
 <script>
       var autocomplete;
 
