@@ -58,7 +58,7 @@ new Vue({
                 $('#'+key).parent().parent().removeClass('has-error');
             });
             $('#signup').modal('hide');
-                redirect( '/details' );
+            //redirect( domain('details') );
 
         },function(){
             
@@ -73,9 +73,10 @@ new Vue({
     },
     inicio_sesion: function(){
 
-        var url = "/login";
+        var url = domain("login");
         this.insert_general(url,'',function( obj ){
-            redirect('/details');
+
+            redirect( domain('details') );
         },function(){
             $('#email').parent().parent().addClass('has-error');
             $('#password').parent().parent().addClass('has-error');

@@ -52,7 +52,7 @@ new Vue({
 	methods: {
 		get: function(uri,keep){
 			
-			var url = "/details/vacante";
+			var url = domain("details/vacante");
 			//se mete en localstorage el id de vacante para poder hacer la consulta.
 			$myLocalStorage.set('id_vacante', keep.id );
 			redirect( url );

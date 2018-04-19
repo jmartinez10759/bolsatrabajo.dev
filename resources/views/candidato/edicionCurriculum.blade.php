@@ -13,7 +13,7 @@
 						  <div class="form-group">
 						    <label class="control-label col-sm-2">Escuela</label>
 						    <div class="col-sm-10">
-						      <input type="text" id="escuela" class="form-control" placeholder="Nombre de la escuela" v-model="fillKeep.escuela">
+						      <input type="text" class="form-control" placeholder="Nombre de la escuela" v-model="fillKeep.escuela">
 						    </div>
 						  </div>
 
@@ -28,12 +28,12 @@
 						  <div class="form-group">
 						    <label class="control-label col-sm-2" >Fecha Inicio</label>
 						    <div class="col-sm-4">
-						      <input type="date" id="fecha_inicio" class="form-control" placeholder="" v-model="fillKeep.fecha_inicio">
+						      <input type="date"  class="form-control" placeholder="" v-model="fillKeep.fecha_inicio">
 
 						    </div>
 						    <label class="control-label col-sm-2" >Fecha Final</label>
 						    <div class="col-sm-4">
-						      <input type="text" id="fecha_final" class="form-control" placeholder="" v-model="fillKeep.fecha_final">
+						      <input type="text" class="form-control" placeholder="" v-model="fillKeep.fecha_final">
 						    </div>
 						  </div>
 

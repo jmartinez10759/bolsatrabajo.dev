@@ -12293,7 +12293,12 @@ function check_status_xhr(status, title, text, type, accept) {
      */
      domain = function( url ){
 
-        var path_url = window.location.protocol+"//"+window.location.host+"/"+url;
+        var path_url;
+        if (window.location.pathname != "/") {
+            path_url = window.location.origin+"/"+url;
+        }else{
+            path_url = window.location.protocol+"//"+window.location.host+"/"+url;
+        }
         return path_url;
 
      }

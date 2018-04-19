@@ -4,7 +4,7 @@ new Vue({
     var fields  = {
       'id_vacante' : $myLocalStorage.get('id_vacante')
     } 
-    var url = "/details/vacante/show";
+    var url = domain("details/vacante/show");
     this.get_general( url, fields);
   },
   data: {
@@ -54,7 +54,7 @@ new Vue({
           return; 
       }
       /*se realiza la inserccion de los datos para la postulacion.*/
-        var url = "/details/vacante/insert";
+        var url = domain("details/vacante/insert");
         var uri = "";
         this.insert_general(url,uri,function(obj){
             

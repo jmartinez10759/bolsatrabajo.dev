@@ -2,7 +2,7 @@
 new Vue({
   el: "#vue-details",
   created: function () {
-    var url = '/details/show';
+    var url = domain('details/show');
     this.get_general(url,{});
   },
   data: {
@@ -45,8 +45,8 @@ new Vue({
 
     insert: function(){
 
-        var url = "/details/insert";
-        var uri = '/details/show';
+        var url = domain("details/insert");
+        var uri = domain('details/show');
         for ( var i in this.newKeep){
             this.newKeep[i] = this.datos[i];
         }
