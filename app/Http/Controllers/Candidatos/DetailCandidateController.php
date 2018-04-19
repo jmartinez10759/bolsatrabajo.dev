@@ -7,6 +7,7 @@ use App\Model\BlmEstadosModel;
 use App\Model\RequestUserModel;
 use App\Model\DetailCandidateModel;
 use Illuminate\Support\Facades\Session;
+use App\Model\BlmPostulateCandidateModel;
 use App\Http\Controllers\MasterController;
 
 class DetailCandidateController extends MasterController
@@ -21,12 +22,14 @@ class DetailCandidateController extends MasterController
      *@return void
      */
     public static function index(){
-    	
+
+    	$where = ['id_users' => Session::get('id') ];
+    	$postulaciones  =  self::$_model::show_model( [], $where, new BlmPostulateCandidateModel);
     	$data = [
     		'nombre_completo' =>  Session::get('name')." ".Session::get('first_surname')
     		,'photo_profile'  =>  ( Session::get('profile') != false )? Session::get('profile'): asset('images/profile/profile.png')
     		,'activo'		  =>  ( Session::get('status') != false )? "Activo": "Desactivado"
-    		,'postulaciones'  =>  1
+    		,'postulaciones'  =>  count($postulaciones)
     	];
 
     	return view('candidato.detailCandidato',$data);
@@ -41,9 +44,10 @@ class DetailCandidateController extends MasterController
     public static function show(){
 
     	$where = ['id_users' => Session::get('id')];
-    	$response  =  self::$_model::show_model( [], $where, new DetailCandidateModel);
-    	$candidato =  self::$_model::show_model( [], ['id' => Session::get('id')], new RequestUserModel);
-    	$estados   =  self::$_model::show_model( [], [], new BlmEstadosModel);
+    	$response  		=  self::$_model::show_model( [], $where, new DetailCandidateModel);
+    	$postulaciones  =  self::$_model::show_model( [], $where, new BlmPostulateCandidateModel);
+    	$candidato 		=  self::$_model::show_model( [], ['id' => Session::get('id')], new RequestUserModel);
+    	$estados   		=  self::$_model::show_model( [], [], new BlmEstadosModel);
     	#debuger($estados);
     	$data = [
     		'name' 				=>  Session::get('name')
@@ -84,6 +88,7 @@ class DetailCandidateController extends MasterController
     		$fields['confirmed_nss'] 	=  $candidato[0]->confirmed_nss;
     		$fields['password'] 	    =  "" ;
     		$fields['estados'] 	    	=  $estados;
+    		$fields['postulaciones'] 	=  $postulaciones;
 
     	return message(true, $fields , 'Trasaccion exitosa');
 

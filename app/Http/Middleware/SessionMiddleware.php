@@ -16,20 +16,12 @@ class SessionMiddleware
      */
     public function handle( $request, Closure $next )
     {   
-
-        if( !Session::has('email') ){
-            return response('Forbidden', 403);
-        }
+        
         if ( Session::has( 'email') ) {
             return $next($request);
         }
-        #return redirect()->route('/');
-        /*$session = [];
-        foreach (Session::all() as $key => $value) {
-            if ( $key != "password" && $key != "remember_token" && $key != "api_token") {
-                $session[$key] = $value;      
-            }
-        }*/        
+        return redirect()->route('/');
+
     }
 
 }
