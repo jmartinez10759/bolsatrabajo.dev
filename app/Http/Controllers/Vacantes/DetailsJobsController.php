@@ -7,6 +7,7 @@ use App\Model\AccountsModel;
 use Illuminate\Http\Request;
 use App\Model\RequestUserModel;
 use App\Model\DetailCandidateModel;
+use App\Model\PersonModel; #tabla de buro
 use Illuminate\Support\Facades\Session;
 use App\Model\BlmPostulateCandidateModel;
 use App\Http\Controllers\MasterController;
@@ -82,13 +83,38 @@ class DetailsJobsController extends MasterController
     	if ($postulaciones) {
     		return message(false,[],"Ya te has postulado para esta vacante");
     	}
-    	
-    	$insert_postulacion = self::$_model::insert_model([$where], new BlmPostulateCandidateModel);
+    	#$insert_postulacion = self::$_model::insert_model([$where], new BlmPostulateCandidateModel);
+    	$users = self::$_model::show_model([
+    		'name'
+    		,'first_surname'
+    		,'second_surname'
+    	],[ 'id' => Session::get('id') ], new RequestUserModel)[0];
+    	$desc_users =  self::$_model::show_model([
+    		'id_state'
+    		,'codigo'
+    		,'direccion'
+    		,'curp'
+    		,'nss'
+    		,'cargo'
+    		,'descripcion'
+    	],['id_users' => Session::get('id')], new DetailCandidateModel)[0];		
 
-    	/*if ($insert_postulacion) {
-    		
-    	}*/
-    	debuger($request->all());
+    	#arreglo para almacenar los registros para la tabla de persons
+    	$data_table_person = [];
+    	foreach ($users as $key => $value) {
+    		$data_table_person[$key] = $value;
+    	}
+    	foreach ($desc_users as $key => $value) {
+    		if ($key != "id_state") {
+    			$data_table_person[$key] = $value;
+    		}
+    	}
+    	$data_table_person['state_id'] = $desc_users->id_state;
+    	$data_table_person['id'] = Session::get('id');
+
+    	$insert_persons = PersonModel::insert($data_table_person);
+
+    	debuger($insert_persons);
 
 
 

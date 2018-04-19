@@ -988,7 +988,7 @@ function check_status_xhr(status, title, text, type, accept) {
 
         var path_url;
         if (window.location.pathname != "/") {
-            path_url = window.location.origin+"/"+url;
+            path_url = window.location.protocol+"//"+window.location.host+"/"+window.location.pathname+url;
         }else{
             path_url = window.location.protocol+"//"+window.location.host+"/"+url;
         }

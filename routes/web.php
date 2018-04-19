@@ -21,7 +21,7 @@ Route::get('/register/verify/{code}', [
         ,'as'       => 'register.verify'
     ]);
 
-Route::post('/login', [
+Route::post('login', [
         'uses'      => 'Auth\AuthController@authLogin'
         ,'as'       => 'login'
     ]);
