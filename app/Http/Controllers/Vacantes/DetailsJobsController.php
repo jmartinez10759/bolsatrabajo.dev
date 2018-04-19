@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Model\RequestUserModel;
 use App\Model\DetailCandidateModel;
 use Illuminate\Support\Facades\Session;
+use App\Model\BlmPostulateCandidateModel;
 use App\Http\Controllers\MasterController;
 
 class DetailsJobsController extends MasterController
@@ -76,8 +77,21 @@ class DetailsJobsController extends MasterController
     public static function store( Request $request ){
 
     	#se realiza la consulta a la tabla de postulaciones
+    	$where = ['id_users' => Session::get('id'), 'id_vacante' => $request->id_vacante];
+    	$postulaciones = self::$_model::show_model([],$where, new BlmPostulateCandidateModel);
+    	if ($postulaciones) {
+    		return message(false,[],"Ya te has postulado para esta vacante");
+    	}
+    	
+    	$insert_postulacion = self::$_model::insert_model([$where], new BlmPostulateCandidateModel);
 
+    	/*if ($insert_postulacion) {
+    		
+    	}*/
     	debuger($request->all());
+
+
+
     }
 
 

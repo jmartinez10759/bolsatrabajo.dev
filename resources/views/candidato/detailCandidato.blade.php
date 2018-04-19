@@ -98,7 +98,7 @@
 								<div id="post-job" class="tab-pane fade">
 									<h3>Estas Postulado en {{$postulaciones}} Empleos</h3>
 									<div class="row">
-										<article>
+										<article v-for="postulacion in datos.postulaciones">
 											<div class="mng-company">
 												<div class="col-md-2 col-sm-2">
 													<div class="mng-company-pic"><img src="" class="img-responsive" alt=""></div>
@@ -106,7 +106,7 @@
 												
 												<div class="col-md-5 col-sm-5">
 													<div class="mng-company-name">
-														<h4>Autodesk <span class="cmp-tagline">(Software Company)</span></h4><span class="cmp-time">10 Hour Ago</span></div>
+														<h4>@{{postulacion.id_vacante}} <span class="cmp-tagline">(Software Company)</span></h4><span class="cmp-time">10 Hour Ago</span></div>
 												</div>
 												
 												<div class="col-md-4 col-sm-4">
