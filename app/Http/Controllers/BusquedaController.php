@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Listado;
+use App\Model\BlmCookieSerchModel;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 
@@ -11,16 +12,37 @@ class BusquedaController extends Controller
 {
      public function scope( Request $request )
     {
-    	#debuger($request->all());
         $vacantes = $request->input('vacantes');
         $edo = $request->input('edo');
+        $id_user = 5;
 
        /* $result = DB::select('SELECT * FROM users where name like :vacantes or curp like :curp',['vacantes' 	 => $vacantes,'curp' =>$edo] );
         debuger($result);*/
+        if ($id_user == '') {
+            ###### Busqueda #######
+            $response = Listado::where( 'name','LIKE',"%".$vacantes."%" )
+                                ->orwhere('state_id','=','$edo')              
+                                ->orderBy('id', 'DESC')->paginate(5);
+            ###### count resutados ######
+            $count = DB::select('SELECT count(*) con FROM job_offers where name like :vacantes or state_id =:curp',['vacantes'      => $vacantes,'curp' =>$edo] );
 
-        $response = Listado::where( 'name','LIKE',"%".$vacantes."%" )->orwhere('state_id','=','$edo')								->orderBy('id', 'DESC')->paginate(5);
+        }else{
+            ###### Busqueda ######
+            $response = Listado::where( 'name','LIKE',"%".$vacantes."%" )
+                                 ->orwhere('state_id','=','$edo')        
+                                 ->orderBy('id', 'DESC')->paginate(5);
+            ###### count resutados ######
+            $count = DB::select('SELECT count(*) con FROM job_offers where name like :vacantes or state_id =:curp',['vacantes'      => $vacantes,'curp' =>$edo] );
+
+            ###### Insercion de datos, Si hay session#####
+            $cookie= BlmCookieSerchModel::create([
+            'id_users' => $id_user,
+            'vacante' => $vacantes,
+        ]);
+        }
+        
         #debuger($response);
-        return view("busqueda.busqueda", ["name" => $response ]);
+         return view("busqueda.busqueda", ["name" => $response, "count" => $count]);
     }
 
     public function index(Request $request)

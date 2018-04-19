@@ -22,6 +22,7 @@
 						                        @endforelse
 						                    </select>
 								</div>
+								<input type="hidden" name="utilisateur" value="{{ Session::get('id')}}">
 								<div class="col-md-2 col-sm-2">
 									<button type="submit" class="btn btn-primary">Buscar</button>
 								</div>
@@ -29,7 +30,7 @@
 						</div>
 					</div>
 					<!-- Company Searrch Filter End -->
-					<h2>Hemos encontrado {{ count($name) }} resultados de vacantes</h2>
+					<h2>Hemos encontrado {{ $count['0']->con }} resultados de vacantes</h2>
 					@if(count($name))
 					@foreach ($name as $data)  
 					<a href="{{ url('detalle/'.$data->id) }}" class="item-click">
@@ -64,11 +65,10 @@
 							<div class="alert alert-dismissable alert-warning">
 							  <button type="button" class="close" data-dismiss="alert">×</button>
 							  <h4>Alerta!</h4>
-							  <p>No se encuentran registros para este periodo.</p>
+							  <p>No se encuentran registros.</p>
 							</div>
 					@endif
 					{{ $name->links() }}
-		
 					
 					<!--
 					<div class="row">

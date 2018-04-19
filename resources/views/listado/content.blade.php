@@ -29,7 +29,7 @@
 						                    </select>
 									 </div>
 								</div>
-								
+								<input type="hidden" name="utilisateur" value="{{ Session::get('id')}}">
 								<div class="col-md-2 no-padd">
 									<div class="input-group">
 										<button type="submit" class="btn btn-primary">Búsqueda</button>
