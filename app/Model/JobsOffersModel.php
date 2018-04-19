@@ -1,15 +1,13 @@
 <?php
 
-namespace App;
+namespace App\Model;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Listado extends Model
+class JobsOffersModel extends Model
 {
-
-  	protected $table = "job_offers";
+    protected $table = "job_offers";
     public $fillable = [
-
     	'id'
 		,'name'
 		,'title'
@@ -18,7 +16,7 @@ class Listado extends Model
 		,'created_by_user_id'
 		,'account_id'
 		,'account_client_id'
-		,'department'
+		,'departament'
 		,'picture'
 		,'email'
 		,'description_short'
