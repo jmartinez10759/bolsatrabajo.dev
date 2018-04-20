@@ -54,7 +54,7 @@ new Vue({
           return; 
       }
       /*se realiza la inserccion de los datos para la postulacion.*/
-        var url = domain("details/vacante/insert");
+        var url = domain("postulacion/insert");
         var uri = "";
         this.insert_general(url,uri,function(obj){
             

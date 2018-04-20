@@ -149,7 +149,7 @@ class DetailCandidateController extends MasterController
 	    		#se realiza la parte de la inserccion de los datos en la tabla de detalles.
 	    		$blm_details['id_users'] = Session::get('id');
 	    		#debuger($blm_details);
-	    		$insert = self::$_model::insert_model([$blm_details],new DetailCandidateModel);
+	    		$insert = self::$_model::create_model([$blm_details],new DetailCandidateModel);
 	    		if (count($insert) > 0) {
 	    			return message(true,$insert[0],"Trasaccion Exitosa");
 	    		}else{

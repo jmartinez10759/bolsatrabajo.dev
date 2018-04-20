@@ -137,9 +137,9 @@ Route::group(['middleware' => ['auth.session']], function() {
         ,'as'       => 'skills.delete'
     ]);
 
-    Route::post('/details/vacante/insert', [
-        'uses'      => 'Vacantes\DetailsJobsController@store'
-        ,'as'       => 'details.vacante.insert'
+    Route::post('postulacion/insert', [
+        'uses'      => 'Postulacion\PostulacionController@store'
+        ,'as'       => 'postulacion.insert'
     ]);
 
      

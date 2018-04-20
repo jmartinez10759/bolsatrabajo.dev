@@ -74,7 +74,7 @@ class CandidatosController extends MasterController
 		$data['confirmed_nss']  = $request->confirmed_nss;
 		#debuger($data);
 		#se realiza la inserccion.
-		$response = MasterModel::insert_model( [ $data ], new RequestUserModel);
+		$response = MasterModel::create_model( [ $data ], new RequestUserModel);
 		if ( count( $response ) > 0) {
 			#envio de correo para validar si existe el correo antes ingresado.
 		    Mail::send('emails.confirmation_code', $data, function($message) use ($data) {
@@ -84,7 +84,6 @@ class CandidatosController extends MasterController
 		    });
 
 			return message(true,$response[0],"Favor de verificar su correo, para continuar");
-			#return redirect()->route('/');
 			#AuthController::getData( $response[0] );
 		}else{
 			return message(false,[],"Ocurrio un error");
