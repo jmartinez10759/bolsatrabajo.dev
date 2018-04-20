@@ -14,7 +14,7 @@ class BusquedaController extends Controller
     {
         $vacantes = $request->input('vacantes');
         $edo = $request->input('edo');
-        $id_user = 5;
+        $id_user = $request->input('utilisateur');
 
        /* $result = DB::select('SELECT * FROM users where name like :vacantes or curp like :curp',['vacantes' 	 => $vacantes,'curp' =>$edo] );
         debuger($result);*/

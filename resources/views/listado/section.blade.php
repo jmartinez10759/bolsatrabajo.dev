@@ -107,7 +107,7 @@
 			<section class="brows-job-category" id="vue-listado">
 				<div class="container">
 					<div class="row">
-						<h2>Hemos encontrado 477 resultados de vacantes, estás viendo 7 a 27</h2>
+						<h2>Hemos encontrado @{{ pagination.total }} resultados de vacantes</h2>
 					</div>
 					<!--/.row-->
 					<div class="row">
@@ -151,7 +151,7 @@
 						<ul class="pagination">
 							<li v-if="pagination.current_page > 1">
 								<a href="#" @click.prevent="changePage(pagination.current_page - 1)">&laquo;</a></li>
-							<li class="active" v-for="page in pagesNumber" v-bind:class="[ page == isActived ? 'active' : '']">
+							<li v-for="page in pagesNumber" v-bind:class="[ page == isActived ? 'active' : '']">
 								<a href="#" @click.prevent="changePage(page)">
 									@{{ page }}
 								</a></li>
