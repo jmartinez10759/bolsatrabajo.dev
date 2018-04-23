@@ -8,6 +8,7 @@ class Listado extends Model
 {
 
   	protected $table = "job_offers";
+  	public $timestamps = false;
     public $fillable = [
 
     	'id'

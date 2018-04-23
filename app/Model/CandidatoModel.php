@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class CandidatoModel extends Model
 {
     protected $table = "candidates";
+    public $timestamps = false;
     public $fillable = [
 			'id'
 			,'account_person_id'

@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class PersonModel extends Model
 {
     protected $table = "persons";
+    public $timestamps = false;
     public $fillable = [
     	'id'
 		,'name'
@@ -38,6 +39,7 @@ class PersonModel extends Model
 		,'cached_references'
 		,'cached_bulletins'
     ];
+
 
 
 

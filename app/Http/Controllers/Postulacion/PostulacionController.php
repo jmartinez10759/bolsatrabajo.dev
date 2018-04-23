@@ -37,7 +37,7 @@ class PostulacionController extends MasterController
     	if ($postulaciones) {
     		return message(false,[],"Ya te has postulado para esta vacante");
     	}
-    	$users_cv = self::$_model::show_model([],['id_users' => Session::get('id')], new BlmCurriculumModel)[0];
+    	$users_cv = self::$_model::show_model([],['id_users' => Session::get('id')], new BlmCurriculumModel);
 	    if (!$users_cv) { return message(false,[],"Por Favor Ingresar datos en su Curriculum."); }
 	    
     	$insert_postulacion = self::$_model::create_model([$where], new BlmPostulateCandidateModel);
