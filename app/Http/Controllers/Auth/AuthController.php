@@ -53,7 +53,7 @@ class AuthController extends MasterController
      *@return void
      */
     public static function logout(){
-
+        #debuger($_SERVER);
     	Session::flush();
     	return redirect()->route('/');
 

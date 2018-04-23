@@ -89,7 +89,8 @@ class DetailCandidateController extends MasterController
     		$fields['password'] 	    =  "" ;
     		$fields['estados'] 	    	=  $estados;
     		$fields['postulaciones'] 	=  $postulaciones;
-
+    		#$fields['postulaciones'] 	=  self::_postulaciones( $postulaciones );
+    		#debuger($fields['postulaciones']);
     	return message(true, $fields , 'Trasaccion exitosa');
 
 
@@ -159,7 +160,26 @@ class DetailCandidateController extends MasterController
 	    
 
     }
+    /**
+     *Metodo para hacer la consulta de la vacante 
+     *@access private
+     *@param $request [Description]
+     *@return void
+     */
+    private static function _postulaciones( $request ){
 
+    	$postulacion = [];
+    	if (count( $request ) == 0 ) {
+    		return $postulacion;
+    	}
+    	
+    	for ($i=0; $i < count( $request ); $i++) {
+    		$postulacion[] = self::$_model::show_model([],[])[0];
+    	}
+    		debuger( $postulacion );
+
+
+    }
 
 
 }

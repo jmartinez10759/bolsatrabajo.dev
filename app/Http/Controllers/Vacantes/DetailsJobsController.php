@@ -63,7 +63,7 @@ class DetailsJobsController extends MasterController
 	    	$data['confirmed_nss'] = isset($candidato->confirmed_nss)?$candidato->confirmed_nss: null;
 	    	$data['nss'] 		   = isset($details->nss)? $details->nss : null;
 	    	$data['curp'] 		   = isset($details->curp)? $details->curp: null;
-
+	    	#debuger($data);
     		return message(true,$data,"Trasaccion Existosa");
     	}
     	return message(false,[],'Ocurrio un error al cargar la informacion');

@@ -55,9 +55,12 @@ new Vue({
       }
       /*se realiza la inserccion de los datos para la postulacion.*/
         var url = domain("postulacion/insert");
-        var uri = "";
+        var uri = domain("details/vacante");
         this.insert_general(url,uri,function(obj){
-            
+          /*var refresh = "details/vacante/show";
+          var fields = { 'id_vacante' : $myLocalStorage.get('id_vacante') };
+            this.get_general(refresh,fields);*/
+            $('#terminos').modal('hide');
         },function(){});
 
 

@@ -30,26 +30,35 @@ class PostulacionController extends MasterController
      *@return void
      */
     public static function store( Request $request ){
-    	
+
     	#se realiza la consulta a la tabla de postulaciones
     	$where = ['id_users' => Session::get('id'), 'id_vacante' => $request->id_vacante];
     	$postulaciones = self::$_model::show_model([],$where, new BlmPostulateCandidateModel);
-    	if ($postulaciones) {
+    	/*if ($postulaciones) {
     		return message(false,[],"Ya te has postulado para esta vacante");
-    	}
+    	}*/
     	$users_cv = self::$_model::show_model([],['id_users' => Session::get('id')], new BlmCurriculumModel);
 	    if (!$users_cv) { return message(false,[],"Por Favor Ingresar datos en su Curriculum."); }
 	    
-    	$insert_postulacion = self::$_model::create_model([$where], new BlmPostulateCandidateModel);
-    	$users = self::$_model::show_model(['name','first_surname','second_surname'],[ 'id' => Session::get('id') ], new RequestUserModel)[0];
+	    #realizo la consulta si es que no exite esta postulacion 
+    	#$insert_postulacion = self::$_model::create_model([$where], new BlmPostulateCandidateModel);
+    	#obtengo los datos del usuario que se postula las tablas de bolsa.
+    	$persons = self::$_model::show_model(['name','first_surname','second_surname'],[ 'id' => Session::get('id') ], new RequestUserModel)[0];
+    	#debuger($persons);
     	$desc_users =  self::$_model::show_model([],['id_users' => Session::get('id')], new DetailCandidateModel)[0];
+    	#$nss_bolsa = #consulta;
+    	debuger($desc_users);
     	#se realiza una consulta si existe la curp en la PersonModel
     	$response_curp = self::$_model::show_model([],['curp' => $desc_users->curp], new PersonModel);
     	if ( $response_curp ) {
-    		return message(true,$response_curp,"Postulacion Exitosa");
+    		
+    		$insert_persons = $response_curp[0];
+    		debuger($insert_persons);
+    		#return message(true,$response_curp,"Postulacion Exitosa");
+    	}else{
+    		#insertar los datos en la tabla persons
+    		$insert_persons = self::store_persons( $desc_users, $persons );
     	}
-    	#insertar los datos en la tabla persons
-    	$insert_persons = self::store_persons( $desc_users, $users );
 
     	if ( $insert_persons ) {
 
@@ -92,13 +101,13 @@ class PostulacionController extends MasterController
      *@access public 
      *@return array [Description]
      */
-    public static function store_persons( $desc_users, $users ){
+    public static function store_persons( $desc_users, $persons ){
     	#arreglo para almacenar los registros para la tabla de persons
     	$data_table_person = [];
     	$key_person = ['name','first_surname','second_surname'];
     	$key_persons_details = ['curp'];
     	
-    	foreach ($users as $key => $value) {
+    	foreach ($persons as $key => $value) {
     		if ( in_array( $key, $key_person ) ) {
     			$data_table_person[$key] = $value;
     		}
@@ -109,8 +118,7 @@ class PostulacionController extends MasterController
     		}
     	}
     	$data_table_person['state_id'] = $desc_users->id_state;
-
-    	return self::$_model::insert_model( [$data_table_person] ,new PersonModel)[0];
+		return self::$_model::insert_model( [$data_table_person] ,new PersonModel)[0];
 
     }
     /**
