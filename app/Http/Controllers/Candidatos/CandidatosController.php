@@ -71,7 +71,7 @@ class CandidatosController extends MasterController
 		$data['status'] 		= 1;
 		$data['confirmed'] 		= false;
 		$data['confirmed_code'] = str_random(50);
-		$data['confirmed_nss']  = $request->confirmed_nss;
+		$data['confirmed_nss']  = !is_null($request->confirmed_nss)? $request->confirmed_nss :false;
 		#debuger($data);
 		#se realiza la inserccion.
 		$response = MasterModel::create_model( [ $data ], new RequestUserModel);

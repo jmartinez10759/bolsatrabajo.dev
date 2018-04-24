@@ -70,9 +70,14 @@ Route::group(['middleware' => ['auth.session']], function() {
         ,'as'       => 'details.show'
     ]);
 
-     Route::post('/details/insert', [
+    Route::post('/details/insert', [
         'uses'      => 'Candidatos\DetailCandidateController@store'
         ,'as'       => 'details.insert'
+    ]);
+
+    Route::post('/details/insert/nss', [
+        'uses'      => 'Candidatos\DetailCandidateController@store_nss'
+        ,'as'       => 'details.insert.nss'
     ]);
 
 ########################################## RUTAS DEL CURRICULUM  #################################################

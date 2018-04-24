@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers\Candidatos;
 
+use App\Model\BlmNssModel;
 use Illuminate\Http\Request;
 use App\Model\BlmEstadosModel;
+use App\Model\JobsOffersModel; #tabla buro
 use App\Model\RequestUserModel;
 use App\Model\DetailCandidateModel;
 use Illuminate\Support\Facades\Session;
@@ -48,7 +50,8 @@ class DetailCandidateController extends MasterController
     	$postulaciones  =  self::$_model::show_model( [], $where, new BlmPostulateCandidateModel);
     	$candidato 		=  self::$_model::show_model( [], ['id' => Session::get('id')], new RequestUserModel);
     	$estados   		=  self::$_model::show_model( [], [], new BlmEstadosModel);
-    	#debuger($estados);
+    	$blm_nss   		=  self::$_model::show_model( [], ['id_users' => Session::get('id')], new BlmNssModel);
+    	#debuger($blm_nss);
     	$data = [
     		'name' 				=>  Session::get('name')
 			,'first_surname'	=>  Session::get('first_surname')
@@ -62,8 +65,7 @@ class DetailCandidateController extends MasterController
     			'telefono' 			=> ""
 				,'codigo' 			=> ""
 				,'direccion' 		=> ""
-				,'curp' 			=> ""
-				,'nss' 				=> ""
+				,'curp' 			=> ""				
 				,'cargo' 			=> ""
 				,'descripcion' 		=> ""
 				,'id_state' 	    => 9
@@ -75,7 +77,6 @@ class DetailCandidateController extends MasterController
 				,'codigo' 			=> $response[0]->codigo
 				,'direccion' 		=> $response[0]->direccion
 				,'curp' 			=> $response[0]->curp
-				,'nss' 				=> $response[0]->nss
 				,'cargo' 			=> $response[0]->cargo
 				,'descripcion' 		=> $response[0]->descripcion
 				,'id_state' 	    => $response[0]->id_state
@@ -88,8 +89,9 @@ class DetailCandidateController extends MasterController
     		$fields['confirmed_nss'] 	=  $candidato[0]->confirmed_nss;
     		$fields['password'] 	    =  "" ;
     		$fields['estados'] 	    	=  $estados;
-    		$fields['postulaciones'] 	=  $postulaciones;
-    		#$fields['postulaciones'] 	=  self::_postulaciones( $postulaciones );
+    		#$fields['postulaciones'] 	=  $postulaciones;
+    		$fields['nss'] 				=  $blm_nss;
+    		$fields['postulaciones'] 	=  self::_postulaciones( $postulaciones );
     		#debuger($fields['postulaciones']);
     	return message(true, $fields , 'Trasaccion exitosa');
 
@@ -107,26 +109,27 @@ class DetailCandidateController extends MasterController
     	$blm_details = [];
     	#se realiza la validacion de NSS
     	if ( Session::get('confirmed_nss') == 1 ) {
+    		$blm_nss = self::$_model::show_model( [], ['id_users' => Session::get('id')], new BlmNssModel);
     		
-    		if ( empty($request->nss) ) {
-    			return message(false,[],'No puede estar Vacio el campo de NSS.');
+    		if ( !$blm_nss ) {
+    			return message(false,[],'Debe de Agregar al menos un NSS.');
     		}
     		
     	}
-
+    	$claves_users = ['name','first_surname','second_surname','email'];
+    	$claves_details = ['name','first_surname','second_surname','email','password','nss'];
     	foreach ($request->all() as $key => $value) {
-    		
-    		if ( $key == "name" || $key == "first_surname" || $key == "second_surname"  || $key == "email") {
+
+    		if (in_array($key, $claves_users)) {
     			$request_users[$key] = $value;
     		}
     		if ($key == "password" && $value != false) {
     			$request_users[$key] = sha1($value);
     			
     		}
-    		if ( $key != "name" && $key != "first_surname" && $key != "second_surname"  && $key != "email" && $key != "password") {
-    			$blm_details[$key] = $value;
-    		}
-    		
+			if( !in_array($key, $claves_details) ){
+				$blm_details[$key] = $value;
+			}    		
 
     	}
     	#se realiza el actualizado de los datos de la tabla del request_users
@@ -136,13 +139,13 @@ class DetailCandidateController extends MasterController
     	foreach ($response[0] as $key => $value) {
            $session[$key] = $value;
         }
-    	if ( count( $response ) > 0 ) {
+    	if ( $response ) {
 
 	    		Session::put( $session );
 	    		$condicion = ['id_users' => Session::get('id') ];
 	    		$response_details = self::$_model::show_model([],$condicion,new DetailCandidateModel);
 	    		#debuger($response_details);
-	    		if ( count($response_details) > 0 ) {
+	    		if ( $response_details ) {
 	    			#se realiza la actualizacion de los datos si es que tiene regitros la tabla.
 	    			$update_details = self::$_model::update_model($condicion ,$blm_details,new DetailCandidateModel);
 	    			return message( true,$update_details[0],"Trasaccion Exitosa");
@@ -151,7 +154,7 @@ class DetailCandidateController extends MasterController
 	    		$blm_details['id_users'] = Session::get('id');
 	    		#debuger($blm_details);
 	    		$insert = self::$_model::create_model([$blm_details],new DetailCandidateModel);
-	    		if (count($insert) > 0) {
+	    		if ( $insert) {
 	    			return message(true,$insert[0],"Trasaccion Exitosa");
 	    		}else{
 	    			return message(false,[],"Ocurrio un error");	
@@ -167,16 +170,45 @@ class DetailCandidateController extends MasterController
      *@return void
      */
     private static function _postulaciones( $request ){
-
+    	
     	$postulacion = [];
-    	if (count( $request ) == 0 ) {
+    	if ( !$request ) {
     		return $postulacion;
     	}
     	
     	for ($i=0; $i < count( $request ); $i++) {
-    		$postulacion[] = self::$_model::show_model([],[])[0];
+    		$where = ['id' => $request[$i]->id_vacante];
+    		$postulacion[] = self::$_model::show_model([],$where,new JobsOffersModel)[0];
     	}
-    		debuger( $postulacion );
+    	#debuger( $postulacion );
+    	return $postulacion;
+
+    }
+     /**
+     *Metodo para insertar el numero de seguro social. 
+     *@access public
+     *@param Request $request [Description]
+     *@return void
+     */
+    public static function store_nss( Request $request ){
+    	#se realiza la validacion de NSS
+    	if ( Session::get('confirmed_nss') == 1 ) {
+    		if ( empty($request->nss) ) {
+    			return message(false,[],'No puede estar Vacio el campo de NSS.');
+    		}
+    		
+    	}
+    	$fields = [
+    		'id_users' 	=> Session::get('id')
+    		,'nss' 		=> $request->nss
+    	];
+    	$response = self::$_model::create_model([$fields],new BlmNssModel);
+    	if ($response) {
+    		return message(true,$response,"Trasaccion Existosa");
+    	}
+
+    	return message(false,[],"Ocurrio un Error. Favor de Verificar");
+
 
 
     }

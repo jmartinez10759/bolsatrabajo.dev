@@ -7,10 +7,12 @@ use App\Model\PersonModel; #tabla de buro
 use Illuminate\Http\Request;
 use App\Model\AccountsModel; #tabla buro
 use App\Model\CandidatoModel; #tabla buro
+use App\Model\BlmNssModel; #tabla buro
 use App\Model\RequestUserModel;
 use App\Model\BlmCurriculumModel;
 use App\Model\DetailCandidateModel;
 use App\Model\AccountsPersonsModel; #tabla buro
+use App\Model\CandidateJobOffersModel; #tabla buro
 use Illuminate\Support\Facades\Session;
 use App\Model\SocialSecurityNumberModel; #tabla buro
 use App\Model\BlmPostulateCandidateModel;
@@ -34,64 +36,69 @@ class PostulacionController extends MasterController
     	#se realiza la consulta a la tabla de postulaciones
     	$where = ['id_users' => Session::get('id'), 'id_vacante' => $request->id_vacante];
     	$postulaciones = self::$_model::show_model([],$where, new BlmPostulateCandidateModel);
-    	/*if ($postulaciones) {
-    		return message(false,[],"Ya te has postulado para esta vacante");
-    	}*/
     	$users_cv = self::$_model::show_model([],['id_users' => Session::get('id')], new BlmCurriculumModel);
+    	if ($postulaciones) {return message(false,[],"Ya te has postulado para esta vacante");}
 	    if (!$users_cv) { return message(false,[],"Por Favor Ingresar datos en su Curriculum."); }
-	    
-	    #realizo la consulta si es que no exite esta postulacion 
-    	#$insert_postulacion = self::$_model::create_model([$where], new BlmPostulateCandidateModel);
     	#obtengo los datos del usuario que se postula las tablas de bolsa.
-    	$persons = self::$_model::show_model(['name','first_surname','second_surname'],[ 'id' => Session::get('id') ], new RequestUserModel)[0];
-    	#debuger($persons);
-    	$desc_users =  self::$_model::show_model([],['id_users' => Session::get('id')], new DetailCandidateModel)[0];
-    	#$nss_bolsa = #consulta;
-    	debuger($desc_users);
-    	#se realiza una consulta si existe la curp en la PersonModel
-    	$response_curp = self::$_model::show_model([],['curp' => $desc_users->curp], new PersonModel);
+    	$persons 	= self::$_model::show_model([],[ 'id' => Session::get('id') ], new RequestUserModel);
+    	$desc_users = self::$_model::show_model([],['id_users' => Session::get('id')], new DetailCandidateModel);
+    	$nss_bolsa  = self::$_model::show_model([],['id_users' => Session::get('id')], new BlmNssModel);
+    	$response_curp = self::$_model::show_model([],['curp' => $desc_users[0]->curp], new PersonModel);
+    	$list_vacantes = self::$_model::show_model([],['id' => $request->id_vacante], new Listado);
+    	#debuger($nss_bolsa);
     	if ( $response_curp ) {
-    		
     		$insert_persons = $response_curp[0];
-    		debuger($insert_persons);
-    		#return message(true,$response_curp,"Postulacion Exitosa");
     	}else{
     		#insertar los datos en la tabla persons
     		$insert_persons = self::store_persons( $desc_users, $persons );
     	}
-
+    	#debuger($insert_persons);
     	if ( $insert_persons ) {
 
-    		$insert_nss = self::store_social_security_numbers( $insert_persons, $desc_users );
-
-    		if ( $insert_nss ) {
+    		$insert_nss = self::store_social_security_numbers( $insert_persons, $nss_bolsa, $list_vacantes );
+    		#if ( $insert_nss ) {
     			
-    			$account_person_insert = self::store_accounts_persons($insert_persons,$request,$users_cv,$desc_users );
+    			$account_person_insert = self::store_accounts_persons($insert_persons,$list_vacantes,$users_cv,$desc_users );
 	    		if ( $account_person_insert  ) {
 	    			#se inserta en las tablas de employees y candidate
 	    			$insert_candidate = self::store_candidates( $account_person_insert );
 
 	    			if ( $insert_candidate ) {
-	    				return message(true,$insert_candidate,"Postulacion Exitosa");
+
+	    				$insert_candidate_jobs = self::_store_candidate_jobs_offers( $insert_candidate, $request );
+
+	    				if ($insert_candidate_jobs) {
+		    				$data = ['id_users' => Session::get('id'), 'id_vacante' => $request->id_vacante];
+	    					$insert_postulacion = self::$_model::create_model([$data], new BlmPostulateCandidateModel);
+	    					if ($insert_postulacion) {
+
+		    					return message(true,$insert_postulacion,"¡Te has postulado exitosamente!");
+	    						
+	    					}else{
+		    					return message(false,[],"¡Ocurrio un error postulate, favor de verificar!");
+	    					}
+	    					
+	    				}
+		    			return message(false,[],"¡Ocurrio un error candidate offers, favor de verificar!");
 	    				
 	    			}
 
-	    			return message(false, [], "Ocurrio un Error al Postularse");
+	    			return message(false, [], "¡Ocurrio un error candidate, favor de verificar!");
 
 	    		}else{
 	    			#segundo if de account_person
-	    			return message( false,[],'Ocurrio un Error Favor de Verificar');
+	    			return message( false,[],'¡Ocurrio un Error account_person, favor de verificar!');
 
 	    		}
 
-    		}else{
+    		/*}else{
     			#else de nss
-    			return message(false, [], "Ocurrio un Error al Postularse");
-    		}
+    			return message(false, [], "¡Ocurrio un error nss, favor de verificar!");
+    		}*/
     		
     	}else{
     		#primer if de persons
-    		return message( false,[],'Ocurrio un Error Favor de Verificar');
+    		return message( false,[],'¡Ocurrio un error persons, favor de verificar!');
     	}
 
 
@@ -107,17 +114,17 @@ class PostulacionController extends MasterController
     	$key_person = ['name','first_surname','second_surname'];
     	$key_persons_details = ['curp'];
     	
-    	foreach ($persons as $key => $value) {
+    	foreach ($persons[0] as $key => $value) {
     		if ( in_array( $key, $key_person ) ) {
     			$data_table_person[$key] = $value;
     		}
     	}
-    	foreach ($desc_users as $key => $value) {
+    	foreach ($desc_users[0] as $key => $value) {
     		if ( in_array($key, $key_persons_details ) ) {
     			$data_table_person[$key] = $value;
     		}
     	}
-    	$data_table_person['state_id'] = $desc_users->id_state;
+    	$data_table_person['state_id'] = $desc_users[0]->id_state;
 		return self::$_model::insert_model( [$data_table_person] ,new PersonModel)[0];
 
     }
@@ -126,19 +133,40 @@ class PostulacionController extends MasterController
      *@access public
      *@return array [Description]
      */
-    public static function store_social_security_numbers( $insert_persons, $desc_users ){
+    public static function store_social_security_numbers( $insert_persons, $nss_bolsa, $list_vacantes ){
+    	
+    	$result = [];
+    	if (!$nss_bolsa) {
+    		return $result;		
+    	}
+    	#$where = ['account_id' => $list_vacantes[0]->id ,'person_id' => $insert_persons->id];
+    	$where = ['person_id' => $insert_persons->id];
+    	$response = self::$_model::show_model([],$where, new SocialSecurityNumberModel);
+    	if ($response) {
+    		$delete_nss = self::$_model::delete_model($where, new SocialSecurityNumberModel);
+	    	if ($delete_nss) {
+	    		return $result;
+	    	}
 
-    	$data_nss = [
-			'person_id' 			=> $insert_persons->id
-			,'nss' 					=> $desc_users->nss
-			,'is_wrong_nss' 		=> null
-			,'created_by_user_id'	=> null
-			,'account_id' 			=> null
-			,'is_deleted'			=> null
-			,'is_locked' 			=> null
-		];
-		return self::$_model::insert_model( [$data_nss], new SocialSecurityNumberModel )[0];
+    	}
 
+    	for ($i=0; $i < count($nss_bolsa) ; $i++) {
+
+    		$data_nss = [
+				'person_id' 			=> $insert_persons->id
+				,'nss' 					=> $nss_bolsa[$i]->nss
+				,'is_wrong_nss' 		=> null
+				,'created_by_user_id'	=> null
+				,'account_id' 			=> $list_vacantes[0]->account_id
+				,'is_deleted'			=> null
+				,'is_locked' 			=> null
+			];
+
+    		$result[] = self::$_model::insert_model( [$data_nss], new SocialSecurityNumberModel );
+    	
+    	}
+
+		return $result;
     }
     /**
      *Metodo para insertar los registros accounts_persons
@@ -149,25 +177,23 @@ class PostulacionController extends MasterController
      *@param $desc_users [description]
      *@return array [Description]
      */
-    public static function store_accounts_persons( $insert_persons, $request, $users_cv, $desc_users ){
-
-    	$list_vacantes = self::$_model::show_model(['account_id'],['id' => $request->id_vacante], new Listado)[0];
+    public static function store_accounts_persons( $insert_persons, $list_vacantes, $users_cv, $desc_users ){
 		#se realiza la inserccion a la tabla de accounts_persons
 		$data_accounts_persons = [
 			'person_id' 			=> $insert_persons->id
-			,'account_id' 			=> $list_vacantes->account_id
+			,'account_id' 			=> $list_vacantes[0]->account_id
 			,'type_id' 				=> null
 			,'blood_type_id' 		=> null
-			,'state_id' 			=> $users_cv->id_state
+			,'state_id' 			=> $users_cv[0]->id_state
 			,'marital_status_id' 	=> null
 			,'image_file_name' 		=> null
-			,'phone_number' 		=> $users_cv->telefono
-			,'mobile_phone_number' 	=> $users_cv->telefono
+			,'phone_number' 		=> $users_cv[0]->telefono
+			,'mobile_phone_number' 	=> $users_cv[0]->telefono
 			,'street' 				=> null
 			,'neighborhood' 		=> null
 			,'municipality' 		=> null
-			,'postal_code' 			=> $desc_users->codigo
-			,'email' 				=> $users_cv->email
+			,'postal_code' 			=> $desc_users[0]->codigo
+			,'email' 				=> $users_cv[0]->email
 			,'is_wrong_email' 		=> null
 			,'website_url' 			=> null
 			,'facebook_url' 		=> null
@@ -209,6 +235,32 @@ class PostulacionController extends MasterController
 		return self::$_model::insert_model([$data_candidate], new CandidatoModel)[0];
 
     }
+    /**
+     *Metodo para insertar los registros candidates y ofertas
+     *@access private 
+     *@param $insert_candidate [description]
+     *@param $request [description]
+     *@return array [description]
+     */
+    private static function _store_candidate_jobs_offers( $insert_candidate, $request ){
+
+    	$data_candidate_offers = [
+			'candidate_id'				=> $insert_candidate->id
+			,'job_offer_id'				=> $request->id_vacante
+			,'recruitment_stage_id'		=> null
+			,'created_by_user_id'		=> null
+			,'assigned_to_user_id'		=> null
+			,'account_client_id'		=> null
+			,'rating'					=> null
+			,'disqualified'				=> null
+			,'disqualify_reason_id'		=> null
+			,'created'					=> null
+			,'modified'					=> null
+		];
+		return self::$_model::insert_model([$data_candidate_offers], new CandidateJobOffersModel)[0];
+
+    }
+    
 
 
 

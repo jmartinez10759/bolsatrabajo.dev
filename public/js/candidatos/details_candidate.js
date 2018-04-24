@@ -50,15 +50,7 @@ new Vue({
         for ( var i in this.newKeep){
             this.newKeep[i] = this.datos[i];
         }
-        if (this.newKeep.nss) {
-           //se realiza las validaciones de los datos de NSS y CURP
-            if ( !nssValido(this.newKeep.nss) ) {
-                toastr.error( validate ,"NSS Incorrecto" );
-                $('#nss').parent().addClass('has-error');
-                return;
-            }
 
-        }
         if ( !curpValida(this.newKeep.curp) ) {
             toastr.error( validate ,"Curp Incorrecto" );
             $('#curp').parent().addClass('has-error');
@@ -70,6 +62,28 @@ new Vue({
           $('#upload_cv').show('slow');
 
         },function( obj ){ });
+
+    },
+    insert_nss: function(){
+
+        if (this.newKeep.nss) {
+           //se realiza las validaciones de los datos de NSS
+            if ( !nssValido(this.newKeep.nss) ) {
+                toastr.error( validate ,"NSS Incorrecto" );
+                $('#nss').parent().parent().addClass('has-error');
+                return;
+            }
+        }else{
+          toastr.error( "Debe de ingresar un NSS" ,"NSS Vacio" );
+          return;
+        }
+        var url = domain("details/insert/nss");
+        var refresh = domain("details/show");
+        this.insert_general(url,refresh,function(obj){
+          $('#modal-nss').modal('hide');
+        },function(){});
+
+
 
     }
 
