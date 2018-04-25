@@ -4,7 +4,7 @@ new Vue({
     var fields  = {
       'id_vacante' : $myLocalStorage.get('id_vacante')
     } 
-    var url = "/details/vacante/show";
+    var url = domain("details/vacante/show");
     this.get_general( url, fields);
   },
   data: {
@@ -27,8 +27,12 @@ new Vue({
   },
   mixins:[mixins],
   methods:{
-    busqueda_vacantes: function( fields ){
+    busqueda_vacantes: function(){
         console.log(this.datos);
+        var url = domain("vacantes");
+        this.show_general(url,this.datos,function( object ){
+          
+        },function(){});
     },
     postulacion: function(){
 
@@ -54,11 +58,16 @@ new Vue({
           return; 
       }
       /*se realiza la inserccion de los datos para la postulacion.*/
-        var url = "/details/vacante/insert";
-        var uri = "";
-        this.insert_general(url,uri,function(obj){
-            
+        var url = domain("postulacion/insert");
+        var uri = domain("details/vacante");
+        this.insert_general(url,uri,function( obj ){
+            $('#terminos').modal('hide');
         },function(){});
+
+        /*var refresh = "details/vacante/show";
+        var fields = { 'id_vacante' : $myLocalStorage.get('id_vacante') };
+        this.get_general(refresh,fields);*/
+
 
 
     }

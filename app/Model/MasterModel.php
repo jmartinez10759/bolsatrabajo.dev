@@ -49,13 +49,13 @@ class MasterModel extends Model
 
 	}
 	/**
-	 *Metodo Model donde se hace la inserccion de los datos, y regresa en formato json el registro ingresado
+	 *Inserccion de los datos con el metodo create, y regresa en formato json el registro ingresado
 	 *@access public
 	 *@param $data array [Description]
 	 *@param $clase object [Descrption]
 	 *@return object
 	 */
-	public static function insert_model( $data = array(), $clase =false ){
+	public static function create_model( $data = array(), $clase =false ){
 
 		#se realiza la inserccion de los datos
 		if ( count($data) > 0 ) {
@@ -99,4 +99,28 @@ class MasterModel extends Model
 		return $response;
 
 	}
+	/**
+	 *Inserccion de los datos con el metodo insert, y regresa en formato json el registro ingresado
+	 *@access public
+	 *@param $data array [Description]
+	 *@param $clase object [Descrption]
+	 *@return object
+	 */
+	public static function insert_model( $data = array(), $clase =false ){
+		#se realiza la inserccion de los datos
+		if ( count($data) > 0 ) {
+			$lasted = [];
+			for ($i=0; $i < count($data); $i++) { 
+				$clase::insert( $data[$i] );
+				$ultimo = self::show_model([],$data[$i], $clase );
+				$latest = $ultimo;
+			}
+
+		}
+		return $latest;
+		
+
+	}
+
+
 }

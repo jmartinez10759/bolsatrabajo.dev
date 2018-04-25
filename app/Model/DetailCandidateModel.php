@@ -15,7 +15,6 @@ class DetailCandidateModel extends Model
 		,'codigo'
 		,'direccion'
 		,'curp'
-		,'nss'
 		,'cargo'
 		,'descripcion'
     ];

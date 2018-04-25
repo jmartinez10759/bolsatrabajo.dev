@@ -27,7 +27,7 @@ class StudyController extends MasterController
                 $data[$key] = $value;        
             }
         }
-        $response = self::$_model::insert_model([$data], new BlmStudyModel);
+        $response = self::$_model::create_model([$data], new BlmStudyModel);
         
         if (count($response) > 0) {
             return message(true,$response[0],"Transaccion Exitosa");

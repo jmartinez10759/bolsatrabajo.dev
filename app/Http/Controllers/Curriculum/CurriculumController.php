@@ -154,7 +154,7 @@ class CurriculumController extends MasterController
 	    	$data['url_cv'] 	= "ruta";
 	    	$data['id_users'] 	= Session::get('id');
 	    	#debuger($data);
-	    	$response = self::$_model::insert_model([$data], new BlmCurriculumModel);
+	    	$response = self::$_model::create_model([$data], new BlmCurriculumModel);
 	    	if (count($response) > 0) {
 	    		return message(true,$response,"Transaccion exitosa");
 	    	}else{

@@ -15,9 +15,7 @@ class BusquedaController extends Controller
         $vacantes = $request->input('vacantes');
         $edo = $request->input('edo');
         $id_user = $request->input('utilisateur');
-
-       /* $result = DB::select('SELECT * FROM users where name like :vacantes or curp like :curp',['vacantes' 	 => $vacantes,'curp' =>$edo] );
-        debuger($result);*/
+        
         if ($id_user == '') {
             ###### Busqueda #######
             $response = Listado::where( 'name','LIKE',"%".$vacantes."%" )
@@ -40,7 +38,6 @@ class BusquedaController extends Controller
             'vacante' => $vacantes,
         ]);
         }
-        
         #debuger($response);
          return view("busqueda.busqueda", ["name" => $response, "count" => $count]);
     }
@@ -65,19 +62,6 @@ class BusquedaController extends Controller
                         ->get();
         return response()->json($data);
     }
-    /**
-     *Metodo para obtener los detalles de la vacante seleccionada por el candidato
-     *@access public
-     *@param Request $request [Description]
-     *@return void
-     */
-    /*public function get_vacante( Request $request ){
-
-        $where = ['id' => $request->id_vacante ];
-        $response = Listado::where( $where )->get();
-        return message(true,$response,"Transaccion exitosa");
-
-    }*/
 
 
 

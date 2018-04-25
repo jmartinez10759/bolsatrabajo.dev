@@ -7,6 +7,8 @@ use App\Model\AccountsModel;
 use Illuminate\Http\Request;
 use App\Model\RequestUserModel;
 use App\Model\DetailCandidateModel;
+use App\Model\BlmNssModel;
+use App\Model\PersonModel; #tabla de buro
 use Illuminate\Support\Facades\Session;
 use App\Model\BlmPostulateCandidateModel;
 use App\Http\Controllers\MasterController;
@@ -38,7 +40,7 @@ class DetailsJobsController extends MasterController
     	$response = self::$_model::show_model([],$where, new Listado );
     	$data = [];
     	if ( sizeof( $response ) > 0 ) {
-    		$empresa = self::$_model::show_model(['id','name','postal_code','website_url'],['id' => $response[0]->account_id], new AccountsModel )[0];
+    		$empresa = self::$_model::show_model(['id','name','postal_code','website_url'],['id' => $response[0]->account_id], new AccountsModel );
     		$data = [
     			'id' 					=> $response[0]->id
     			,'name' 				=> $response[0]->name
@@ -49,50 +51,28 @@ class DetailsJobsController extends MasterController
     			,'is_active' 			=> $response[0]->is_active
     			,'salary_max' 			=> $response[0]->salary_max
     			,'salary_min' 			=> $response[0]->salary_min
-    			,'account_id' 			=> $empresa->id
-    			,'account_name' 		=> $empresa->name
-    			,'account_postal_code' 	=> $empresa->postal_code
-    			,'account_website_url' 	=> $empresa->website_url
+    			,'state_id' 			=> $response[0]->state_id
+    			,'account_id' 			=> $empresa[0]->id
+    			,'account_name' 		=> $empresa[0]->name
+    			,'account_postal_code' 	=> $empresa[0]->postal_code
+    			,'account_website_url' 	=> $empresa[0]->website_url
     		];
 
     		if ( Session::has('email') ) {
-	    		$candidato =  self::$_model::show_model( ['confirmed_nss'], ['id' => Session::get('id')], new RequestUserModel)[0];
-	    		$details  =  self::$_model::show_model( ['curp','nss'], ['id_users' => Session::get('id')], new DetailCandidateModel)[0];
+	    		$candidato =  self::$_model::show_model( ['confirmed_nss'], ['id' => Session::get('id')], new RequestUserModel);
+	    		$details  =  self::$_model::show_model( ['curp'], ['id_users' => Session::get('id')], new DetailCandidateModel);
+	    		$nss  =  self::$_model::show_model( ['nss'], ['id_users' => Session::get('id')], new BlmNssModel);
 	    	}
-	    	$data['confirmed_nss'] = isset($candidato->confirmed_nss)?$candidato->confirmed_nss: null;
-	    	$data['nss'] 		   = isset($details->nss)? $details->nss : null;
-	    	$data['curp'] 		   = isset($details->curp)? $details->curp: null;
-
+	    	$data['confirmed_nss'] = isset($candidato[0]->confirmed_nss)?$candidato[0]->confirmed_nss: null;
+	    	$data['nss'] 		   = isset($nss)? $nss :[];
+	    	$data['curp'] 		   = isset($details[0]->curp)? $details[0]->curp: null;
+	    	#debuger($data);
     		return message(true,$data,"Trasaccion Existosa");
     	}
     	return message(false,[],'Ocurrio un error al cargar la informacion');
 
     }
-    /**
-     *Metodo para insertar los datos de la postulacion en sus respectivas tablas
-     *@access public
-     *@param Request $request[ Description ]
-     *@return void 
-     */
-    public static function store( Request $request ){
-
-    	#se realiza la consulta a la tabla de postulaciones
-    	$where = ['id_users' => Session::get('id'), 'id_vacante' => $request->id_vacante];
-    	$postulaciones = self::$_model::show_model([],$where, new BlmPostulateCandidateModel);
-    	if ($postulaciones) {
-    		return message(false,[],"Ya te has postulado para esta vacante");
-    	}
-    	
-    	$insert_postulacion = self::$_model::insert_model([$where], new BlmPostulateCandidateModel);
-
-    	/*if ($insert_postulacion) {
-    		
-    	}*/
-    	debuger($request->all());
-
-
-
-    }
+    
 
 
 }

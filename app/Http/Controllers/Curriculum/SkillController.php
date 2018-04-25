@@ -28,7 +28,7 @@ class SkillController extends MasterController
             }
         }
         #debuger( $data );
-        $response = self::$_model::insert_model([$data], new BlmSkillModel);
+        $response = self::$_model::create_model([$data], new BlmSkillModel);
 
         if (count($response) > 0) {
             return message(true,$response[0],"Transaccion Exitosa");

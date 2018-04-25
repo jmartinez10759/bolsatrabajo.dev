@@ -21,7 +21,7 @@ Route::get('/register/verify/{code}', [
         ,'as'       => 'register.verify'
     ]);
 
-Route::post('/login', [
+Route::post('login', [
         'uses'      => 'Auth\AuthController@authLogin'
         ,'as'       => 'login'
     ]);
@@ -70,9 +70,14 @@ Route::group(['middleware' => ['auth.session']], function() {
         ,'as'       => 'details.show'
     ]);
 
-     Route::post('/details/insert', [
+    Route::post('/details/insert', [
         'uses'      => 'Candidatos\DetailCandidateController@store'
         ,'as'       => 'details.insert'
+    ]);
+
+    Route::post('/details/insert/nss', [
+        'uses'      => 'Candidatos\DetailCandidateController@store_nss'
+        ,'as'       => 'details.insert.nss'
     ]);
 
 ########################################## RUTAS DEL CURRICULUM  #################################################
@@ -137,9 +142,9 @@ Route::group(['middleware' => ['auth.session']], function() {
         ,'as'       => 'skills.delete'
     ]);
 
-    Route::post('/details/vacante/insert', [
-        'uses'      => 'Vacantes\DetailsJobsController@store'
-        ,'as'       => 'details.vacante.insert'
+    Route::post('postulacion/insert', [
+        'uses'      => 'Postulacion\PostulacionController@store'
+        ,'as'       => 'postulacion.insert'
     ]);
 
      

@@ -21,7 +21,6 @@ class CreateBlmDetailsCandidateTable extends Migration
             $table->string('codigo')->nullable();
             $table->string('direccion')->nullable();
             $table->string('curp');
-            $table->string('nss')->nullable();
             $table->string('cargo')->nullable();
             $table->string('descripcion')->nullable();
             $table->timestamps();

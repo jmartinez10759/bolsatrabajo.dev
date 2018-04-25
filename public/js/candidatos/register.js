@@ -58,8 +58,7 @@ new Vue({
                 $('#'+key).parent().parent().removeClass('has-error');
             });
             $('#signup').modal('hide');
-                redirect( 'details' );
-
+            //redirect( domain('details') );
         },function(){
             
             $.each(this.newKeep,function(key, value){
@@ -75,6 +74,10 @@ new Vue({
 
         var url = domain("login");
         this.insert_general(url,'',function( obj ){
+<<<<<<< HEAD
+=======
+
+>>>>>>> aafa1f1dfc95bdc675d64f363ba1f6b1187a9660
             redirect( domain('details') );
         },function(){
             $('#email').parent().parent().addClass('has-error');

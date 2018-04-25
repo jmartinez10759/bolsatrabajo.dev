@@ -175,8 +175,8 @@
 											</tr>
 										</thead>
 										<tbody>
-											<tr v-for="study in datos.study">
-												<td>@{{ study.id }}</td>
+											<tr v-for="( study, key ) in datos.study">
+												<td>@{{ key + 1 }}</td>
 												<td>@{{ study.escuela }}</td>
 												<td>@{{ study.nivel }}</td>
 												<td>@{{ study.fecha_inicio }}</td>
@@ -221,8 +221,8 @@
 											</tr>
 										</thead>
 										<tbody>
-											<tr v-for="jobs in datos.jobs">
-												<td>@{{ jobs.id }}</td>
+											<tr v-for="(jobs, key) in datos.jobs">
+												<td>@{{ key + 1 }}</td>
 												<td>@{{ jobs.jobs_empresa }}</td>
 												<td>@{{ jobs.jobs_puesto }}</td>
 												<td>@{{ jobs.jobs_fecha_inicio }}</td>
@@ -265,8 +265,8 @@
 											</tr>
 										</thead>
 										<tbody>
-											<tr v-for="skills in datos.skills">
-												<td> @{{ skills.id }} </td>
+											<tr v-for="(skills,key) in datos.skills">
+												<td> @{{ key + 1}} </td>
 												<td> @{{ skills.habilidad }} </td>
 												<td> @{{ skills.porcentaje }} </td>
 												<td>

@@ -8,6 +8,7 @@ class AccountsModel extends Model
 {
     
 	protected $table = "accounts";
+	public $timestamps = false;
     public $fillable = [
     	'id'
 		,'parent_account_id'
