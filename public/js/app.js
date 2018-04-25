@@ -12292,8 +12292,8 @@ function check_status_xhr(status, title, text, type, accept) {
      *@return array[description]
      */
      domain = function( url ){
-
-        var path_url = window.location.protocol+"//"+window.location.host+"/"+url;
+        //var path_url = window.location.protocol+"//"+window.location.host+"/"+url;
+        var path_url = window.location.origin+"/"+window.location.pathname+url;
         return path_url;
 
      }

@@ -18,7 +18,7 @@
 new Vue ({
   el: "#vue-curriculum",
   created: function () {
-    var url = "/cv/show";
+    var url = "cv/show";
     this.get_general(url,{});
   },
   data: {
