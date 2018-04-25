@@ -72,13 +72,9 @@ new Vue({
     },
     inicio_sesion: function(){
 
-        var url = domain("login");
+        var url = domain("../login");
         this.insert_general(url,'',function( obj ){
-<<<<<<< HEAD
-=======
-
->>>>>>> aafa1f1dfc95bdc675d64f363ba1f6b1187a9660
-            redirect( domain('details') );
+            redirect( domain('../details') );
         },function(){
             $('#email').parent().parent().addClass('has-error');
             $('#password').parent().parent().addClass('has-error');

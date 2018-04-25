@@ -985,13 +985,8 @@ function check_status_xhr(status, title, text, type, accept) {
      *@return array[description]
      */
      domain = function( url ){
-
-        var path_url;
-        if (window.location.pathname != "/") {
-            path_url = window.location.protocol+"//"+window.location.host+"/"+window.location.pathname+url;
-        }else{
-            path_url = window.location.protocol+"//"+window.location.host+"/"+url;
-        }
+        
+        var path_url = window.location.protocol+"//"+window.location.host+"/"+url;
         return path_url;
 
      }

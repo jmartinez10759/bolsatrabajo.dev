@@ -4,7 +4,8 @@ new Vue({
     var fields  = {
       'id_vacante' : $myLocalStorage.get('id_vacante')
     } 
-    var url = domain("details/vacante/show");
+    var url = domain("../details/vacante/show");
+    //var url = "../details/vacante/show";
     this.get_general( url, fields);
   },
   data: {
@@ -31,7 +32,7 @@ new Vue({
         console.log(this.datos);
         var url = domain("vacantes");
         this.show_general(url,this.datos,function( object ){
-          
+
         },function(){});
     },
     postulacion: function(){
