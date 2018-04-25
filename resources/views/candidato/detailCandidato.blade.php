@@ -97,8 +97,8 @@
 								<!-- Start Job List -->
 								<div id="post-job" class="tab-pane fade">
 									<h3>Estas Postulado en {{$postulaciones}} Empleos</h3>
-									<div class="row">
-										<article v-for="(postulacion, key ) in datos.postulaciones">
+									<div class="row" v-for="(postulacion, key ) in datos.postulaciones">
+										<article v-on:click.prevent="details_vacantes( postulacion )" style="cursor: pointer;">
 											<div class="mng-company">
 												<div class="col-md-2 col-sm-2">
 													<div class="mng-company-pic"><img src="" class="img-responsive" alt=""></div>
@@ -106,12 +106,12 @@
 												
 												<div class="col-md-5 col-sm-5">
 													<div class="mng-company-name">
-														<h4>@{{postulacion.id}} <span class="cmp-tagline">@{{postulacion.title}}</span></h4><span class="cmp-time">10 Hour Ago</span></div>
+														<h4>@{{postulacion.title}} -<span class="cmp-tagline"> @{{postulacion.name}}</span></h4><span class="cmp-time">10 Hour Ago</span></div>
 												</div>
 												
 												<div class="col-md-4 col-sm-4">
 													<div class="mng-company-location">
-														<p><i class="fa fa-map-marker"></i> @{{postulacion.name}}</p>
+														<p><i class="fa fa-map-marker"></i> </p>
 													</div>
 												</div>
 												
@@ -125,15 +125,23 @@
 									</div>
 									<div class="row">
 										<ul class="pagination">
-											<li><a href="#">«</a></li>
-											<li class="active"><a href="#">1</a></li>
-											<li><a href="#">2</a></li>
-											<li><a href="#">3</a></li>
-											<li><a href="#">4</a></li>
-											<li><a href="#"><i class="fa fa-ellipsis-h"></i></a></li>
-											<li><a href="#">»</a></li>
+											<li v-if="pagination.current_page > 1 ">
+												<a v-on:click.prevent="changePage( pagination.current_page - 1 )" style="cursor: pointer;" >
+													«
+												</a>
+											</li>
+											<li v-for="page in pagesNumber" v-bind:class="[ page == isActived ? 'active' : '']" >
+												<a style="cursor: pointer;" v-on:click.prevent="changePage(page)">@{{page}}
+												</a>
+											</li>
+											<li v-if="pagination.current_page < pagination.last_page">
+												<a style="cursor: pointer;" v-on:click.prevent="changePage(pagination.current_page + 1)">
+													»
+												</a>
+											</li>
 										</ul>
 									</div>
+
 								</div>
 								<!-- End Job List -->
 								

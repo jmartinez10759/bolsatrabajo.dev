@@ -51,6 +51,7 @@ class DetailsJobsController extends MasterController
     			,'is_active' 			=> $response[0]->is_active
     			,'salary_max' 			=> $response[0]->salary_max
     			,'salary_min' 			=> $response[0]->salary_min
+    			,'state_id' 			=> $response[0]->state_id
     			,'account_id' 			=> $empresa[0]->id
     			,'account_name' 		=> $empresa[0]->name
     			,'account_postal_code' 	=> $empresa[0]->postal_code
@@ -71,16 +72,7 @@ class DetailsJobsController extends MasterController
     	return message(false,[],'Ocurrio un error al cargar la informacion');
 
     }
-    /**
-     *Metodo para insertar los datos de detalles de las vacantes 
-     *@access public
-     *@param Request $request[ Description ]
-     *@return void 
-     */
-    /*public static function store( Request $request ){
-
-
-    }*/
+    
 
 
 }

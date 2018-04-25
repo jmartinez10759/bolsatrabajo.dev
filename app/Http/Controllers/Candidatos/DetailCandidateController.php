@@ -47,7 +47,8 @@ class DetailCandidateController extends MasterController
 
     	$where = ['id_users' => Session::get('id')];
     	$response  		=  self::$_model::show_model( [], $where, new DetailCandidateModel);
-    	$postulaciones  =  self::$_model::show_model( [], $where, new BlmPostulateCandidateModel);
+    	#$postulaciones  =  self::$_model::show_model( [], $where, new BlmPostulateCandidateModel);
+    	$postulaciones  =  BlmPostulateCandidateModel::where($where)->paginate(3);
     	$candidato 		=  self::$_model::show_model( [], ['id' => Session::get('id')], new RequestUserModel);
     	$estados   		=  self::$_model::show_model( [], [], new BlmEstadosModel);
     	$blm_nss   		=  self::$_model::show_model( [], ['id_users' => Session::get('id')], new BlmNssModel);
@@ -89,10 +90,18 @@ class DetailCandidateController extends MasterController
     		$fields['confirmed_nss'] 	=  $candidato[0]->confirmed_nss;
     		$fields['password'] 	    =  "" ;
     		$fields['estados'] 	    	=  $estados;
-    		#$fields['postulaciones'] 	=  $postulaciones;
     		$fields['nss'] 				=  $blm_nss;
     		$fields['postulaciones'] 	=  self::_postulaciones( $postulaciones );
-    		#debuger($fields['postulaciones']);
+    		$fields['pagination'] 	    =  [
+    			 'total'         => $postulaciones->total()
+                ,'current_page'  => $postulaciones->currentPage()
+                ,'per_page'      => $postulaciones->perPage()
+                ,'last_page'     => $postulaciones->lastPage()
+                ,'from'          => $postulaciones->firstItem()
+                ,'to'            => $postulaciones->lastItem()
+    		];
+
+    		#debuger($fields['pagination']);
     	return message(true, $fields , 'Trasaccion exitosa');
 
 
@@ -112,7 +121,7 @@ class DetailCandidateController extends MasterController
     		$blm_nss = self::$_model::show_model( [], ['id_users' => Session::get('id')], new BlmNssModel);
     		
     		if ( !$blm_nss ) {
-    			return message(false,[],'Debe de Agregar al menos un NSS.');
+    			return message(false,[],'¡Debe de Agregar al menos un NSS!');
     		}
     		
     	}
@@ -140,25 +149,32 @@ class DetailCandidateController extends MasterController
            $session[$key] = $value;
         }
     	if ( $response ) {
+    			
+    		Session::put( $session );
+    		$condicion = ['id_users' => Session::get('id'), 'curp' => $blm_details['curp'] ];
+    		$response_details = self::$_model::show_model([],$condicion,new DetailCandidateModel);
+    		if ( $response_details ) {
+    			#se realiza la actualizacion de los datos si es que tiene regitros la tabla.
+    			$update_details = self::$_model::update_model($condicion ,$blm_details,new DetailCandidateModel);
+    			return message( true,$update_details[0],"¡Trasaccion Exitosa!");
+    		}
+    		#se realiza la parte de la inserccion de los datos en la tabla de detalles.
+    		$blm_details['id_users'] = Session::get('id');
+    		#debuger($blm_details);
+    		$select_details = self::$_model::show_model([],['curp' => $blm_details['curp'] ], new DetailCandidateModel);
 
-	    		Session::put( $session );
-	    		$condicion = ['id_users' => Session::get('id') ];
-	    		$response_details = self::$_model::show_model([],$condicion,new DetailCandidateModel);
-	    		#debuger($response_details);
-	    		if ( $response_details ) {
-	    			#se realiza la actualizacion de los datos si es que tiene regitros la tabla.
-	    			$update_details = self::$_model::update_model($condicion ,$blm_details,new DetailCandidateModel);
-	    			return message( true,$update_details[0],"Trasaccion Exitosa");
-	    		}
-	    		#se realiza la parte de la inserccion de los datos en la tabla de detalles.
-	    		$blm_details['id_users'] = Session::get('id');
-	    		#debuger($blm_details);
-	    		$insert = self::$_model::create_model([$blm_details],new DetailCandidateModel);
+    		if ( !$select_details ) {
+    			$insert = self::$_model::create_model([$blm_details],new DetailCandidateModel);
+	    		
 	    		if ( $insert) {
-	    			return message(true,$insert[0],"Trasaccion Exitosa");
+	    			return message(true,$insert[0],"¡Trasaccion Exitosa!");
 	    		}else{
-	    			return message(false,[],"Ocurrio un error");	
+	    			return message(false,[],"¡Ocurrio un error!");	
 	    		}
+    			
+    		}
+    			return message(false,[],"¡Ya existe la CURP que intenta agregar!");
+
 	    }
 	    
 
@@ -175,12 +191,11 @@ class DetailCandidateController extends MasterController
     	if ( !$request ) {
     		return $postulacion;
     	}
-    	
     	for ($i=0; $i < count( $request ); $i++) {
     		$where = ['id' => $request[$i]->id_vacante];
     		$postulacion[] = self::$_model::show_model([],$where,new JobsOffersModel)[0];
+    		#$postulacion[] = JobsOffersModel::where($where)->paginate(3);
     	}
-    	#debuger( $postulacion );
     	return $postulacion;
 
     }

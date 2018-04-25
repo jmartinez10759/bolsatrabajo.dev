@@ -27,8 +27,12 @@ new Vue({
   },
   mixins:[mixins],
   methods:{
-    busqueda_vacantes: function( fields ){
+    busqueda_vacantes: function(){
         console.log(this.datos);
+        var url = domain("vacantes");
+        this.show_general(url,this.datos,function( object ){
+          
+        },function(){});
     },
     postulacion: function(){
 
@@ -56,12 +60,14 @@ new Vue({
       /*se realiza la inserccion de los datos para la postulacion.*/
         var url = domain("postulacion/insert");
         var uri = domain("details/vacante");
-        this.insert_general(url,uri,function(obj){
-          /*var refresh = "details/vacante/show";
-          var fields = { 'id_vacante' : $myLocalStorage.get('id_vacante') };
-            this.get_general(refresh,fields);*/
+        this.insert_general(url,uri,function( obj ){
             $('#terminos').modal('hide');
         },function(){});
+
+        /*var refresh = "details/vacante/show";
+        var fields = { 'id_vacante' : $myLocalStorage.get('id_vacante') };
+        this.get_general(refresh,fields);*/
+
 
 
     }

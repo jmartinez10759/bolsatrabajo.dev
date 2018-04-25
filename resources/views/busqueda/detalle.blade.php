@@ -53,7 +53,7 @@
 						<li><i class="fa fa-envelope"></i><span>@{{datos.email}}</span></li>
 						<li><i class="fa fa-globe"></i><span>@{{datos.account_website_url}}</span></li>
 						<li><i class="fa fa-phone"></i><span></span></li>
-						<li><i class="fa fa-money"></i><span>@{{datos.salary_min}} - @{{datos.salary_max}} MX</span></li>
+						<li><i class="fa fa-money"></i><span>@{{datos.salary_min}} - @{{datos.salary_max}} MXN</span></li>
 					</ul>
 				</div>
 			</div>
