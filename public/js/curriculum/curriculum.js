@@ -1,24 +1,7 @@
-/*Vue.component('date-picker', {
-  template: '<input type="text" class="form-control" />',
-  props: [ 'dateFormat' ],
-  mounted: function() {
-  var self = this;
-  $(this.$el).dateDropper({
-    dateFormat: this.dateFormat,
-    onSelect: function(date) {
-      self.$emit('update-date', date);
-    }
-  });
-  },
-  beforeDestroy: function() {
-    $(this.$el).dateDropper('hide').dateDropper('destroy');
-  }
-});
-*/
 new Vue ({
   el: "#vue-curriculum",
   created: function () {
-    var url = domain("cv/show");
+    var url = domain("../cv/show");
     this.get_general(url,{});
   },
   data: {
@@ -79,8 +62,8 @@ new Vue ({
 
     insert_detalles: function(){
         
-        var url = domain('cv/insert');
-        var uri = domain('cv/show');
+        var url = domain('../cv/insert');
+        var uri = domain('../cv/show');
 
         this.newKeep.id_state     = this.datos.id_state;
         this.newKeep.id_categoria = this.datos.id_categoria;
@@ -101,8 +84,8 @@ new Vue ({
     },
     insert_study: function(){
 
-      var url = domain('study/insert');
-      var uri = domain('cv/show');
+      var url = domain('../study/insert');
+      var uri = domain('../cv/show');
       //setter las propiedades para enviarlas.
       this.newKeep.id_cv        = this.datos.id_cv;
       this.newKeep.escuela      = this.datos.escuela;
@@ -119,8 +102,8 @@ new Vue ({
     },
     insert_jobs: function(){
 
-      var url = domain('jobs/insert');
-      var uri = domain('cv/show');
+      var url = domain('../jobs/insert');
+      var uri = domain('../cv/show');
       //setter las propiedades para enviarlas.
       this.newKeep.id_cv                = this.datos.id_cv;
       this.newKeep.jobs_empresa         = this.datos.jobs_empresa;
@@ -138,8 +121,8 @@ new Vue ({
     },
     insert_skills: function(){
 
-      var url = domain('skills/insert');
-      var uri = domain('cv/show');
+      var url = domain('../skills/insert');
+      var uri = domain('../cv/show');
       //setter las propiedades para enviarlas.
       this.newKeep.id_cv                = this.datos.id_cv;
       this.newKeep.habilidad            = this.datos.habilidad;
@@ -154,38 +137,40 @@ new Vue ({
     },
     update_study: function(){
 
-      var url = domain('study/update');
-      var uri = domain('cv/show');
+      var url = domain('../study/update');
+      var uri = domain('../cv/show');
       this.update_general( url,uri,'modal-edit-educacion' );
 
     },
     update_jobs: function(){
 
-      var url = domain('jobs/update');
-      var uri = domain('cv/show');
+      var url = domain('../jobs/update');
+      var uri = domain('../cv/show');
       this.update_general( url,uri,'modal-edit-experiencia' );
 
     },
     update_skills: function(){
 
-      var url = domain('skills/update');
-      var uri = domain('cv/show');
+      var url = domain('../skills/update');
+      var uri = domain('../cv/show');
       this.update_general( url,uri,'modal-edit-skill' );
       
     },
     delete_study( keep ){
-      var url = domain('study/delete');
-      var uri = domain('cv/show');
+      var url = domain('../study/delete');
+      var uri = domain('../cv/show');
       this.delete_general(url,uri, keep.id );
+    
     },
     delete_jobs( keep ){
-      var url = domain('jobs/delete');
-      var uri = domain('cv/show');
+      var url = domain('../jobs/delete');
+      var uri = domain('../cv/show');
       this.delete_general(url,uri, keep.id );
+    
     },
     delete_skills( keep ){
-      var url = domain('skills/delete');
-      var uri = domain('cv/show');
+      var url = domain('../skills/delete');
+      var uri = domain('../cv/show');
       this.delete_general(url,uri, keep.id );
 
     }
@@ -195,3 +180,9 @@ new Vue ({
 
 
 });
+
+
+var empresa = ['BLA','BURO LABORAL MEXICO','CPA VISION', 'BGT SISTEMAS', 'NETZEN', 'INDUSTRIAS IDEAL','PAE MEXICO','INTELEGIS','AGUA DE MEXICO','STO CONSULTING','CESCIJUC','ICSI COMERCIAL'];
+
+autocomplete("jobs_empresa", empresa);
+autocomplete("jobs_puesto", empresa);

@@ -47,7 +47,9 @@
                         </div>
                         <div class="col-md-7 col-sm-7">
                            <div class="detail-pannel-footer-btn pull-right"><!--<a href="javascript:void(0)" data-toggle="modal" data-target="#apply-job" class="footer-btn grn-btn" title="">Edit Now</a>-->
-                           		<a href="{{ route('upload_cv') }}" id="upload_cv" class="footer-btn blu-btn" title="" style="display: none">Crear Curriculum</a>
+                           		<a href="{{ route('upload_cv') }}" id="upload_cv" class="footer-btn blu-btn" title="" {{ $curriculum }}>
+                           			Crear Curriculum
+                           		</a>
                            </div>
                         </div>
                     </div>
@@ -115,9 +117,9 @@
 													</div>
 												</div>
 												
-												<div class="col-md-1 col-sm-1">
+												<!-- <div class="col-md-1 col-sm-1">
 													<div class="mng-company-action"><a href="#"><i class="fa fa-edit"></i></a><a href="#"><i class="fa fa-trash-o"></i></a></div>
-												</div>
+												</div> -->
 												
 											</div>
 											<span class="tg-themetag tg-featuretag">Premium</span>
@@ -130,6 +132,9 @@
 													«
 												</a>
 											</li>
+											<li v-else class="disabled" >
+												<a> « </a>
+											</li>
 											<li v-for="page in pagesNumber" v-bind:class="[ page == isActived ? 'active' : '']" >
 												<a style="cursor: pointer;" v-on:click.prevent="changePage(page)">@{{page}}
 												</a>
@@ -138,6 +143,9 @@
 												<a style="cursor: pointer;" v-on:click.prevent="changePage(pagination.current_page + 1)">
 													»
 												</a>
+											</li>
+											<li v-else class="disabled" >
+												<a > » </a>
 											</li>
 										</ul>
 									</div>
@@ -545,13 +553,19 @@
 																	<i class="fa fa-plus-circle"></i>
 																</button>
 															</th>
+															<th></th>
 														</tr>
 													</thead>
 													<tbody>
 														<tr v-for="(nss, key ) in datos.nss">
 															<td>@{{key + 1 }}</td>
 															<td>@{{nss.nss}}</td>
-															<td></td>
+															<td>
+																<button type="button" data-toggle="tooltip" title="Editar Registro" class="btn btn-sm" v-on:click.prevent="edit_nss(nss)"><i class="fa fa-edit"></i></button>
+															</td>
+															<td>
+																<button type="button" data-toggle="tooltip" title="Editar Registro" class="btn btn-sm" v-on:click.prevent="destroy_nss(nss)"><i class="fa fa-trash"></i></button>
+															</td>
 														</tr>
 													</tbody>
 												</table>
@@ -620,6 +634,38 @@
 									  </div>
 									</div>
 
+									<!-- Modal -->
+									<div class="modal fade" id="modal-nss-edit" data-backdrop="static" data-keyboard="false">
+									  <div class="modal-dialog modal-sm modal-dialog-centered" role="document">
+									    <div class="modal-content">
+									      <div class="modal-header">
+									        <h5 class="modal-title" id="exampleModalLabel">Registro de NSS</h5>
+									        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+									          <span aria-hidden="true">&times;</span>
+									        </button>
+									      </div>
+									      <div class="modal-body">
+									        	
+									        	<form class="form-horizontal">
+									        		<div class="form-group">
+										                <label for="" class="col-md-4 control-label">NSS</label>
+
+										                <div class="col-md-8">
+									        				<input type="text" id="nss_edit" class="form-control" v-model="fillKeep.nss">
+										                </div>
+										            </div>
+
+									        	</form>
+									      </div>
+									      <div class="modal-footer">
+									        <button type="button" class="btn btn" data-dismiss="modal">Cancelar</button>
+									        <button type="button" class="btn btn" v-on:click.prevent="update_nss()">Actualizar</button>
+									      </div>
+									    </div>
+									  </div>
+									</div>
+
+							
 							</div>
 							<!-- Start All Sec -->
 						</div>  

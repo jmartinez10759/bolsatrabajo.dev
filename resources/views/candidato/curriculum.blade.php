@@ -370,14 +370,14 @@
 						  <div class="form-group">
 						    <label class="control-label col-sm-2" >Empresa</label>
 						    <div class="col-sm-10">
-						      <input type="text" name="jobs_empresa" class="form-control" placeholder="Nombre de la Empresa" v-model="datos.jobs_empresa">
+						      <input type="text" id="jobs_empresa" class="form-control" placeholder="Nombre de la Empresa" v-model="datos.jobs_empresa">
 						    </div>
 						  </div>
 
 						  <div class="form-group">
 						    <label class="control-label col-sm-2" >Puesto</label>
 						    <div class="col-sm-10">
-						      <input type="text" name="jobs_puesto" class="form-control" placeholder="Puesto Desempeñado" v-model="datos.jobs_puesto">
+						      <input type="text" id="jobs_puesto" class="form-control" placeholder="Puesto Desempeñado" v-model="datos.jobs_puesto">
 						    </div>
 						  </div>
 

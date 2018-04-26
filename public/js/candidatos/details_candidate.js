@@ -33,7 +33,8 @@ new Vue({
 
     },
     fillKeep: { 
-       'cargo': ''
+        'id':''
+      ,'cargo': ''
       ,'codigo': ''
       ,'curp': ''
       ,'descripcion': ''
@@ -107,10 +108,10 @@ new Vue({
                 return;
             }
         }else{
-          toastr.error( "Debe de ingresar un NSS" ,"NSS Vacio" );
+          toastr.error( "¡Debe de ingresar un NSS!" ,"NSS Vacio" );
           return;
         }
-        var url = domain("../details/insert/nss");
+        var url = domain("../nss/insert");
         var refresh = domain("../details/show");
         this.insert_general(url,refresh,function(obj){
           $('#modal-nss').modal('hide');
@@ -136,11 +137,27 @@ new Vue({
         
         var url = domain('../details/show');
         var fields = {};
-        axios.get(url,fields).then(response => {
-          this.datos = response.data.result,
-          this.pagination = response.data.result.pagination
+        axios.get(url,fields).then( response => {
+          
+          this.datos = response.data.result;
+          this.pagination = response.data.result.pagination;
+
         });
 
+    },
+    edit_nss: function( fields ){
+        this.edit_general( fields,'modal-nss-edit' );
+    },
+    destroy_nss: function( fields ){
+        var url = domain('../nss/detele');
+        var refresh =  domain('../details/show');
+        this.delete_general(url,refresh,fields.id);
+    },
+    update_nss: function(){
+      var url = domain('../nss/update');
+      var uri = domain('../details/show');
+      this.update_general(url,uri,'modal-nss-edit');
+      
     }
 
   }

@@ -33,9 +33,7 @@ class BusquedaController extends Controller
 
         }
 
-        return view("busqueda.busqueda", [
-            "name" => $response
-            ,'count' => [ 0 => array_to_object([ "con" => count($response) ]) ]  ]  );
+        return view("busqueda.busqueda", ["name" => $response, 'count' => count($response)] );
 
     }
 

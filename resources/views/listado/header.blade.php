@@ -34,3 +34,4 @@
     <!-- Custom style -->
     <link href="{{ asset('css/style.css') }}" rel="stylesheet">
 	<link href="{{ asset('css/responsiveness.css') }}" rel="stylesheet">
+	

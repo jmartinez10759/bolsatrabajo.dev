@@ -29,11 +29,14 @@
 							</form>
 						</div>
 					</div>
+				<div id="vue-serch">
 					<!-- Company Searrch Filter End -->
-					<h2>Hemos encontrado {{ $count['0']->con }} resultados de vacantes</h2>
+					<h2>Hemos encontrado {{ $count }} resultados de vacantes</h2>
 					@if(count($name))
-					@foreach ($name as $data)  
-					<a href="{{ url('detalle/'.$data->id) }}" class="item-click">
+					@foreach ($name as $data) 
+
+					<!-- <div href="{{ url('detalle/'.$data->id) }}" class="item-click" > -->
+					<div class="item-click" style="cursor: pointer;" id_vacante="{{ $data->id }}" v-on:click.prevent="details_vacante({{ $data->id }})">
 						<article>
 							<div class="brows-job-list">
 								<div class="col-md-1 col-sm-2 small-padding">
@@ -59,7 +62,7 @@
 								</div>
 							</div>
 						</article>
-					</a>
+					</div>
 					@endforeach
 					@else
 							<div class="alert alert-dismissable alert-warning">
@@ -69,6 +72,8 @@
 							</div>
 					@endif
 					{{ $name->links() }}
+
+				</div>
 					
 					<!--
 					<div class="row">
@@ -100,10 +105,39 @@
             $myLocalStorage.set('name',data);
             localStorage.setItem("titulo", "Curso de Angular avanzado - Víctor Robles");
               return process(data);*/
-
         return $.get(path, { query: query }, function (data) {
                 return process(data);
             });
+
         }
     });
 </script>
+
+@push('scripts')
+
+<script type="text/javascript">
+new Vue ({
+	el: "#vue-serch",
+	created: function () {
+	},
+	data: {
+	   datos: [],
+	   newKeep: { },
+	   fillKeep: { },
+	},
+	mixins: [mixins],
+	methods: {
+		details_vacante( id_vacante ){
+			//se mete en localstorage el id de vacante para poder hacer la consulta.
+			var url = domain("../details/vacante");
+			$myLocalStorage.set('id_vacante', id_vacante );
+			redirect( url );
+		}
+	}
+});
+</script>
+
+@endpush
+
+
+

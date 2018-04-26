@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Model\BlmEstadosModel;
 use App\Model\JobsOffersModel; #tabla buro
 use App\Model\RequestUserModel;
+use App\Model\BlmCurriculumModel;
 use App\Model\DetailCandidateModel;
 use Illuminate\Support\Facades\Session;
 use App\Model\BlmPostulateCandidateModel;
@@ -27,11 +28,13 @@ class DetailCandidateController extends MasterController
 
     	$where = ['id_users' => Session::get('id') ];
     	$postulaciones  =  self::$_model::show_model( [], $where, new BlmPostulateCandidateModel);
+    	$curriculum   	=  self::$_model::show_model( [], $where, new BlmCurriculumModel);
     	$data = [
     		'nombre_completo' =>  Session::get('name')." ".Session::get('first_surname')
     		,'photo_profile'  =>  ( Session::get('profile') != false )? Session::get('profile'): asset('images/profile/profile.png')
     		,'activo'		  =>  ( Session::get('status') != false )? "Activo": "Desactivado"
     		,'postulaciones'  =>  count($postulaciones)
+    		,'curriculum'  	  =>  ( count($curriculum) )? 'style=display:block' : 'style=display:none'
     	];
 
     	return view('candidato.detailCandidato',$data);
@@ -47,12 +50,10 @@ class DetailCandidateController extends MasterController
 
     	$where = ['id_users' => Session::get('id')];
     	$response  		=  self::$_model::show_model( [], $where, new DetailCandidateModel);
-    	#$postulaciones  =  self::$_model::show_model( [], $where, new BlmPostulateCandidateModel);
     	$postulaciones  =  BlmPostulateCandidateModel::where($where)->paginate(3);
     	$candidato 		=  self::$_model::show_model( [], ['id' => Session::get('id')], new RequestUserModel);
     	$estados   		=  self::$_model::show_model( [], [], new BlmEstadosModel);
-    	$blm_nss   		=  self::$_model::show_model( [], ['id_users' => Session::get('id')], new BlmNssModel);
-    	#debuger($blm_nss);
+    	$blm_nss   		=  self::$_model::show_model( [], $where, new BlmNssModel);
     	$data = [
     		'name' 				=>  Session::get('name')
 			,'first_surname'	=>  Session::get('first_surname')
@@ -205,7 +206,7 @@ class DetailCandidateController extends MasterController
      *@param Request $request [Description]
      *@return void
      */
-    public static function store_nss( Request $request ){
+    /*public static function store_nss( Request $request ){
     	#se realiza la validacion de NSS
     	if ( Session::get('confirmed_nss') == 1 ) {
     		if ( empty($request->nss) ) {
@@ -217,16 +218,20 @@ class DetailCandidateController extends MasterController
     		'id_users' 	=> Session::get('id')
     		,'nss' 		=> $request->nss
     	];
-    	$response = self::$_model::create_model([$fields],new BlmNssModel);
-    	if ($response) {
-    		return message(true,$response,"Trasaccion Existosa");
+    	$response_nss 	= self::$_model::show_model([],[ 'nss' => $request->nss ],new BlmNssModel);
+    	if ($response_nss) {
+    		return message(false,[],"¡Ya se encuentra registrado este NSS.!");
+    	}
+    	$insert_nss 	= self::$_model::create_model([$fields],new BlmNssModel);
+    	if ($insert_nss) {
+    		return message(true,$insert_nss,"Trasaccion Existosa");
     	}
 
     	return message(false,[],"Ocurrio un Error. Favor de Verificar");
 
 
 
-    }
+    }*/
 
 
 }

@@ -75,9 +75,24 @@ Route::group(['middleware' => ['auth.session']], function() {
         ,'as'       => 'details.insert'
     ]);
 
-    Route::post('/details/insert/nss', [
-        'uses'      => 'Candidatos\DetailCandidateController@store_nss'
+    Route::post('/nss/insert', [
+        'uses'      => 'Candidatos\NssController@store'
         ,'as'       => 'details.insert.nss'
+    ]);
+
+    Route::get('/nss/show', [
+        'uses'      => 'Candidatos\NssController@show'
+        ,'as'       => 'details.nss.show'
+    ]);
+
+    Route::put('/nss/update', [
+        'uses'      => 'Candidatos\NssController@update'
+        ,'as'       => 'details.nss.update'
+    ]);
+
+    Route::delete('/nss/detele/{id}', [
+        'uses'      => 'Candidatos\NssController@destroy'
+        ,'as'       => 'nss.delete'
     ]);
 
 ########################################## RUTAS DEL CURRICULUM  #################################################

@@ -5,7 +5,6 @@ new Vue({
       'id_vacante' : $myLocalStorage.get('id_vacante')
     } 
     var url = domain("../details/vacante/show");
-    //var url = "../details/vacante/show";
     this.get_general( url, fields);
   },
   data: {
@@ -36,9 +35,7 @@ new Vue({
           ,'edo'            : this.datos.state_id
           ,'utilisateur'    : true
         };
-        this.show_general(url,fields,function( object ){
-            //redirect("/");
-        },function(){});
+        this.get_general(url,fields);
         redirect("../vacantes");
     },
     postulacion: function(){
@@ -65,10 +62,11 @@ new Vue({
           return; 
       }
       /*se realiza la inserccion de los datos para la postulacion.*/
-        var url = domain("postulacion/insert");
-        var uri = domain("details/vacante");
+        var url = domain("../postulacion/insert");
+        var uri = domain("../details/vacante");
         this.insert_general(url,uri,function( obj ){
             $('#terminos').modal('hide');
+             redirect("../vacantes");
         },function(){});
 
         /*var refresh = "details/vacante/show";
