@@ -287,6 +287,17 @@
 
     }
 
+    if (!function_exists('json_to_array')) {
+
+        function json_to_array ( $json = false ) {
+            if ( $json ) {
+                return  json_decode( $json, TRUE );
+            }
+       
+        }
+
+    }
+
     if (!function_exists('build_icon')) {
 
         function build_icon($u = array(), $event= false, $icon = false, $attr = false) {

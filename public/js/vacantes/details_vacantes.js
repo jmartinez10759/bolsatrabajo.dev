@@ -31,9 +31,15 @@ new Vue({
     busqueda_vacantes: function(){
         console.log(this.datos);
         var url = domain("vacantes");
-        this.show_general(url,this.datos,function( object ){
-
+        var fields = {
+          'vacantes'        : this.datos.name
+          ,'edo'            : this.datos.state_id
+          ,'utilisateur'    : true
+        };
+        this.show_general(url,fields,function( object ){
+            //redirect("/");
         },function(){});
+        redirect("../vacantes");
     },
     postulacion: function(){
 
