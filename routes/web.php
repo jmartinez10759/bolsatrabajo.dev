@@ -58,10 +58,10 @@ Route::post('/password/verify', [
         'uses'      => 'Auth\PasswordController@store'
         ,'as'       => 'password.verify'
     ]);
-Route::get('/password/reset/{code}', [
+/*Route::get('/password/reset/{code}', [
         'uses'      => 'Auth\PasswordController@create'
         ,'as'       => 'password.reset'
-    ]);
+    ]);*/
 
 
 ######################################## MIDDLEWARE SESSION  ################################################

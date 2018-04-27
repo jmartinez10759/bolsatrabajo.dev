@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Candidatos;
 #use App\User;
 use App\Model\MasterModel;
 use Illuminate\Http\Request;
-use Illuminate\Mail\Message;
+#use Illuminate\Mail\Message;
 use App\Model\RequestUserModel;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;

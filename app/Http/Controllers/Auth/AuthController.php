@@ -101,7 +101,7 @@ class AuthController extends MasterController
                 $condicion = ['confirmed_code' => $confirmed_code ];
                 $consulta = MasterModel::show_model([], $condicion , new RequestUserModel );
                 #debuger($consulta);
-                if( count( $consulta ) > 0 ){
+                if( $consulta ){
                     $session = [];
                     foreach ($consulta[0] as $key => $value) {
                         $session[$key] = $value;
@@ -118,7 +118,6 @@ class AuthController extends MasterController
         return redirect()->route('/');
 
     }
-
 
 
 

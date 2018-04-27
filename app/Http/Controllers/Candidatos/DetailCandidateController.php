@@ -142,6 +142,7 @@ class DetailCandidateController extends MasterController
 			}    		
 
     	}
+        #debuger($blm_details);
     	#se realiza el actualizado de los datos de la tabla del request_users
     	$where = ['id' => Session::get('id')];
     	$session = [];

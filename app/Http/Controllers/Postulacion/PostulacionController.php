@@ -45,13 +45,7 @@ class PostulacionController extends MasterController
     	$nss_bolsa  = self::$_model::show_model([],['id_users' => Session::get('id')], new BlmNssModel);
     	$response_curp = self::$_model::show_model([],['curp' => $desc_users[0]->curp], new PersonModel);
     	$list_vacantes = self::$_model::show_model([],['id' => $request->id_vacante], new Listado);
-    	#debuger($nss_bolsa);
-    	if ( $response_curp ) {
-    		$insert_persons = $response_curp[0];
-    	}else{
-    		#insertar los datos en la tabla persons
-    		$insert_persons = self::store_persons( $desc_users, $persons );
-    	}
+    	$insert_persons = self::store_persons( $response_curp, $desc_users, $persons );
     	#debuger($insert_persons);
     	if ( $insert_persons ) {
 
@@ -108,7 +102,7 @@ class PostulacionController extends MasterController
      *@access public 
      *@return array [Description]
      */
-    public static function store_persons( $desc_users, $persons ){
+    public static function store_persons( $response_curp, $desc_users, $persons ){
     	#arreglo para almacenar los registros para la tabla de persons
     	$data_table_person = [];
     	$key_person = ['name','first_surname','second_surname'];
@@ -125,6 +119,11 @@ class PostulacionController extends MasterController
     		}
     	}
     	$data_table_person['state_id'] = $desc_users[0]->id_state;
+    	#debuger($response_curp);
+    	if ($response_curp) {
+    		$where = ['id' => $response_curp[0]->id];
+			return self::$_model::update_model( $where ,$data_table_person ,new PersonModel)[0];
+    	}
 		return self::$_model::insert_model( [$data_table_person] ,new PersonModel)[0];
 
     }
