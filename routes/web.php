@@ -31,11 +31,6 @@ Route::post('/logout', [
         ,'as'       => 'logout'
     ]);
 
-Route::get('/password', [
-        'uses'      => 'Auth\AuthController@password'
-        ,'as'       => 'password.request'
-    ]);
-
 Route::get('/register', [
         'uses'      => 'Candidatos\CandidatosController@index'
         ,'as'       => 'register'
@@ -45,7 +40,7 @@ Route::post('/register/insert', [
         'uses'      => 'Candidatos\CandidatosController@create'
         ,'as'       => 'create'
     ]);
-#RUTA PARA OBTENER EL DETALLE DE LA VACANTE 
+######################################RUTA PARA OBTENER EL DETALLE DE LA VACANTE ###################################
 Route::get('/details/vacante', [
         'uses'      => 'Vacantes\DetailsJobsController@index'
         ,'as'       => 'details.vacante'
@@ -54,6 +49,20 @@ Route::get('/details/vacante/show', [
         'uses'      => 'Vacantes\DetailsJobsController@show'
         ,'as'       => 'details.vacante.show'
     ]);
+######################################RECUPERACION DE LA CONTRASEÑA ###################################
+Route::get('/password/request', [
+        'uses'      => 'Auth\PasswordController@index'
+        ,'as'       => 'password.request'
+    ]);
+Route::post('/password/verify', [
+        'uses'      => 'Auth\PasswordController@store'
+        ,'as'       => 'password.verify'
+    ]);
+Route::get('/password/reset/{code}', [
+        'uses'      => 'Auth\PasswordController@create'
+        ,'as'       => 'password.reset'
+    ]);
+
 
 ######################################## MIDDLEWARE SESSION  ################################################
 Route::group(['middleware' => ['auth.session']], function() {

@@ -298,6 +298,20 @@
 
     }
 
+    if (!function_exists('object_to_array')) {
+
+        function object_to_array ( $object = false ) {
+            if ( $object ) {
+                return  json_decode( json_encode( $object ), TRUE );
+            }
+       
+        }
+
+    }
+
+
+
+
     if (!function_exists('build_icon')) {
 
         function build_icon($u = array(), $event= false, $icon = false, $attr = false) {

@@ -50,7 +50,6 @@ new Vue({
             $('#correo').parent().parent().addClass('has-error');
             return;
         }
-
         //se manda a llamar la funcion de insertar de vue master_vue.js
         this.insert_general( uri, '' ,function(json){
 

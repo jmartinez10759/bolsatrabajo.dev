@@ -119,7 +119,7 @@ var mixins = {
 
 /*
 
-mixins = {
+new Vue = ({
   el: "#vue-curriculum",
   created: function () {
     this.get_general();
@@ -134,11 +134,12 @@ mixins = {
     },
 
   },
+  mixins : [mixins],
   methods:{
 
   }
 
 
-}
+});
 
 */

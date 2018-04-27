@@ -83,10 +83,10 @@ class CandidatosController extends MasterController
 		        		->subject('Por favor confirma tu correo');
 		    });
 
-			return message(true,$response[0],"Favor de verificar su correo, para continuar");
+			return message(true,$response[0],"¡Favor de verificar su correo, para continuar.!");
 			#AuthController::getData( $response[0] );
 		}else{
-			return message(false,[],"Ocurrio un error");
+			return message(false,[],"¡Ocurrio un error, favor de verificar.!");
 		}
 
 
