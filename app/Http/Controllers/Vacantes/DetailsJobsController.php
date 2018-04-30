@@ -36,10 +36,12 @@ class DetailsJobsController extends MasterController
      */
     public static function show( Request $request ){
 
+
     	$where = ['id' => $request->id_vacante,'is_active' => 1];
     	$response = self::$_model::show_model([],$where, new Listado );
+        $postulate = self::$_model::show_model([],['id_vacante' => $request->id_vacante,'id_users' => Session::get('id')], new BlmPostulateCandidateModel);
     	$data = [];
-    	if ( sizeof( $response ) > 0 ) {
+    	if ( $response  ) {
     		$empresa = self::$_model::show_model(['id','name','postal_code','website_url'],['id' => $response[0]->account_id], new AccountsModel );
     		$data = [
     			'id' 					=> $response[0]->id
@@ -65,7 +67,8 @@ class DetailsJobsController extends MasterController
 	    	}
 	    	$data['confirmed_nss'] = isset($candidato[0]->confirmed_nss)?$candidato[0]->confirmed_nss: null;
 	    	$data['nss'] 		   = isset($nss)? $nss :[];
-	    	$data['curp'] 		   = isset($details[0]->curp)? $details[0]->curp: null;
+            $data['curp']          = isset($details[0]->curp)? $details[0]->curp: null;
+	    	$data['is_postulate']  = ($postulate)? false: true;
 	    	#debuger($data);
     		return message(true,$data,"Trasaccion Existosa");
     	}

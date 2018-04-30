@@ -12,6 +12,7 @@ use App\Model\RequestUserModel;
 use App\Model\BlmCurriculumModel;
 use App\Model\DetailCandidateModel;
 use App\Model\AccountsPersonsModel; #tabla buro
+use Illuminate\Support\Facades\Mail;
 use App\Model\CandidateJobOffersModel; #tabla buro
 use Illuminate\Support\Facades\Session;
 use App\Model\SocialSecurityNumberModel; #tabla buro
@@ -45,8 +46,8 @@ class PostulacionController extends MasterController
     	$nss_bolsa  = self::$_model::show_model([],['id_users' => Session::get('id')], new BlmNssModel);
     	$response_curp = self::$_model::show_model([],['curp' => $desc_users[0]->curp], new PersonModel);
     	$list_vacantes = self::$_model::show_model([],['id' => $request->id_vacante], new Listado);
-    	$insert_persons = self::store_persons( $response_curp, $desc_users, $persons );
-    	#debuger($insert_persons);
+    	#debuger($persons);
+        $insert_persons = self::store_persons( $response_curp, $desc_users, $persons );
     	if ( $insert_persons ) {
 
     		$insert_nss = self::store_social_security_numbers( $insert_persons, $nss_bolsa, $list_vacantes );
@@ -65,6 +66,19 @@ class PostulacionController extends MasterController
 		    				$data = ['id_users' => Session::get('id'), 'id_vacante' => $request->id_vacante];
 	    					$insert_postulacion = self::$_model::create_model([$data], new BlmPostulateCandidateModel);
 	    					if ($insert_postulacion) {
+
+                                $postulate = [
+                                    'name'              => $persons[0]->name
+                                    ,'email'            => $persons[0]->email
+                                    ,'name_vacante'     => $list_vacantes[0]->name
+                                    ,'name_company'     => $list_vacantes[0]->title
+                                ];
+                                #envio de correo para validar si existe el correo antes ingresado.
+                                Mail::send('emails.postulacion', $postulate, function($message) use ( $postulate ) {
+                                    $message->to( $postulate['email'], $postulate['name'] )
+                                            ->from('jorge.martinez@burolaboralmexico.com','Buro Laboral Mexico')
+                                            ->subject('Postulacion exitosa');
+                                });
 
 		    					return message(true,$insert_postulacion,"¡Te has postulado exitosamente!");
 	    						
@@ -166,6 +180,7 @@ class PostulacionController extends MasterController
     	}
 
 		return $result;
+    
     }
     /**
      *Metodo para insertar los registros accounts_persons

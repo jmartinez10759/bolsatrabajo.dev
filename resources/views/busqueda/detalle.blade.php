@@ -74,7 +74,7 @@
 				
 				<div class="col-md-7 col-sm-7">
 					<div class="detail-pannel-footer-btn pull-right">
-						<a data-toggle="modal" data-target="#terminos" style="cursor: pointer;" class="footer-btn grn-btn" title="">Postularse</a>
+						<a data-toggle="modal" data-target="#terminos" style="cursor: pointer;" class="footer-btn grn-btn" title="" v-show="datos.is_postulate">Postularse</a>
 						<a v-on:click.prevent="busqueda_vacantes()" style="cursor: pointer;" class="footer-btn blu-btn" title="">Listado de Vacantes</a>
 					</div>
 				</div>

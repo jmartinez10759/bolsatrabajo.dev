@@ -29,12 +29,14 @@ class DetailCandidateController extends MasterController
     	$where = ['id_users' => Session::get('id') ];
     	$postulaciones  =  self::$_model::show_model( [], $where, new BlmPostulateCandidateModel);
     	$curriculum   	=  self::$_model::show_model( [], $where, new BlmCurriculumModel);
+        $details        =  self::$_model::show_model( [], $where, new DetailCandidateModel);        
+
     	$data = [
     		'nombre_completo' =>  Session::get('name')." ".Session::get('first_surname')
     		,'photo_profile'  =>  ( Session::get('profile') != false )? Session::get('profile'): asset('images/profile/profile.png')
     		,'activo'		  =>  ( Session::get('status') != false )? "Activo": "Desactivado"
     		,'postulaciones'  =>  count($postulaciones)
-    		,'curriculum'  	  =>  ( count($curriculum) )? 'style=display:block' : 'style=display:none'
+    		,'curriculum'  	  =>  ( $details || count($curriculum) )? 'style=display:block' : 'style=display:none'
     	];
 
     	return view('candidato.detailCandidato',$data);
