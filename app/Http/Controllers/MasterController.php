@@ -16,11 +16,15 @@ class MasterController extends Controller
     protected $_tipo = "application/json";
     public $_http;
     public static $_model;
+    protected static $message_success;
+    protected static $message_error;
 
     public function __construct(){
 
         $this->_client = new Client();
         self::$_model = new MasterModel();
+        self::$message_success = "¡Transaccion Exitosa.!";
+        self::$message_error = "¡Ocurrio un error, favor de verificar.!";
         #$this->middleware('guest');
         #$this->_domain = $_SERVER['HTTP_HOST'];
         #$this->_http   = $_SERVER['REQUEST_SCHEME'];

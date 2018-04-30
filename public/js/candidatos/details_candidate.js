@@ -80,7 +80,7 @@ new Vue({
     insert: function(){
 
         var url = domain("../details/insert");
-        var uri = domain('../details/show');
+        var refresh = domain('../details/show');
         for ( var i in this.newKeep){
             this.newKeep[i] = this.datos[i];
         }
@@ -91,11 +91,11 @@ new Vue({
             return;
         }
 
-        this.insert_general(url, uri, function( obj ){
+        this.insert_general(url, refresh, function( object ){
           
           $('#upload_cv').show('slow');
 
-        },function( obj ){ });
+        },function( object ){ });
 
     },
     insert_nss: function(){

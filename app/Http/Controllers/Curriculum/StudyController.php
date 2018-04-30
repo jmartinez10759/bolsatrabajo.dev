@@ -29,10 +29,10 @@ class StudyController extends MasterController
         }
         $response = self::$_model::create_model([$data], new BlmStudyModel);
         
-        if (count($response) > 0) {
-            return message(true,$response[0],"Transaccion Exitosa");
+        if ( $response ) {
+            return message(true,$response[0],self::$message_success);
         }else{
-            return message(false,[],"Ocurrio Un Error");
+            return message(false,[],self::$message_error);
         }
 
     }
@@ -49,7 +49,7 @@ class StudyController extends MasterController
     	if (count($response) > 0 ) {
     		return message(true, $response[0], "Actualizacion Correcta");
     	}else{
-    		return message(false, $response[0], "Ocurrio un error");
+    		return message(false, $response[0], self::$message_error);
     	}
 
     }
@@ -66,7 +66,7 @@ class StudyController extends MasterController
     	if (count( $response ) == 0) {
     		return message(true,$response,'Registro eliminado correctamente');
     	}else{
-    		return message(false,[],'Ocurrio un error');
+    		return message(false,[],self::$message_error);
     	}
 
 

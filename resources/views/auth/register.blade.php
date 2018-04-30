@@ -83,7 +83,7 @@
             </div> -->
             <div class="form-group">
                 <div class="col-md-6 col-md-offset-4">
-                    <button type="button" class="btn btn-primary" v-on:click.prevent="insertar('register/insert')">
+                    <button type="button" class="btn btn-primary" v-on:click.prevent="insertar()">
                         Registrar Candidato
                     </button>
                 </div>

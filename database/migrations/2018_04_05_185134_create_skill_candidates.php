@@ -18,6 +18,7 @@ class CreateSkillCandidates extends Migration
             $table->integer('id_cv');
             $table->string('habilidad')->nullable();
             $table->integer('porcentaje')->nullable();
+            $table->integer('skill_orden')->default(1);
             $table->timestamps();
         });
     }

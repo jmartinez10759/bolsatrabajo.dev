@@ -23,9 +23,11 @@ new Vue ({
         ,'fecha_final': ''
         ,'habilidad': ''
         ,'porcentaje': ''
+        ,'skill_orden': ''
         ,'jobs_empresa' : ''
         ,'jobs_puesto' : ''
         ,'jobs_descripcion': ''
+        ,'jobs_orden': ''
         ,'jobs_fecha_inicio': ''
         ,'jobs_fecha_final': ''
         //,'url_cv': ''
@@ -48,9 +50,11 @@ new Vue ({
         ,'fecha_final': ''
         ,'habilidad': ''
         ,'porcentaje': ''
+        ,'skill_orden': ''
         ,'jobs_empresa' : ''
         ,'jobs_puesto' : ''
         ,'jobs_descripcion': ''
+        ,'jobs_orden': ''
         ,'jobs_fecha_inicio': ''
         ,'jobs_fecha_final': ''
         //,'url_cv': ''
@@ -181,8 +185,7 @@ new Vue ({
 
 });
 
-
-var empresa = ['BLA','BURO LABORAL MEXICO','CPA VISION', 'BGT SISTEMAS', 'NETZEN', 'INDUSTRIAS IDEAL','PAE MEXICO','INTELEGIS','AGUA DE MEXICO','STO CONSULTING','CESCIJUC','ICSI COMERCIAL'];
+/*var empresa = ['BLA','BURO LABORAL MEXICO','CPA VISION', 'BGT SISTEMAS', 'NETZEN', 'INDUSTRIAS IDEAL','PAE MEXICO','INTELEGIS','AGUA DE MEXICO','STO CONSULTING','CESCIJUC','ICSI COMERCIAL'];
 
 autocomplete("jobs_empresa", empresa);
-autocomplete("jobs_puesto", empresa);
+autocomplete("jobs_puesto", empresa);*/

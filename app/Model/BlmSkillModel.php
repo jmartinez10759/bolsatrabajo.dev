@@ -12,6 +12,7 @@ class BlmSkillModel extends Model
         ,'id_cv'
         ,'habilidad'
         ,'porcentaje'
+        ,'skill_orden'
     ];
     
 }

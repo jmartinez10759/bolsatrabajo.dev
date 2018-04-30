@@ -15,16 +15,33 @@ class MasterModel extends Model
 	 *@param object $clase [description] 
 	 *@return object 
 	 */
-	public static function show_model( $params = array(), $where= array(), $clase= false ){
+	public static function show_model( $params = [], $where= [], $clase= false, $orderby = [] ){
+		
+		$fields = ($orderby)? array_keys($orderby)[0] : false;
+		$order = ($orderby)? array_values($orderby)[0] : false;
 		
 		if ( $where ) {
-			if ( $params) { 
-				$response = $clase::where( $where )->select( $params )->get();
+			if ( $params ) {
+				if ($orderby) {
+					$response = $clase::where( $where )->select( $params )->orderBy( $fields, $order )->get();
+				 }else{
+					$response = $clase::where( $where )->select( $params )->get();
+				 }
 			}else{ 
-				$response = $clase::where( $where )->get(); 
+				if ($orderby) {
+					$response = $clase::where( $where )->orderBy( $fields, $order )->get(); 
+				}else{
+					$response = $clase::where( $where )->get(); 
+				}
 			}
 
-		}else{ $response = $clase::all(); }
+		}else{ 
+			if ($orderby) {
+				$response = $clase::all()->orderBy( $fields, $order );
+			}else{
+				$response = $clase::all();
+			}
+		}
 
 		$result = [];
 		$i = 0;
@@ -58,7 +75,7 @@ class MasterModel extends Model
 	public static function create_model( $data = array(), $clase =false ){
 
 		#se realiza la inserccion de los datos
-		if ( count($data) > 0 ) {
+		if ( $data ) {
 
 			for ($i=0; $i < count($data); $i++) { 
 				$clase::create( $data[$i] );
@@ -108,7 +125,7 @@ class MasterModel extends Model
 	 */
 	public static function insert_model( $data = array(), $clase =false ){
 		#se realiza la inserccion de los datos
-		if ( count($data) > 0 ) {
+		if ( $data ) {
 			$lasted = [];
 			for ($i=0; $i < count($data); $i++) { 
 				$clase::insert( $data[$i] );

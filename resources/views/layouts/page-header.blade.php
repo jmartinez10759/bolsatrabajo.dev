@@ -20,7 +20,7 @@
                                 <!-- <input type="text" class="form-control" placeholder="Find Freelancer"> -->
                                 <!-- <a href="{{route('details')}}">Bienvenid@ {{ Session::get('name') }} {{ Session::get('first_surname') }}</a> -->
                             </li>
-                            <li class="dropdown megamenu-fw"><a href="#" class="dropdown-toggle" data-toggle="dropdown">Brows</a>
+                            <!-- <li class="dropdown megamenu-fw"><a href="#" class="dropdown-toggle" data-toggle="dropdown">Brows</a>
                                 <ul class="dropdown-menu megamenu-content" role="menu">
                                     <li>
                                         <div class="row">
@@ -37,7 +37,7 @@
                                                         <li><a href="search-job.html">Search Job</a></li>
                                                     </ul>
                                                 </div>
-                                            </div><!-- end col-3 -->
+                                            </div>
                                             <div class="col-menu col-md-3">
                                                 <h6 class="title">For Candidate</h6>
                                                 <div class="content">
@@ -52,7 +52,7 @@
                                                         <li><a href="candidate-profile.html">Candidate Profile</a></li>                                                         
                                                     </ul>
                                                 </div>
-                                            </div><!-- end col-3 -->
+                                            </div>
                                             <div class="col-menu col-md-3">
                                                 <h6 class="title">For Employee</h6>
                                                 <div class="content">
@@ -81,19 +81,19 @@
                                                         <li><a href="new-job-detail.html">New Job Detail</a></li>
                                                     </ul>
                                                 </div>
-                                            </div><!-- end col-3 -->
-                                        </div><!-- end row -->
+                                            </div>
+                                        </div>
                                     </li>
                                 </ul>
-                            </li>
-                            <li><a href="blog.html">Blog</a></li>
+                            </li> -->
+                            <li><a href="">Blog</a></li>
                         </ul>
                         <ul class="nav navbar-nav navbar-right" data-in="fadeInDown" data-out="fadeOutUp">
                             <!-- <li><a href="{{route('details')}}">Bienvenid@ {{ Session::get('name') }}</a></li> -->
                             <li><a href="pricing.html"><i class="fa fa-sign-in" aria-hidden="true"></i>Paquetes</a></li>
                             @if( !Session::has('name') )
                                 <li class="left-br">
-                                    <a href="javascript:void(0)"  data-toggle="modal" data-target="#signup" class="signin">Acceso Usuarios</a>
+                                    <a data-toggle="modal" data-target="#signup" class="signin" style="cursor: pointer;">Acceso Usuarios</a>
                                 </li>
                             @else
                                 <li class="">

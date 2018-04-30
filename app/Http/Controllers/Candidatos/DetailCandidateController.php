@@ -63,7 +63,7 @@ class DetailCandidateController extends MasterController
 			,'email' 			=>  Session::get('email')		
 			#,'password' 		=>  Session::get('password')		
     	];
-    	if ( count($response) == 0  ) {
+    	if ( !$response) {
 
     		$fields = [
     			'telefono' 			=> ""
@@ -103,8 +103,7 @@ class DetailCandidateController extends MasterController
                 ,'from'          => $postulaciones->firstItem()
                 ,'to'            => $postulaciones->lastItem()
     		];
-
-    		#debuger($fields['pagination']);
+    		#debuger($fields);
     	return message(true, $fields , 'Trasaccion exitosa');
 
 
@@ -159,8 +158,8 @@ class DetailCandidateController extends MasterController
     		$response_details = self::$_model::show_model([],$condicion,new DetailCandidateModel);
     		if ( $response_details ) {
     			#se realiza la actualizacion de los datos si es que tiene regitros la tabla.
-    			$update_details = self::$_model::update_model($condicion ,$blm_details,new DetailCandidateModel);
-    			return message( true,$update_details[0],"¡Trasaccion Exitosa!");
+    			$update_details = self::$_model::update_model(['id_users' => Session::get('id') ] ,$blm_details,new DetailCandidateModel);
+    			return message( true,$update_details[0],"¡Transaccion Exitosa!");
     		}
     		#se realiza la parte de la inserccion de los datos en la tabla de detalles.
     		$blm_details['id_users'] = Session::get('id');
@@ -171,9 +170,9 @@ class DetailCandidateController extends MasterController
     			$insert = self::$_model::create_model([$blm_details],new DetailCandidateModel);
 	    		
 	    		if ( $insert) {
-	    			return message(true,$insert[0],"¡Trasaccion Exitosa!");
+	    			return message(true,$insert[0],"¡Transaccion Exitosa!");
 	    		}else{
-	    			return message(false,[],"¡Ocurrio un error!");	
+	    			return message(false,[],"¡Ocurrio un error, favor de verificar.!");	
 	    		}
     			
     		}
@@ -198,43 +197,10 @@ class DetailCandidateController extends MasterController
     	for ($i=0; $i < count( $request ); $i++) {
     		$where = ['id' => $request[$i]->id_vacante];
     		$postulacion[] = self::$_model::show_model([],$where,new JobsOffersModel)[0];
-    		#$postulacion[] = JobsOffersModel::where($where)->paginate(3);
     	}
     	return $postulacion;
 
     }
-     /**
-     *Metodo para insertar el numero de seguro social. 
-     *@access public
-     *@param Request $request [Description]
-     *@return void
-     */
-    /*public static function store_nss( Request $request ){
-    	#se realiza la validacion de NSS
-    	if ( Session::get('confirmed_nss') == 1 ) {
-    		if ( empty($request->nss) ) {
-    			return message(false,[],'No puede estar Vacio el campo de NSS.');
-    		}
-    		
-    	}
-    	$fields = [
-    		'id_users' 	=> Session::get('id')
-    		,'nss' 		=> $request->nss
-    	];
-    	$response_nss 	= self::$_model::show_model([],[ 'nss' => $request->nss ],new BlmNssModel);
-    	if ($response_nss) {
-    		return message(false,[],"¡Ya se encuentra registrado este NSS.!");
-    	}
-    	$insert_nss 	= self::$_model::create_model([$fields],new BlmNssModel);
-    	if ($insert_nss) {
-    		return message(true,$insert_nss,"Trasaccion Existosa");
-    	}
-
-    	return message(false,[],"Ocurrio un Error. Favor de Verificar");
-
-
-
-    }*/
 
 
 }

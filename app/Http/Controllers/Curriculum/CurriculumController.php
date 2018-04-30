@@ -50,21 +50,25 @@ class CurriculumController extends MasterController
     	$where = ['id_users' => Session::get('id')];
     	$curriculum = self::$_model::show_model([],$where, new BlmCurriculumModel);
     	$data = [];
-    	if ( count( $curriculum ) > 0) {
+    	if ( $curriculum ) {
     		
+    		$fields = ['nombre','puesto','descripcion'];
+
     		for ($i=0; $i < count($curriculum); $i++) { 
     			
     			foreach ($curriculum[$i] as $key => $value) {
-    				if ($key != "nombre" || $key != "puesto" || $key != "descripcion") {
+    				#if ($key != "nombre" || $key != "puesto" || $key != "descripcion") {
+    				if (!in_array($key, $fields)) {
     					$data[$key] = $value;	
     				}
     			}
 
     		}
+
     		$where = [ 'id_cv'	=>  $data['id'] ];
-    		$study 			= self::$_model::show_model( [], $where , new BlmStudyModel );
-	    	$jobs 			= self::$_model::show_model( [], $where , new BlmJobsModel );
-	    	$skills 		= self::$_model::show_model( [], $where , new BlmSkillModel );
+    		$study 			= self::$_model::show_model( [], $where , new BlmStudyModel,[ 'id_nivel' => 'ASC'] );
+	    	$jobs 			= self::$_model::show_model( [], $where , new BlmJobsModel,[ 'jobs_orden' => 'ASC'] );
+	    	$skills 		= self::$_model::show_model( [], $where , new BlmSkillModel,[ 'skill_orden' => 'ASC'] );
 
     		$data['status'] 		= 1;
             $data['id_nivel']       = 3;
@@ -88,7 +92,7 @@ class CurriculumController extends MasterController
     		$data['id_cv'] 		= "";
     		
     	}
-    	//Datos que deben de existir siempre.
+    	#Datos que deben de existir siempre.
         $data['nombre']         = $candidate[0]->name." ".$candidate[0]->first_surname." ".$candidate[0]->second_surname;
     	$data['email'] 		    = $candidate[0]->email;
 		$data['puesto'] 		= $detalles[0]->cargo;
@@ -104,16 +108,19 @@ class CurriculumController extends MasterController
         $data['fecha_final']    = date('Y-m-d');
         #seccion de trabajos
         $data['jobs_empresa']        = "";            
-        $data['jobs_puesto']        = "";         
+        $data['jobs_puesto']         = "";         
         $data['jobs_descripcion']    = "";            
+        $data['jobs_orden']    		 = "";            
         $data['jobs_fecha_inicio']   = date('Y-m-d');           
         $data['jobs_fecha_final']    = date('Y-m-d');            
         #seccion de habilidades
         $data['habilidad'] 			= "";
         $data['porcentaje'] 		= "";
+        $data['skill_orden'] 		= "";
+
         $data['estados'] 			= $estados;
     	#debuger($data);
-        return message( true, $data ,"Transaccion exitosa" );
+        return message( true, $data ,self::$message_success );
 
     }
     /**

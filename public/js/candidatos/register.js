@@ -33,7 +33,7 @@ new Vue({
   mixins:[mixins],
   methods:{
     
-    insertar: function( uri ){
+    insertar: function(){
         //se realiza las validaciones de los datos de NSS y CURP
         /*if ( !nssValido(this.newKeep.nss) ) {
             toastr.error( validate ,"NSS Incorrecto" );
@@ -45,13 +45,14 @@ new Vue({
             $('#curp').parent().parent().addClass('has-error');
             return;
         }*/
+        var url = domain("../register/insert");
         if ( !emailValidate(this.newKeep.correo) ) {
             toastr.error( validate ,"Correo Incorrecto" );
             $('#correo').parent().parent().addClass('has-error');
             return;
         }
         //se manda a llamar la funcion de insertar de vue master_vue.js
-        this.insert_general( uri, '' ,function(json){
+        this.insert_general( url, '' ,function(json){
 
             $.each(this.newKeep,function(key, value){
                 $('#'+key).parent().parent().removeClass('has-error');

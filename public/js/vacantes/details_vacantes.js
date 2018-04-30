@@ -63,10 +63,11 @@ new Vue({
       }
       /*se realiza la inserccion de los datos para la postulacion.*/
         var url = domain("../postulacion/insert");
-        var uri = domain("../details/vacante");
-        this.insert_general(url,uri,function( obj ){
+        var refresh = domain("../details/vacante");
+        this.insert_general(url,refresh,function( obj ){
             $('#terminos').modal('hide');
-             redirect("../vacantes");
+            buildSweetAlert('¡Postulacion Exitosa.!',"Se postulo exitosamente a la vacante.","success");
+             //redirect("../vacantes");
         },function(){});
 
         /*var refresh = "details/vacante/show";
