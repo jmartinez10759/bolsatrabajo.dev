@@ -11487,6 +11487,7 @@ function requestAjaxSend(pathUrl, data, success, beforeSend, error, complete, do
             done();
         }
     });
+
 }
 /**
  * Verifica la sesion del usuario
@@ -11560,7 +11561,7 @@ function send_post(data, url, target, debug){
                 hiddenField[i] = document.createElement("input");
                 hiddenField[i].setAttribute("type", "hidden");
                 hiddenField[i].setAttribute("id", keys[i]);
-                hiddenField[i].setAttribute("name", "data["+keys[i]+"]");
+                hiddenField[i].setAttribute("name", keys[i]);
                 hiddenField[i].setAttribute("value", data[keys[i]]);
                 form.appendChild(hiddenField[i]);
             }
@@ -12679,6 +12680,22 @@ function check_status_xhr(status, title, text, type, accept) {
               closeAllLists(e.target);
         });
     
+    }
+    /**
+     *Funcion para conveertir mayusculas y/o minusculas
+     *{{ @param }} {{ @string }}
+     *{{ @param }} {{ @type }}
+     *{{return }}
+     */
+    convert_letters = function( string, type ){
+
+        if (type == "UPPER") {
+            return string.toUpperCase();
+        }
+        if (type == "LOWER") {
+            return string.toLowerCase();
+        }
+
     }
     /* 
      * To change this license header, choose License Headers in Project Properties.

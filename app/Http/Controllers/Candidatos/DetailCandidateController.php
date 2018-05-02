@@ -129,21 +129,29 @@ class DetailCandidateController extends MasterController
     	}
     	$claves_users = ['name','first_surname','second_surname','email'];
     	$claves_details = ['name','first_surname','second_surname','email','password','nss'];
+        $claves_upper = ['direccion','cargo','curp'];
     	foreach ($request->all() as $key => $value) {
 
-    		if (in_array($key, $claves_users)) {
-    			$request_users[$key] = $value;
-    		}
-    		if ($key == "password" && $value != false) {
-    			$request_users[$key] = sha1($value);
-    			
-    		}
-			if( !in_array($key, $claves_details) ){
-				$blm_details[$key] = $value;
-			}    		
+    		if ( in_array($key, $claves_users) ) {
+                if ($key == "email") {
+                    $request_users[$key] = $value;
+                }else{
+                    $request_users[$key] = strtoupper($value);
+                }
+            }
+            if ($key == "password" && $value != false) {
+                $request_users[$key] = sha1($value);
+                
+            }
+            if( !in_array($key, $claves_details) ){
+                $blm_details[$key] = $value;
+            }
+            if (in_array($key, $claves_upper)) {
+                $blm_details[$key] = strtoupper($value);
+            }    		
 
     	}
-        #debuger($blm_details);
+        #debuger($request_users);
     	#se realiza el actualizado de los datos de la tabla del request_users
     	$where = ['id' => Session::get('id')];
     	$session = [];

@@ -487,19 +487,20 @@
 											<h3>Editar Perfil</h3>
 										</div>
 										<!-- <div class="col-sm-6"></div> -->
-										
+										<!-- text-transform: lowercase; -->
+
 										<div class="edit-pro">
 											<div class="col-md-4 col-sm-6">
 												<label>Nombre</label>
-												<input type="text" class="form-control" v-model="datos.name" >
+												<input type="text" class="form-control" v-model="datos.name" style="text-transform: uppercase;">
 											</div>
 											<div class="col-md-4 col-sm-6">
 												<label>Primer Apellido</label>
-												<input type="text" class="form-control" v-model="datos.first_surname" >
+												<input type="text" class="form-control" v-model="datos.first_surname" style="text-transform: uppercase;">
 											</div>
 											<div class="col-md-4 col-sm-6">
 												<label>Segundo Apellido</label>
-												<input type="text" class="form-control" v-model="datos.second_surname" >
+												<input type="text" class="form-control" v-model="datos.second_surname" style="text-transform: uppercase;">
 											</div>
 											<div class="col-md-4 col-sm-6">
 												<label>Email</label>
@@ -515,16 +516,16 @@
 											</div>
 											<div class="col-md-4 col-sm-6">
 												<label>Direccion</label>
-												<input type="text" id="direccion" class="form-control" v-model="datos.direccion">
+												<input type="text" id="direccion" class="form-control" v-model="datos.direccion" style="text-transform: uppercase;">
 											</div>
 											<div class="col-md-4 col-sm-6">
 												<label>Curp*</label>
-												<input type="text" id="curp" class="form-control" v-model="datos.curp">
+												<input type="text" id="curp" class="form-control" v-model="datos.curp" style="text-transform: uppercase;">
 											</div>
 											
 											<div class="col-md-4 col-sm-6">
 												<label>Cargo</label>
-												<input type="text" id="cargo" class="form-control" v-model="datos.cargo">
+												<input type="text" id="cargo" class="form-control" v-model="datos.cargo" style="text-transform: uppercase;">
 											</div>
 											<!-- <div class="col-md-4 col-sm-6">
 												<label>Ciudad</label>

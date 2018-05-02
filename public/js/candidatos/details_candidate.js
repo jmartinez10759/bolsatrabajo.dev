@@ -84,7 +84,7 @@ new Vue({
         for ( var i in this.newKeep){
             this.newKeep[i] = this.datos[i];
         }
-
+        
         if ( !curpValida(this.newKeep.curp) ) {
             toastr.error( validate ,"Curp Incorrecto" );
             $('#curp').parent().addClass('has-error');

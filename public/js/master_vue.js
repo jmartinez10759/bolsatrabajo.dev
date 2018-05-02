@@ -6,6 +6,7 @@ var update      = "Registro actualizado corretamente.";
 var validate    = "Favor de Verificar los campos color Rojo";
 var expired     = "Sesion Expirada.";
 var csrf_token  = { 'X-CSRF-TOKEN': document.getElementsByTagName("META")['3'].content }
+var _token      = csrf_token[ Object.keys( csrf_token )[0] ];
 var params = {};
 
 var mixins = {

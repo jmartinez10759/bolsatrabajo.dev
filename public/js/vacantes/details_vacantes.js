@@ -15,6 +15,9 @@ new Vue({
        ,'nss' : ''
        ,'confirmed_nss' : ''
        ,'id_vacante' : ''
+       ,'vacantes':''
+       ,'edo' : ''
+       ,'utilisateur' : ''
     },
     fillKeep: { 
       'terminos_condiciones': false
@@ -22,21 +25,24 @@ new Vue({
       ,'nss' : ''
       ,'confirmed_nss' : ''
       ,'id_vacante' : ''
+      ,'vacantes' :''
+      ,'edo' : ''
+      ,'utilisateur' : ''
     },
 
   },
   mixins:[mixins],
   methods:{
     busqueda_vacantes: function(){
-        console.log(this.datos);
-        var url = domain("vacantes");
+        var url = domain("../vacantes");
         var fields = {
-          'vacantes'        : this.datos.name
+           '_token'         : _token
+          ,'vacantes'       : this.datos.name
           ,'edo'            : this.datos.state_id
           ,'utilisateur'    : true
         };
-        this.get_general(url,fields);
-        redirect("../vacantes");
+        send_post(fields,url);
+
     },
     postulacion: function(){
 
@@ -66,8 +72,10 @@ new Vue({
         var refresh = domain("../details/vacante");
         this.insert_general(url,refresh,function( obj ){
             $('#terminos').modal('hide');
-            buildSweetAlert('¡Postulacion Exitosa.!',"Se postulo exitosamente a la vacante.","success");
-             //redirect("../vacantes");
+            //buildSweetAlert('¡Postulacion Exitosa.!',"Se postulo exitosamente a la vacante.","success");
+            buildSweetAlertOptions('¡Postulacion Exitosa.!',"Se postulo exitosamente a la vacante.",function(){
+             redirect("../vacantes");
+            });
         },function(){});
 
         /*var refresh = "details/vacante/show";

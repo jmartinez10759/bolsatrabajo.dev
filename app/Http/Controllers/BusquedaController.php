@@ -13,17 +13,35 @@ class BusquedaController extends Controller
 {
      public function scope( Request $request )
     {
+        #debuger( $request->all() );
         $vacantes   = isset($request->vacantes)? $request->vacantes : false;
         $edo        = isset($request->edo)? $request->edo : false;
-        $modulo    = isset($request->utilisateur)? $request->utilisateur : false;
-        ###### Busqueda #######
-        $response = Listado::where( 'name','LIKE',"%".$vacantes."%" )
-                            ->orwhere('state_id','=',$edo )              
-                            ->orderBy('id', 'DESC')->paginate(5);
+        $modulo     = isset($request->utilisateur)? $request->utilisateur : false;
 
-        #debuger($response);
-        ###### count resutados ######
-        /*$count = DB::select('SELECT count(*) con FROM job_offers where name like :vacantes or state_id =:curp',['vacantes'      => $vacantes,'curp' =>$edo] );*/
+        if ($edo) {
+            
+            $consulta = Listado::where( 'name','LIKE',"%".$vacantes."%" )
+                            ->where('state_id','=',$edo )              
+                            ->orderBy('id', 'DESC')
+                            ->paginate(5);
+
+            if ( count($consulta) == 0 ) {
+                
+                $consulta = Listado::where( 'name','LIKE',"%".$vacantes."%" )
+                            ->orwhere('state_id','=',$edo )              
+                            ->orderBy('id', 'DESC')
+                            ->paginate(5);   
+            }
+
+        }else{
+
+             $consulta =  Listado::where( 'name','LIKE',"%".$vacantes."%" )
+                            ->orderBy('id', 'DESC')
+                            ->paginate(5);
+        }
+
+        $response = $consulta;
+        ###### Busqueda #######
         if ( Session::get('id') && !$modulo ) {
             ###### Insercion de datos, Si hay session#####
             $cookie= BlmCookieSerchModel::create([
