@@ -8,8 +8,9 @@ use App\Model\BlmCookieSerchModel;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
+use App\Http\Controllers\MasterController;
 
-class BusquedaController extends Controller
+class BusquedaController extends MasterController
 {
      public function scope( Request $request )
     {
@@ -17,41 +18,44 @@ class BusquedaController extends Controller
         $vacantes   = isset($request->vacantes)? $request->vacantes : false;
         $edo        = isset($request->edo)? $request->edo : false;
         $modulo     = isset($request->utilisateur)? $request->utilisateur : false;
+        $values = ([ 'name'=> $vacantes ,'state_id' => $edo ]);
 
-        if ($edo) {
+          if ( Session::get('id') && !$modulo ) {
+
+            $cookie= BlmCookieSerchModel::create([
+                'id_users'      => Session::get('id')
+                ,'vacante'      => $vacantes
+            ]);
+
+        }
+
+        if ( $values['state_id'] ) {
             
-            $consulta = Listado::where( 'name','LIKE',"%".$vacantes."%" )
-                            ->where('state_id','=',$edo )              
+            $consulta = Listado::where( 'name','LIKE',"%".$values['name']."%" )
+                            ->where('state_id','=',$values['state_id'] )              
                             ->orderBy('id', 'DESC')
                             ->paginate(5);
 
             if ( count($consulta) == 0 ) {
                 
-                $consulta = Listado::where( 'name','LIKE',"%".$vacantes."%" )
-                            ->orwhere('state_id','=',$edo )              
+                $consulta = Listado::where( 'name','LIKE',"%".$values['name']."%" )
+                            ->orwhere('state_id','=', $values['state_id'] )              
                             ->orderBy('id', 'DESC')
                             ->paginate(5);   
             }
 
         }else{
 
-             $consulta =  Listado::where( 'name','LIKE',"%".$vacantes."%" )
+             $consulta =  Listado::where( 'name','LIKE',"%".$values['name']."%" )
                             ->orderBy('id', 'DESC')
                             ->paginate(5);
         }
 
         $response = $consulta;
-        ###### Busqueda #######
-        if ( Session::get('id') && !$modulo ) {
-            ###### Insercion de datos, Si hay session#####
-            $cookie= BlmCookieSerchModel::create([
-                'id_users'  => Session::get('id')
-                ,'vacante'   => $vacantes
-            ]);
-
-        }
-
         return view("busqueda.busqueda", ["name" => $response, 'count' => count($response)] );
+
+      
+
 
     }
 

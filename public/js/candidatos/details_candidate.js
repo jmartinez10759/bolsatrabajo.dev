@@ -146,12 +146,15 @@ new Vue({
 
     },
     edit_nss: function( fields ){
+
         this.edit_general( fields,'modal-nss-edit' );
+
     },
     destroy_nss: function( fields ){
         var url = domain('../nss/detele');
         var refresh =  domain('../details/show');
         this.delete_general(url,refresh,fields.id);
+    
     },
     update_nss: function(){
       var url = domain('../nss/update');

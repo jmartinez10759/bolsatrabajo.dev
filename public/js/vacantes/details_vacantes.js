@@ -71,11 +71,12 @@ new Vue({
         var url = domain("../postulacion/insert");
         var refresh = domain("../details/vacante");
         this.insert_general(url,refresh,function( obj ){
+            
             $('#terminos').modal('hide');
-            //buildSweetAlert('¡Postulacion Exitosa.!',"Se postulo exitosamente a la vacante.","success");
             buildSweetAlertOptions('¡Postulacion Exitosa.!',"Se postulo exitosamente a la vacante.",function(){
-             redirect("../vacantes");
-            });
+              redirect("../vacantes");
+            },"success",false);
+
         },function(){});
 
         /*var refresh = "details/vacante/show";
