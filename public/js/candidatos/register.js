@@ -45,7 +45,8 @@ new Vue({
             $('#curp').parent().parent().addClass('has-error');
             return;
         }*/
-        var url = domain("../register/insert");
+        //var url = domain("../register/insert");
+        var url = "register/insert";
         if ( !emailValidate(this.newKeep.correo) ) {
             toastr.error( validate ,"Correo Incorrecto" );
             $('#correo').parent().parent().addClass('has-error');
@@ -72,9 +73,11 @@ new Vue({
     },
     inicio_sesion: function(){
 
-        var url = domain("../login");
+        //var url = domain("../login");
+        var url = "login";
         this.insert_general(url,'',function( obj ){
-            redirect( domain('../details') );
+            //redirect( domain('../details') );
+            redirect( 'details');
         },function(){
             $('#email').parent().parent().addClass('has-error');
             $('#password').parent().parent().addClass('has-error');

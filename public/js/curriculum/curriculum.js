@@ -1,7 +1,7 @@
 new Vue ({
   el: "#vue-curriculum",
   created: function () {
-    var url = domain("../cv/show");
+    var url = ("cv/show");
     this.get_general(url,{});
   },
   data: {
@@ -66,8 +66,8 @@ new Vue ({
 
     insert_detalles: function(){
         
-        var url = domain('../cv/insert');
-        var uri = domain('../cv/show');
+        var url = ('cv/insert');
+        var uri = ('cv/show');
 
         this.newKeep.id_state     = this.datos.id_state;
         this.newKeep.id_categoria = this.datos.id_categoria;
@@ -88,8 +88,8 @@ new Vue ({
     },
     insert_study: function(){
 
-      var url = domain('../study/insert');
-      var uri = domain('../cv/show');
+      var url = ('study/insert');
+      var uri = ('cv/show');
       //setter las propiedades para enviarlas.
       this.newKeep.id_cv        = this.datos.id_cv;
       this.newKeep.escuela      = this.datos.escuela;
@@ -106,8 +106,8 @@ new Vue ({
     },
     insert_jobs: function(){
 
-      var url = domain('../jobs/insert');
-      var uri = domain('../cv/show');
+      var url = ('jobs/insert');
+      var uri = ('cv/show');
       //setter las propiedades para enviarlas.
       this.newKeep.id_cv                = this.datos.id_cv;
       this.newKeep.jobs_empresa         = this.datos.jobs_empresa;
@@ -125,8 +125,8 @@ new Vue ({
     },
     insert_skills: function(){
 
-      var url = domain('../skills/insert');
-      var uri = domain('../cv/show');
+      var url = ('skills/insert');
+      var uri = ('cv/show');
       //setter las propiedades para enviarlas.
       this.newKeep.id_cv                = this.datos.id_cv;
       this.newKeep.habilidad            = this.datos.habilidad;
@@ -141,40 +141,40 @@ new Vue ({
     },
     update_study: function(){
 
-      var url = domain('../study/update');
-      var uri = domain('../cv/show');
+      var url = ('study/update');
+      var uri = ('cv/show');
       this.update_general( url,uri,'modal-edit-educacion' );
 
     },
     update_jobs: function(){
 
-      var url = domain('../jobs/update');
-      var uri = domain('../cv/show');
+      var url = ('jobs/update');
+      var uri = ('cv/show');
       this.update_general( url,uri,'modal-edit-experiencia' );
 
     },
     update_skills: function(){
 
-      var url = domain('../skills/update');
-      var uri = domain('../cv/show');
+      var url = ('skills/update');
+      var uri = ('cv/show');
       this.update_general( url,uri,'modal-edit-skill' );
       
     },
     delete_study( keep ){
-      var url = domain('../study/delete');
-      var uri = domain('../cv/show');
+      var url = ('study/delete');
+      var uri = ('cv/show');
       this.delete_general(url,uri, keep.id );
     
     },
     delete_jobs( keep ){
-      var url = domain('../jobs/delete');
-      var uri = domain('../cv/show');
+      var url = ('jobs/delete');
+      var uri = ('cv/show');
       this.delete_general(url,uri, keep.id );
     
     },
     delete_skills( keep ){
-      var url = domain('../skills/delete');
-      var uri = domain('../cv/show');
+      var url = ('skills/delete');
+      var uri = ('cv/show');
       this.delete_general(url,uri, keep.id );
 
     }

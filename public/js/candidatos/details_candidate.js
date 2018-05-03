@@ -3,7 +3,7 @@ new Vue({
   el: "#vue-details",
   created: function () {
     this.consulta_general();
-    /*var url = domain('details/show');
+    /*var url = ('details/show');
     this.get_general(url,{});*/
   },
   data: {
@@ -79,8 +79,8 @@ new Vue({
 
     insert: function(){
 
-        var url = domain("../details/insert");
-        var refresh = domain('../details/show');
+        var url = ("details/insert");
+        var refresh = ('details/show');
         for ( var i in this.newKeep){
             this.newKeep[i] = this.datos[i];
         }
@@ -111,8 +111,8 @@ new Vue({
           toastr.error( "¡Debe de ingresar un NSS!" ,"NSS Vacio" );
           return;
         }
-        var url = domain("../nss/insert");
-        var refresh = domain("../details/show");
+        var url = ("nss/insert");
+        var refresh = ("details/show");
         this.insert_general(url,refresh,function(obj){
           $('#modal-nss').modal('hide');
         },function(){});
@@ -120,7 +120,7 @@ new Vue({
     },
     details_vacantes( data ){
           
-        var url = domain("../details/vacante");
+        var url = ("details/vacante");
         //se mete en localstorage el id de vacante para poder hacer la consulta.
         $myLocalStorage.set('id_vacante', data.id );
         redirect( url );
@@ -128,14 +128,15 @@ new Vue({
     },
     changePage( page ){
         this.pagination.current_page = page;
-        var url = domain('../details/show');
+        var url = ('details/show');
         var fields = {'page': page};
         this.get_general( url,fields );
     
     },
     consulta_general: function(){
         
-        var url = domain('../details/show');
+        //var url = ('details/show');
+        var url = 'details/show';
         var fields = {};
         axios.get(url,fields).then( response => {
           
@@ -151,14 +152,14 @@ new Vue({
 
     },
     destroy_nss: function( fields ){
-        var url = domain('../nss/detele');
-        var refresh =  domain('../details/show');
+        var url = ('nss/detele');
+        var refresh =  ('details/show');
         this.delete_general(url,refresh,fields.id);
     
     },
     update_nss: function(){
-      var url = domain('../nss/update');
-      var uri = domain('../details/show');
+      var url = ('nss/update');
+      var uri = ('details/show');
       this.update_general(url,uri,'modal-nss-edit');
       
     }
