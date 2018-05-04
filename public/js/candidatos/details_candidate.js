@@ -3,8 +3,6 @@ new Vue({
   el: "#vue-details",
   created: function () {
     this.consulta_general();
-    /*var url = ('details/show');
-    this.get_general(url,{});*/
   },
   data: {
     datos: [],
@@ -136,7 +134,7 @@ new Vue({
     consulta_general: function(){
         
         //var url = ('details/show');
-        var url = 'details/show';
+        var url = ('details/show');
         var fields = {};
         axios.get(url,fields).then( response => {
           

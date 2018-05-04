@@ -1,7 +1,7 @@
 new Vue({
   el: ".vue-candidate",
   created: function () {
-    //this.get_general('');
+
   },
   data: {
     datos: [],
@@ -34,19 +34,8 @@ new Vue({
   methods:{
     
     insertar: function(){
-        //se realiza las validaciones de los datos de NSS y CURP
-        /*if ( !nssValido(this.newKeep.nss) ) {
-            toastr.error( validate ,"NSS Incorrecto" );
-            $('#nss').parent().parent().addClass('has-error');
-            return;
-        }
-        if ( !curpValida(this.newKeep.curp) ) {
-            toastr.error( validate ,"Curp Incorrecto" );
-            $('#curp').parent().parent().addClass('has-error');
-            return;
-        }*/
-        //var url = domain("../register/insert");
-        var url = "register/insert";
+
+        var url = ("register/insert");
         if ( !emailValidate(this.newKeep.correo) ) {
             toastr.error( validate ,"Correo Incorrecto" );
             $('#correo').parent().parent().addClass('has-error');
@@ -59,7 +48,7 @@ new Vue({
                 $('#'+key).parent().parent().removeClass('has-error');
             });
             $('#signup').modal('hide');
-            //redirect( domain('details') );
+            //redirect( ('details') );
         },function(){
             
             $.each(this.newKeep,function(key, value){
@@ -73,11 +62,9 @@ new Vue({
     },
     inicio_sesion: function(){
 
-        //var url = domain("../login");
-        var url = "login";
-        this.insert_general(url,'',function( obj ){
-            //redirect( domain('../details') );
-            redirect( 'details');
+        var url = ("login");
+        this.insert_general(url,'',function( object ){
+            redirect( ('details') );
         },function(){
             $('#email').parent().parent().addClass('has-error');
             $('#password').parent().parent().addClass('has-error');

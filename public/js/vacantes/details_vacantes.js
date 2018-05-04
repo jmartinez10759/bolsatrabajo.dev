@@ -70,7 +70,7 @@ new Vue({
       /*se realiza la inserccion de los datos para la postulacion.*/
         var url = ("postulacion/insert");
         var refresh = ("details/vacante");
-        this.insert_general(url,refresh,function( obj ){
+        this.insert_general(url,refresh,function( object ){
             
             $('#terminos').modal('hide');
             buildSweetAlertOptions('¡Postulacion Exitosa.!',"Se postulo exitosamente a la vacante.",function(){
@@ -78,12 +78,6 @@ new Vue({
             },"success",false);
 
         },function(){});
-
-        /*var refresh = "details/vacante/show";
-        var fields = { 'id_vacante' : $myLocalStorage.get('id_vacante') };
-        this.get_general(refresh,fields);*/
-
-
 
     }
 
