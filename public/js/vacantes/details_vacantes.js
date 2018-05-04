@@ -34,7 +34,7 @@ new Vue({
   mixins:[mixins],
   methods:{
     busqueda_vacantes: function(){
-        var url = domain("vacantes");
+        var url = ("vacantes");
         var fields = {
            '_token'         : _token
           ,'vacantes'       : this.datos.name

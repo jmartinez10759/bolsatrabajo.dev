@@ -126,7 +126,7 @@ new Vue({
     },
     changePage( page ){
         this.pagination.current_page = page;
-        var url = ('details/show');
+        var url = domain('details/show');
         var fields = {'page': page};
         this.get_general( url,fields );
     
