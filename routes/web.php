@@ -36,9 +36,9 @@ Route::get('/register', [
         ,'as'       => 'register'
     ]);
 
-Route::post('/register/insert', [
+Route::post('register/insert', [
         'uses'      => 'Candidatos\CandidatosController@create'
-        ,'as'       => 'create'
+        ,'as'       => 'register.insert'
     ]);
 ######################################RUTA PARA OBTENER EL DETALLE DE LA VACANTE ###################################
 Route::get('/details/vacante', [

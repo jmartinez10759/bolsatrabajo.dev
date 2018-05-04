@@ -35,7 +35,7 @@ new Vue({
     
     insertar: function(){
 
-        var url = ("register/insert");
+        var url = domain("register/insert");
         if ( !emailValidate(this.newKeep.correo) ) {
             toastr.error( validate ,"Correo Incorrecto" );
             $('#correo').parent().parent().addClass('has-error');
@@ -62,9 +62,9 @@ new Vue({
     },
     inicio_sesion: function(){
 
-        var url = ("login");
+        var url = domain("login");
         this.insert_general(url,'',function( object ){
-            redirect( ('details') );
+            redirect( domain('details') );
         },function(){
             $('#email').parent().parent().addClass('has-error');
             $('#password').parent().parent().addClass('has-error');

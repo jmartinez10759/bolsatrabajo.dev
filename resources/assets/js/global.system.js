@@ -987,8 +987,24 @@ function check_status_xhr(status, title, text, type, accept) {
      */
      domain = function( url ){
         //var path_url = window.location.protocol+"//"+window.location.host+"/"+url;
-        var path_url = window.location.origin+window.location.pathname+url;
-        return path_url;
+        //var path_url = window.location.origin+window.location.pathname+"/"+url;
+        var path_url = "";
+        var ruta = window.location.pathname.split("/");
+
+        if ( ruta.length > 0 ) {
+            for( var i in ruta ){
+                if ( ruta[2] ) {
+                    return window.location.protocol+"//"+window.location.host+"/"+ruta[1]+"/"+ruta[2]+"/"+url;
+                }if( ruta[1] && !ruta[2]){
+                   return window.location.protocol+"//"+window.location.host+"/"+ruta[1]+"/"+url;
+                }else{
+                   return window.location.protocol+"//"+window.location.host+"/"+url;
+                }
+            }
+        }else{
+            return window.location.protocol+"//"+window.location.host+"/"+url;
+        }
+        
 
      }
      /**

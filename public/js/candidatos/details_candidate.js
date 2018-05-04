@@ -77,8 +77,8 @@ new Vue({
 
     insert: function(){
 
-        var url = ("details/insert");
-        var refresh = ('details/show');
+        var url = domain("details/insert");
+        var refresh = domain('details/show');
         for ( var i in this.newKeep){
             this.newKeep[i] = this.datos[i];
         }
@@ -109,8 +109,8 @@ new Vue({
           toastr.error( "¡Debe de ingresar un NSS!" ,"NSS Vacio" );
           return;
         }
-        var url = ("nss/insert");
-        var refresh = ("details/show");
+        var url = domain("nss/insert");
+        var refresh = domain("details/show");
         this.insert_general(url,refresh,function(obj){
           $('#modal-nss').modal('hide');
         },function(){});
@@ -118,7 +118,7 @@ new Vue({
     },
     details_vacantes( data ){
           
-        var url = ("details/vacante");
+        var url = domain("details/vacante");
         //se mete en localstorage el id de vacante para poder hacer la consulta.
         $myLocalStorage.set('id_vacante', data.id );
         redirect( url );
@@ -134,7 +134,7 @@ new Vue({
     consulta_general: function(){
         
         //var url = ('details/show');
-        var url = ('details/show');
+        var url = domain('details/show');
         var fields = {};
         axios.get(url,fields).then( response => {
           
@@ -150,14 +150,14 @@ new Vue({
 
     },
     destroy_nss: function( fields ){
-        var url = ('nss/detele');
-        var refresh =  ('details/show');
+        var url = domain('nss/detele');
+        var refresh =  domain('details/show');
         this.delete_general(url,refresh,fields.id);
     
     },
     update_nss: function(){
-      var url = ('nss/update');
-      var uri = ('details/show');
+      var url = domain('nss/update');
+      var uri = domain('details/show');
       this.update_general(url,uri,'modal-nss-edit');
       
     }

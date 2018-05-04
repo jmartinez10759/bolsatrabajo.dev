@@ -4,7 +4,7 @@ new Vue({
     var fields  = {
       'id_vacante' : $myLocalStorage.get('id_vacante')
     } 
-    var url = ("details/vacante/show");
+    var url = domain("details/vacante/show");
     this.get_general( url, fields);
   },
   data: {
@@ -34,7 +34,7 @@ new Vue({
   mixins:[mixins],
   methods:{
     busqueda_vacantes: function(){
-        var url = ("vacantes");
+        var url = domain("vacantes");
         var fields = {
            '_token'         : _token
           ,'vacantes'       : this.datos.name
@@ -68,13 +68,13 @@ new Vue({
           return; 
       }
       /*se realiza la inserccion de los datos para la postulacion.*/
-        var url = ("postulacion/insert");
-        var refresh = ("details/vacante");
+        var url = domain("postulacion/insert");
+        var refresh = domain("details/vacante");
         this.insert_general(url,refresh,function( object ){
             
             $('#terminos').modal('hide');
             buildSweetAlertOptions('¡Postulacion Exitosa.!',"Se postulo exitosamente a la vacante.",function(){
-              redirect("vacantes");
+              redirect( domain("vacantes") );
             },"success",false);
 
         },function(){});

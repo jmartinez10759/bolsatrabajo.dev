@@ -22,8 +22,8 @@ new Vue ({
             $('#emails').parent().parent().addClass('has-error');
             return;
         }
-        var url = ("password/verify");
-        var refresh = ("password/request");
+        var url = domain("password/verify");
+        var refresh = domain("password/request");
         this.insert_general(url,refresh,function( object ){
         	$('#signup').modal('show');
         },function(){});
