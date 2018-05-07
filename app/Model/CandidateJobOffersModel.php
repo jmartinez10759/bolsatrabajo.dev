@@ -8,6 +8,7 @@ class CandidateJobOffersModel extends Model
 {
     
 	protected $table = "candidates_job_offers";
+	protected $connection = "blm_mysql";
     public $fillable = [
     	'id'
 		,'candidate_id'

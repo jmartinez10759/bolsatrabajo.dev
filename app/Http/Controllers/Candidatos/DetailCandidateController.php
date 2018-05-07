@@ -33,7 +33,7 @@ class DetailCandidateController extends MasterController
 
     	$data = [
     		'nombre_completo' =>  Session::get('name')." ".Session::get('first_surname')
-    		,'photo_profile'  =>  ( Session::get('profile') != false )? Session::get('profile'): asset('images/profile/profile.png')
+    		,'photo_profile'  =>  ( $details[0]->photo  )? asset( $details[0]->photo ) : asset('images/profile/profile.png')
     		,'activo'		  =>  ( Session::get('status') != false )? "Activo": "Desactivado"
     		,'postulaciones'  =>  count($postulaciones)
     		,'curriculum'  	  =>  ( $details || count($curriculum) )? 'style=display:block' : 'style=display:none'
@@ -72,7 +72,8 @@ class DetailCandidateController extends MasterController
 				,'curp' 			=> ""				
 				,'cargo' 			=> ""
 				,'descripcion' 		=> ""
-				,'id_state' 	    => 9
+                ,'id_state'         => 9
+				,'url_file' 	    => 'images/profile/profile.png'
     		];
 
     	}else{
@@ -83,18 +84,19 @@ class DetailCandidateController extends MasterController
 				,'curp' 			=> $response[0]->curp
 				,'cargo' 			=> $response[0]->cargo
 				,'descripcion' 		=> $response[0]->descripcion
-				,'id_state' 	    => $response[0]->id_state
-    		];
-    	}
-    		$fields['name'] 			=  $data['name']; 
-    		$fields['first_surname'] 	=  $data['first_surname'] ;
-    		$fields['second_surname']   =  $data['second_surname'] ;
-    		$fields['email'] 			=  $data['email'] ;
-    		$fields['confirmed_nss'] 	=  $candidato[0]->confirmed_nss;
-    		$fields['password'] 	    =  "" ;
-    		$fields['estados'] 	    	=  $estados;
-    		$fields['nss'] 				=  $blm_nss;
-    		$fields['postulaciones'] 	=  self::_postulaciones( $postulaciones );
+                ,'id_state'         => $response[0]->id_state
+    		    ,'photo' 	        => ( $response[0]->photo )? $response[0]->photo : 'images/profile/profile.png'
+            ];
+        }
+            $fields['name']             =  $data['name']; 
+            $fields['first_surname']    =  $data['first_surname'] ;
+            $fields['second_surname']   =  $data['second_surname'] ;
+            $fields['email']            =  $data['email'] ;
+            $fields['confirmed_nss']    =  $candidato[0]->confirmed_nss;
+            $fields['password']         =  "" ;
+            $fields['estados']          =  $estados;
+            $fields['nss']              =  $blm_nss;
+            $fields['postulaciones']    =  self::_postulaciones( $postulaciones );
     		$fields['pagination'] 	    =  [
     			 'total'         => $postulaciones->total()
                 ,'current_page'  => $postulaciones->currentPage()
@@ -104,7 +106,7 @@ class DetailCandidateController extends MasterController
                 ,'to'            => $postulaciones->lastItem()
     		];
     		#debuger($fields);
-    	return message(true, $fields , 'Trasaccion exitosa');
+    	return message(true, $fields , '¡Trasaccion exitosa!');
 
 
     }
@@ -115,7 +117,7 @@ class DetailCandidateController extends MasterController
      *@return void
      */
     public static function store( Request $request ){
-
+        #debuger( $request->all() );
     	$request_users = [];
     	$blm_details = [];
     	#se realiza la validacion de NSS
@@ -128,7 +130,7 @@ class DetailCandidateController extends MasterController
     		
     	}
     	$claves_users = ['name','first_surname','second_surname','email'];
-    	$claves_details = ['name','first_surname','second_surname','email','password','nss'];
+    	$claves_details = ['name','first_surname','second_surname','email','password','nss','confirmed_nss'];
         $claves_upper = ['direccion','cargo','curp'];
     	foreach ($request->all() as $key => $value) {
 
@@ -160,11 +162,11 @@ class DetailCandidateController extends MasterController
            $session[$key] = $value;
         }
     	if ( $response ) {
-    			
-    		Session::put( $session );
-    		$condicion = ['id_users' => Session::get('id'), 'curp' => $blm_details['curp'] ];
-    		$response_details = self::$_model::show_model([],$condicion,new DetailCandidateModel);
-    		if ( $response_details ) {
+            Session::put( $session );
+            $condicion = ['id_users' => Session::get('id'), 'curp' => $blm_details['curp'] ];
+            $response_details = self::$_model::show_model([],$condicion,new DetailCandidateModel);
+            if ( $response_details ) {
+    			#debuger($blm_details);
     			#se realiza la actualizacion de los datos si es que tiene regitros la tabla.
     			$update_details = self::$_model::update_model(['id_users' => Session::get('id') ] ,$blm_details,new DetailCandidateModel);
     			return message( true,$update_details[0],"¡Transaccion Exitosa!");
@@ -209,6 +211,33 @@ class DetailCandidateController extends MasterController
     	return $postulacion;
 
     }
+    /**
+     *Metodo para hacer la consulta de la vacante 
+     *@access public
+     *@param $request [Description]
+     *@return void
+     */
+    public static function upload_file( Request $request ){
 
+        $files = $request->file('file');
+        $archivo = "";
+        for ($i=0; $i < count($files) ; $i++) { 
+            
+            $nombre_temp    = $files[$i]->getClientOriginalName();
+            $extension      = strtolower($files[$i]->getClientOriginalExtension());
+            $archivo        = Session::get('id').".".$extension;
+            $path           = public_path()."/images/profile/";
+            $files[$i]->move($path,$archivo);
+        }
+         $url = public_path().'/images/profile/'.$archivo;
+         #verificamos si el archivo existe y lo retornamos
+         if ( file_exists( $url) ){
+            Session::put( ['profile' => "/images/profile/".$archivo ] );
+           return message( true, ['url_file' => "/images/profile/".$archivo ],"¡Trasaccion Exitosa.!" );
+         }else{
+           return message( false,[],"¡Ocurrio un error al subir el archivo.!" );
+         }
+
+    }
 
 }

@@ -17,5 +17,6 @@ class DetailCandidateModel extends Model
 		,'curp'
 		,'cargo'
 		,'descripcion'
+		,'photo'
     ];
 }

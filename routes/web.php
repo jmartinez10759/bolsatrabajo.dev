@@ -83,6 +83,11 @@ Route::group(['middleware' => ['auth.session']], function() {
         'uses'      => 'Candidatos\DetailCandidateController@store'
         ,'as'       => 'details.insert'
     ]);
+    Route::post('/details/upload', [
+        'uses'      => 'Candidatos\DetailCandidateController@upload_file'
+        ,'as'       => 'details.upload_file'
+    ]);
+    
 
     Route::post('/nss/insert', [
         'uses'      => 'Candidatos\NssController@store'

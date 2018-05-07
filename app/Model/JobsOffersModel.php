@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class JobsOffersModel extends Model
 {
     protected $table = "job_offers";
+    protected $connection = "blm_mysql";
     public $fillable = [
     	'id'
 		,'name'

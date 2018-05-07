@@ -1,4 +1,3 @@
-
 new Vue({
   el: "#vue-details",
   created: function () {
@@ -28,6 +27,8 @@ new Vue({
       ,'telefono': ''
       ,'password': ''
       ,'id_state': ''
+      ,'confirmed_nss': ''
+      ,'photo': ''
 
     },
     fillKeep: { 
@@ -45,6 +46,8 @@ new Vue({
       ,'telefono': ''
       ,'password': ''
       ,'id_state': ''
+      ,'confirmed_nss': ''
+      ,'photo': ''
     },
     offset: 3
 
@@ -82,7 +85,8 @@ new Vue({
         for ( var i in this.newKeep){
             this.newKeep[i] = this.datos[i];
         }
-        
+        this.newKeep.photo = $('#url_file').val();
+        //console.log(this.newKeep);return;
         if ( !curpValida(this.newKeep.curp) ) {
             toastr.error( validate ,"Curp Incorrecto" );
             $('#curp').parent().addClass('has-error');
@@ -90,10 +94,8 @@ new Vue({
         }
 
         this.insert_general(url, refresh, function( object ){
-          
           $('#upload_cv').show('slow');
-
-        },function( object ){ });
+        },function(){ });
 
     },
     insert_nss: function(){
@@ -140,7 +142,7 @@ new Vue({
           
           this.datos = response.data.result;
           this.pagination = response.data.result.pagination;
-
+          console.log( this.datos );
         });
 
     },
@@ -164,4 +166,11 @@ new Vue({
 
   }
 
+});
+//se realiza la carga de la foto del candidato.
+var upload_url = domain('details/upload');
+upload_file('',upload_url,1,'.jpg,.png',function( object ){
+    $('#url_file').val( object.result.url_file );
+    $('#modal-upload').modal('hide');
+    //redirect('details');
 });

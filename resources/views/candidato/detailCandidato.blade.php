@@ -16,7 +16,13 @@
         <section class="detail-desc advance-detail-pr gray-bg">
             <div class="container white-shadow">
                 <div class="row">
-                    <div class="detail-pic"><img src="{{ $photo_profile }}" class="img" alt="" /><a href="#" class="detail-edit" title="edit"><i class="fa fa-pencil"></i></a></div>
+                    <div class="detail-pic"><img src="{{ $photo_profile }}" class="img" alt="" />
+                    	<a data-toggle="modal" data-target="#modal-upload"  style="cursor: pointer;" class="detail-edit" title="Cargar foto">
+                    		<i class="fa fa-pencil"></i>
+                    	</a>
+
+
+                    </div>
                     <div class="detail-status"><span>{{ $activo }}</span></div>
                 </div>
 				
@@ -666,7 +672,29 @@
 									  </div>
 									</div>
 
-							
+									<!-- Modal -->
+									<div class="modal fade" id="modal-upload" data-backdrop="static" data-keyboard="false">
+									  <div class="modal-dialog modal-sm modal-dialog-centered" role="document">
+									    <div class="modal-content">
+									      <div class="modal-header">
+									        <h5 class="modal-title" id="exampleModalLabel">Cargar Fotografia</h5>
+									        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+									          <span aria-hidden="true">&times;</span>
+									        </button>
+									      </div>
+									      <div class="modal-body">
+									        	<div class="col-sm-12">
+									      			<div id="div_dropzone_file"></div>
+									        	</div>
+									        	<input type="text" id="url_file" v-model="newKeep.photo">
+									      </div>
+									      <div class="modal-footer">
+									        <button type="button" class="btn btn" data-dismiss="modal">Aceptar</button>
+									      </div>
+									    </div>
+									  </div>
+									</div>										
+
 							</div>
 							<!-- Start All Sec -->
 						</div>  

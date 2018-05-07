@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class AccountsPersonsModel extends Model
 {
     protected $table = "accounts_persons";
-    public $timestamps = false;
+    protected $connection = "blm_mysql";
     public $fillable = [
 			'id'
 			,'person_id'

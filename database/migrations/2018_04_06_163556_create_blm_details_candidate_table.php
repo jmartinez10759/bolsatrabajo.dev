@@ -23,6 +23,7 @@ class CreateBlmDetailsCandidateTable extends Migration
             $table->string('curp');
             $table->string('cargo')->nullable();
             $table->string('descripcion')->nullable();
+            $table->string('photo')->nullable();
             $table->timestamps();
         });
     }

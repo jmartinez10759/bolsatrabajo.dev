@@ -8,7 +8,7 @@ class SocialSecurityNumberModel extends Model
 {
     
 	protected $table = "social_security_numbers";
-	public $timestamps = false;
+	protected $connection = "blm_mysql";
     public $fillable = [
     	'id'
 		,'person_id'

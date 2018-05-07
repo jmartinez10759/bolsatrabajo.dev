@@ -12100,7 +12100,7 @@ function check_status_xhr(status, title, text, type, accept) {
                             dictDefaultMessage: "Favor de Cargar o arrastrar archivo",
                             dictFallbackMessage: "layoutLang['mjs_navegador']",
                             dictFileTooBig: "layoutLang['file_size']",
-                            dictInvalidFileType: "layoutLang['file_type']",
+                            dictInvalidFileType: "archivo incorrecto",
                             dictResponseError: "layoutLang['error_server']",
                             dictCancelUpload: "layoutLang['cancel']",
                             dictCancelUploadConfirmation: "layoutLang['confirmacion']",
@@ -12115,9 +12115,9 @@ function check_status_xhr(status, title, text, type, accept) {
                             success:function( data, datos ) {
                                 var jsonRequest = JSON.parse(datos);
                                    if (jsonRequest.success === true) {
-                                        pnotify('Archivo Cargado.!','El archivo seleccionado se cargo con exito','success');
+                                        toastr.success( 'El archivo seleccionado se cargo con exito', '¡Archivo Cargado.!' );
                                    }else{
-                                        pnotify('No se Cargado Correctamente.!','El archivo no se cargo con exito','error');
+                                        toastr.error( 'El archivo no se cargo con exito', '¡No se Cargo Correctamente.!' );
                                    }
                                    methods(jsonRequest);
 
@@ -12293,18 +12293,16 @@ function check_status_xhr(status, title, text, type, accept) {
      *@return array[description]
      */
      domain = function( url ){
-        //var path_url = window.location.protocol+"//"+window.location.host+"/"+url;
         //var path_url = window.location.origin+window.location.pathname+"/"+url;
         var path_url = "";
         var ruta = window.location.pathname.split("/");
-
         if ( ruta.length > 0 ) {
             for( var i in ruta ){
-                if ( ruta[2] ) {
+                if ( ruta[2] == "public" ) {
                     return window.location.protocol+"//"+window.location.host+"/"+ruta[1]+"/"+ruta[2]+"/"+url;
-                }if( ruta[1] && !ruta[2]){
+                }/*if( ruta[1] && ruta[2] != "public"){
                    return window.location.protocol+"//"+window.location.host+"/"+ruta[1]+"/"+url;
-                }else{
+                }*/else{
                    return window.location.protocol+"//"+window.location.host+"/"+url;
                 }
             }

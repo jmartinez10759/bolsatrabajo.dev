@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class CandidatoModel extends Model
 {
     protected $table = "candidates";
-    public $timestamps = false;
+    protected $connection = "blm_mysql";
     public $fillable = [
 			'id'
 			,'account_person_id'
