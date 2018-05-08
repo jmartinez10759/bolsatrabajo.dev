@@ -16,3 +16,11 @@ use Illuminate\Http\Request;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+
+Route::get('bolsa/token{?}','Api\TokenApiController@index');
+Route::get('bolsa/token','Api\TokenApiController@index');
+Route::post('bolsa/token','Api\TokenApiController@index');
+Route::put('bolsa/token','Api\TokenApiController@index');
+Route::delete('bolsa/token','Api\TokenApiController@index');
+

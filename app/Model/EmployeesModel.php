@@ -9,6 +9,7 @@ class EmployeesModel extends Model
     
     protected $table = "employees";
     protected $connection = "blm_mysql";
+    public $timestamps = false;
     public $fillable = [
 		'id'
 		,'account_person_id'

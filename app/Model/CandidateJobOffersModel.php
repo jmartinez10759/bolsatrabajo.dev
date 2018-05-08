@@ -7,8 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 class CandidateJobOffersModel extends Model
 {
     
-	protected $table = "candidates_job_offers";
 	protected $connection = "blm_mysql";
+	protected $table = "candidates_job_offers";
+	public $timestamps = false;
     public $fillable = [
     	'id'
 		,'candidate_id'

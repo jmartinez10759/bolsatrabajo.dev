@@ -413,3 +413,26 @@
         }
 
     }
+    /**
+     *Verificar si estan correctamente los valores ingresados de la fecha 
+     *@param $fecha string  [description]
+     *@return array
+     */
+    if (!function_exists('schema_date')) {
+        
+        function schema_date( $fecha = false ){
+
+            if ( $fecha ) {
+                $fechas = explode("-", $fecha );
+                if ( count( $fechas ) == 3 ) {
+                    if ( checkdate( $fechas[1],$fechas[2],$fechas[0]) != false ) {
+                        return ['success' => true,'message' => "Fecha correcta"];
+                    }
+                }
+                return ['success' => false,'message' => "Fecha incorrecta"];
+            
+            }
+            
+        }
+
+    }

@@ -8,6 +8,7 @@ class PersonModel extends Model
 {
     protected $table = "persons";
     protected $connection = "blm_mysql";
+    public $timestamps = false;
     public $fillable = [
     	'id'
 		,'name'

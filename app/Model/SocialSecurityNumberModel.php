@@ -7,8 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 class SocialSecurityNumberModel extends Model
 {
     
-	protected $table = "social_security_numbers";
-	protected $connection = "blm_mysql";
+	protected $table 		= "social_security_numbers";
+	protected $connection 	= "blm_mysql";
+	public $timestamps 	= false;
     public $fillable = [
     	'id'
 		,'person_id'

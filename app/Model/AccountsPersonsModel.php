@@ -6,8 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class AccountsPersonsModel extends Model
 {
-    protected $table = "accounts_persons";
     protected $connection = "blm_mysql";
+    protected $table = "accounts_persons";
+    public $timestamps = false;
     public $fillable = [
 			'id'
 			,'person_id'

@@ -8,6 +8,7 @@ class BlmEstadosModel extends Model
 {
     protected $table = "estados";
     protected $connection = "blm_mysql";
+    public $timestamps = false;
     public $fillable = [
     	'id'
     	,'country_id'

@@ -8,6 +8,7 @@ class AccountsModel extends Model
 {
     
 	protected $table = "accounts";
+	public $timestamps = false;
 	protected $connection = "blm_mysql";
     public $fillable = [
     	'id'
