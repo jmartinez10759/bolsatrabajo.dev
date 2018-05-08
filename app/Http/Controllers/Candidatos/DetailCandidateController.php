@@ -86,7 +86,7 @@ class DetailCandidateController extends MasterController
                 ,'cargo'            => $response[0]->cargo
                 ,'descripcion'      => $response[0]->descripcion
                 ,'id_state'         => $response[0]->id_state
-                ,'photo'            => ( $response[0]->photo )? $response[0]->photo : 'images/profile/profile.png'
+                ,'photo'            => ( isset($response[0]->photo) && $response[0]->photo)? $response[0]->photo : 'images/profile/profile.png'
             ];
         }
             $fields['name']             =  $data['name']; 
