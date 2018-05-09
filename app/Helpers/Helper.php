@@ -400,8 +400,8 @@
 
             $response = [];
             $i = 0;
+                #debuger($data->fillable);
             foreach ($data as $key => $values) {
-
                 foreach ($values->fillable as $key => $value) {
                     $response[$i][$value] = $values->$value;
                 }

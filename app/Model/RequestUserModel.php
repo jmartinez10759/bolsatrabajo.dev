@@ -21,6 +21,16 @@ class RequestUserModel extends Model
 		,'confirmed_code'
 		,'confirmed_nss'
     ];
+    public function description(){
+        return $this->hasMany('App\Model\DetailCandidateModel','id_users');
+    }
+    public function curriculum(){
+        return $this->hasMany('App\Model\BlmCurriculumModel','id_users');
+    }
+    public function postulate(){
+        return $this->hasMany('App\Model\BlmPostulateCandidateModel','id_users');
+    }
+
 
 
 }

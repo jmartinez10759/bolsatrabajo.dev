@@ -44,12 +44,6 @@ class CandidatosController extends MasterController
 		if ( !self::validaciones( $request->all() ) ) {
 			return self::validaciones( $request->all() );
 		}
-		#$where = [];
-		/*foreach ($request->all() as $key => $value) {
-			if ( $key == "curp" ) {
-				$where[$key] = $value;
-			}
-		}*/
 		$where['email'] = $request->correo;
 		#se realiza la consulta para verificar si existen ese candidato en la base de datos
 		$consulta = MasterModel::show_model([], $where , new RequestUserModel );
@@ -58,9 +52,10 @@ class CandidatosController extends MasterController
 			return message(false,[],"Registro del candidato existente");
 		}
 		$data = [];
+		$claves = ['passwordConfirm','pass','correo'];
 		foreach ($request->all() as $key => $value) {
-			
-			if ($key != "passwordConfirm" && $key != "pass" && $key != "correo") {
+			#if ($key != "passwordConfirm" && $key != "pass" && $key != "correo") {
+			if ( !in_array( $key, $claves ) ) {
 				$data[$key] = $value;
 			}
 		}
@@ -72,10 +67,10 @@ class CandidatosController extends MasterController
 		$data['confirmed'] 		= false;
 		$data['confirmed_code'] = str_random(50);
 		$data['confirmed_nss']  = !is_null($request->confirmed_nss)? $request->confirmed_nss :false;
-		#debuger($data);
 		#se realiza la inserccion.
 		$response = MasterModel::create_model( [ $data ], new RequestUserModel);
-		if ( count( $response ) > 0) {
+
+		if ( count( $response ) > 0 ) {
 			#envio de correo para validar si existe el correo antes ingresado.
 		    Mail::send('emails.confirmation_code', $data, function($message) use ($data) {
 		        $message->to($data['email'], $data['name'])
@@ -114,14 +109,6 @@ class CandidatosController extends MasterController
 				}
 
 			}
-			/*if ($key == 'terminos') {
-				
-				if ( $value == false ) {
-					echo message(false,[],'Debe de Aceptar los Terminos y Condiciones');
-					die();
-				}
-
-			}*/
 
 		}
 		return true;

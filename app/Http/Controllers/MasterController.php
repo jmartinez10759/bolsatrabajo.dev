@@ -10,9 +10,9 @@ use App\Http\Controllers\Controller;
 class MasterController extends Controller
 {
 
-	public $_client;
+	public static $_client;
     public $_tipo_user;
-    public $_domain = "";
+    public static $_domain = "";
     protected $_tipo = "application/json";
     public $_http;
     public static $_model;
@@ -21,13 +21,12 @@ class MasterController extends Controller
 
     public function __construct(){
 
-        $this->_client = new Client();
+        self::$_client = new Client();
+        self::$_domain = $_SERVER['HTTP_HOST'];
         self::$_model = new MasterModel();
         self::$message_success = "¡Transaccion Exitosa.!";
         self::$message_error = "¡Ocurrio un error, favor de verificar.!";
-        #$this->middleware('guest');
-        #$this->_domain = $_SERVER['HTTP_HOST'];
-        #$this->_http   = $_SERVER['REQUEST_SCHEME'];
+
     }
     /**
      *Verifica si tiene acceso a esta parte del menu por cada accion
@@ -74,9 +73,9 @@ class MasterController extends Controller
      *@param  data [description]
      *@return json [description]
      */
-    protected function endpoint( $url = false, $headers = array(), $data = array(),$method=false ){
+    protected static function endpoint( $url = false, $headers = array(), $data = array(),$method=false ){
 
-            $response = $this->_client->$method( $url, ['headers'=> $headers, 'body' => json_encode( $data ) ]);
+            $response = self::$_client->$method( $url, ['headers'=> $headers, 'body' => json_encode( $data ) ]);
             $zonerStatusCode = $response->getStatusCode();
             return json_decode($response->getBody());
 

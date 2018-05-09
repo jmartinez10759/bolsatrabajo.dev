@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Model\MasterModel;
 use Illuminate\Http\Request;
 use App\Model\RequestUserModel;
 use App\Http\Controllers\Controller;
@@ -18,6 +19,7 @@ class TokenApiController extends MasterApiController
      */
     public function __construct(){
     	parent::__construct();	
+    	$this->_model = new RequestUserModel;
     }
      /**
      * Display a listing of the resource.
@@ -26,9 +28,8 @@ class TokenApiController extends MasterApiController
      */
     public function index( Request $request ){
         #se manda a llamar el metodo para hacer la validacion de los permisos.
-        $this->_model = new RequestUserModel;
-        debuger( $this->_message_success(200,['nombre' => "Jorge Martinez Quezada"]) );
-        return self::validate_permisson($this->_id,[],$request);
+        #return self::validate_permisson($this->_id,[],$request);
+    
     }
     /**
      *Metodo para obtener todos los registros de los proyectos
@@ -37,11 +38,8 @@ class TokenApiController extends MasterApiController
      */
     public function all(){
 
-        $response = $this->master::show_model([],[], $this->_model );        
-        if ( $response ) {
-            return $this->_message_success(200,$response);
-        }
-        return $this->show_error(4); 
+        $response = ( $this->master::show_model([],[], $this->_model ) )? $this->_message_success(200, $this->master::show_model([],[], $this->_model ) ) :$this->show_error(4);
+        return $response;
 
     }
     /**
@@ -49,18 +47,17 @@ class TokenApiController extends MasterApiController
      *
      * @return \Illuminate\Http\Response
      */
-    public function create( $request ){
+    public function create( Request $request ){
 
         if (isset($request->data)) {
-
             $datos = self::parse_register([$request->data], $this->_model );
             if( isset($datos['success']) && $datos['success'] == false ){
                 return self::show_error(3,$datos['result']);
             }
+            $response = array_to_object( $this->token( $request->data ) );
 
-            $response = MasterModel::insert_model( [$request->data] , $this->_model );
-            if ( sizeof( $response ) > 0 ) {
-                return $this->_message_success(201,$response);
+            if ( $response->success  == true ) {            	
+                return $this->_message_success(201, object_to_array( $response->result[0]) );
             }
 
         } 
@@ -74,17 +71,13 @@ class TokenApiController extends MasterApiController
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show( $data = array() ){  
+    public function token( $datos ){
 
-        $datos = self::parse_register([$data], $this->_model );
-        if( isset($datos['success']) && $datos['success'] == false ){
-            return self::show_error(3,$datos['result']);
-        }        
-        $response = MasterModel::show_model([],$datos, $this->_model );
-        if ( sizeof( $response ) > 0) {
-            return $this->_message_success(200,$response);
+        $response = MasterModel::show_model(['api_token','email'],$datos, $this->_model );
+        if ( $response ) {
+            return ['success' => true,'result' => $response];
         }
-        return self::show_error(4);
+        return ['success' => false,'result' => $response ];
 
     }
     /**
@@ -94,15 +87,16 @@ class TokenApiController extends MasterApiController
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update( $request, $id){
-        
-        if( !empty( $id ) ){
+    public function update( Request $request ){
 
-            $where = [$this->_id => $id];
-            $response = MasterModel::update_model($where, $request, $this->_model );
-            if ( count($response) > 0) {
+        if( isset( $request->data['email'] ) && $request->data['email'] != null ){
+            
+            $where = ['email' => $request->data['email'] ];
+            $response = MasterModel::update_model($where, ['api_token' => str_random(50)], $this->_model );
+            if ( $response) {
                 return $this->_message_success(202,$response);
             }
+
         }  
 
         return $this->show_error(3);
@@ -132,4 +126,5 @@ class TokenApiController extends MasterApiController
         return $this->show_error(3);
     
     }
+
 }

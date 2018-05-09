@@ -18,9 +18,28 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 
-Route::get('bolsa/token{?}','Api\TokenApiController@index');
-Route::get('bolsa/token','Api\TokenApiController@index');
-Route::post('bolsa/token','Api\TokenApiController@index');
-Route::put('bolsa/token','Api\TokenApiController@index');
-Route::delete('bolsa/token','Api\TokenApiController@index');
+Route::get('bolsa/token/{email}','Api\TokenApiController@show');
+Route::get('bolsa/token','Api\TokenApiController@all');
+Route::post('bolsa/token','Api\TokenApiController@create');
+Route::put('bolsa/token','Api\TokenApiController@update');
+Route::delete('bolsa/token','Api\TokenApiController@destroy');
 
+#SERVICIOS DE AUTH 
+
+Route::get('bolsa/auth{?}','Api\AuthApiController@index');
+Route::get('bolsa/auth','Api\AuthApiController@index');
+Route::post('bolsa/auth','Api\AuthApiController@index');
+Route::put('bolsa/auth','Api\AuthApiController@index');
+Route::delete('bolsa/auth','Api\AuthApiController@index');
+
+Route::get('bolsa/nss{?}','Api\NssApiController@index');
+Route::get('bolsa/nss','Api\NssApiController@index');
+Route::post('bolsa/nss','Api\NssApiController@index');
+Route::put('bolsa/nss','Api\NssApiController@index');
+Route::delete('bolsa/nss','Api\NssApiController@index');
+
+Route::get('bolsa/candidate{?}','Api\CandidateApiController@index');
+Route::get('bolsa/candidate','Api\CandidateApiController@index');
+Route::post('bolsa/candidate','Api\CandidateApiController@index');
+Route::put('bolsa/candidate','Api\CandidateApiController@index');
+Route::delete('bolsa/candidate','Api\CandidateApiController@index');

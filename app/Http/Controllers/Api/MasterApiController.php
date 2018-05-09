@@ -10,18 +10,18 @@ use App\Http\Controllers\Controller;
 class MasterApiController extends Controller
 {
     
+    public $_client;
 	protected $_api; #propiedad
     protected $_permission; #propiedad
     protected $_url;
     protected $tipo = "application/json";
-    public $_client;
-    protected $model_master;
+    protected $master;
 
     public function __construct(){
         $this->_client = new Client();
         $this->master = new MasterModel();
     }
-     /**
+    /**
      *Metodo para la validacion del token
      *@access public
      *@param array
@@ -31,23 +31,20 @@ class MasterApiController extends Controller
         #indice = id_de la tabla
         $datos          = self::parser_string();
         $server         = $_SERVER['REQUEST_METHOD'];
-        $http_usuario   = isset( $_SERVER['HTTP_USUARIO'] )? $_SERVER['HTTP_USUARIO']:"";
-        $http_token     = isset( $_SERVER['HTTP_TOKEN'] )? $_SERVER['HTTP_TOKEN']:"";
+        $http_usuario   = isset( $_SERVER['HTTP_USUARIO'] )? $_SERVER['HTTP_USUARIO']:null;
+        $http_token     = isset( $_SERVER['HTTP_TOKEN'] )? $_SERVER['HTTP_TOKEN']:null;
 
-        if ($http_token && $http_usuario) {
-            $token = self::token_validate([ 'usuario' => $http_usuario,'token' => $http_token]);
-        }else{
-            $token = false;
-        }
-    	$permisson = self::permisson_validate();
-        if ( isset($token->success) && $token->success == true ) {            
+        $token = ( $http_token && $http_usuario )? self::token_validate([ 'email' => $http_usuario,'api_token' => $http_token]) : false;
+    	$permisson = self::permisson_validate( [ 'email' => $http_usuario,'api_token' => $http_token] );
+
+        if ( isset( $token->success ) && $token->success == true ) {            
             switch ($server) {
                 case 'GET':
-                    if ( in_array( $permisson, [21,19] )  ) {
+                    if ( in_array( $permisson, [1] )  ) {
                         if ( isset($parametros[$indice]) ) {
                             return $this->show( $parametros );
                         }
-                        if (isset($datos) && count($datos) > 0) {
+                        if ( isset($datos) && count($datos) > 0 ) {
                             return $this->show( $datos );
                         }
                             return $this->all();
@@ -56,21 +53,23 @@ class MasterApiController extends Controller
                     break;
                 
                 case 'POST':
-                    if ( in_array( $permisson, [21,45]  ) ){
+                    if ( in_array( $permisson, [1]  ) ){
                         return $this->create($request);
                     }
 		    			return $this->show_error(0);
                     break;
+
                 case 'PUT':
                         $id = isset($request->data[$indice])? $request->data[$indice] :false;
-                        if ( in_array( $permisson, [21,44]  ) ) {
+                        if ( in_array( $permisson, [1]  ) ) {
                             return $this->update($request->data,$id);
                         }
 						return $this->show_error(0);
                     break;
+
                 case 'DELETE':
                         $id = isset($request->data[$indice])? $request->data[$indice] :false;
-                        if ( in_array( $permisson, [21]  ) ){
+                        if ( in_array( $permisson, [1]  ) ){
                             return $this->destroy($id);
                         }
 						return $this->show_error(0);
@@ -91,10 +90,8 @@ class MasterApiController extends Controller
      */
     protected  function token_validate( $data = array() ){
 
-        $request = json_encode( [ 'usuario' => $data['usuario'],'token' => $data['token']] );
-        $request = json_decode($request);
-        $this->_api = new ValidateTokenController();
-        return json_decode( $this->_api::token( $request ) );
+        $this->_api = new TokenApiController();
+        return array_to_object($this->_api->token( $data ));
     }
     /**
      *Metodo para la validacion de los permisos por cada usuario
@@ -102,14 +99,11 @@ class MasterApiController extends Controller
      *@param array data [description]
      *@return integer [regresa el numero de permiso solicitdo]
      */
-    protected function permisson_validate(){
+    protected function permisson_validate( $data = [] ){
 
-        $http_usuario = isset( $_SERVER['HTTP_USUARIO'] )? $_SERVER['HTTP_USUARIO']:"";
-        $http_token = isset( $_SERVER['HTTP_TOKEN'] )? $_SERVER['HTTP_TOKEN']:"";
-        $request = json_encode( [ 'usuario' => $http_usuario,'token' => $http_token ] );
-        $request = json_decode($request);        
+    	return 1;
         $this->_permission = new ValidatePermissonController();
-        return json_decode( $this->_permission::permisson( $request ) );        
+        return array_to_object( $this->_permission::permisson( $data ) );        
 
     }
     /**
@@ -129,6 +123,7 @@ class MasterApiController extends Controller
             "result"    => $data
         ];
         return response()->json($datos);
+        #return json_encode($datos);
     
     }
     /**
@@ -185,9 +180,10 @@ class MasterApiController extends Controller
 				'success' => false,
 				'message' => "Error en la transaccion",
 				'error'	  => [
-					'description' => "Token expiro y/o cambio, favor de verificar",
-					'result' 	  => $datos,
-					'code' 	=> "BLM-400-".$this->setCabecera(400)
+					'description' => "Token expiro y/o cambio, favor de verificar."
+					,'result' 	  => $datos
+					,'code' 		  => "BLM-400-".$this->setCabecera(400)
+					,'token' 	  => ""
 				 ]
 
 			],
@@ -304,7 +300,7 @@ class MasterApiController extends Controller
 
                     for ($j=0; $j < count($claves_date); $j++) { 
                         $validate_fecha = isset( $data[$i][$claves_date[$j]] )? $data[$i][$claves_date[$j]] : false;
-                        $fecha = self::schema_fecha( $validate_fecha );
+                        $fecha = schema_fecha( $validate_fecha );
                         if ( isset($fecha['success']) && $fecha['success'] == false ) {
                             return ['success' => false,'result' => $claves_date[$j] ];        
                          }

@@ -72,18 +72,29 @@ class AuthController extends MasterController
             $condicion['password'] = $where->password;
             $condicion['confirmed'] = true;    
         }
+
+        $url = "http://".self::$_domain."/api/bolsa/token";
+        $headers = [ 'Content-Type'  => 'application/json'];
+        $data['data'] = [ 'email'=> $where->email ];
+        $method = 'put';
+        $response = self::endpoint( $url,$headers,$data,$method );
+        if ($response->success == true) {
+            $condicion['api_token'] = $response->result[0]->api_token;    
+        }else{
+            $condicion['api_token'] = null;    
+        }
+
         $consulta = MasterModel::show_model([], $condicion , new RequestUserModel );
-        if( count( $consulta ) > 0 ){
+        if( $consulta ){
             $session = [];
             foreach ($consulta[0] as $key => $value) {
                 $session[$key] = $value;
             }
             #debuger($session);
             Session::put( $session );
-            #return redirect()->route( self::$_ruta );
-            return message( true,$consulta[0],'Usuario Inicio Sesion correctamente.');
+            return message( true, $consulta[0],'Usuario inicio sesion correctamente.');
         }
-        #return redirect()->route('/');
+
         return message(false,[],'Por favor Verificar la informacion ingresada');
 
 
@@ -107,7 +118,7 @@ class AuthController extends MasterController
                         $session[$key] = $value;
                     }
                     #debuger($session);
-                    $datos = [ 'confirmed_code' => null, 'confirmed' => true ];
+                    $datos = [ 'confirmed_code' => null, 'confirmed' => true, 'api_token' => str_random(50) ];
                     MasterModel::update_model( $condicion,$datos, new RequestUserModel );
                     Session::put( $session );
                     return redirect()->route( self::$_ruta );

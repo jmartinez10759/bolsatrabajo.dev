@@ -92,7 +92,6 @@ new Vue({
             $('#curp').parent().addClass('has-error');
             return;
         }
-
         this.insert_general(url, refresh, function( object ){
           $('#upload_cv').show('slow');
         },function(){ });

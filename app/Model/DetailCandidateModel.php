@@ -19,4 +19,5 @@ class DetailCandidateModel extends Model
 		,'descripcion'
 		,'photo'
     ];
+    
 }
