@@ -36,8 +36,7 @@ class MasterApiController extends Controller
 
         $token = ( $http_token && $http_usuario )? self::token_validate([ 'email' => $http_usuario,'api_token' => $http_token]) : false;
     	$permisson = self::permisson_validate( [ 'email' => $http_usuario,'api_token' => $http_token] );
-
-        if ( isset( $token->success ) && $token->success == true ) {            
+        if ( isset( $token->success ) && $token->success == true ) {
             switch ($server) {
                 case 'GET':
                     if ( in_array( $permisson, [1] )  ) {
@@ -45,6 +44,7 @@ class MasterApiController extends Controller
                             return $this->show( $parametros );
                         }
                         if ( isset($datos) && count($datos) > 0 ) {
+                        	
                             return $this->show( $datos );
                         }
                             return $this->all();
@@ -182,7 +182,7 @@ class MasterApiController extends Controller
 				'error'	  => [
 					'description' => "Token expiro y/o cambio, favor de verificar."
 					,'result' 	  => $datos
-					,'code' 		  => "BLM-400-".$this->setCabecera(400)
+					,'code' 	  => "BLM-400-".$this->setCabecera(400)
 					,'token' 	  => ""
 				 ]
 

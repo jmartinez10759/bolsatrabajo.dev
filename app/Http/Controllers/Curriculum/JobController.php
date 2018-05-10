@@ -26,13 +26,20 @@ class JobController extends MasterController
                 $data[$key] = $value;        
             }
         }
-        #debuger( $data );
-        $response = self::$_model::create_model( [$data], new BlmJobsModel );
-        
-        if (count($response) > 0) {
-            return message(true,$response[0],"Transaccion Exitosa");
+        $url            = "http://".$_SERVER['HTTP_HOST']."/api/bolsa/jobs";
+        $headers        = [ 
+            'Content-Type'  => 'application/json'
+            ,'usuario'      => Session::get('email')
+            ,'token'        => Session::get('api_token')
+        ];
+        $datos['data']  = $data;
+        $method         = 'post';
+        $response       = self::endpoint($url, $headers, $datos,$method);
+                
+        if ( $response->success == true ) {
+            return message(true,$response->result,self::$message_success);
         }else{
-            return message(false,[],"Ocurrio Un Error");
+            return message(false,[],self::$message_error);
         }
 
 
@@ -45,13 +52,21 @@ class JobController extends MasterController
      */
     public static function update( Request $request ){
 
-    	$where = ['id' => $request->id];
-    	$response = self::$_model::update_model( $where, $request->all(), new BlmJobsModel);
-    	if (count($response) > 0 ) {
-    		return message(true, $response[0], "Actualizacion Correcta");
-    	}else{
-    		return message(false, $response[0], "Ocurrio un error");
-    	}
+    	$url            = "http://".$_SERVER['HTTP_HOST']."/api/bolsa/jobs";
+        $headers        = [ 
+            'Content-Type'  => 'application/json'
+            ,'usuario'      => Session::get('email')
+            ,'token'        => Session::get('api_token')
+        ];
+        $fields['data']  = $request->all();
+        $method          = 'put';
+        $response        = self::endpoint($url, $headers, $fields,$method);
+
+        if ( $response->success == true ) {
+            return message(true,$response->result,self::$message_success);
+        }else{
+            return message(false,[],self::$message_error);
+        }
 
 
     }

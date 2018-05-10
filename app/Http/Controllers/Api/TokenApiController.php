@@ -48,21 +48,20 @@ class TokenApiController extends MasterApiController
      * @return \Illuminate\Http\Response
      */
     public function create( Request $request ){
-
+    	
         if (isset($request->data)) {
             $datos = self::parse_register([$request->data], $this->_model );
             if( isset($datos['success']) && $datos['success'] == false ){
                 return self::show_error(3,$datos['result']);
             }
             $response = array_to_object( $this->token( $request->data ) );
-
             if ( $response->success  == true ) {            	
                 return $this->_message_success(201, object_to_array( $response->result[0]) );
             }
 
         } 
 
-        return $this->show_error(5);
+        return $this->show_error(1);
     
     }
     /**

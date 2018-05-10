@@ -21,6 +21,7 @@ class RequestUserModel extends Model
 		,'confirmed_code'
 		,'confirmed_nss'
     ];
+    
     public function description(){
         return $this->hasMany('App\Model\DetailCandidateModel','id_users');
     }
@@ -29,6 +30,9 @@ class RequestUserModel extends Model
     }
     public function postulate(){
         return $this->hasMany('App\Model\BlmPostulateCandidateModel','id_users');
+    }
+    public function numero_seguro_social(){
+        return $this->hasMany('App\Model\BlmNssModel','id_users');
     }
 
 

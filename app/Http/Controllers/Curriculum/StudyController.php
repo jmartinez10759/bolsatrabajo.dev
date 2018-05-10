@@ -27,10 +27,18 @@ class StudyController extends MasterController
                 $data[$key] = $value;        
             }
         }
-        $response = self::$_model::create_model([$data], new BlmStudyModel);
-        
-        if ( $response ) {
-            return message(true,$response[0],self::$message_success);
+        $url            = "http://".$_SERVER['HTTP_HOST']."/api/bolsa/study";
+        $headers        = [ 
+            'Content-Type'  => 'application/json'
+            ,'usuario'      => Session::get('email')
+            ,'token'        => Session::get('api_token')
+        ];
+        $datos['data']  = $data;
+        $method         = 'post';
+        $response       = self::endpoint($url, $headers, $datos,$method);
+                
+        if ( $response->success == true ) {
+            return message(true,$response->result,self::$message_success);
         }else{
             return message(false,[],self::$message_error);
         }
@@ -44,13 +52,21 @@ class StudyController extends MasterController
      */
     public static function update( Request $request ){
 
-    	$where = ['id' => $request->id];
-    	$response = self::$_model::update_model( $where, $request->all(), new BlmStudyModel);
-    	if (count($response) > 0 ) {
-    		return message(true, $response[0], "Actualizacion Correcta");
-    	}else{
-    		return message(false, $response[0], self::$message_error);
-    	}
+    	$url            = "http://".$_SERVER['HTTP_HOST']."/api/bolsa/study";
+        $headers        = [ 
+            'Content-Type'  => 'application/json'
+            ,'usuario'      => Session::get('email')
+            ,'token'        => Session::get('api_token')
+        ];
+        $fields['data']  = $request->all();
+        $method          = 'put';
+        $response        = self::endpoint($url, $headers, $fields,$method);
+
+        if ( $response->success == true ) {
+            return message(true,$response->result,self::$message_success);
+        }else{
+            return message(false,[],self::$message_error);
+        }
 
     }
     /**

@@ -23,6 +23,16 @@ class BlmCurriculumModel extends Model
 		,'fecha_nacimiento'
 		,'url_cv'
     ];
+
+    public function study(){
+        return $this->hasMany('App\Model\BlmStudyModel','id_cv');
+    }
+    public function experiencia(){
+        return $this->hasMany('App\Model\BlmJobsModel','id_cv');
+    }
+    public function skills(){
+        return $this->hasMany('App\Model\BlmSkillModel','id_cv');
+    }
              
             
 }

@@ -37,33 +37,6 @@ class MasterController extends Controller
      */
     public function verify_permison(){
 
-        $server        = $_SERVER['REQUEST_METHOD'];
-        $http_usuario  = isset( $_SERVER['HTTP_USUARIO'] )? $_SERVER['HTTP_USUARIO']:"";
-        $http_token    = isset( $_SERVER['HTTP_TOKEN'] )? $_SERVER['HTTP_TOKEN']:"";
-
-        $url_permisos   = "http://52.44.90.182/api/privileges";
-        $url_token      = "http://52.44.90.182/api/userData";
-        $headers        = ['Content-Type' => 'application/json'];
-        $data           = ['token' => $http_token ,'usuario' => $http_usuario ];
-        $method         = 'post';
-        if ($http_token && $http_usuario) {
-            $token = self::endpoint($url_token,$headers, $data , $method );
-            if ( isset($token->error) && $token->error == true ) {
-                return $this->show_error(1);
-            }
-        }
-        $data['producto'] = 7;
-        $permisson = self::endpoint( $url_permisos,$headers,$data, $method );
-        if ( isset( $permisson->rows[0] ) ) {
-        	$permisson =  $permisson->rows[0]->perfil_id;
-        	$this->_tipo_user = $permisson;
-        }else{ $permisson = 0; }
-        if ( !in_array( $permisson, [21,19,44,45] )) {
-            return $this->show_error(0,$permisson);
-        }
-
-        #return $this->show_error(0);
-
     }
     /**
      *Metodo general para consumir endpoint utilizando una clase de laravel

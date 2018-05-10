@@ -686,7 +686,7 @@
 									        	<div class="col-sm-12">
 									      			<div id="div_dropzone_file"></div>
 									        	</div>
-									        	<input type="text" id="url_file" v-model="newKeep.photo">
+									        	<input type="hidden" id="url_file" v-model="datos.photo">
 									      </div>
 									      <div class="modal-footer">
 									        <button type="button" class="btn btn" data-dismiss="modal">Aceptar</button>

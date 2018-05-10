@@ -31,7 +31,8 @@ class DetailCandidateController extends MasterController
         $details        = data_march( $users->description );
         $postulaciones  = data_march( $users->postulate );
         $curriculum     = data_march( $users->curriculum );
-
+        $nss            = data_march( $users->numero_seguro_social);
+        #debuger($details);
         $data = [
             'nombre_completo' =>  Session::get('name')." ".Session::get('first_surname')
             ,'photo_profile'  =>  ( isset($details[0]->photo) && $details[0]->photo )? asset( $details[0]->photo ) : asset('images/profile/profile.png')
@@ -41,35 +42,6 @@ class DetailCandidateController extends MasterController
         ];
 
         return view('candidato.detailCandidato',$data);
-
-        /*$postulaciones  =  self::$_model::show_model( [], $where, new BlmPostulateCandidateModel);
-        $curriculum     =  self::$_model::show_model( [], $where, new BlmCurriculumModel);*/
-        
-        
-        #$details        =  self::$_model::show_model( [], $where, new DetailCandidateModel);
-        /*$url = "http://".self::$_domain."/api/bolsa/nss";
-        $headers = [ 
-            'Content-Type'  => 'application/json'
-            ,'usuario'      => Session::get('email')
-            ,'token'        => Session::get('api_token')
-        ];
-        $data['data'] = [];
-        $method = 'get';
-        $response = self::endpoint( $url,$headers,$data,$method );
-        if ($response->success == true) {
-            debuger($response);
-        }else{
-
-            if ( isset($response->error->token) ) {
-                Session::flush();
-                return redirect()->route('/');
-            }
-
-            debuger($response);
-        }
-*/
-        #$details        =  self::$_model::show_model( [], $where, new DetailCandidateModel);
-
 
     }
     /**
@@ -82,11 +54,11 @@ class DetailCandidateController extends MasterController
 
         $where = ['id_users' => Session::get('id')];
         $response       =  self::$_model::show_model( [], $where, new DetailCandidateModel);
-        #debuger($response);
         $postulaciones  =  BlmPostulateCandidateModel::where($where)->paginate(3);
         $candidato      =  self::$_model::show_model( [], ['id' => Session::get('id')], new RequestUserModel);
         $estados        =  self::$_model::show_model( [], [], new BlmEstadosModel);
         $blm_nss        =  self::$_model::show_model( [], $where, new BlmNssModel);
+        
         $data = [
             'name'              =>  Session::get('name')
             ,'first_surname'    =>  Session::get('first_surname')
@@ -258,7 +230,7 @@ class DetailCandidateController extends MasterController
             $extension      = strtolower($files[$i]->getClientOriginalExtension());
             $archivo        = Session::get('id').".".$extension;
             $path           = public_path()."/images/profile/";
-            chmod( $path,0755 );
+            #chmod( $path,0755 );
             $files[$i]->move($path,$archivo);
         }
          $url = public_path().'/images/profile/'.$archivo;
