@@ -62,7 +62,7 @@ new Vue({
     },
     inicio_sesion: function(){
 
-        var url = domain("login");
+        var url = domain( "login" );
         this.insert_general(url,'',function( object ){
             redirect( domain('details') );
         },function(){

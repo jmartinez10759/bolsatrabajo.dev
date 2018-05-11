@@ -52,6 +52,8 @@ class BusquedaController extends MasterController
         }
 
         $response = $consulta;
+        $response->appends($request->only('vacantes'));
+
         return view("busqueda.busqueda", ["name" => $response, 'count' => count($response)] );
 
       

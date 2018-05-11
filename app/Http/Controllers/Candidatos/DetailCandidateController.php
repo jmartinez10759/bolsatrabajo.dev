@@ -32,7 +32,6 @@ class DetailCandidateController extends MasterController
         $postulaciones  = data_march( $users->postulate );
         $curriculum     = data_march( $users->curriculum );
         $nss            = data_march( $users->numero_seguro_social);
-        #debuger($details);
         $data = [
             'nombre_completo' =>  Session::get('name')." ".Session::get('first_surname')
             ,'photo_profile'  =>  ( isset($details[0]->photo) && $details[0]->photo )? asset( $details[0]->photo ) : asset('images/profile/profile.png')

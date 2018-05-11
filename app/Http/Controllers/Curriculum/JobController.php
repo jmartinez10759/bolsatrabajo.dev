@@ -26,7 +26,7 @@ class JobController extends MasterController
                 $data[$key] = $value;        
             }
         }
-        $url            = "http://".$_SERVER['HTTP_HOST']."/api/bolsa/jobs";
+        $url            = self::$_domain."/api/bolsa/jobs";
         $headers        = [ 
             'Content-Type'  => 'application/json'
             ,'usuario'      => Session::get('email')
@@ -52,7 +52,7 @@ class JobController extends MasterController
      */
     public static function update( Request $request ){
 
-    	$url            = "http://".$_SERVER['HTTP_HOST']."/api/bolsa/jobs";
+    	$url            = self::$_domain."/api/bolsa/jobs";
         $headers        = [ 
             'Content-Type'  => 'application/json'
             ,'usuario'      => Session::get('email')

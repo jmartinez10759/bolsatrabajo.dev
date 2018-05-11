@@ -21,10 +21,11 @@ class MasterController extends Controller
     protected static $ssl_ruta = [];
 
     public function __construct(){
-
-        self::$ssl_ruta = ["verify" => $_SERVER['DOCUMENT_ROOT']. "/cacert.pem"];
+        
+        #self::$ssl_ruta = ["verify" => $_SERVER['DOCUMENT_ROOT']. "/cacert.pem"];
+        self::$ssl_ruta = ["verify" => true ];
         self::$_client = new Client( self::$ssl_ruta );
-        self::$_domain = $_SERVER['HTTP_HOST'];
+        self::$_domain = domain();
         self::$_model = new MasterModel();
         self::$message_success = "¡Transaccion Exitosa.!";
         self::$message_error = "¡Ocurrio un error, favor de verificar.!";

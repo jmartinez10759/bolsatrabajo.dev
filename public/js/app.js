@@ -12294,18 +12294,20 @@ function check_status_xhr(status, title, text, type, accept) {
      */
      domain = function( url ){
         //var path_url = window.location.origin+window.location.pathname+"/"+url;
-        var path_url = "";
         var ruta = window.location.pathname.split("/");
-        if ( ruta.length > 0 ) {
+        
+        if ( ruta.length > 0 && ruta.length > 3 ) {
             for( var i in ruta ){
                 if ( ruta[2] == "public" ) {
                     return window.location.protocol+"//"+window.location.host+"/"+ruta[1]+"/"+ruta[2]+"/"+url;
-                }/*if( ruta[1] && ruta[2] != "public"){
-                   return window.location.protocol+"//"+window.location.host+"/"+ruta[1]+"/"+url;
-                }*/else{
-                   return window.location.protocol+"//"+window.location.host+"/"+url;
+                }else{
+                    return window.location.protocol+"//"+window.location.host+"/"+ruta[1]+"/"+url;
                 }
             }
+        }if( ruta.length > 0 && ruta.length < 4 ){
+            
+            return window.location.protocol+"//"+window.location.host+"/"+ruta[1]+"/"+url;
+                
         }else{
             return window.location.protocol+"//"+window.location.host+"/"+url;
         }

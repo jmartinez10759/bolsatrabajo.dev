@@ -436,3 +436,22 @@
         }
 
     }
+    /**
+     *Realiza un parseo de la ruta si existe un dominio y un nombre del proyecto
+     *@param $fecha string  [description]
+     *@return array
+     */
+    if (!function_exists('domain')) {
+        
+        function domain(){
+
+            $dominio = explode("/", $_SERVER['HTTP_REFERER']);
+            $http = $_SERVER['REQUEST_SCHEME'];
+            $domain  = isset( $dominio[2] )? $dominio[2] : false;
+            $project = isset($dominio[3])? $dominio[3]."/" : false;
+            $public  = (isset($dominio[4]) && $dominio[4] == "public")? $dominio[4]."/" : false;
+            return $http."://".$domain."/".$project.$public;
+            
+        }
+
+    }

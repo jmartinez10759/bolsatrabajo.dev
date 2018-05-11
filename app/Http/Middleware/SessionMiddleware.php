@@ -18,10 +18,10 @@ class SessionMiddleware
      */
     public function handle( Request $request, Closure $next )
     {      
-
+            
         if ( Session::has( 'email') ) {
 
-            $url = "http://".$_SERVER['HTTP_HOST']."/api/bolsa/token";
+            $url = domain()."/api/bolsa/token";
             $headers = [ 'Content-Type'  => 'application/json' ];
             $data['data'] = [ 'email'=> Session::get('email'),'api_token' => Session::get('api_token') ];
             $method = 'post';

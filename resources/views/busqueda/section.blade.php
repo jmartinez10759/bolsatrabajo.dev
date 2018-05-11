@@ -129,7 +129,7 @@ new Vue ({
 	methods: {
 		details_vacante( id_vacante ){
 			//se mete en localstorage el id de vacante para poder hacer la consulta.
-			var url = domain("../details/vacante");
+			var url = domain("details/vacante");
 			$myLocalStorage.set('id_vacante', id_vacante );
 			redirect( url );
 		}
