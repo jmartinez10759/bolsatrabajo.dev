@@ -445,11 +445,24 @@
         
         function domain(){
 
-            $dominio = explode("/", $_SERVER['HTTP_REFERER']);
             $http = $_SERVER['REQUEST_SCHEME'];
-            $domain  = isset( $dominio[2] )? $dominio[2] : false;
-            $project = isset($dominio[3])? $dominio[3]."/" : false;
-            $public  = (isset($dominio[4]) && $dominio[4] == "public")? $dominio[4]."/" : false;
+            $host = $_SERVER['HTTP_HOST'];
+            $server_href = $http."://".$host.$_SERVER['REQUEST_URI'];
+            if ( $server_href ) {
+                $dominio = explode("/", $server_href );
+                $request_uri  = explode("/", $_SERVER['REQUEST_URI']);
+                $domain  = isset( $dominio[2] )? $dominio[2] : false;
+                $project = (isset($dominio[3]) ) ? $dominio[3]."/" : false;
+                $public  = (isset($dominio[4]) && $dominio[4] == "public")? $dominio[4]."/" : false;
+                #debuger($dominio);
+                if ( isset($request_uri[1]) && $request_uri[1]."/" != $project ) {
+                    return $http."://".$host."/";
+                }else{
+                    return $http."://".$host."/";
+                }
+
+            }
+
             return $http."://".$domain."/".$project.$public;
             
         }

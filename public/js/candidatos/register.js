@@ -36,6 +36,7 @@ new Vue({
     insertar: function(){
 
         var url = domain("register/insert");
+
         if ( !emailValidate(this.newKeep.correo) ) {
             toastr.error( validate ,"Correo Incorrecto" );
             $('#correo').parent().parent().addClass('has-error');
