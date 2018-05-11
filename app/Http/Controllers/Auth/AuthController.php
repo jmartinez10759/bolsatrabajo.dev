@@ -72,12 +72,12 @@ class AuthController extends MasterController
             $condicion['password'] = $where->password;
             $condicion['confirmed'] = true;    
         }
-
-        $url = "http://".self::$_domain."/api/bolsa/token";
-        $headers = [ 'Content-Type'  => 'application/json'];
-        $data['data'] = [ 'email'=> $where->email ];
-        $method = 'put';
-        $response = self::endpoint( $url,$headers,$data,$method );
+        
+        $url            = "http://".self::$_domain."/api/bolsa/token";
+        $headers        = [ 'Content-Type'  => 'application/json'];
+        $data['data']   = [ 'email'=> $where->email ];
+        $method         = 'put';
+        $response       = self::endpoint( $url,$headers,$data,$method);
         if ($response->success == true) {
             $condicion['api_token'] = $response->result[0]->api_token;    
         }else{

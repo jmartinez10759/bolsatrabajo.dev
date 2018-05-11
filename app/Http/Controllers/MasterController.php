@@ -18,10 +18,12 @@ class MasterController extends Controller
     public static $_model;
     protected static $message_success;
     protected static $message_error;
+    protected static $ssl_ruta = [];
 
     public function __construct(){
 
-        self::$_client = new Client();
+        self::$ssl_ruta = ["verify" => $_SERVER['DOCUMENT_ROOT']. "/cacert.pem"];
+        self::$_client = new Client( self::$ssl_ruta );
         self::$_domain = $_SERVER['HTTP_HOST'];
         self::$_model = new MasterModel();
         self::$message_success = "¡Transaccion Exitosa.!";
@@ -46,8 +48,8 @@ class MasterController extends Controller
      *@param  data [description]
      *@return json [description]
      */
-    protected static function endpoint( $url = false, $headers = array(), $data = array(),$method=false ){
-
+    protected static function endpoint( $url = false, $headers = [], $data = [], $method=false ){
+            
             $response = self::$_client->$method( $url, ['headers'=> $headers, 'body' => json_encode( $data ) ]);
             $zonerStatusCode = $response->getStatusCode();
             return json_decode($response->getBody());
