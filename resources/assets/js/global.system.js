@@ -22,9 +22,9 @@ $().ready(function(){
     for (var p in element) {
         salida += p + ": " + element[p];
     }
-    alert(salida);
     alert(  JSON.stringify(element) );
     console.log(element);
+    alert(salida);return;
 
  }
 
