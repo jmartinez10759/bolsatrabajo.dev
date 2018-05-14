@@ -12286,6 +12286,24 @@ function check_status_xhr(status, title, text, type, accept) {
 
      }
      /**
+      *Se accesde a los metas de html para otener el contenido.
+      *@access {{public}}
+      *@param {{name}}
+      *@return {{@content}}
+      */
+      meta = function( name ){
+
+            var ruta_general = document.getElementsByTagName("META");
+            var content = "";
+            for (var i = 0; i < ruta_general.length; i++) {
+                if( ruta_general[i].name == name ){
+                    content = ruta_general[i].content;
+                }
+            }
+            return content;
+
+      }
+     /**
      *Funcion para obtener el dominio actual.
      *@access public
      *@param table [description]
@@ -12295,39 +12313,34 @@ function check_status_xhr(status, title, text, type, accept) {
     domain = function( url ){
 
         //var path_url = window.location.origin+window.location.pathname+"/"+url;
-        var ruta = window.location.href.split("/");
-        var path_url = window.location.pathname.split("/");
-        var http = window.location.protocol;
-        var host = window.location.host;
-        var project =  (typeof ruta[3] != "undefined" )? ruta[3]+"/": ""; 
-        var public  =  (typeof ruta[4] != "undefined" && ruta[4] == "public")? ruta[4]+"/": ""; 
-            console.log(ruta);
-            console.log(path_url[1]+"/");
-            console.log(project);return;
-        if (typeof path_url[1] != "undefined" && path_url[1]+"/" != project ) {
-            console.log(http+"//"+host+"/"+public+url);return;
-            return http+"//"+host+"/"+public+url;
-        }
-            console.log(http+"//"+host+"/"+public+url);return;
-        return http+"//"+host+"/"+project+public+url;
-
-
-        /*if ( ruta.length > 0 && ruta.length > 3 ) {
-            for( var i in ruta ){
-                if ( ruta[2] == "public" ) {
-                    return window.location.protocol+"//"+window.location.host+"/"+ruta[1]+"/"+ruta[2]+"/"+url;
-                }else{
-                    return window.location.protocol+"//"+window.location.host+"/"+ruta[1]+"/"+url;
-                }
+        var ruta_general = document.getElementsByTagName("META");
+        var content = "";
+        for (var i = 0; i < ruta_general.length; i++) {
+            if( ruta_general[i].name == 'ruta-general' ){
+                content = ruta_general[i].content;
             }
-        }if( ruta.length > 0 && ruta.length < 4 ){
-            
-            return window.location.protocol+"//"+window.location.host+"/"+ruta[1]+"/"+url;
-                
-        }else{
-            return window.location.protocol+"//"+window.location.host+"/"+url;
-        }*/
-        
+        }
+        var meta    =  content.split('/');
+        var ruta    =  window.location.href.split("/");
+        var http    =  window.location.protocol;
+        var host    =  window.location.host;
+        var public  =  ( typeof ruta[4] != "undefined" && ruta[4] == "public")? ruta[4]+"/": ""; 
+        var project =  ( typeof ruta[3] != "undefined" )? ruta[3]+"/": ""; 
+
+        if ( typeof meta[1] != "undefined" && meta[1] == "index.php" || meta[1] == "server.php" ) {
+            //console.log(http+"//"+host+"/"+url);return;
+            return http+"//"+host+"/"+url;   
+        }
+        if ( public && project) {
+            //console.log(http+"//"+host+"/"+project+public+url);return;
+            return http+"//"+host+"/"+project+public+url;
+        }
+        if ( public == "" && project ) {
+            //console.log(http+"//"+host+"/"+project+url);return;
+            return http+"//"+host+"/"+project+url;
+        }
+
+
 
     }
      /**

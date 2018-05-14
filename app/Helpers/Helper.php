@@ -1,5 +1,5 @@
 <?php
-
+    
 
     function checkPermission($name){
         if(Session::has('rol')){
@@ -67,7 +67,7 @@
 		}
 	}
 
-	   if(!function_exists('dropdown')){
+	if(!function_exists('dropdown')){
 
         function dropdown($params){
             $data       = (isset($params['data']))?$params['data']:'';
@@ -112,6 +112,7 @@
             return $opc;
         
         }
+    
     }
 
     if(!function_exists('incCss')){
@@ -449,13 +450,13 @@
             $host = $_SERVER['HTTP_HOST'];
             $server_href = $http."://".$host.$_SERVER['REQUEST_URI'];
             if ( $server_href ) {
-                $dominio = explode("/", $server_href );
-                $request_uri  = explode("/", $_SERVER['REQUEST_URI']);
-                $domain  = isset( $dominio[2] )? $dominio[2] : false;
-                $project = (isset($dominio[3]) ) ? $dominio[3]."/" : false;
-                $public  = (isset($dominio[4]) && $dominio[4] == "public")? $dominio[4]."/" : false;
-                #debuger($dominio);
-                if ( isset($request_uri[1]) && $request_uri[1]."/" != $project ) {
+                $dominio        = explode("/", $server_href );
+                $request_uri    = explode("/", $_SERVER['PHP_SELF']);
+                $domain         = isset( $dominio[2] )? $dominio[2] : false;
+                $project        = (isset($dominio[3]) ) ? $dominio[3]."/" : false;
+                $public         = (isset($dominio[4]) && $dominio[4] == "public")? $dominio[4]."/" : false;
+                #debuger($request_uri);
+                if ( isset( $request_uri[1]) && $request_uri[1]."/" != $project ) {
                     return $http."://".$host."/";
                 }
 

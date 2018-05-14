@@ -5,10 +5,10 @@ var title_error = "Registros Incorrectos";
 var update      = "Registro actualizado corretamente.";
 var validate    = "Favor de Verificar los campos color Rojo";
 var expired     = "Sesion Expirada.";
-var csrf_token  = { 'X-CSRF-TOKEN': document.getElementsByTagName("META")['3'].content }
+//var csrf_token  = { 'X-CSRF-TOKEN': document.getElementsByTagName("META")['3'].content }
+var csrf_token  = { 'X-CSRF-TOKEN': meta('csrf-token') }
 var _token      = csrf_token[ Object.keys( csrf_token )[0] ];
 var params = {};
-
 var mixins = {
     //mixins : [mixins],
     methods: {
