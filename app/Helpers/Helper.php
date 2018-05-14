@@ -457,8 +457,6 @@
                 #debuger($dominio);
                 if ( isset($request_uri[1]) && $request_uri[1]."/" != $project ) {
                     return $http."://".$host."/";
-                }else{
-                    return $http."://".$host."/";
                 }
 
             }

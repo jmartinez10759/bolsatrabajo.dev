@@ -13,7 +13,7 @@ class CreateRequestUsers extends Migration
      */
     public function up()
     {
-        Schema::create('blm_request_users', function (Blueprint $table) {
+        Schema::create('sde_request_users', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
             $table->string('first_surname');
@@ -38,6 +38,6 @@ class CreateRequestUsers extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('blm_request_users');
+        Schema::dropIfExists('sde_request_users');
     }
 }

@@ -13,7 +13,7 @@ class CreateCookieSerchTable extends Migration
      */
     public function up()
     {
-        Schema::create('blm_cookie_serch', function (Blueprint $table) {
+        Schema::create('sde_cookie_serch', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('id_users');
             $table->string('vacante');
@@ -28,6 +28,6 @@ class CreateCookieSerchTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('blm_cookie_serch');
+        Schema::dropIfExists('sde_cookie_serch');
     }
 }

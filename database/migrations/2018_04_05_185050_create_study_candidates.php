@@ -13,7 +13,7 @@ class CreateStudyCandidates extends Migration
      */
     public function up()
     {
-        Schema::create('blm_study_candidate', function (Blueprint $table) {
+        Schema::create('sde_study_candidate', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('id_cv');
             $table->integer('id_nivel')->nullable();
@@ -31,6 +31,6 @@ class CreateStudyCandidates extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('blm_study_candidate');
+        Schema::dropIfExists('sde_study_candidate');
     }
 }

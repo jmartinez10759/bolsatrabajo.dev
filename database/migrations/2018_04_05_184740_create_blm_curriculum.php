@@ -13,7 +13,7 @@ class CreateBlmCurriculum extends Migration
      */
     public function up()
     {
-        Schema::create('blm_curriculum', function (Blueprint $table) {
+        Schema::create('sde_curriculum', function (Blueprint $table) {
             
             $table->increments('id');
             $table->integer('id_users');
@@ -39,6 +39,6 @@ class CreateBlmCurriculum extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('blm_curriculum');
+        Schema::dropIfExists('sde_curriculum');
     }
 }

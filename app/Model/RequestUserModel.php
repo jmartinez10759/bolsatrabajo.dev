@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class RequestUserModel extends Model
 {
-    protected $table = "blm_request_users";
+    protected $table = "sde_request_users";
     public $fillable = [
     	'id'
 		,'name'

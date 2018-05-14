@@ -13,7 +13,7 @@ class CreateNivelAcademicos extends Migration
      */
     public function up()
     {
-        Schema::create('blm_niveles_academicos', function (Blueprint $table) {
+        Schema::create('sde_niveles_academicos', function (Blueprint $table) {
             $table->increments('id');
             $table->string('nombre',255);
             $table->timestamps();
@@ -27,6 +27,6 @@ class CreateNivelAcademicos extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('blm_niveles_academicos');
+        Schema::dropIfExists('sde_niveles_academicos');
     }
 }

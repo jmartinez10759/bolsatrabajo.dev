@@ -990,14 +990,18 @@ function check_status_xhr(status, title, text, type, accept) {
         //var path_url = window.location.origin+window.location.pathname+"/"+url;
         var ruta = window.location.href.split("/");
         var path_url = window.location.pathname.split("/");
-
         var http = window.location.protocol;
         var host = window.location.host;
         var project =  (typeof ruta[3] != "undefined" )? ruta[3]+"/": ""; 
         var public  =  (typeof ruta[4] != "undefined" && ruta[4] == "public")? ruta[4]+"/": ""; 
+            console.log(ruta);
+            console.log(path_url[1]+"/");
+            console.log(project);return;
         if (typeof path_url[1] != "undefined" && path_url[1]+"/" != project ) {
+            console.log(http+"//"+host+"/"+public+url);return;
             return http+"//"+host+"/"+public+url;
         }
+            console.log(http+"//"+host+"/"+public+url);return;
         return http+"//"+host+"/"+project+public+url;
 
 

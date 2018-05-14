@@ -13,7 +13,7 @@ class CreateBlmPostulateCandidateTable extends Migration
      */
     public function up()
     {
-        Schema::create('blm_postulate_candidate', function (Blueprint $table) {
+        Schema::create('sde_postulate_candidate', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('id_users');
             $table->integer('id_vacante');
@@ -28,6 +28,6 @@ class CreateBlmPostulateCandidateTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('blm_postulate_candidate');
+        Schema::dropIfExists('sde_postulate_candidate');
     }
 }

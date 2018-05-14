@@ -13,7 +13,7 @@ class CreateBlmNssTable extends Migration
      */
     public function up()
     {
-        Schema::create('blm_nss', function (Blueprint $table) {
+        Schema::create('sde_nss', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('id_users')->nullable();
             $table->string('nss')->nullable();
@@ -28,6 +28,6 @@ class CreateBlmNssTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('blm_nss');
+        Schema::dropIfExists('sde_nss');
     }
 }

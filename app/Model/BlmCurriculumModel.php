@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class BlmCurriculumModel extends Model
 {
     
-	protected $table = "blm_curriculum";
+	protected $table = "sde_curriculum";
     public $fillable = [
     	'id'
 		,'id_users'

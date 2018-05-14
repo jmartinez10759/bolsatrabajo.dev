@@ -13,7 +13,7 @@ class CreateJobCandidates extends Migration
      */
     public function up()
     {
-        Schema::create('blm_jobs_candidate', function (Blueprint $table) {
+        Schema::create('sde_jobs_candidate', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('id_cv');
             $table->string('jobs_empresa')->nullable();
@@ -33,6 +33,6 @@ class CreateJobCandidates extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('blm_jobs_candidate');
+        Schema::dropIfExists('sde_jobs_candidate');
     }
 }

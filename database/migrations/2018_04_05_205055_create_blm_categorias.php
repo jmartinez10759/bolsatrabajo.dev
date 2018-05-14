@@ -13,7 +13,7 @@ class CreateBlmCategorias extends Migration
      */
     public function up()
     {
-        Schema::create('blm_categorias', function (Blueprint $table) {
+        Schema::create('sde_categorias', function (Blueprint $table) {
             $table->increments('id');
             $table->string('nombre');
             $table->timestamps();
@@ -27,6 +27,6 @@ class CreateBlmCategorias extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('blm_categorias');
+        Schema::dropIfExists('sde_categorias');
     }
 }

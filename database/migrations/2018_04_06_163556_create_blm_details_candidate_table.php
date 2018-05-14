@@ -13,7 +13,7 @@ class CreateBlmDetailsCandidateTable extends Migration
      */
     public function up()
     {
-        Schema::create('blm_details_candidate', function (Blueprint $table) {
+        Schema::create('sde_details_candidate', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('id_users');
             $table->integer('id_state');
@@ -35,6 +35,6 @@ class CreateBlmDetailsCandidateTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('blm_details_candidate');
+        Schema::dropIfExists('sde_details_candidate');
     }
 }

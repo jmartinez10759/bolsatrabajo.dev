@@ -13,7 +13,7 @@ class CreateSkillCandidates extends Migration
      */
     public function up()
     {
-        Schema::create('blm_skills_candidate', function (Blueprint $table) {
+        Schema::create('sde_skills_candidate', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('id_cv');
             $table->string('habilidad')->nullable();
@@ -30,6 +30,6 @@ class CreateSkillCandidates extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('blm_skills_candidate');
+        Schema::dropIfExists('sde_skills_candidate');
     }
 }
