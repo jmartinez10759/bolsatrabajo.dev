@@ -26,7 +26,7 @@ class SelectionController extends MasterController
     	$data = [
     		'menu' => self::menus( Session::get('id') )
     	];
-    	return View('administracion.selection',$data);
+    	return View( 'administracion.selection',$data );
     }
 
 }

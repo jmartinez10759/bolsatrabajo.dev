@@ -6,8 +6,9 @@ use App\Model\MasterModel;
 use GuzzleHttp\Client;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\MenuController;
 
-class MasterController extends Controller
+class MasterController extends MenuController
 {
 
 	public static $_client;
@@ -23,7 +24,7 @@ class MasterController extends Controller
     public function __construct(){
         
         #self::$ssl_ruta = ["verify" => $_SERVER['DOCUMENT_ROOT']. "/cacert.pem"];
-        self::$ssl_ruta = ["verify" => true ];
+        self::$ssl_ruta = ["verify" => false ];
         self::$_client = new Client( self::$ssl_ruta );
         self::$_domain = domain();
         self::$_model = new MasterModel();
@@ -128,12 +129,6 @@ class MasterController extends Controller
             return $errors[$id];
 	
 	}
-
-    public static function menus( $id_users ){
-        echo $id_users;
-        return '<h1>yo merengues diablo que hijo de tu.....'.$id_users.'</h1>';
-
-    }
 
 
 
