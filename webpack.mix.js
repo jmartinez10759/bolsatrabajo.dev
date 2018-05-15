@@ -27,7 +27,8 @@ mix.scripts([
 	'resources/assets/js/plugins/wysihtml5-0.3.0.js',
 	'resources/assets/js/plugins/bootstrap-wysihtml5.js',
 	'resources/assets/js/plugins/owl.carousel.min.js',
-	//'resources/assets/js/plugins/custom.js',
+	'resources/assets/js/plugins/jquery.metisMenu.js',
+	'resources/assets/js/plugins/jquery.slimscroll.js',
 	'resources/assets/js/app.js',
 	], 'public/js/app.js')
 	.styles([

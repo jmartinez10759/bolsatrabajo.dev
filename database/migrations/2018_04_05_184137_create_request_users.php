@@ -15,6 +15,7 @@ class CreateRequestUsers extends Migration
     {
         Schema::create('sde_request_users', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('id_rol');
             $table->string('name');
             $table->string('first_surname');
             $table->string('second_surname')->nullable();

@@ -9,6 +9,7 @@ class RequestUserModel extends Model
     protected $table = "sde_request_users";
     public $fillable = [
     	'id'
+		,'id_rol'
 		,'name'
 		,'first_surname'
 		,'second_surname'
@@ -33,6 +34,9 @@ class RequestUserModel extends Model
     }
     public function numero_seguro_social(){
         return $this->hasMany('App\Model\BlmNssModel','id_users');
+    }
+    public function roles(){
+        return $this->hasMany('App\Model\SdeRolesModel','id');
     }
 
 

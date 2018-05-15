@@ -16,5 +16,7 @@ class DatabaseSeeder extends Seeder
          #$this->call(BlmJobsOffersSeeder::class);
          $this->call(BlmNivelesAcademicosSeeder::class);
          $this->call(BlmCategoriasSeeder::class);
+         $this->call(SdeMenusSeeder::class);
+         $this->call(SdeRolesSeeder::class);
     }
 }

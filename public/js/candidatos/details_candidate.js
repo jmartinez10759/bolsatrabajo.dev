@@ -87,7 +87,7 @@ new Vue({
         }
         this.newKeep.photo = $('#url_file').val();
         //console.log(this.newKeep);return;
-        if ( !curpValida(this.newKeep.curp) ) {
+        if ( !curpValida( convert_letters( this.newKeep.curp,'UPPER') ) ) {
             toastr.error( validate ,"Curp Incorrecto" );
             $('#curp').parent().addClass('has-error');
             return;

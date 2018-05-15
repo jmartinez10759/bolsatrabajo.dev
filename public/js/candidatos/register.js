@@ -1,3 +1,5 @@
+var admin = 1;
+
 new Vue({
   el: ".vue-candidate",
   created: function () {
@@ -7,6 +9,7 @@ new Vue({
     datos: [],
     newKeep: { 
          'name': ''
+        ,'id_rol': 2
         ,'first_surname': ''
         ,'second_surname': ''
         ,'correo': ''
@@ -18,6 +21,7 @@ new Vue({
     },
     fillKeep: { 
         'id': ''
+        ,'id_rol': 2
         ,'name': ''
         ,'first_surname': ''
         ,'second_surname': ''
@@ -65,7 +69,12 @@ new Vue({
 
         var url = domain( "login" );
         this.insert_general(url,'',function( object ){
-            redirect( domain('details') );
+
+            if ( object.result.id_rol === admin ) {
+                redirect( domain('selection') );
+            }else{
+                redirect( domain('details') );
+            }
         },function(){
             $('#email').parent().parent().addClass('has-error');
             $('#password').parent().parent().addClass('has-error');

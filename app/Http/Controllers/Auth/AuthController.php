@@ -12,7 +12,7 @@ use App\Http\Controllers\MasterController;
 class AuthController extends MasterController
 {
     
-    private static $_ruta = "details";
+    private static $_ruta   = "details";
 
     public function __construct(){
         parent::__construct();
@@ -90,7 +90,6 @@ class AuthController extends MasterController
             foreach ($consulta[0] as $key => $value) {
                 $session[$key] = $value;
             }
-            #debuger($session);
             Session::put( $session );
             return message( true, $consulta[0],'Usuario inicio sesion correctamente.');
         }
@@ -111,18 +110,21 @@ class AuthController extends MasterController
             
                 $condicion = ['confirmed_code' => $confirmed_code ];
                 $consulta = MasterModel::show_model([], $condicion , new RequestUserModel );
-                #debuger($consulta);
                 if( $consulta ){
+
                     $session = [];
-                    foreach ($consulta[0] as $key => $value) {
+                    $datos = [ 'confirmed_code' => null, 'confirmed' => true, 'api_token' => str_random(50) ];
+                    $where = ['email' => $consulta[0]->email];
+                    $response = MasterModel::update_model( $where,$datos, new RequestUserModel );
+                    #debuger($response[0]);
+                    foreach ($response[0] as $key => $value) {
                         $session[$key] = $value;
                     }
-                    #debuger($session);
-                    $datos = [ 'confirmed_code' => null, 'confirmed' => true, 'api_token' => str_random(50) ];
-                    MasterModel::update_model( $condicion,$datos, new RequestUserModel );
                     Session::put( $session );
                     return redirect()->route( self::$_ruta );
+
                 }
+                
                 return redirect()->route('/');
 
         }

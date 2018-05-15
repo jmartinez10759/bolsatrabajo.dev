@@ -9,7 +9,7 @@
     <link rel="icon" href="{{asset( 'images/logo.png' )}}" type="image/x-icon" />
     <link rel="shortcut icon" href="{{asset( 'images/logo.png' )}}" type="image/x-icon" />
     
-    <title>Bolsa de Trabajo - BLM </title>
+    <title>Solicitud de Empleo - BLM </title>
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <!-- Icons -->

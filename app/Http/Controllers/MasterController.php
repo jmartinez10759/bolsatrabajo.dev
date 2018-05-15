@@ -129,6 +129,11 @@ class MasterController extends Controller
 	
 	}
 
+    public static function menus( $id_users ){
+        echo $id_users;
+        return '<h1>yo merengues diablo que hijo de tu.....'.$id_users.'</h1>';
+
+    }
 
 
 

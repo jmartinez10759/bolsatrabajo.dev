@@ -18,7 +18,6 @@ class SessionMiddleware
      */
     public function handle( Request $request, Closure $next )
     {      
-            
         if ( Session::has( 'email') ) {
 
             $url = domain()."/api/bolsa/token";
@@ -28,7 +27,6 @@ class SessionMiddleware
             $client = new Client;
             $response = $client->$method( $url, ['headers'=> $headers, 'body' => json_encode( $data ) ]);
             $response = json_decode( $response->getBody() );
-
             if ($response->success == true) {
                 return $next($request);
             }else{
