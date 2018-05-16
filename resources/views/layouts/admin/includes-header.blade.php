@@ -7,7 +7,7 @@
     <meta name="ruta-general" content="{{ $_SERVER['PHP_SELF'] }}">
 
     <link rel="icon" href="{{asset( 'images/logo.png' )}}" type="image/x-icon" />
-    <link rel="shortcut icon" href="{{asset( 'images/logo.png' )}}" type="image/x-icon" />
+    <link rel="shortcut icon" href="{{ asset( 'images/logo.png' )}}" type="image/x-icon" />
     
     <title>Solicitud de Empleo - BLM </title>
 

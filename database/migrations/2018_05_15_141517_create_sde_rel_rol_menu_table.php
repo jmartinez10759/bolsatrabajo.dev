@@ -13,7 +13,7 @@ class CreateSdeRelRolMenuTable extends Migration
      */
     public function up()
     {
-        Schema::create('sde_rel_rol_menu', function (Blueprint $table) {
+        Schema::create('sde_rol_menu', function (Blueprint $table) {
             $table->integer('id_rol');
             $table->integer('id_users');
             $table->integer('id_empresa');
@@ -31,6 +31,6 @@ class CreateSdeRelRolMenuTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('sde_rel_rol_menu');
+        Schema::dropIfExists('sde_rol_menu');
     }
 }

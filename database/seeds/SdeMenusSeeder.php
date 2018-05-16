@@ -17,6 +17,7 @@ class SdeMenusSeeder extends Seeder
         $orden = [1,2,3,1,2,3,4];
         $icon = ['fa fa-home','fa fa-user-circle-o','fa fa-cog','fa fa-plus-circle','','fa fa-file-text','fa fa-power-off'];
         $padre = [0,0,0,3,3,3,0];
+        
     	for ($i=0; $i < sizeof( $menus ) ; $i++) { 
 	        
 	        App\Model\SdeMenusModel::create([

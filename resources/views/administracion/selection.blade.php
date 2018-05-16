@@ -78,7 +78,7 @@
 							</div>
 							<div class="col-md-6 col-sm-5">
 								<div class="brows-job-position">
-									<h3>Senior front-end Developer</h3>
+									<h3>Administrador</h3>
 									<p><span>Autodesk</span><span class="brows-job-status"><strong>Status:</strong> Active</span></p>
 								</div>
 							</div>

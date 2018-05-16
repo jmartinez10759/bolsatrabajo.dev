@@ -13,6 +13,7 @@ class SdeRolesSeeder extends Seeder
     {
         $roles = ['Administrador','Candidato'];
         $clave_corta = ['admin','Cand'];
+        
     	for ($i=0; $i < sizeof( $roles ) ; $i++) { 
 	        
 	        App\Model\SdeRolesModel::create([
@@ -22,6 +23,6 @@ class SdeRolesSeeder extends Seeder
 	        ]);
     		
     	}
-
+    	
     }
 }

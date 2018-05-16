@@ -18,5 +18,6 @@ class DatabaseSeeder extends Seeder
          $this->call(BlmCategoriasSeeder::class);
          $this->call(SdeMenusSeeder::class);
          $this->call(SdeRolesSeeder::class);
+         $this->call(SdeRolMenusSeeder::class);
     }
 }

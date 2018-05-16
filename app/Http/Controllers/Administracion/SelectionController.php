@@ -22,11 +22,11 @@ class SelectionController extends MasterController
      *@return void
      */
     public static function index(){
-
-    	$data = [
-    		'menu' => self::menus( Session::get('id') )
-    	];
+ 
+        $fields = [ 'id_rol' => Session::get('id_rol'), 'id_users' => Session::get('id') ];
+    	$data = [ 'menu' => self::menus( $fields ) ];
     	return View( 'administracion.selection',$data );
+        
     }
 
 }

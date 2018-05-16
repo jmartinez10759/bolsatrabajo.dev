@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Model\MasterModel;
 use GuzzleHttp\Client;
+use App\Model\SdeRolMenuModel;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\MenuController;
@@ -129,7 +130,20 @@ class MasterController extends MenuController
             return $errors[$id];
 	
 	}
+	/**
+	 *Metodo para mandar a cargar el menu dependiendo el rol desempeñado por el usuario
+	 *@access public
+	 *@param array $data [ Description ]
+	 *@return void
+	 */
+	protected static function menus( $data = [] ){
+		
+		#$response = self::$_model::show_model([], $data , new SdeRolMenuModel);
+		$response = SdeRolMenuModel::where( [ 'id_rol' =>  $data['id_rol'] ] )->get();
+		#$response = SdeRolMenuModel::find( $data['id_rol'] );
+		debuger($response->menu);
 
+	}
 
 
 
