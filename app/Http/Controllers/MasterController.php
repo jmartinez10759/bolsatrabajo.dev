@@ -139,9 +139,9 @@ class MasterController extends MenuController
 	protected static function menus( $data = [] ){
 		
 		#$response = self::$_model::show_model([], $data , new SdeRolMenuModel);
-		$response = SdeRolMenuModel::where( [ 'id_rol' =>  $data['id_rol'] ] )->get();
+		$response = SdeRolMenuModel::with('menu')->where( $data  )->get();
 		#$response = SdeRolMenuModel::find( $data['id_rol'] );
-		debuger($response->menu);
+		debuger( $response->toArray() );
 
 	}
 
