@@ -98,6 +98,7 @@
 						<h4>Trabajos Recientes</h4>
 					</div>
 					<!-- Job Lists-->
+					@foreach( $trabajos as $jobs )
 					<div class="job-lists">
 						<div class="row">
 							<div class="col-md-10 col-sm-9">
@@ -106,9 +107,9 @@
 										<img src="assets/img/com-1.jpg" class="img-responsive" alt="">
 									</div>
 									<div class="recent-job-caption">
-										<h4>Senior Web Design</h4>
-										<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed....</p>
-										<span class="recent-job-status">2 Min ago</span>
+										<h4>{{ $jobs->name }}</h4>
+										<p>{{ $jobs->title }}</p>
+										<span class="recent-job-status"></span>
 									</div>
 								</div>
 							</div>
@@ -120,6 +121,7 @@
 							</div>
 						</div>
 					</div>
+					@endforeach
 					<!-- ./Job Lists-->
 				</div>
 			</div>

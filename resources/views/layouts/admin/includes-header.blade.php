@@ -11,7 +11,10 @@
     
     <title>Solicitud de Empleo - BLM </title>
 
-     <link href="{{asset('plugins/css/bootstrap.css')}}" rel="stylesheet" />
+    <!-- Styles -->
+    <link href="{{ asset('css/app_admin.css') }}" rel="stylesheet">
+
+    <!-- <link href="{{asset('plugins/css/bootstrap.css')}}" rel="stylesheet" /> -->
     <!-- Icons -->
     <link href="{{ asset('plugins/font-awesome/font-awesome.css' )}}" rel="stylesheet">
     <link href="{{ asset('plugins/line-font/line-font.css')}}" rel="stylesheet">

@@ -74,9 +74,21 @@ Route::group(['middleware' => ['auth.session','admin.only']], function() {
         'uses'      => 'Administracion\DashboardController@index'
         ,'as'       => 'dashboard'
     ]);
+
     Route::get('/candidate', [
-        'uses'      => 'Administracion\CandidateController@index'
+        'uses'      => 'Administracion\CandidateAdminController@index'
         ,'as'       => 'candidate'
+    ]);
+
+     Route::get('/candidate/show', [
+        'uses'      => 'Administracion\CandidateAdminController@show'
+        ,'as'       => 'candidate.show'
+    ]);
+
+
+    Route::post('/candidate/insert', [
+        'uses'      => 'Administracion\CandidateAdminController@create'
+        ,'as'       => 'candidate.insert'
     ]);
 
 

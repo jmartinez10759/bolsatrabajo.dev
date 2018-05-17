@@ -110,7 +110,6 @@ class DetailCandidateController extends MasterController
             #debuger($fields);
         return message(true, $fields , '¡Trasaccion exitosa!');
 
-
     }
     /**
      *Metodo para insertar y/o actualizar los datos del candidato
@@ -192,7 +191,6 @@ class DetailCandidateController extends MasterController
 
         }
         
-
     }
     /**
      *Metodo para hacer la consulta de la vacante 

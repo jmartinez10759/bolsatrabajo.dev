@@ -45,4 +45,20 @@ mix.scripts([
 	'resources/assets/css/plugins/bootsnav.css',
 	/*'resources/assets/css/plugins/style.css',
 	'resources/assets/css/plugins/responsiveness.css',*/
-	], 'public/css/app.css');
+	], 'public/css/app.css')
+	.scripts([
+		'resources/assets/js/jquery.js',
+		'resources/assets/js/bootstrap.js',
+		'resources/assets/js/toastr.js',
+		'resources/assets/js/vue.js',
+		'resources/assets/js/axios.js',
+		'resources/assets/js/sweetalert.js',
+		'resources/assets/js/global.system.js',
+		'resources/assets/js/tools-manager.js',
+	],'public/js/app_admin.js')
+	.styles([
+		'resources/assets/css/bootstrap.css',
+		'resources/assets/css/toastr.css',
+		'resources/assets/css/sweetalert.css',
+		'resources/assets/css/plugins/dropzone.css',
+	],'public/css/app_admin.css');
