@@ -11,8 +11,7 @@ class SdePermisosSeeder extends Seeder
      */
     public function run()
     {
-
-    	$clave = ['UPD','INS','DEL','CON'];
+        $clave = ['UPD','INS','DEL','GET'];
     	$descripcion = ['update','insert','destroy','select'];
 
     	for ($i=0; $i < sizeof( $clave ); $i++) { 
@@ -24,7 +23,5 @@ class SdePermisosSeeder extends Seeder
 	        ]);
 
     	}
-
     }
-
 }

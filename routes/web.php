@@ -65,7 +65,24 @@ Route::post('/password/verify', [
 
 
 ######################################## MIDDLEWARE SESSION  ################################################
-Route::group(['middleware' => ['auth.session']], function() {
+Route::group(['middleware' => ['auth.session','admin.only']], function() {
+
+
+##################################### RUTAS DE ADMINISTRADORES #############################################
+    
+    Route::get('/dashboard', [
+        'uses'      => 'Administracion\DashboardController@index'
+        ,'as'       => 'dashboard'
+    ]);
+    Route::get('/candidate', [
+        'uses'      => 'Administracion\CandidateController@index'
+        ,'as'       => 'candidate'
+    ]);
+
+
+
+
+
 
 ######################################## RUTAS DE DETALLES DEL CANDIDATO  #################################
 
@@ -73,12 +90,7 @@ Route::group(['middleware' => ['auth.session']], function() {
         'uses'      => 'Candidatos\DetailCandidateController@index'
         ,'as'       => 'details'
     ]);
-    #
-    Route::get('/dashboard', [
-        'uses'      => 'Administracion\DashboardController@index'
-        ,'as'       => 'dashboard'
-    ]);
-    #
+    
     Route::get('/details/show', [
         'uses'      => 'Candidatos\DetailCandidateController@show'
         ,'as'       => 'details.show'

@@ -21,7 +21,7 @@ class DashboardController extends MasterController
      */
     public static function index(){
 
-    	$candidatos = array_to_object(RequestUserModel::with('description')->get()->toArray()); 
+    	$candidatos = array_to_object(RequestUserModel::with('description')->where(['id_rol' => 2])->get()->toArray()); 
     	#debuger($candidatos);
     	$data = [ 
     		'menu' 			=> self::menus( [ 'id_rol' => Session::get('id_rol'), 'id_users' => Session::get('id') ] )
