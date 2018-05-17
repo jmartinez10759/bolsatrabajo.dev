@@ -35,11 +35,13 @@ class MasterApiController extends Controller
         $http_token     = isset( $_SERVER['HTTP_TOKEN'] )? $_SERVER['HTTP_TOKEN']:null;
 
         $token = ( $http_token && $http_usuario )? self::token_validate([ 'email' => $http_usuario,'api_token' => $http_token]) : false;
-    	$permisson = self::permisson_validate( [ 'email' => $http_usuario,'api_token' => $http_token] );
         if ( isset( $token->success ) && $token->success == true ) {
+    		
+    		$permisson = self::permisson_validate( [ 'id_users' => $token->result[0]->id ] )->result;
+    		#debuger(['CON']);
             switch ($server) {
                 case 'GET':
-                    if ( in_array( $permisson, [1] )  ) {
+                    if ( in_array( 'CON', $permisson )  ) {
                         if ( isset($parametros[$indice]) ) {
                             return $this->show( $parametros );
                         }
@@ -53,7 +55,7 @@ class MasterApiController extends Controller
                     break;
                 
                 case 'POST':
-                    if ( in_array( $permisson, [1]  ) ){
+                    if ( in_array( 'INS' ,$permisson  ) ){
                         return $this->create($request);
                     }
 		    			return $this->show_error(0);
@@ -61,7 +63,7 @@ class MasterApiController extends Controller
 
                 case 'PUT':
                         $id = isset($request->data[$indice])? $request->data[$indice] :false;
-                        if ( in_array( $permisson, [1]  ) ) {
+                        if ( in_array( 'UPD' ,$permisson  ) ) {
                             return $this->update($request->data,$id);
                         }
 						return $this->show_error(0);
@@ -69,7 +71,7 @@ class MasterApiController extends Controller
 
                 case 'DELETE':
                         $id = isset($request->data[$indice])? $request->data[$indice] :false;
-                        if ( in_array( $permisson, [1]  ) ){
+                        if ( in_array( 'DEL' ,$permisson  ) ){
                             return $this->destroy($id);
                         }
 						return $this->show_error(0);
@@ -100,10 +102,10 @@ class MasterApiController extends Controller
      *@return integer [regresa el numero de permiso solicitdo]
      */
     protected function permisson_validate( $data = [] ){
-
+    	
+        $this->_permission = new PermisosApiController();
+        return array_to_object( $this->_permission->permisson( $data ) );        
     	return 1;
-        $this->_permission = new ValidatePermissonController();
-        return array_to_object( $this->_permission::permisson( $data ) );        
 
     }
     /**

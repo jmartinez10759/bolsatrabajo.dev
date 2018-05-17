@@ -73,12 +73,12 @@ Route::group(['middleware' => ['auth.session']], function() {
         'uses'      => 'Candidatos\DetailCandidateController@index'
         ,'as'       => 'details'
     ]);
-    
-    Route::get('/selection', [
-        'uses'      => 'Administracion\SelectionController@index'
-        ,'as'       => 'selection'
+    #
+    Route::get('/dashboard', [
+        'uses'      => 'Administracion\DashboardController@index'
+        ,'as'       => 'dashboard'
     ]);
-    
+    #
     Route::get('/details/show', [
         'uses'      => 'Candidatos\DetailCandidateController@show'
         ,'as'       => 'details.show'

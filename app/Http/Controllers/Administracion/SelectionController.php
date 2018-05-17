@@ -11,10 +11,9 @@ use App\Http\Controllers\MasterController;
 
 class SelectionController extends MasterController
 {
-    
+
     public function __construct(){
     	parent::__construct();
-    
     }
     /**
      *Metodo para obtener la vista de Candidatos y/o portal de admin

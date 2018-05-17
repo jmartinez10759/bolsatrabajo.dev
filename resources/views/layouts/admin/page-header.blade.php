@@ -1,5 +1,5 @@
 <div class="navbar navbar-inverse navbar-fixed-top" >
-                <div class="container-fluid">
+                <div class="col-sm-offset-1 col-sm-10">
                     <div class="navbar-header">
                         <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".sidebar-collapse">
                             <span class="icon-bar"></span>

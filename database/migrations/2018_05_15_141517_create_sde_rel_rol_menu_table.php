@@ -19,6 +19,7 @@ class CreateSdeRelRolMenuTable extends Migration
             $table->integer('id_empresa');
             $table->integer('id_sucursal');
             $table->integer('id_menu');
+            $table->integer('id_permiso');
             $table->boolean('estatus');
             $table->timestamps();
         });

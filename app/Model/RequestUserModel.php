@@ -24,21 +24,23 @@ class RequestUserModel extends Model
     ];
     
     public function description(){
-        return $this->hasMany('App\Model\DetailCandidateModel','id_users');
+        return $this->hasMany('App\Model\DetailCandidateModel','id_users','id');
     }
     public function curriculum(){
-        return $this->hasMany('App\Model\BlmCurriculumModel','id_users');
+        return $this->hasMany('App\Model\BlmCurriculumModel','id_users','id');
     }
     public function postulate(){
-        return $this->hasMany('App\Model\BlmPostulateCandidateModel','id_users');
+        return $this->hasMany('App\Model\BlmPostulateCandidateModel','id_users','id');
     }
     public function numero_seguro_social(){
-        return $this->hasMany('App\Model\BlmNssModel','id_users');
+        return $this->hasMany('App\Model\BlmNssModel','id_users','id');
     }
     public function roles(){
-        return $this->hasMany('App\Model\SdeRolesModel','id');
+        return $this->hasMany('App\Model\SdeRolesModel','id','id_rol');
     }
-
+    public function permisos(){
+        return $this->hasMany('App\Model\SdePermisosModel','id_users','id');
+    }
 
 
 }

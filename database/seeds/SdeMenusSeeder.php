@@ -11,8 +11,8 @@ class SdeMenusSeeder extends Seeder
      */
     public function run()
     {
-        $menus = ['Dashboard','Candidatos','Configuracion','Roles','Menus','Permisos','Cerrar Sesion'];
-        $link = ['dashboard','candidate','','roles','menus','permisos','logout'];
+        $menus = ['Dashboard','Candidatos','Configuracion','Roles','Menus','Permisos','Portal Candidatos'];
+        $link = ['dashboard','candidate','','roles','menus','permisos','details'];
         $tipo = ['SIMPLE','SIMPLE','PADRE','HIJO','HIJO','HIJO','SIMPLE'];
         $orden = [1,2,3,1,2,3,4];
         $icon = ['fa fa-home','fa fa-user-circle-o','fa fa-cog','fa fa-plus-circle','','fa fa-file-text','fa fa-power-off'];

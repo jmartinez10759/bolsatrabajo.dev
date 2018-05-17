@@ -71,7 +71,7 @@ new Vue({
         this.insert_general(url,'',function( object ){
 
             if ( object.result.id_rol === admin ) {
-                redirect( domain('selection') );
+                redirect( domain('dashboard') );
             }else{
                 redirect( domain('details') );
             }

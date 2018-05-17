@@ -4,11 +4,12 @@ namespace App\Http\Controllers\Api;
 
 use App\Model\MasterModel;
 use Illuminate\Http\Request;
-use App\Model\RequestUserModel;
+use App\Model\SdePermisosModel;
 use App\Http\Controllers\Controller;
 
-class TokenApiController extends MasterApiController
+class PermisosApiController extends MasterApiController
 {
+    
     
     private $_id = "id";
     private $_model;
@@ -19,7 +20,7 @@ class TokenApiController extends MasterApiController
      */
     public function __construct(){
     	parent::__construct();	
-    	$this->_model = new RequestUserModel;
+    	$this->_model = new SdePermisosModel;
     }
      /**
      * Display a listing of the resource.
@@ -54,9 +55,10 @@ class TokenApiController extends MasterApiController
             if( isset($datos['success']) && $datos['success'] == false ){
                 return self::show_error(3,$datos['result']);
             }
-            $response = array_to_object( $this->token( $request->data ) );
+            $response = array_to_object( $this->permisson( $request->data ) );
+            #debuger($response);
             if ( $response->success  == true ) {            	
-                return $this->_message_success(201, object_to_array( $response->result[0]) );
+                return $this->_message_success(201, object_to_array( $response->result) );
             }
 
         } 
@@ -70,11 +72,23 @@ class TokenApiController extends MasterApiController
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function token( $datos ){
+    public function permisson( $datos ){
 
-        $response = MasterModel::show_model(['id','api_token','email'],$datos, $this->_model );
+        $response = MasterModel::show_model([],$datos, $this->_model );
         if ( $response ) {
-            return ['success' => true,'result' => $response];
+        	$permisos = [];
+        	for ($i=0; $i < count($response); $i++) { 
+	        	
+	        	foreach ($response[$i] as $key => $value) {
+	        		if ($key == "clave_corta") {
+	        			$permisos[] = $value;
+	        		}
+	        		
+	        	}
+
+        	}
+        	#debuger($permisos);
+            return ['success' => true,'result' => $permisos ];
         }
         return ['success' => false,'result' => $response ];
 
@@ -125,5 +139,4 @@ class TokenApiController extends MasterApiController
         return $this->show_error(3);
     
     }
-
 }
