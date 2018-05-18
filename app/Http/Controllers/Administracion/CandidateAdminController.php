@@ -42,8 +42,8 @@ class CandidateAdminController extends MasterController
     public static function show(){
 
         $candidatos = array_to_object(RequestUserModel::with('description')->where(['id_rol' => 2])->get()->toArray());
-        #$usuarios  =  RequestUserModel::where(['id_rol' => 2])->paginate(4);
-    	#debuger($usuarios);
+        $usuarios  =  RequestUserModel::where(['id_rol' => 2])->paginate(4);
+    	#debuger( $candidatos->data);
     	$fields = [];
     	if ( $candidatos ) {
     		#mandar aqui toda la informacion detalles y usuarios

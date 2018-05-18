@@ -137,14 +137,13 @@ new Vue({
     },
     changePage( page ){
         this.pagination.current_page = page;
-        var url = domain('details/show');
+        var url = domain('candidate/show');
         var fields = {'page': page};
         this.get_general( url,fields );
     
     },
     consulta_general: function(){
         
-        //var url = ('details/show');
         var url = domain('candidate/show');
         var fields = {};
         axios.get(url,fields).then( response => {
