@@ -71,6 +71,31 @@
 										</div>
 									</div>
 								</div>
+								
+								<!--<div class="row">
+										<ul class="pagination">
+											<li v-if="pagination.current_page > 1 ">
+												<a v-on:click.prevent="changePage( pagination.current_page - 1 )" style="cursor: pointer;" >
+													«
+												</a>
+											</li>
+											<li v-else class="disabled" >
+												<a> « </a>
+											</li>
+											<li v-for="page in pagesNumber" v-bind:class="[ page == isActived ? 'active' : '']" >
+												<a style="cursor: pointer;" v-on:click.prevent="changePage(page)">@{{page}}
+												</a>
+											</li>
+											<li v-if="pagination.current_page < pagination.last_page">
+												<a style="cursor: pointer;" v-on:click.prevent="changePage(pagination.current_page + 1)">
+													»
+												</a>
+											</li>
+											<li v-else class="disabled" >
+												<a > » </a>
+											</li>
+										</ul>
+									</div>-->
 
 
 
@@ -147,9 +172,9 @@
 		  </div>
 		   <div class="form-group">
 		    <label for="">Estado</label>
-		    	<select class="form-control" v-model="newKeep.id_state" >
+		    	<select class="form-control" v-model="newKeep.id_state">
 		    		@foreach( $estados as $contry )
-		    			<option value="{{ $contry->id}}">{{ $contry->nombre }}</option>
+		    			<option value="{{ $contry->id}}" >{{ $contry->nombre }}</option>
 		    		@endforeach
 		    	</select>
 		  </div>

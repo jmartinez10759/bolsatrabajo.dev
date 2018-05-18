@@ -3,7 +3,7 @@
 @push('styles')
 @endpush
 			
-<div id="page-wrapper" >
+<div id="page-wrapper" class="vue_dashboard">
 
 	<div class="row bg-title">
 		<div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
@@ -98,8 +98,7 @@
 						<h4>Trabajos Recientes</h4>
 					</div>
 					<!-- Job Lists-->
-					@foreach( $trabajos as $jobs )
-					<div class="job-lists">
+					<div class="job-lists" v-for="(jobs, key) in datos.trabajos">
 						<div class="row">
 							<div class="col-md-10 col-sm-9">
 								<div class="recent-job-box">
@@ -107,8 +106,8 @@
 										<img src="assets/img/com-1.jpg" class="img-responsive" alt="">
 									</div>
 									<div class="recent-job-caption">
-										<h4>{{ $jobs->name }}</h4>
-										<p>{{ $jobs->title }}</p>
+										<h4>@{{ jobs.name }}</h4>
+										<p>@{{ jobs.title }}</p>
 										<span class="recent-job-status"></span>
 									</div>
 								</div>
@@ -121,17 +120,17 @@
 							</div>
 						</div>
 					</div>
-					@endforeach
 					<!-- ./Job Lists-->
 				</div>
+
 			</div>
 			<div class="col-md-4 col-sm-4">
 				<div class="recent-jobs-pannel">
 					<div class="pannel-header">
 						<h4>Candidatos</h4>
 					</div>
-					<div class="full-followers">
-					  @foreach( $detalles as $detalle)
+					<div class="full-followers" v-for="details in datos.detalles ">
+
 						<a href="">
 							<div class="user-img">
 								<img src="assets/img/img-1.jpg" alt="user" class="img-circle">
@@ -139,22 +138,50 @@
 								<i class="fa fa-circle active" aria-hidden="true"></i>
 							</div>
 							<div class="message-content">
-							<h5>{{ $detalle->name }} {{ $detalle->first_surname }} {{ $detalle->second_surname }} </h5>
-							@foreach( $detalle->description as $description)
-							<span class="mail-desc">{{ $description->cargo }}</span>
-							@endforeach
-							<span class="time">{{$detalle->status}}</span>
+							<h5>@{{ details.name }} @{{ details.first_surname }} @{{ details.second_surname }} </h5>
+							
+							<span class="mail-desc" v-for="description in details.description">@{{ description.cargo }}</span>
+							
+							<span class="time">@{{details.status}}</span>
 							</div>
 						</a>
-					@endforeach
 					</div>
 				</div>
 			</div>
+
+			
 		</div>
+
+		<div class="row">
+			<ul class="pagination">
+				<li v-if="pagination.current_page > 1 ">
+					<a v-on:click.prevent="changePage( pagination.current_page - 1 )" style="cursor: pointer;" >
+						«
+					</a>
+				</li>
+				<li v-else class="disabled" >
+					<a> « </a>
+				</li>
+				<li v-for="page in pagesNumber" v-bind:class="[ page == isActived ? 'active' : '']" >
+					<a style="cursor: pointer;" v-on:click.prevent="changePage(page)">@{{page}}
+					</a>
+				</li>
+				<li v-if="pagination.current_page < pagination.last_page">
+					<a style="cursor: pointer;" v-on:click.prevent="changePage(pagination.current_page + 1)">
+						»
+					</a>
+				</li>
+				<li v-else class="disabled" >
+					<a > » </a>
+				</li>
+			</ul>
+		</div>
+
 	</div>
 </div>
  <!-- /. PAGE WRAPPER  -->
 			
 @stop
 @push('scripts')
+	<script type="text/javascript" src="{{asset('js/candidatos/admin_dashboard.js')}}" ></script>
 @endpush

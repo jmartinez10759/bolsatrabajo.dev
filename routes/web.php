@@ -72,6 +72,11 @@ Route::group(['middleware' => ['admin.only']], function() {
         ,'as'       => 'dashboard'
     ]);
 
+    Route::get('/dashboard/show', [
+        'uses'      => 'Administracion\DashboardController@show'
+        ,'as'       => 'dashboard.show'
+    ]);
+
     Route::get('/candidate', [
         'uses'      => 'Administracion\CandidateAdminController@index'
         ,'as'       => 'candidate'

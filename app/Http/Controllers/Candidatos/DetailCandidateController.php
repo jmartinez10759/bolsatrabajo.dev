@@ -38,6 +38,7 @@ class DetailCandidateController extends MasterController
 			,'activo'         =>  ( Session::get('status') != false )? "Activo": "Desactivado"
 			,'postulaciones'  =>  count($postulaciones)
 			,'curriculum'     =>  ( $details || count($curriculum) )? 'style=display:block' : 'style=display:none'
+			,'administrador'  =>  ( $users->id_rol == 1 ) ? 'style=display:block' : 'style=display:none'
 		];
 
 		return view('candidato.detailCandidato',$data);
