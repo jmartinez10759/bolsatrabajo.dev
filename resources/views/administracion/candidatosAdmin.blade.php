@@ -41,8 +41,8 @@
 							
 							<div class="row no-ext-mrg">
 								
-								<div class="col-sm-offset-10">
-									<button class="btn btn-success"type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal_insert"> Agregar </button>
+								<div class="col-sm-offset-9">
+									<button type="button" class="btn btn-success btn-lg" data-toggle="modal" data-target="#modal_insert"> Agregar Candidato </button>
 								</div>
 								<br>
 								<div class="col-md-4 col-sm-6" v-for="detalle in datos">
@@ -50,12 +50,12 @@
 										<div class="top-box">
 											<i class="fa fa-star" aria-hidden="true"></i>
 											<div class="candidate-action">
-												<a href="#" class="edit-can"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+												<a href="#" class="edit-can" v-on:click.prevent="edit_general(detalle,'modal_update')"><i class="fa fa-pencil" aria-hidden="true"></i></a>
 												<a href="#" class="delete-can"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
 											</div>
 										</div>
-										<div class="candidate-img">
-											<img src="{{ asset( $photo ) }}" class="img-circle img-responsive" alt="">
+										<div class="candidate-img"  >
+											<img src="" class="img-circle img-responsive" alt="">
 										</div>
 										<div class="candidate-caption">
 											<h4>@{{ detalle.name }} @{{ detalle.first_surname }} @{{ detalle.second_surname }} </h4>
@@ -170,7 +170,7 @@
 
 </div>
 
-
+@include('administracion.edicionCandidate');
 
 </div>
 <!-- /. WRAPPER  -->

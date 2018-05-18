@@ -26,7 +26,6 @@ class CandidateAdminController extends MasterController
     		'menu' 		   => self::menus( [ 'id_rol' => Session::get('id_rol'), 'id_users' => Session::get('id') ] )
     		,'detalles'    => $candidatos
     		,'total'       => count($candidatos)
-    		,'photo' 	   => ""
     	];
 
     	return view('administracion.candidatosAdmin',$data);
@@ -42,9 +41,11 @@ class CandidateAdminController extends MasterController
 
     	$candidatos = array_to_object(RequestUserModel::with('description')->where(['id_rol' => 2])->get()->toArray());
     	if ( $candidatos ) {
-    		return message(true,$candidatos,self::$message_success);
+    		#mandar aqui toda la informacion detalles y usuarios
+
+    		return message( true,$candidatos,self::$message_success );
     	}
-    	return message(false,[],self::$message_error);
+    	return message( false,[],self::$message_error );
 
     }
     /**
@@ -126,7 +127,20 @@ class CandidateAdminController extends MasterController
             return message(false,[],"¡Ya existe la CURP que intenta agregar!");
         
 
-    }	
+    }
+    /**
+     *Metodo donde se genera la carga de los datos 
+     *@access public 
+     *@param Request $request [ description ]
+     *@return json
+     */
+    public static function update( Request $request ){
+
+    	debuger( $request->all() );
+
+    }
+    
+
 
 
 }

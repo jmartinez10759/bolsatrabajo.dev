@@ -62,13 +62,10 @@ Route::post('/password/verify', [
         'uses'      => 'Auth\PasswordController@create'
         ,'as'       => 'password.reset'
     ]);*/
+Route::group(['middleware' => ['admin.only']], function() {
+    
 
-
-######################################## MIDDLEWARE SESSION  ################################################
-Route::group(['middleware' => ['auth.session','admin.only']], function() {
-
-
-##################################### RUTAS DE ADMINISTRADORES #############################################
+    ##################################### RUTAS DE ADMINISTRADORES #############################################
     
     Route::get('/dashboard', [
         'uses'      => 'Administracion\DashboardController@index'
@@ -92,9 +89,14 @@ Route::group(['middleware' => ['auth.session','admin.only']], function() {
     ]);
 
 
+});
 
 
 
+
+
+######################################## MIDDLEWARE SESSION  ################################################
+Route::group(['middleware' => ['auth.session']], function() {
 
 ######################################## RUTAS DE DETALLES DEL CANDIDATO  #################################
 

@@ -69,12 +69,15 @@ new Vue({
 
         var url = domain( "login" );
         this.insert_general(url,'',function( object ){
-
-            if ( object.result.id_rol === admin ) {
+            if ( object.result.id_rol == admin ) {
                 redirect( domain('dashboard') );
-            }else{
-                redirect( domain('details') );
+                return;
             }
+            if( object.result.id_rol == 2 ){
+                redirect( domain('details') );
+                return;
+            }
+
         },function(){
             $('#email').parent().parent().addClass('has-error');
             $('#password').parent().parent().addClass('has-error');

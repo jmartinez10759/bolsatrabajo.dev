@@ -28,7 +28,9 @@ class SessionMiddleware
             $response = $client->$method( $url, ['headers'=> $headers, 'body' => json_encode( $data ) ]);
             $response = json_decode( $response->getBody() );
             $permisos = [1,2];
+            #debuger(Session::all());
             if ($response->success == true && in_array( Session::get('id_rol'), $permisos ) ) {
+                #debuger($response->success);
                 return $next($request);
             }else{
                 Session::flush();
