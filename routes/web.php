@@ -88,6 +88,15 @@ Route::group(['middleware' => ['admin.only']], function() {
         ,'as'       => 'candidate.insert'
     ]);
 
+    Route::put('/candidate/update', [
+        'uses'      => 'Administracion\CandidateAdminController@update'
+        ,'as'       => 'candidate.update'
+    ]);
+
+    Route::delete('/candidate/destroy/{id}', [
+        'uses'      => 'Administracion\CandidateAdminController@destroy'
+        ,'as'       => 'candidate.destroy'
+    ]);
 
 });
 

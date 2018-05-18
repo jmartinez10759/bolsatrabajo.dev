@@ -51,7 +51,7 @@
 											<i class="fa fa-star" aria-hidden="true"></i>
 											<div class="candidate-action">
 												<a href="#" class="edit-can" v-on:click.prevent="edit_general(detalle,'modal_update')"><i class="fa fa-pencil" aria-hidden="true"></i></a>
-												<a href="#" class="delete-can"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
+												<a href="#" class="delete-can" v-on:click.prevent="destroy_candidate( detalle )"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
 											</div>
 										</div>
 										<div class="candidate-img"  >
@@ -59,7 +59,8 @@
 										</div>
 										<div class="candidate-caption">
 											<h4>@{{ detalle.name }} @{{ detalle.first_surname }} @{{ detalle.second_surname }} </h4>
-											<span v-for=" description in detalle.description">@{{ description.cargo }}</span>
+											<span>@{{ detalle.cargo }}</span>
+
 										</div>
 										<div class="candidate-footer">
 											<span class="can-status" v-if="detalle.status == 1"> 
@@ -146,7 +147,11 @@
 		  </div>
 		   <div class="form-group">
 		    <label for="">Estado</label>
-		    <select class="form-control" id="estado" v-model="newKeep.estados" ></select>
+		    	<select class="form-control" v-model="newKeep.id_state" >
+		    		@foreach( $estados as $contry )
+		    			<option value="{{ $contry->id}}">{{ $contry->nombre }}</option>
+		    		@endforeach
+		    	</select>
 		  </div>
 		  <!-- <div class="form-group">
 		  	<label >Numero de Seguro Social</label>

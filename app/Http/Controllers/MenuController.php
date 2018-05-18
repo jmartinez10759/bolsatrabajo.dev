@@ -25,10 +25,10 @@ class MenuController extends Controller
             $submenu = "";
 
             foreach ($data as $menus) {
-                if (strtoupper($menus->tipo) == "SIMPLE") {
+                if (strtoupper($menus->tipo) == "SIMPLE" && $menus->estatus == 1) {
                     $menu .= '<li><a href="'.self::$_base_url.$menus->link.'"><i class="'.$menus->icon.'"></i> '.$menus->texto.'</a></li>';
                 }
-                if (strtoupper($menus->tipo) == "PADRE") {
+                if (strtoupper($menus->tipo) == "PADRE" && $menus->estatus == 1 ) {
                         $menu .= '<li><a><i class="'.$menus->icon.'"></i> '.$menus->texto.' <span class="fa fa-chevron-down"></span></a>';
                         $menu .= '<ul class="nav child_menu">';
                         $menu .= self::_submenus( $data,$menus->id );
@@ -51,7 +51,7 @@ class MenuController extends Controller
         if ($id_menu && $data) {
             $submenus = "";
             foreach ($data as $submenu) {
-                if (strtoupper($submenu->tipo) == "HIJO" && $submenu->id_padre == $id_menu) {
+                if (strtoupper($submenu->tipo) == "HIJO" && $submenu->id_padre == $id_menu && $menus->estatus == 1) {
                     $submenus .= '<li><a href="'.self::$_base_url.$submenu->link.'">'.$submenu->texto.'</a></li>';
                 }
             }

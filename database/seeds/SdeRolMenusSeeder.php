@@ -11,7 +11,8 @@ class SdeRolMenusSeeder extends Seeder
      */
     public function run()
     {
-        $menus = [1,2,3,4,5,6,7];
+		$menus = [1,2,3,4,5,6,7];
+		$status = [1,1,0,0,0,0,1];
         #$permiso = [1,2,3,4];
         for ($i=0; $i < count( $menus ); $i++) { 
 	        
@@ -22,7 +23,7 @@ class SdeRolMenusSeeder extends Seeder
 		        ,'id_sucursal'  => 0
 		        ,'id_menu' 		=> $menus[$i]
 		        ,'id_permiso' 	=> 1 
-		        ,'estatus' 		=> 1
+		        ,'estatus' 		=> $status[$i]
 		    ]);
 	        	
         	

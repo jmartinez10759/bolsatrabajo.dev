@@ -27,7 +27,7 @@ new Vue({
       ,'telefono': ''
       ,'password': ''
       ,'id_state': ''
-      ,'confirmed_nss': ''
+      ,'confirmed_nss': false
       ,'photo': ''
 
     },
@@ -46,7 +46,7 @@ new Vue({
       ,'telefono': ''
       ,'password': ''
       ,'id_state': ''
-      ,'confirmed_nss': ''
+      ,'confirmed_nss': false
       ,'photo': ''
     },
     offset: 3
@@ -91,6 +91,20 @@ new Vue({
         this.insert_general(url, refresh, function( object ){
             $('#modal_insert').modal('hide');
         },function(){ });
+
+    },
+    update_candidate: function(){
+      
+      var url = domain("candidate/update");
+      var refresh = domain("candidate/show");
+      this.update_general(url,refresh,'modal_update');
+
+    },
+    destroy_candidate: function( keep ){
+      
+      var url = domain("candidate/destroy");
+      var refresh = domain("candidate/show");
+      this.delete_general(url,refresh,keep.id);
 
     },
     insert_nss: function(){

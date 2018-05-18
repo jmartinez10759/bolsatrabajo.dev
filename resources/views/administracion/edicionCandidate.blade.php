@@ -30,7 +30,7 @@
 
 		  <div class="form-group col-sm-6">
 		    <label for="">Correo</label>
-		    <input type="text" class="form-control"  v-model="fillKeep.email">
+		    <input type="text" class="form-control"  v-model="fillKeep.email" disabled="">
 		  </div>
 
 		  <div class="form-group col-sm-6">
@@ -59,7 +59,11 @@
 		  </div>
 		   <div class="form-group">
 		    <label for="">Estado</label>
-		    <select class="form-control"  v-model="fillKeep.estados" ></select>
+		    <select class="form-control"  v-model="fillKeep.id_state" >
+		    	@foreach( $estados as $contry )
+	    			<option value="{{ $contry->id}}">{{ $contry->nombre }}</option>
+	    		@endforeach
+		    </select>
 		  </div>
 		  <!-- <div class="form-group">
 		  	<label >Numero de Seguro Social</label>
