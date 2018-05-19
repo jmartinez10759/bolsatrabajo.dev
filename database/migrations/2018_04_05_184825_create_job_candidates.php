@@ -22,6 +22,8 @@ class CreateJobCandidates extends Migration
             $table->integer('jobs_orden')->default(1);
             $table->date('jobs_fecha_inicio')->nullable();
             $table->date('jobs_fecha_final')->nullable();
+            $table->string('jobs_jefe_inmediato')->nullable();
+            $table->string('jobs_telefono')->nullable();
             $table->timestamps();
         });
     }

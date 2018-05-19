@@ -43,8 +43,8 @@
                 </div>
 
                 <div class="modal-footer">
-			        <button type="button" class="btn btn" v-on:click.prevent="update_study()" >Actualizar</button>
-			        <button type="button" class="btn btn" data-dismiss="modal">Cancelar</button>
+			        <button type="button" class="btn btn-success" v-on:click.prevent="update_study()" >Actualizar</button>
+			        <button type="button" class="btn btn-warning" data-dismiss="modal">Cancelar</button>
 			    </div>
 
             </div>
@@ -77,6 +77,18 @@
 					      <input type="text" name="jobs_puesto" class="form-control" placeholder="Puesto Desempeñado" v-model="fillKeep.jobs_puesto">
 					    </div>
 					  </div>
+					   <div class="form-group">
+					    <label class="control-label col-sm-2" >Jefe Inmediato</label>
+					    <div class="col-sm-10">
+					      <input type="text" name="jobs_jefe_inmediato" class="form-control" placeholder="Nombre" v-model="fillKeep.jobs_jefe_inmediato">
+					    </div>
+					  </div>
+						  <div class="form-group">
+						    <label class="control-label col-sm-2" >Telefono</label>
+						    <div class="col-sm-10">
+						      <input type="number" name="jobs_telefono" class="form-control" placeholder="5533356593" v-model="fillKeep.jobs_telefono">
+						    </div>
+						  </div>
 
 					  <div class="form-group">
 					    <label class="control-label col-sm-2" >Fecha Inicio</label>
@@ -108,8 +120,8 @@
             </div>
 
             <div class="modal-footer">
-		        <button type="button" class="btn btn" v-on:click.prevent="update_jobs()">Actualizar</button>
-		        <button type="button" class="btn btn" data-dismiss="modal">Cancelar</button>
+		        <button type="button" class="btn btn-success" v-on:click.prevent="update_jobs()">Actualizar</button>
+		        <button type="button" class="btn btn-warning" data-dismiss="modal">Cancelar</button>
 		    </div>
 
         </div>
@@ -157,8 +169,8 @@
                 </div>
 
                 <div class="modal-footer">
-			        <button type="button" class="btn btn" v-on:click.prevent="update_skills()">Actualizar</button>
-			        <button type="button" class="btn btn" data-dismiss="modal">Cancelar</button>
+			        <button type="button" class="btn btn-success" v-on:click.prevent="update_skills()">Actualizar</button>
+			        <button type="button" class="btn btn-warning" data-dismiss="modal">Cancelar</button>
 			    </div>
 
             </div>

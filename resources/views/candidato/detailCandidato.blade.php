@@ -496,7 +496,19 @@
 									<div class="row no-mrg">
 										<div class="col-sm-12">
 											<h3>Editar Perfil</h3>
+											<!--<h1 v-if="datos.confirmed_nss == 0">fuck you</h1>
+   										<h1 v-else>jaja ;) :) xD</h1>-->
+
+											<div align="right" v-if="datos.confirmed_nss == 1">
+								                <label class="">¿Cuenta con NSS ?</label>
+								                    <input id="confirmed_nss" type="checkbox" v-model="datos.confirmed_nss" class="fantasma" checked >
+								            </div>
+								            <div align="right" v-else>
+								                <label class="">¿Cuenta con NSS ?</label>
+								                    <input id="confirmed_nss" type="checkbox" v-model="datos.confirmed_nss" class="fantasma" >
+								            </div>
 										</div>
+										
 										<!-- <div class="col-sm-6"></div> -->
 										<!-- text-transform: lowercase; -->
 
@@ -554,6 +566,7 @@
 												<input type="password" class="form-control" v-model="datos.password">
 											</div>
 									
+											<div id="dvOcultar">
 											<div class="col-md-4 col-sm-6" style="overflow-y:scroll; height:130px;" v-show="datos.confirmed_nss">
 												<table class="table table-responsive" id="table-nss">
 													<thead>
@@ -561,7 +574,7 @@
 															<th>#</th>
 															<th>NSS</th>
 															<th>
-																<button type="button" class="btn btn" data-toggle="modal" data-target="#modal-nss" data-toggle="tooltip" title="Agregar NSS">
+																<button type="button" class="btn btn-success" data-toggle="modal" data-target="#modal-nss" data-toggle="tooltip" title="Agregar NSS">
 																	<i class="fa fa-plus-circle"></i>
 																</button>
 															</th>
@@ -573,16 +586,17 @@
 															<td>@{{key + 1 }}</td>
 															<td>@{{nss.nss}}</td>
 															<td>
-																<button type="button" data-toggle="tooltip" title="Editar Registro" class="btn btn-sm" v-on:click.prevent="edit_nss(nss)"><i class="fa fa-edit"></i></button>
+																<button type="button" data-toggle="tooltip" title="Editar Registro" class="btn btn-info" v-on:click.prevent="edit_nss(nss)"><i class="fa fa-edit"></i></button>
 															</td>
 															<td>
-																<button type="button" data-toggle="tooltip" title="Editar Registro" class="btn btn-sm" v-on:click.prevent="destroy_nss(nss)"><i class="fa fa-trash"></i></button>
+																<button type="button" data-toggle="tooltip" title="Editar Registro" class="btn btn-danger" v-on:click.prevent="destroy_nss(nss)"><i class="fa fa-trash"></i></button>
 															</td>
 														</tr>
 													</tbody>
 												</table>
 
 											</div>
+										</div>
 
 											<div class="col-md-4 col-sm-6">
 												<label>Acerca de </label>
@@ -639,8 +653,8 @@
 									        	</form>
 									      </div>
 									      <div class="modal-footer">
-									        <button type="button" class="btn btn" data-dismiss="modal">Cancelar</button>
-									        <button type="button" class="btn btn" v-on:click.prevent="insert_nss()">Guardar</button>
+									        <button type="button" class="btn btn-warning" data-dismiss="modal">Cancelar</button>
+									        <button type="button" class="btn btn-success" v-on:click.prevent="insert_nss()">Guardar</button>
 									      </div>
 									    </div>
 									  </div>
@@ -670,8 +684,8 @@
 									        	</form>
 									      </div>
 									      <div class="modal-footer">
-									        <button type="button" class="btn btn" data-dismiss="modal">Cancelar</button>
-									        <button type="button" class="btn btn" v-on:click.prevent="update_nss()">Actualizar</button>
+									        <button type="button" class="btn btn-warning" data-dismiss="modal">Cancelar</button>
+									        <button type="button" class="btn btn-success" v-on:click.prevent="update_nss()">Actualizar</button>
 									      </div>
 									    </div>
 									  </div>
@@ -718,4 +732,21 @@
 
 @push('scripts')
 <script type="text/javascript" src="{{asset('js/candidatos/details_candidate.js')}}" ></script>
+<script type="text/javascript">
+
+
+	$(function(){
+		
+
+		$('.fantasma').change(function(){
+	  	if(!$(this).prop('checked')){
+	    	$('#dvOcultar').hide();
+	    }else{
+	    	$('#dvOcultar').show();
+	    }
+	  
+	  })
+
+	})
+</script>
 @endpush

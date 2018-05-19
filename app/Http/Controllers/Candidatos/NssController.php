@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Candidatos;
 
 use App\Model\BlmNssModel;
+use App\Model\RequestUserModel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use App\Http\Controllers\MasterController;
@@ -42,12 +43,20 @@ class NssController extends MasterController
     		'id_users' 	=> Session::get('id')
     		,'nss' 		=> $request->nss
     	];
-    	$response_nss 	= self::$_model::show_model([],[ 'nss' => $request->nss ],new BlmNssModel);
+        #debuger($request->nss);
+        ####Update en la tabla request_users-->confirmed_nss a 1
+        $iduser = Session::get('id');
+        $passport= RequestUserModel::find($iduser);
+        $passport->confirmed_nss=1;
+        $passport->save();
+
+        $response_nss 	= self::$_model::show_model([],[ 'nss' => $request->nss ],new BlmNssModel);
     	if ($response_nss) {
     		return message(false,[],"¡Ya se encuentra registrado este NSS.!");
     	}
     	$insert_nss 	= self::$_model::create_model([$fields],new BlmNssModel);
     	if ($insert_nss) {
+            #update de confirned_nss a la tabla request 
     		return message(true,$insert_nss,"¡Trasaccion Existosa.!");
     	}
 

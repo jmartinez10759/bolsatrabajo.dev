@@ -112,7 +112,9 @@ class CurriculumController extends MasterController
         $data['jobs_descripcion']    = "";            
         $data['jobs_orden']    		 = "";            
         $data['jobs_fecha_inicio']   = date('Y-m-d');           
-        $data['jobs_fecha_final']    = date('Y-m-d');            
+        $data['jobs_fecha_final']    = date('Y-m-d');
+        $data['jobs_jefe_inmediato'] = "";  
+        $data['jobs_telefono']       = "";              
         #seccion de habilidades
         $data['habilidad'] 			= "";
         $data['porcentaje'] 		= "";

@@ -16,5 +16,7 @@ class BlmJobsModel extends Model
         ,'jobs_orden'
         ,'jobs_fecha_inicio'
         ,'jobs_fecha_final'
+        ,'jobs_jefe_inmediato'
+        ,'jobs_telefono'
     ];
 }
