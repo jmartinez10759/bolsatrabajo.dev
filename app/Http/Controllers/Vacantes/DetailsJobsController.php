@@ -37,7 +37,7 @@ class DetailsJobsController extends MasterController
     public static function show( Request $request ){
 
 
-    	$where = ['id' => $request->id_vacante,'is_active' => 1];
+    	$where = ['id' => $request->id_vacante,'is_active' => 0];
     	$response = self::$_model::show_model([],$where, new Listado );
         $postulate = self::$_model::show_model([],['id_vacante' => $request->id_vacante,'id_users' => Session::get('id')], new BlmPostulateCandidateModel);
     	$data = [];

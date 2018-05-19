@@ -37,7 +37,7 @@
 				<div class="detail-desc-caption">
 					<h4>@{{datos.title}}</h4>
 					<span class="designation">@{{datos.name}}</span>
-					<p>@{{datos.description_short}}</p>
+					<p>@{{datos.account_name}}</p>
 					<ul>
 						<li><i class="fa fa-briefcase"></i><span>Tiempo Completo</span></li>
 						<li><i class="fa fa-flask"></i><span>3 Años de Experecia</span></li>
