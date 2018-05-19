@@ -27,7 +27,7 @@ new Vue({
       ,'telefono': ''
       ,'password': ''
       ,'id_state': ''
-      ,'confirmed_nss': ''
+      ,'confirmed_nss': ""
       ,'photo': ''
 
     },
@@ -46,7 +46,7 @@ new Vue({
       ,'telefono': ''
       ,'password': ''
       ,'id_state': ''
-      ,'confirmed_nss': ''
+      ,'confirmed_nss': ""
       ,'photo': ''
     },
     offset: 3
@@ -85,6 +85,7 @@ new Vue({
         for ( var i in this.newKeep){
             this.newKeep[i] = this.datos[i];
         }
+        //console.log(this.newKeep);return;
         this.newKeep.photo = $('#url_file').val();
         //console.log(this.newKeep);return;
         if ( !curpValida(this.newKeep.curp) ) {
@@ -139,9 +140,14 @@ new Vue({
         var fields = {};
         axios.get(url,fields).then( response => {
           
+          //console.log( response.data.result );return;
           this.datos = response.data.result;
           this.pagination = response.data.result.pagination;
-          console.log( this.datos );
+          if (response.data.result.nss.length > 0   ) {
+              $('#dvOcultar').show();
+          }else {
+              $('#dvOcultar').hide();
+          }
         });
 
     },

@@ -12,7 +12,7 @@ new Vue({
         ,'correo': ''
         ,'pass': ''
         ,'passwordConfirm': '' 
-        ,'confirmed_nss': true
+        ,'confirmed_nss': false
         ,'email': ''
         ,'password': ''
     },
@@ -24,7 +24,7 @@ new Vue({
         ,'correo': ''
         ,'pass': ''
         ,'passwordConfirm': '' 
-        ,'confirmed_nss': true 
+        ,'confirmed_nss': false 
         ,'email': ''
         ,'password': ''
     },

@@ -182,12 +182,12 @@
 												<td>@{{ study.fecha_inicio }}</td>
 												<td>@{{ study.fecha_final }}</td>
 												<td>
-													<button class="btn btn-lg" type="button" v-on:click.prevent="edit_general(study,'modal-edit-educacion')" data-toggle="tooltip" title="Editar Registro">
+													<button class="btn btn-info" type="button" v-on:click.prevent="edit_general(study,'modal-edit-educacion')" data-toggle="tooltip" title="Editar Registro">
 														<i class="fa fa-edit"></i>
 													</button>
 												</td>
 												<td>
-													<button class="btn btn-lg" type="button" v-on:click.prevent="delete_study(study)" data-toggle="tooltip" title="Eliminar Registro">
+													<button class="btn btn-danger" type="button" v-on:click.prevent="delete_study(study)" data-toggle="tooltip" title="Eliminar Registro">
 														<i class="fa fa-trash"></i>
 													</button>
 												</td>
@@ -229,12 +229,12 @@
 												<td>@{{ jobs.jobs_fecha_final }}</td>
 												<td>@{{ jobs.jobs_descripcion }}</td>
 												<td>
-													<button class="btn btn-lg" type="button" v-on:click.prevent="edit_general(jobs,'modal-edit-experiencia')" data-toggle="tooltip" title="Editar Registro">
+													<button class="btn btn-info" type="button" v-on:click.prevent="edit_general(jobs,'modal-edit-experiencia')" data-toggle="tooltip" title="Editar Registro">
 														<i class="fa fa-edit"></i>
 													</button>
 												</td>
 												<td>
-													<button class="btn btn-lg" type="button" v-on:click.prevent="delete_jobs(jobs)" data-toggle="tooltip" title="Eliminar Registro">
+													<button class="btn btn-danger" type="button" v-on:click.prevent="delete_jobs(jobs)" data-toggle="tooltip" title="Eliminar Registro">
 														<i class="fa fa-trash"></i>
 													</button>
 												</td>
@@ -270,12 +270,12 @@
 												<td> @{{ skills.habilidad }} </td>
 												<td> @{{ skills.porcentaje }} </td>
 												<td>
-													<button class="btn btn-lg" type="button" v-on:click.prevent="edit_general(skills,'modal-edit-skill')" data-toggle="tooltip" title="Editar Registro">
+													<button class="btn btn-info" type="button" v-on:click.prevent="edit_general(skills,'modal-edit-skill')" data-toggle="tooltip" title="Editar Registro">
 														<i class="fa fa-edit"></i>
 													</button>
 												</td>
 												<td>
-													<button class="btn btn-lg" type="button" v-on:click.prevent="delete_skills(skills)" data-toggle="tooltip" title="Eliminar Registro">
+													<button class="btn btn-danger" type="button" v-on:click.prevent="delete_skills(skills)" data-toggle="tooltip" title="Eliminar Registro">
 														<i class="fa fa-trash"></i>
 													</button>
 												</td>
@@ -348,8 +348,8 @@
                 </div>
 
                 <div class="modal-footer">
-			        <button type="button" class="btn btn" v-on:click.prevent="insert_study()" >Agregar</button>
-			        <button type="button" class="btn btn" data-dismiss="modal">Cancelar</button>
+			        <button type="button" class="btn btn-success" v-on:click.prevent="insert_study()" >Agregar</button>
+			        <button type="button" class="btn btn-warning" data-dismiss="modal">Cancelar</button>
 			    </div>
 
             </div>
@@ -383,6 +383,18 @@
 						      <input type="text" id="jobs_puesto" class="form-control" placeholder="Puesto Desempeñado" v-model="datos.jobs_puesto">
 						    </div>
 						  </div>
+						   <div class="form-group">
+						    <label class="control-label col-sm-2" >Jefe Inmediato</label>
+						    <div class="col-sm-10">
+						      <input type="text" name="jobs_jefe_inmediato" class="form-control" placeholder="Nombre" v-model="datos.jobs_jefe_inmediato">
+						    </div>
+						  </div>
+						  <div class="form-group">
+						    <label class="control-label col-sm-2" >Telefono</label>
+						    <div class="col-sm-10">
+						      <input type="number" name="jobs_telefono" class="form-control" placeholder="5533356593" v-model="datos.jobs_telefono">
+						    </div>
+						  </div>
 
 						  <div class="form-group">
 						    <label class="control-label col-sm-2" >Fecha Inicio</label>
@@ -414,8 +426,8 @@
                 </div>
 
                 <div class="modal-footer">
-			        <button type="button" class="btn btn" v-on:click.prevent="insert_jobs()">Agregar</button>
-			        <button type="button" class="btn btn" data-dismiss="modal">Cancelar</button>
+			        <button type="button" class="btn btn-success" v-on:click.prevent="insert_jobs()">Agregar</button>
+			        <button type="button" class="btn btn-warning" data-dismiss="modal">Cancelar</button>
 			    </div>
 
             </div>
@@ -462,8 +474,8 @@
                 </div>
 
                 <div class="modal-footer">
-			        <button type="button" class="btn btn" v-on:click.prevent="insert_skills()">Agregar</button>
-			        <button type="button" class="btn btn" data-dismiss="modal">Cancelar</button>
+			        <button type="button" class="btn btn-success" v-on:click.prevent="insert_skills()">Agregar</button>
+			        <button type="button" class="btn btn-warning" data-dismiss="modal">Cancelar</button>
 			    </div>
 
             </div>

@@ -123,7 +123,8 @@ class DetailCandidateController extends MasterController
         $request_users = [];
         $blm_details = [];
         #se realiza la validacion de NSS
-        if ( Session::get('confirmed_nss') == 1 ) {
+        #debuger($request->input('confirmed_nss'));
+        if ( $request->confirmed_nss == 1 ) {
             $blm_nss = self::$_model::show_model( [], ['id_users' => Session::get('id')], new BlmNssModel);
             
             if ( !$blm_nss ) {
@@ -131,7 +132,7 @@ class DetailCandidateController extends MasterController
             }
             
         }
-        $claves_users = ['name','first_surname','second_surname','email'];
+        $claves_users = ['name','first_surname','second_surname','email','confirmed_nss'];
         $claves_details = ['name','first_surname','second_surname','email','password','nss','confirmed_nss'];
         $claves_upper = ['direccion','cargo','curp'];
         foreach ($request->all() as $key => $value) {
@@ -155,6 +156,7 @@ class DetailCandidateController extends MasterController
             }           
 
         }
+        $request_users['confirmed_nss'] = ($request_users['confirmed_nss'] == 1)? $request_users['confirmed_nss'] : 0;
         #debuger($request_users);
         #se realiza el actualizado de los datos de la tabla del request_users
         $where = ['id' => Session::get('id')];

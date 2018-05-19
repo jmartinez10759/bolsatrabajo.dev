@@ -30,6 +30,8 @@ new Vue ({
         ,'jobs_orden': ''
         ,'jobs_fecha_inicio': ''
         ,'jobs_fecha_final': ''
+        ,'jobs_jefe_inmediato': ''
+        ,'jobs_telefono': ''
         //,'url_cv': ''
     },
     fillKeep: { 
@@ -57,6 +59,8 @@ new Vue ({
         ,'jobs_orden': ''
         ,'jobs_fecha_inicio': ''
         ,'jobs_fecha_final': ''
+        ,'jobs_jefe_inmediato': ''
+        ,'jobs_telefono': ''
         //,'url_cv': ''
     },
 
@@ -115,6 +119,8 @@ new Vue ({
       this.newKeep.jobs_descripcion     = this.datos.jobs_descripcion;
       this.newKeep.jobs_fecha_inicio    = this.datos.jobs_fecha_inicio;
       this.newKeep.jobs_fecha_final     = this.datos.jobs_fecha_final;
+      this.newKeep.jobs_jefe_inmediato  = this.datos.jobs_jefe_inmediato;
+      this.newKeep.jobs_telefono        = this.datos.jobs_telefono;
       
        this.insert_general(url,uri,function(json){
           $('#modal-experiencia').modal('hide');
