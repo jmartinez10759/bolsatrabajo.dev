@@ -146,42 +146,93 @@ new Vue ({
 
     },
     update_study: function(){
-
       var url = domain('study/update');
-      var uri = domain('cv/show');
-      this.update_general( url,uri,'modal-edit-educacion' );
+      var refresh = domain('cv/show');
+      var modal = 'modal-edit-educacion';
+      axios.post(url, this.fillKeep, csrf_token ).then(response => {
+          this.get_general(refresh,{}, csrf_token );
+          for( var i in this.newKeep ){
+              this.newKeep[i] = "";
+          }
+          $('#'+modal).modal('hide');
+          toastr.info(update,title);
+      }).catch(error => {
+          toastr.error( error, expired );
+      });
+      //this.update_general( url,uri,'modal-edit-educacion' );
 
     },
     update_jobs: function(){
-
       var url = domain('jobs/update');
-      var uri = domain('cv/show');
-      this.update_general( url,uri,'modal-edit-experiencia' );
+      var refresh = domain('cv/show');
+      var modal = 'modal-edit-experiencia';
+      axios.post(url, this.fillKeep, csrf_token ).then(response => {
+          this.get_general(refresh,{}, csrf_token );
+          for( var i in this.newKeep ){
+              this.newKeep[i] = "";
+          }
+          $('#'+modal).modal('hide');
+          toastr.info(update,title);
+      }).catch(error => {
+          toastr.error( error, expired );
+      });
+      //this.update_general( url,uri,'modal-edit-experiencia' );
 
     },
     update_skills: function(){
 
       var url = domain('skills/update');
-      var uri = domain('cv/show');
-      this.update_general( url,uri,'modal-edit-skill' );
+      var refresh = domain('cv/show');
+      var modal = 'modal-edit-skill';
+      axios.post(url, this.fillKeep, csrf_token ).then(response => {
+          this.get_general(refresh,{}, csrf_token );
+          for( var i in this.newKeep ){
+              this.newKeep[i] = "";
+          }
+          $('#'+modal).modal('hide');
+          toastr.info(update,title);
+      }).catch(error => {
+          toastr.error( error, expired );
+      });
+      //this.update_general( url,uri,'modal-edit-skill' );
 
     },
     delete_study( keep ){
-      var url = domain('study/delete');
-      var uri = domain('cv/show');
-      this.delete_general(url,uri, keep.id );
+      var url = domain('study/delete/'+keep.id);
+      var refresh = domain('cv/show');
+      axios.get( url, csrf_token ).then(response => {
+        this.get_general(refresh, {}, csrf_token ); //listamos
+        toastr.success('Registro eliminado correctamente',title); //mensaje
 
+      }).catch(error => {
+          toastr.error( error, expired );
+      });
+      //this.delete_general(url,uri, keep.id );
     },
     delete_jobs( keep ){
-      var url = domain('jobs/delete');
-      var uri = domain('cv/show');
-      this.delete_general(url,uri, keep.id );
+      var url = domain('jobs/delete/'+keep.id);
+      var refresh = domain('cv/show');
+      axios.get( url, csrf_token ).then(response => {
+        this.get_general(refresh, {}, csrf_token ); //listamos
+        toastr.success('Registro eliminado correctamente',title); //mensaje
+
+      }).catch(error => {
+          toastr.error( error, expired );
+      });
+      //this.delete_general(url,uri, keep.id );
 
     },
     delete_skills( keep ){
-      var url = domain('skills/delete');
-      var uri = domain('cv/show');
-      this.delete_general(url,uri, keep.id );
+      var url = domain('skills/delete/'+keep.id);
+      var refresh = domain('cv/show');
+      axios.get( url, csrf_token ).then(response => {
+        this.get_general(refresh, {}, csrf_token ); //listamos
+        toastr.success('Registro eliminado correctamente',title); //mensaje
+
+      }).catch(error => {
+          toastr.error( error, expired );
+      });
+      //this.delete_general(url,uri, keep.id );
 
     }
 

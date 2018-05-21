@@ -13,7 +13,7 @@ new Vue({
       ,'from': 0
       ,'to': 0
     },
-    newKeep: {   
+    newKeep: {
       'cargo': ''
       ,'codigo': ''
       ,'curp': ''
@@ -31,7 +31,7 @@ new Vue({
       ,'photo': ''
 
     },
-    fillKeep: { 
+    fillKeep: {
         'id':''
       ,'cargo': ''
       ,'codigo': ''
@@ -58,11 +58,11 @@ new Vue({
       if(!this.pagination.to){
         return [];
       }
-      var from = this.pagination.current_page - this.offset; 
+      var from = this.pagination.current_page - this.offset;
       if(from < 1){
         from = 1;
       }
-      var to = from + (this.offset * 2); 
+      var to = from + (this.offset * 2);
       if(to >= this.pagination.last_page){
         to = this.pagination.last_page;
       }
@@ -73,10 +73,10 @@ new Vue({
       }
       return pagesArray;
     }
-  
+
   },
   mixins : [mixins],
-  methods:{ 
+  methods:{
 
     insert: function(){
 
@@ -119,7 +119,7 @@ new Vue({
 
     },
     details_vacantes( data ){
-          
+
         var url = domain("details/vacante");
         //se mete en localstorage el id de vacante para poder hacer la consulta.
         $myLocalStorage.set('id_vacante', data.id );
@@ -131,15 +131,15 @@ new Vue({
         var url = domain('details/show');
         var fields = {'page': page};
         this.get_general( url,fields );
-    
+
     },
     consulta_general: function(){
-        
+
         //var url = ('details/show');
         var url = domain('details/show');
         var fields = {};
         axios.get(url,fields).then( response => {
-          
+
           //console.log( response.data.result );return;
           this.datos = response.data.result;
           this.pagination = response.data.result.pagination;
@@ -157,16 +157,34 @@ new Vue({
 
     },
     destroy_nss: function( fields ){
-        var url = domain('nss/detele');
-        var refresh =  domain('details/show');
-        this.delete_general(url,refresh,fields.id);
-    
+      var url = domain('nss/detele/'+fields.id);
+      var refresh =  domain('details/show');
+      axios.get( url, csrf_token ).then(response => {
+        this.get_general(refresh, {}, csrf_token ); //listamos
+        toastr.success('Registro eliminado correctamente',title); //mensaje
+
+      }).catch(error => {
+          toastr.error( error, expired );
+      });
+        //this.delete_general(url,refresh,fields.id);
+
     },
     update_nss: function(){
       var url = domain('nss/update');
-      var uri = domain('details/show');
-      this.update_general(url,uri,'modal-nss-edit');
-      
+      var refresh = domain('details/show');
+      var modal = 'modal-nss-edit';
+      axios.post(url, this.fillKeep, csrf_token ).then(response => {
+          this.get_general(refresh,{}, csrf_token );
+          for( var i in this.newKeep ){
+              this.newKeep[i] = "";
+          }
+          $('#'+modal).modal('hide');
+          toastr.info(update,title);
+      }).catch(error => {
+          toastr.error( error, expired );
+      });
+      //this.update_general(url,uri,'modal-nss-edit');
+
     }
 
   }

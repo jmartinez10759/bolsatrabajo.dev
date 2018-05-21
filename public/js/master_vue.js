@@ -6,7 +6,8 @@ var update      = "Registro actualizado corretamente.";
 var validate    = "Favor de Verificar los campos color Rojo";
 var expired     = "Sesion Expirada.";
 //var csrf_token  = { 'X-CSRF-TOKEN': document.getElementsByTagName("META")['3'].content }
-var csrf_token  = { 'X-CSRF-TOKEN': meta('csrf-token') }
+var _method     = 'ORIGIN';
+var csrf_token  = { 'X-CSRF-TOKEN': meta('csrf-token'),'Access-Control-Request-Method':_method };
 var _token      = csrf_token[ Object.keys( csrf_token )[0] ];
 var params = {};
 var mixins = {
@@ -14,7 +15,7 @@ var mixins = {
     methods: {
 
         get_general: function( url, fields ) {
-            
+
             axios.get( url, { params: fields }, csrf_token ).then(response => {
                 console.log( response.data.result );
                 this.datos = response.data.result;
@@ -22,7 +23,7 @@ var mixins = {
             }).catch(error => {
                 toastr.error( error, expired );
             });
-        
+
         },
         edit_general: function( obj, modal ) {
 
@@ -31,17 +32,17 @@ var mixins = {
                 this.fillKeep[i] = obj[i];
             }
             $('#'+modal).modal('show');
-        
+
         },
         insert_general: function( uri, url, function_success , function_errors ) {
-            
+
             axios.post(uri, this.newKeep, csrf_token ).then(response => {
-                
+
                 if (response.data.success == true) {
 
                     this.get_general( url, params, csrf_token );
-                    for( var i in this.newKeep ){ 
-                        this.newKeep[i] = ""; 
+                    for( var i in this.newKeep ){
+                        this.newKeep[i] = "";
                     }
                     $('#create_form').modal('hide');
                     toastr.success( response.data.message , title );
@@ -56,31 +57,31 @@ var mixins = {
             }).catch(error => {
                 toastr.error( error,expired );
             });
-        
+
         },
         update_general: function( uri, url, modal ) {
             
             axios.put(uri, this.fillKeep, csrf_token ).then(response => {
 
                 this.get_general(url,params, csrf_token );
-                for( var i in this.newKeep ){ 
-                    this.newKeep[i] = ""; 
+                for( var i in this.newKeep ){
+                    this.newKeep[i] = "";
                 }
                 $('#'+modal).modal('hide');
                 toastr.info(update,title);
 
             }).catch(error => {
-                
+
                 toastr.error( error, expired );
 
             });
-        
+
         },
         delete_general: function( uri ,refresh ,keep ) {
-             
+
               var url = uri +"/"+keep;
               axios.delete(url, params, csrf_token).then(response => { //eliminamos
-                    
+
                     this.get_general(refresh, params, csrf_token ); //listamos
                     toastr.success('Registro eliminado correctamente',title); //mensaje
 
@@ -111,8 +112,8 @@ var mixins = {
 
             }).catch(error => {
                 toastr.error( "Favor de Iniciar Sesion, para continuar.", expired );
-            }); 
-        
+            });
+
         }
 
     }
@@ -127,10 +128,10 @@ new Vue = ({
   },
   data: {
     datos: [],
-    newKeep: { 
-        
+    newKeep: {
+
     },
-    fillKeep: { 
+    fillKeep: {
 
     },
 

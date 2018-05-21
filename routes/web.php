@@ -63,10 +63,10 @@ Route::post('/password/verify', [
         ,'as'       => 'password.reset'
     ]);*/
 Route::group(['middleware' => ['admin.only']], function() {
-    
+
 
     ##################################### RUTAS DE ADMINISTRADORES #############################################
-    
+
     Route::get('/dashboard', [
         'uses'      => 'Administracion\DashboardController@index'
         ,'as'       => 'dashboard'
@@ -93,12 +93,12 @@ Route::group(['middleware' => ['admin.only']], function() {
         ,'as'       => 'candidate.insert'
     ]);
 
-    Route::put('/candidate/update', [
+    Route::post('/candidate/update', [
         'uses'      => 'Administracion\CandidateAdminController@update'
         ,'as'       => 'candidate.update'
     ]);
 
-    Route::delete('/candidate/destroy/{id}', [
+    Route::get('/candidate/destroy/{id}', [
         'uses'      => 'Administracion\CandidateAdminController@destroy'
         ,'as'       => 'candidate.destroy'
     ]);
@@ -118,7 +118,7 @@ Route::group(['middleware' => ['auth.session']], function() {
         'uses'      => 'Candidatos\DetailCandidateController@index'
         ,'as'       => 'details'
     ]);
-    
+
     Route::get('/details/show', [
         'uses'      => 'Candidatos\DetailCandidateController@show'
         ,'as'       => 'details.show'
@@ -132,7 +132,7 @@ Route::group(['middleware' => ['auth.session']], function() {
         'uses'      => 'Candidatos\DetailCandidateController@upload_file'
         ,'as'       => 'details.upload_file'
     ]);
-    
+
 
     Route::post('/nss/insert', [
         'uses'      => 'Candidatos\NssController@store'
@@ -144,18 +144,18 @@ Route::group(['middleware' => ['auth.session']], function() {
         ,'as'       => 'details.nss.show'
     ]);
 
-    Route::put('/nss/update', [
+    Route::post('/nss/update', [
         'uses'      => 'Candidatos\NssController@update'
         ,'as'       => 'details.nss.update'
     ]);
 
-    Route::delete('/nss/detele/{id}', [
+    Route::get('/nss/detele/{id}', [
         'uses'      => 'Candidatos\NssController@destroy'
         ,'as'       => 'nss.delete'
     ]);
 
 ########################################## RUTAS DEL CURRICULUM  #################################################
-   
+
     Route::get('/cv', [
         'uses'      => 'Curriculum\CurriculumController@index'
         ,'as'       => 'upload_cv'
@@ -176,7 +176,7 @@ Route::group(['middleware' => ['auth.session']], function() {
         ,'as'       => 'study.insert'
     ]);
 
-    Route::put('study/update', [
+    Route::post('study/update', [
         'uses'      => 'Curriculum\StudyController@update'
         ,'as'       => 'study.update'
     ]);
@@ -191,11 +191,11 @@ Route::group(['middleware' => ['auth.session']], function() {
         ,'as'       => 'jobs.insert'
     ]);
 
-    Route::put('jobs/update', [
+    Route::post('jobs/update', [
         'uses'      => 'Curriculum\JobController@update'
         ,'as'       => 'jobs.update'
     ]);
-    
+
     Route::delete('jobs/delete/{id}', [
         'uses'      => 'Curriculum\JobController@destroy'
         ,'as'       => 'jobs.delete'
@@ -205,13 +205,13 @@ Route::group(['middleware' => ['auth.session']], function() {
         'uses'      => 'Curriculum\SkillController@store'
         ,'as'       => 'skills.insert'
     ]);
-    
-    Route::put('skills/update', [
+
+    Route::post('skills/update', [
         'uses'      => 'Curriculum\SkillController@update'
         ,'as'       => 'skills.update'
     ]);
 
-    Route::delete('skills/delete/{id}', [
+    Route::get('skills/delete/{id}', [
         'uses'      => 'Curriculum\SkillController@destroy'
         ,'as'       => 'skills.delete'
     ]);
@@ -221,7 +221,7 @@ Route::group(['middleware' => ['auth.session']], function() {
         ,'as'       => 'postulacion.insert'
     ]);
 
-     
+
 });
 
 ###################################### GRUPO DE RUTAS SIN AUTH ############################
