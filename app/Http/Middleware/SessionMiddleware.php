@@ -6,6 +6,7 @@ use Closure;
 use GuzzleHttp\Client;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
+use App\Http\Controllers\Api\TokenApiController;
 
 class SessionMiddleware
 {
@@ -20,17 +21,19 @@ class SessionMiddleware
     {
         if ( Session::has( 'email') ) {
 
-            $url = domain()."/api/bolsa/token";
-            $headers = [ 'Content-Type'  => 'application/json' ];
-            $data['data'] = [ 'email'=> Session::get('email'),'api_token' => Session::get('api_token') ];
-            $method = 'post';
-            $client = new Client( ["verify" => false ] );
-            $response = $client->$method( $url, ['headers'=> $headers, 'body' => json_encode( $data ) ]);
-            $response = json_decode( $response->getBody() );
+            // $url = domain()."/api/bolsa/token";
+            // $headers = [ 'Content-Type'  => 'application/json' ];
+            // $data['data'] = [ 'email'=> Session::get('email'),'api_token' => Session::get('api_token') ];
+            // $method = 'post';
+            // $client = new Client( ["verify" => false ] );
+            // $response = $client->$method( $url, ['headers'=> $headers, 'body' => json_encode( $data ) ]);
+            // $response = json_decode( $response->getBody() );
+            $datos = [ 'email'=> Session::get('email'),'api_token' => Session::get('api_token') ];
+            $token = new TokenApiController;
+            $response = array_to_object($token->token( $datos ));
             $permisos = [1,2];
             #debuger(Session::all());
             if ($response->success == true && in_array( Session::get('id_rol'), $permisos ) ) {
-                #debuger($response->success);
                 return $next($request);
             }else{
                 Session::flush();
