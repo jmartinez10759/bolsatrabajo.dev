@@ -3,13 +3,13 @@ new Vue({
   created: function () {
     var fields  = {
       'id_vacante' : $myLocalStorage.get('id_vacante')
-    } 
+    }
     var url = domain("details/vacante/show");
     this.get_general( url, fields);
   },
   data: {
     datos: [],
-    newKeep: { 
+    newKeep: {
        'terminos_condiciones': false
        ,'curp': ''
        ,'nss' : ''
@@ -19,7 +19,7 @@ new Vue({
        ,'edo' : ''
        ,'utilisateur' : ''
     },
-    fillKeep: { 
+    fillKeep: {
       'terminos_condiciones': false
       ,'curp': ''
       ,'nss' : ''
@@ -50,7 +50,7 @@ new Vue({
       this.newKeep.nss            = this.datos.nss;
       this.newKeep.confirmed_nss  = this.datos.confirmed_nss;
       this.newKeep.id_vacante     = $myLocalStorage.get('id_vacante');
-      
+
       if (this.newKeep.terminos_condiciones == false) {
           toastr.error( "Debe de aceptar los terminos y condiciones para continuar." , "Terminos y Condiciones" );
           return;
@@ -65,13 +65,14 @@ new Vue({
       }
       if ( this.newKeep.confirmed_nss == 1 && this.newKeep.nss == null) {
         toastr.error( "NSS es un dato obligatorio para solicitar la vacante" , "Verificar NSS" );
-          return; 
+          return;
       }
       /*se realiza la inserccion de los datos para la postulacion.*/
         var url = domain("postulacion/insert");
         var refresh = domain("details/vacante");
+        $('#btn_condiciones').attr('disabled',true);
         this.insert_general(url,refresh,function( object ){
-            
+            //$('#').attr('disabled',false);
             $('#terminos').modal('hide');
             buildSweetAlertOptions('¡Postulacion Exitosa.!',"Se postulo exitosamente a la vacante.",function(){
               redirect( domain("vacantes") );

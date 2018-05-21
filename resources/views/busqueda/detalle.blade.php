@@ -18,20 +18,20 @@
 
 <section class="detail-desc">
 	<div class="container white-shadow">
-	
+
 		<div class="row">
-		
+
 			<div class="detail-pic">
 				<img src="http://via.placeholder.com/150x150" class="img" alt="" />
 				<a href="#" class="detail-edit" title="edit" ><i class="fa fa-pencil"></i></a>
 			</div>
-			
+
 			<div class="detail-status">
 				<span></span>
 			</div>
-			
+
 		</div>
-		
+
 		<div class="row bottom-mrg">
 			<div class="col-md-8 col-sm-8">
 				<div class="detail-desc-caption">
@@ -44,7 +44,7 @@
 					</ul>
 				</div>
 			</div>
-			
+
 			<div class="col-md-4 col-sm-4">
 				<div class="get-touch">
 					<h4>Contactanos</h4>
@@ -57,9 +57,9 @@
 					</ul>
 				</div>
 			</div>
-			
+
 		</div>
-		
+
 		<div class="row no-padd">
 			<div class="detail pannel-footer">
 				<div class="col-md-5 col-sm-5">
@@ -71,7 +71,7 @@
 						<li><a href="#"><i class="fa fa-instagram"></i></a></li>
 					</ul>
 				</div>
-				
+
 				<div class="col-md-7 col-sm-7">
 					<div class="detail-pannel-footer-btn pull-right">
 						<a data-toggle="modal" data-target="#terminos" style="cursor: pointer;" class="footer-btn grn-btn" title="" v-show="datos.is_postulate">Postularse</a>
@@ -91,7 +91,7 @@
 			<h2 class="detail-title">Responsabilidades laborales</h2>
 			<p> </p>
 		</div>
-		
+
 		<div class="row row-bottom">
 			<h2 class="detail-title">Requisito de habilidad</h2>
 			<p></p>
@@ -105,7 +105,7 @@
 				<li></li>
 			</ul>
 		</div>
-		
+
 		<div class="row row-bottom">
 			<h2 class="detail-title">Calificación</h2>
 			<p></p>
@@ -120,14 +120,14 @@
 				<li></li>
 			</ul>
 		</div>
-		
+
 	</div>
 </section>
 <!-- Job full detail End -->
 <!-- Modal -->
   <div class="modal fade" id="terminos" role="dialog">
     <div class="modal-dialog modal-lg">
-    
+
       <!-- Modal content-->
       <div class="modal-content">
         <div class="modal-header">
@@ -149,10 +149,10 @@
 	           <input type="hidden" id="curp" v-model="newKeep.curp">
 	           <input type="hidden" id="nss" v-model="newKeep.nss"> -->
         	</div>
-        	<button type="button" class="btn btn-success" v-on:click.prevent="postulacion()">Aceptar Terminos</button>
+        	<button type="button" class="btn btn-success" v-on:click.prevent="postulacion()" id="btn_condiciones">Aceptar Terminos</button>
         </div>
       </div>
-      
+
     </div>
   </div>
 
@@ -162,4 +162,3 @@
 @push('scripts')
 <script type="text/javascript" src="{{asset('js/vacantes/details_vacantes.js')}}" ></script>
 @endpush
-

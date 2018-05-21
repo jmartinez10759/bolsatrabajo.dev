@@ -18,14 +18,14 @@ class AdminMiddleware
      */
     public function handle( $request, Closure $next )
     {
-        
+
         if ( Session::has( 'email') ) {
 
             $url = domain()."/api/bolsa/token";
             $headers = [ 'Content-Type'  => 'application/json' ];
             $data['data'] = [ 'email'=> Session::get('email'),'api_token' => Session::get('api_token') ];
             $method = 'post';
-            $client = new Client;
+            $client = new Client( ["verify" => false ] );
             $response = $client->$method( $url, ['headers'=> $headers, 'body' => json_encode( $data ) ]);
             $response = json_decode( $response->getBody() );
             $permisos = [1];
@@ -36,19 +36,19 @@ class AdminMiddleware
                 if ( isset($_SERVER['CONTENT_TYPE']) ) {
                     return response('Token expiro, favor de iniciar sesion.', 401);
                 }
-                
+
                 return redirect()->route('/');
-                
+
             }
 
 
         }else{
-            
+
             Session::flush();
             if ( isset($_SERVER['CONTENT_TYPE']) ) {
                 return response('Token expiro, favor de iniciar sesion.', 401);
             }
-            
+
             return redirect()->route('/');
 
         }

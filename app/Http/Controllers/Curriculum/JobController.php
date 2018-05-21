@@ -23,21 +23,21 @@ class JobController extends MasterController
     	$data = [];
         foreach ($request->all() as $key => $value) {
             if ( $value != null ) {
-                $data[$key] = $value;        
+                $data[$key] = $value;
             }
         }
-        $url            = self::$_domain."/api/bolsa/jobs";
-        $headers        = [ 
-            'Content-Type'  => 'application/json'
-            ,'usuario'      => Session::get('email')
-            ,'token'        => Session::get('api_token')
-        ];
-        $datos['data']  = $data;
-        $method         = 'post';
-        $response       = self::endpoint($url, $headers, $datos,$method);
-                
-        if ( $response->success == true ) {
-            return message(true,$response->result,self::$message_success);
+        // $url            = self::$_domain."/api/bolsa/jobs";
+        // $headers        = [
+        //     'Content-Type'  => 'application/json'
+        //     ,'usuario'      => Session::get('email')
+        //     ,'token'        => Session::get('api_token')
+        // ];
+        // $datos['data']  = $data;
+        // $method         = 'post';
+        // $response       = self::endpoint($url, $headers, $datos,$method);
+        $response = self::$_model::create_model( [$data] ,new BlmJobsModel);
+        if ( $response ) {
+            return message(true,$response[0],self::$message_success);
         }else{
             return message(false,[],self::$message_error);
         }
@@ -45,28 +45,29 @@ class JobController extends MasterController
 
     }
     /**
-     *Metodo para la actualizacion de los campos 
+     *Metodo para la actualizacion de los campos
      *@access public
      *@param Request $request [Description]
      *@return void
      */
     public static function update( Request $request ){
 
-    	$url            = self::$_domain."/api/bolsa/jobs";
-        $headers        = [ 
-            'Content-Type'  => 'application/json'
-            ,'usuario'      => Session::get('email')
-            ,'token'        => Session::get('api_token')
-        ];
-        $fields['data']  = $request->all();
-        $method          = 'put';
-        $response        = self::endpoint($url, $headers, $fields,$method);
-
-        if ( $response->success == true ) {
-            return message(true,$response->result,self::$message_success);
-        }else{
-            return message(false,[],self::$message_error);
-        }
+    	// $url            = self::$_domain."/api/bolsa/jobs";
+      //   $headers        = [
+      //       'Content-Type'  => 'application/json'
+      //       ,'usuario'      => Session::get('email')
+      //       ,'token'        => Session::get('api_token')
+      //   ];
+      //   $fields['data']  = $request->all();
+      //   $method          = 'put';
+      //   $response        = self::endpoint($url, $headers, $fields,$method);
+      $where = ['id' => $request->id];
+      $response = self::$_model::update_model( $where,$request->all(), new BlmJobsModel);
+      if ( $response ) {
+          return message(true,$response[0],self::$message_success);
+      }else{
+          return message(false,[],self::$message_error);
+      }
 
 
     }
@@ -86,7 +87,7 @@ class JobController extends MasterController
     		return message(false,[],'Ocurrio un error');
     	}
 
-    }	
+    }
 
 
 }

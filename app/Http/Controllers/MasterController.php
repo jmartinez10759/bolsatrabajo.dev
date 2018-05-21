@@ -12,7 +12,7 @@ use App\Http\Controllers\MenuController;
 class MasterController extends MenuController
 {
 
-	public static $_client;
+		public static $_client;
     public $_tipo_user;
     public static $_domain = "";
     protected $_tipo = "application/json";
@@ -23,7 +23,7 @@ class MasterController extends MenuController
     protected static $ssl_ruta = [];
 
     public function __construct(){
-        
+
         #self::$ssl_ruta = ["verify" => $_SERVER['DOCUMENT_ROOT']. "/cacert.pem"];
         self::$ssl_ruta = ["verify" => false ];
         self::$_client = new Client( self::$ssl_ruta );
@@ -35,7 +35,7 @@ class MasterController extends MenuController
     }
     /**
      *Verifica si tiene acceso a esta parte del menu por cada accion
-     *@access protected 
+     *@access protected
      *@param
      *@param
      *@return void
@@ -52,7 +52,7 @@ class MasterController extends MenuController
      *@return json [description]
      */
     protected static function endpoint( $url = false, $headers = [], $data = [], $method=false ){
-            
+
             $response = self::$_client->$method( $url, ['headers'=> $headers, 'body' => json_encode( $data ) ]);
             $zonerStatusCode = $response->getStatusCode();
             return json_decode($response->getBody());
@@ -128,7 +128,7 @@ class MasterController extends MenuController
 
 		];
             return $errors[$id];
-	
+
 	}
 	/**
 	 *Metodo para mandar a cargar el menu dependiendo el rol desempeñado por el usuario
@@ -137,17 +137,17 @@ class MasterController extends MenuController
 	 *@return void
 	 */
 	protected static function menus( $data = [] ){
-		
-		$response = array_to_object(SdeRolMenuModel::with('menu','permisos')->where( $data )->get()->toArray()); 
+
+		$response = array_to_object(SdeRolMenuModel::with('menu','permisos')->where( $data )->get()->toArray());
         #debuger($response);
-        $menus_array = []; 
+        $menus_array = [];
         $permisos = [];
 
-        for ($i=0; $i < count( $response ); $i++) { 
-            for ($j=0; $j < count( $response[$i]->menu ); $j++) { 
+        for ($i=0; $i < count( $response ); $i++) {
+            for ($j=0; $j < count( $response[$i]->menu ); $j++) {
                $menus_array[] = $response[$i]->menu[$j];
             }
-            
+
         }
         #self::$menu = self::build_menu( $menus_array );
         return self::build_menu( $menus_array );

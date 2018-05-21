@@ -24,46 +24,50 @@ class SkillController extends MasterController
     	$data = [];
         foreach ($request->all() as $key => $value) {
             if ( $value != null ) {
-                $data[$key] = $value;        
+                $data[$key] = $value;
             }
         }
-        $url            = self::$_domain."/api/bolsa/skills";
-        $headers        = [ 
-            'Content-Type'  => 'application/json'
-            ,'usuario'      => Session::get('email')
-            ,'token'        => Session::get('api_token')
-        ];
-        $datos['data']  = $data;
-        $method         = 'post';
-        $response       = self::endpoint($url, $headers, $datos,$method);
-                
-        if ( $response->success == true ) {
-            return message(true,$response->result,self::$message_success);
+        // $url            = self::$_domain."/api/bolsa/skills";
+        // $headers        = [
+        //     'Content-Type'  => 'application/json'
+        //     ,'usuario'      => Session::get('email')
+        //     ,'token'        => Session::get('api_token')
+        // ];
+        // $datos['data']  = $data;
+        // $method         = 'post';
+        // $response       = self::endpoint($url, $headers, $datos,$method);
+
+        $response = self::$_model::create_model( [$data] ,new BlmSkillModel);
+
+        if ( $response ) {
+            return message(true,$response[0],self::$message_success);
         }else{
             return message(false,[],self::$message_error);
         }
 
     }
     /**
-     *Metodo para la actualizacion de los campos 
+     *Metodo para la actualizacion de los campos
      *@access public
      *@param Request $request [Description]
      *@return void
      */
     public static function update( Request $request ){
 
-        $url            = self::$_domain."/api/bolsa/skills";
-        $headers        = [ 
-            'Content-Type'  => 'application/json'
-            ,'usuario'      => Session::get('email')
-            ,'token'        => Session::get('api_token')
-        ];
-        $fields['data']  = $request->all();
-        $method          = 'put';
-        $response        = self::endpoint($url, $headers, $fields,$method);
+        // $url            = self::$_domain."/api/bolsa/skills";
+        // $headers        = [
+        //     'Content-Type'  => 'application/json'
+        //     ,'usuario'      => Session::get('email')
+        //     ,'token'        => Session::get('api_token')
+        // ];
+        // $fields['data']  = $request->all();
+        // $method          = 'put';
+        // $response        = self::endpoint($url, $headers, $fields,$method);
 
-    	if ( $response->success == true ) {
-            return message(true,$response->result,self::$message_success);
+        $where = ['id' => $request->id];
+        $response = self::$_model::update_model( $where,$request->all(), new BlmSkillModel);
+        if ( $response ) {
+            return message(true,$response[0],self::$message_success);
         }else{
             return message(false,[],self::$message_error);
         }
@@ -77,16 +81,16 @@ class SkillController extends MasterController
      *@return void
      */
     public static function destroy( $id ){
-    	
+
     	$where = ['id' => $id];
     	$response = self::$_model::delete_model($where, new BlmSkillModel );
     	if (count( $response ) == 0) {
     		return message(true,$response,'Registro eliminado correctamente');
     	}else{
-    		return message(false,[],'Ocurrio un error');
+    		return message(false,[],self::$message_error);
     	}
 
-    }	
+    }
 
 
 

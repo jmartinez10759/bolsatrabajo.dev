@@ -11,8 +11,8 @@ class Listado extends Model
   	protected $connection = "blm_mysql";
   	public $timestamps = false;
     public $fillable = [
-
-    	'id'
+      
+     'id'
 		,'name'
 		,'title'
 		,'code'

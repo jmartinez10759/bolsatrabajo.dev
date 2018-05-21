@@ -32,32 +32,31 @@ class DetailsJobsController extends MasterController
      *Metodo para realizar la consulta del id de la vacante para obtener el detalle
      *@access public
      *@param Request $request [Description]
-     *@return void 
+     *@return void
      */
     public static function show( Request $request ){
-
-
-    	$where = ['id' => $request->id_vacante,'is_active' => 0];
+    	#$where = ['id' => $request->id_vacante,'is_active' => 0];
+    	$where = ['id' => $request->id_vacante ];
     	$response = self::$_model::show_model([],$where, new Listado );
-        $postulate = self::$_model::show_model([],['id_vacante' => $request->id_vacante,'id_users' => Session::get('id')], new BlmPostulateCandidateModel);
+      $postulate = self::$_model::show_model([],['id_vacante' => $request->id_vacante,'id_users' => Session::get('id')], new BlmPostulateCandidateModel);
     	$data = [];
     	if ( $response  ) {
     		$empresa = self::$_model::show_model(['id','name','postal_code','website_url'],['id' => $response[0]->account_id], new AccountsModel );
     		$data = [
-    			'id' 					=> $response[0]->id
-    			,'name' 				=> $response[0]->name
-    			,'title' 				=> $response[0]->title
-    			,'description_large' 	=> $response[0]->description_large
-    			,'description_short' 	=> $response[0]->description_short
-    			,'email' 				=> $response[0]->email
-    			,'is_active' 			=> $response[0]->is_active
-    			,'salary_max' 			=> $response[0]->salary_max
-    			,'salary_min' 			=> $response[0]->salary_min
-    			,'state_id' 			=> $response[0]->state_id
-    			,'account_id' 			=> $empresa[0]->id
-    			,'account_name' 		=> $empresa[0]->name
-    			,'account_postal_code' 	=> $empresa[0]->postal_code
-    			,'account_website_url' 	=> $empresa[0]->website_url
+    			'id' 					           => $response[0]->id
+    			,'name' 				         => $response[0]->name
+    			,'title' 				         => $response[0]->title
+    			,'description_large' 	   => $response[0]->description_large
+    			,'description_short' 	   => $response[0]->description_short
+    			,'email' 				         => $response[0]->email
+    			,'is_active' 			       => $response[0]->is_active
+    			,'salary_max' 			     => $response[0]->salary_max
+    			,'salary_min' 			     => $response[0]->salary_min
+    			,'state_id' 			       => $response[0]->state_id
+    			,'account_id' 			     => $empresa[0]->id
+    			,'account_name' 		     => $empresa[0]->name
+    			,'account_postal_code' 	 => $empresa[0]->postal_code
+    			,'account_website_url' 	 => $empresa[0]->website_url
     		];
 
     		if ( Session::has('email') ) {
@@ -70,12 +69,12 @@ class DetailsJobsController extends MasterController
             $data['curp']          = isset($details[0]->curp)? $details[0]->curp: null;
 	    	$data['is_postulate']  = ($postulate)? false: true;
 	    	#debuger($data);
-    		return message(true,$data,"Trasaccion Existosa");
+    		return message(true,$data,self::$message_success);
     	}
-    	return message(false,[],'Ocurrio un error al cargar la informacion');
+    	return message(false,[],self::$message_error);
 
     }
-    
+
 
 
 }

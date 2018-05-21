@@ -9,7 +9,7 @@ use App\Http\Controllers\MasterController;
 
 class StudyController extends MasterController
 {
-    
+
     public function __construct(){
     	parent::__construct();
     }
@@ -20,50 +20,53 @@ class StudyController extends MasterController
      *@return void
      */
     public static function store( Request $request ){
-    	
+
         $data = [];
         foreach ($request->all() as $key => $value) {
             if ( $value != null ) {
-                $data[$key] = $value;        
+                $data[$key] = $value;
             }
         }
-        $url            = self::$_domain."/api/bolsa/study";
-        $headers        = [ 
-            'Content-Type'  => 'application/json'
-            ,'usuario'      => Session::get('email')
-            ,'token'        => Session::get('api_token')
-        ];
-        $datos['data']  = $data;
-        $method         = 'post';
-        $response       = self::endpoint($url, $headers, $datos,$method);
-                
-        if ( $response->success == true ) {
-            return message(true,$response->result,self::$message_success);
+        // $url            = self::$_domain."/api/bolsa/study";
+        // $headers        = [
+        //     'Content-Type'  => 'application/json'
+        //     ,'usuario'      => Session::get('email')
+        //     ,'token'        => Session::get('api_token')
+        // ];
+        // $datos['data']  = $data;
+        // $method         = 'post';
+        // $response       = self::endpoint($url, $headers, $datos,$method);
+        $response = self::$_model::create_model( [$data] ,new BlmStudyModel);
+
+        if ( $response ) {
+            return message(true,$response[0],self::$message_success);
         }else{
             return message(false,[],self::$message_error);
         }
 
     }
     /**
-     *Metodo para la actualizacion de los campos 
+     *Metodo para la actualizacion de los campos
      *@access public
      *@param Request $request [Description]
      *@return void
      */
     public static function update( Request $request ){
 
-    	$url            = self::$_domain."/api/bolsa/study";
-        $headers        = [ 
-            'Content-Type'  => 'application/json'
-            ,'usuario'      => Session::get('email')
-            ,'token'        => Session::get('api_token')
-        ];
-        $fields['data']  = $request->all();
-        $method          = 'put';
-        $response        = self::endpoint($url, $headers, $fields,$method);
-
-        if ( $response->success == true ) {
-            return message(true,$response->result,self::$message_success);
+    	// $url            = self::$_domain."/api/bolsa/study";
+      //   $headers        = [
+      //       'Content-Type'  => 'application/json'
+      //       ,'usuario'      => Session::get('email')
+      //       ,'token'        => Session::get('api_token')
+      //   ];
+      //   $fields['data']  = $request->all();
+      //   $method          = 'put';
+      //   $response        = self::endpoint($url, $headers, $fields,$method);
+      #debuger($request->all());
+        $where = ['id' => $request->id];
+        $response = self::$_model::update_model( $where,$request->all(), new BlmStudyModel);
+        if ( $response ) {
+            return message(true,$response[0],self::$message_success);
         }else{
             return message(false,[],self::$message_error);
         }
@@ -76,7 +79,7 @@ class StudyController extends MasterController
      *@return void
      */
     public static function destroy( $id ){
-    	
+
     	$where = ['id' => $id];
     	$response = self::$_model::delete_model($where, new BlmStudyModel );
     	if (count( $response ) == 0) {
@@ -86,7 +89,7 @@ class StudyController extends MasterController
     	}
 
 
-    }	
+    }
 
 
 }

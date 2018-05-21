@@ -6,7 +6,7 @@ new Vue ({
   },
   data: {
     datos: [],
-    newKeep: { 
+    newKeep: {
         'id_state': ''
         ,'id_categoria': ''
         ,'email': ''
@@ -34,7 +34,7 @@ new Vue ({
         ,'jobs_telefono': ''
         //,'url_cv': ''
     },
-    fillKeep: { 
+    fillKeep: {
          'id':''
         ,'id_state': ''
         ,'id_categoria': ''
@@ -69,7 +69,7 @@ new Vue ({
   methods:{
 
     insert_detalles: function(){
-        
+
         var url = domain('cv/insert');
         var uri = domain('cv/show');
 
@@ -88,12 +88,12 @@ new Vue ({
         },function(json){
           $('#seccion-cv').hide('slow');
         });
-    
+
     },
     insert_study: function(){
 
       var url = domain('study/insert');
-      var uri = domain('cv/show');
+      var refresh = domain('cv/show');
       //setter las propiedades para enviarlas.
       this.newKeep.id_cv        = this.datos.id_cv;
       this.newKeep.escuela      = this.datos.escuela;
@@ -101,7 +101,7 @@ new Vue ({
       this.newKeep.fecha_inicio = this.datos.fecha_inicio;
       this.newKeep.fecha_final  = this.datos.fecha_final;
 
-       this.insert_general(url,uri,function(json){
+       this.insert_general(url,refresh,function(json){
           $('#modal-educacion').modal('hide');
         },function(json){
           $('#modal-educacion').modal('hide');
@@ -121,7 +121,7 @@ new Vue ({
       this.newKeep.jobs_fecha_final     = this.datos.jobs_fecha_final;
       this.newKeep.jobs_jefe_inmediato  = this.datos.jobs_jefe_inmediato;
       this.newKeep.jobs_telefono        = this.datos.jobs_telefono;
-      
+
        this.insert_general(url,uri,function(json){
           $('#modal-experiencia').modal('hide');
         },function(json){
@@ -164,19 +164,19 @@ new Vue ({
       var url = domain('skills/update');
       var uri = domain('cv/show');
       this.update_general( url,uri,'modal-edit-skill' );
-      
+
     },
     delete_study( keep ){
       var url = domain('study/delete');
       var uri = domain('cv/show');
       this.delete_general(url,uri, keep.id );
-    
+
     },
     delete_jobs( keep ){
       var url = domain('jobs/delete');
       var uri = domain('cv/show');
       this.delete_general(url,uri, keep.id );
-    
+
     },
     delete_skills( keep ){
       var url = domain('skills/delete');
@@ -184,7 +184,7 @@ new Vue ({
       this.delete_general(url,uri, keep.id );
 
     }
-    
+
 
   }
 

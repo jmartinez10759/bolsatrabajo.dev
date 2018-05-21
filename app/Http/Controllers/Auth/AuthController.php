@@ -11,7 +11,7 @@ use App\Http\Controllers\MasterController;
 
 class AuthController extends MasterController
 {
-    
+
     private static $_ruta   = "details";
 
     public function __construct(){
@@ -23,7 +23,7 @@ class AuthController extends MasterController
      *@return void
      */
     public static function showLogin(){
-    	
+
     	return View('auth.auth');
 
     }
@@ -70,22 +70,22 @@ class AuthController extends MasterController
         if ( isset($where->email) && isset($where->password)) {
             $condicion['email'] = $where->email;
             $condicion['password'] = $where->password;
-            $condicion['confirmed'] = true;    
+            $condicion['confirmed'] = true;
         }
         /*$url            = self::$_domain."api/bolsa/token";
         $headers        = [ 'Content-Type'  => 'application/json'];
         $data['data']   = [ 'email'=> $where->email ];
         $method         = 'put';
         $response       = self::endpoint( $url,$headers,$data,$method);*/
-        $datos = [ 'confirmed_code' => null, 'confirmed' => true, 'api_token' => str_random(50) ];
+        $datos = [ 'api_token' => str_random(50) ];
         $where = ['email' => $where->email];
         $response = MasterModel::update_model( $where,$datos, new RequestUserModel );
         #debuger($response);
         #if ($response->success == true) {
         if ( $response ) {
-            $condicion['api_token'] = $response[0]->api_token;    
+            $condicion['api_token'] = $response[0]->api_token;
         }else{
-            $condicion['api_token'] = null;    
+            $condicion['api_token'] = null;
         }
 
         $consulta = MasterModel::show_model([], $condicion , new RequestUserModel );
@@ -111,7 +111,7 @@ class AuthController extends MasterController
     public static function verify_code( $confirmed_code ){
 
         if ( $confirmed_code ) {
-            
+
                 $condicion = ['confirmed_code' => $confirmed_code ];
                 $consulta = MasterModel::show_model([], $condicion , new RequestUserModel );
                 if( $consulta ){
@@ -128,7 +128,7 @@ class AuthController extends MasterController
                     return redirect()->route( self::$_ruta );
 
                 }
-                
+
                 return redirect()->route('/');
 
         }

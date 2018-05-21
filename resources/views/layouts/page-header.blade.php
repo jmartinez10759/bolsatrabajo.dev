@@ -86,11 +86,11 @@
                                     </li>
                                 </ul>
                             </li> -->
-                            <li><a href="">Blog</a></li>
+                            <li><!-- <a href="">Blog</a> --></li>
                         </ul>
                         <ul class="nav navbar-nav navbar-right" data-in="fadeInDown" data-out="fadeOutUp">
                             <!-- <li><a href="{{route('details')}}">Bienvenid@ {{ Session::get('name') }}</a></li> -->
-                            <li><a href="pricing.html"><i class="fa fa-sign-in" aria-hidden="true"></i>Paquetes</a></li>
+                            <li><!-- <a href="pricing.html"><i class="fa fa-sign-in" aria-hidden="true"></i>Paquetes</a> --></li>
                             @if( !Session::has('name') )
                                 <li class="left-br">
                                     <a data-toggle="modal" data-target="#signup" class="signin" style="cursor: pointer;">Acceso Usuarios</a>
