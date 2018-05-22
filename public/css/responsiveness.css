@@ -127,7 +127,7 @@ padding-top:13%;
 min-height:620px;
 }
 .company-brand {
-position:absolute;
+position:relative;
 bottom:0;
 }
 .min-padd{
@@ -157,7 +157,7 @@ margin-bottom:25px;
 .services h1{
 font-size:4em;
 margin-bottom:35px;
-}	
+}
 
 .sec-features-caption{
 max-width:90%;
@@ -274,7 +274,7 @@ padding: 8px 9px 22px 9px;
 body nav.navbar.bootsnav ul.nav > li > a.signin {
 padding: 8px 30px;
 margin-left: 5px;
-}	
+}
 .inner-header-title h1 {
 font-size: 80px;
 }
@@ -371,7 +371,7 @@ font-size: 19px;
 @media (max-width: 1023px) {
 .banner-caption .form-control{
 margin-bottom:15px;
-}	
+}
 }
 
 @media screen and (max-width: 992px) {

@@ -3,7 +3,7 @@
 @section('content')
 
 	@include('listado.content')
-    @include('listado.section')
-    
+  @include('listado.section')
+
 
 @endsection
