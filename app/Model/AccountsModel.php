@@ -6,11 +6,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class AccountsModel extends Model
 {
-    
+
 	protected $table = "accounts";
 	public $timestamps = false;
 	protected $connection = "blm_mysql";
-    public $fillable = [
+  public $fillable = [
     	'id'
 		,'parent_account_id'
 		,'logo'

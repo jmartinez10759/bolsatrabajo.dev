@@ -2,7 +2,7 @@
 			<section class="first-feature" >
 				<div class="container">
 					<div class="all-features">
-					
+
 						<div class="col-md-3 col-sm-6 small-padding">
 							<div class="job-feature">
 								<div class="feature-icon">
@@ -14,7 +14,7 @@
 								</div>
 							</div>
 						</div>
-						
+
 						<div class="col-md-3 col-sm-6 small-padding">
 							<div class="job-feature">
 								<div class="feature-icon">
@@ -37,7 +37,7 @@
 								</div>
 							</div>
 						</div>
-						
+
 						<div class="col-md-3 col-sm-6 small-padding">
 							<div class="job-feature">
 								<div class="feature-icon">
@@ -49,7 +49,7 @@
 								</div>
 							</div>
 						</div>
-						
+
 						<div class="col-md-3 col-sm-6 small-padding">
 							<div class="job-feature">
 								<div class="feature-icon">
@@ -72,7 +72,7 @@
 								</div>
 							</div>
 						</div>
-						
+
 						<div class="col-md-3 col-sm-6 small-padding">
 							<div class="job-feature">
 								<div class="feature-icon">
@@ -84,7 +84,7 @@
 								</div>
 							</div>
 						</div>
-						
+
 						<div class="col-md-3 col-sm-6 small-padding">
 							<div class="job-feature">
 								<div class="feature-icon">
@@ -96,13 +96,13 @@
 								</div>
 							</div>
 						</div>
-						
+
 					</div>
 				</div>
 			</section>
 			<div class="clearfix"></div>
 			<!-- Top Features Section End-->
-			
+
 			<!-- ========== Begin: Brows job Category ===============  -->
 			<section class="brows-job-category" id="vue-listado">
 				<div class="container">
@@ -111,7 +111,7 @@
 					</div>
 					<!--/.row-->
 					<div class="row">
-					
+
 
 						<div class="item-click" v-for="data in keeps" style="cursor: pointer;" >
 							<article  @click="get('detalle', data)">
@@ -121,32 +121,32 @@
 											<img src="http://via.placeholder.com/150x150" class="img-responsive" alt="" />
 										</div>
 									</div>
-									
+
 									<div class="col-md-6 col-sm-5">
 										<div class="brows-job-position">
 											<h3>@{{ data.name }}</h3>
-											<p><span>@{{ data.title }}</span><span class="brows-job-sallery"><i class="fa fa-money"></i>$@{{ data.salary_min }} - @{{ data.salary_max }}</span></p>
+											<p><span>@{{ data.accounts[0].name }}</span><span class="brows-job-sallery"><i class="fa fa-money"></i>$@{{ data.salary_min }} - @{{ data.salary_max }}</span></p>
 										</div>
 									</div>
-									
+
 									<div class="col-md-3 col-sm-3">
 										<div class="brows-job-location">
-											<p><i class="fa fa-map-marker"></i>QBL Park, C40</p>
+											<p><i class="fa fa-map-marker"></i>@{{data.estados[0].nombre}}</p>
 										</div>
 									</div>
-									
+
 									<div class="col-md-2 col-sm-2">
 										<div class="brows-job-type">
-											<span class="full-time">Full Time</span>
+											<span class="full-time">@{{data.contract_type[0].name}}</span>
 										</div>
 									</div>
-									
+
 								</div>
 							</article>
 						</div>
-						
+
 					</div>
-					
+
 					<div class="row">
 						<ul class="pagination">
 							<li v-if="pagination.current_page > 1">
@@ -159,15 +159,15 @@
 								<a href="#" @click.prevent="changePage(pagination.current_page + 1)">
 									&raquo;
 								</a>
-							</li> 
+							</li>
 						</ul>
 					</div>
 
-					
+
 				</div>
 			</section>
 			<!-- ========== Begin: Brows job Category End ===============  -->
-			
+
 			<!-- testimonial section Start -->
 			<section class="testimonial" id="testimonial">
 				<div class="container">
@@ -209,7 +209,7 @@
 									<li class="fa fa-star"></li>
 								</ul>
 							</div>
-							
+
 							<div class="client-testimonial">
 								<div class="pic">
 									<img src="http://via.placeholder.com/150x150" alt="">
@@ -224,7 +224,7 @@
 									<li class="fa fa-star"></li>
 								</ul>
 							</div>
-							
+
 							<div class="client-testimonial">
 								<div class="pic">
 									<img src="http://via.placeholder.com/150x150" alt="">
@@ -262,5 +262,5 @@
     </script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBjiPiq0g0VPiJ9fZUNsvvmI7JczVr_5Ks&libraries=places&callback=initAutocomplete"
         async defer></script>
-        
+
 @endpush

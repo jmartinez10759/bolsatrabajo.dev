@@ -10,6 +10,6 @@ class BlmCookieSerchModel extends Model
     public $fillable = [
     	'id'
     	,'id_users'
-        ,'vacante'
+      ,'vacante'
     ];
 }

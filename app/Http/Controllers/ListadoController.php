@@ -17,7 +17,10 @@ class ListadoController extends Controller
     public function index(Request $request)
     {
         #SE REALIZA LA CONSULTA PARA LAS VACANTES.
-        $tasks = Listado::orderBy('id', 'DESC')->paginate(3);
+        $where = ['is_active' => 1, 'is_published' => null];
+        $tasks = Listado::where( $where )->orderBy('id', 'DESC')->paginate(3);
+        $response = array_to_object(Listado::with('accounts','contractType','workingtimetype','estados')->where( $where )->orderBy('id', 'DESC')->paginate(3)->toArray());
+        #debuger($response);
         return [
             'pagination' => [
                 'total'         => $tasks->total(),
@@ -27,17 +30,17 @@ class ListadoController extends Controller
                 'from'          => $tasks->firstItem(),
                 'to'            => $tasks->lastItem(),
             ],
-            'tasks' => $tasks
+            'tasks' => $response
         ];
-        
+
     }
 
     public function estados()
     {
         return $estados = BlmEstadosModel::all();
-         
+
     }
-    
+
 	public function listado()
 	{
         #realiza la consulta del listado de vacantes disponibles.

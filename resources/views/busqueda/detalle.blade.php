@@ -27,7 +27,7 @@
 			</div>
 
 			<div class="detail-status">
-				<span></span>
+				<span>{{date('Y-m-d')}}</span>
 			</div>
 
 		</div>
@@ -35,12 +35,12 @@
 		<div class="row bottom-mrg">
 			<div class="col-md-8 col-sm-8">
 				<div class="detail-desc-caption">
-					<h4>@{{datos.title}}</h4>
-					<span class="designation">@{{datos.name}}</span>
-					<p>@{{datos.account_name}}</p>
+					<h4>@{{datos.name}}</h4>
+					<span class="designation">@{{datos.account_name}}</span>
+					<p>@{{datos.description_short}}</p>
 					<ul>
-						<li><i class="fa fa-briefcase"></i><span>Tiempo Completo</span></li>
-						<li><i class="fa fa-flask"></i><span>3 Años de Experecia</span></li>
+						<li><i class="fa fa-briefcase"></i><span>@{{datos.contract_type}}</span></li>
+						<li><i class="fa fa-flask"></i><span>@{{datos.workingtimetype}}</span></li>
 					</ul>
 				</div>
 			</div>
@@ -49,11 +49,11 @@
 				<div class="get-touch">
 					<h4>Contactanos</h4>
 					<ul>
-						<li><i class="fa fa-map-marker"></i><span></span></li>
+						<li><i class="fa fa-map-marker"></i><span> @{{datos.estado}} </span></li>
 						<li><i class="fa fa-envelope"></i><span>@{{datos.email}}</span></li>
-						<li><i class="fa fa-globe"></i><span>@{{datos.account_website_url}}</span></li>
+						<li><i class="fa fa-globe"></i><span>@{{datos.account_address}}</span></li>
 						<li><i class="fa fa-phone"></i><span></span></li>
-						<li><i class="fa fa-money"></i><span>@{{datos.salary_min}} - @{{datos.salary_max}} MXN</span></li>
+						<li><i class="fa fa-money"></i><span>@{{ datos.salario }}</span></li>
 					</ul>
 				</div>
 			</div>
@@ -89,10 +89,11 @@
 	<div class="container">
 		<div class="row row-bottom">
 			<h2 class="detail-title">Responsabilidades laborales</h2>
-			<p> </p>
+			<p align="justify">@{{datos.other_details}}</p>
+
 		</div>
 
-		<div class="row row-bottom">
+		<!-- <div class="row row-bottom">
 			<h2 class="detail-title">Requisito de habilidad</h2>
 			<p></p>
 			<ul class="detail-list">
@@ -104,9 +105,9 @@
 				<li></li>
 				<li></li>
 			</ul>
-		</div>
+		</div> -->
 
-		<div class="row row-bottom">
+		<!-- <div class="row row-bottom">
 			<h2 class="detail-title">Calificación</h2>
 			<p></p>
 			<ul class="detail-list">
@@ -119,7 +120,7 @@
 				<li></li>
 				<li></li>
 			</ul>
-		</div>
+		</div> -->
 
 	</div>
 </section>

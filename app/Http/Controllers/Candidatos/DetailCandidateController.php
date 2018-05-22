@@ -15,17 +15,17 @@ use App\Http\Controllers\MasterController;
 
 class DetailCandidateController extends MasterController
 {
-    
+
     public function __construct(){
         parent::__construct();
     }
     /**
      *Metodo para obtener la vista de los detalles del candidato que se registro al portal.
-     *@access public 
+     *@access public
      *@return void
      */
     public static function index(){
-        
+
         #$where = ['id_users' => Session::get('id') ];
         $users          =  RequestUserModel::find( Session::get('id') );
         $details        = data_march( $users->description );
@@ -58,13 +58,13 @@ class DetailCandidateController extends MasterController
         $candidato      =  self::$_model::show_model( [], ['id' => Session::get('id')], new RequestUserModel);
         $estados        =  self::$_model::show_model( [], [], new BlmEstadosModel);
         $blm_nss        =  self::$_model::show_model( [], $where, new BlmNssModel);
-        
+        #debuger($postulaciones);
         $data = [
             'name'              =>  Session::get('name')
             ,'first_surname'    =>  Session::get('first_surname')
             ,'second_surname'   =>  Session::get('second_surname')
-            ,'email'            =>  Session::get('email')       
-            #,'password'        =>  Session::get('password')        
+            ,'email'            =>  Session::get('email')
+            #,'password'        =>  Session::get('password')
         ];
         if ( !$response) {
 
@@ -72,7 +72,7 @@ class DetailCandidateController extends MasterController
                 'telefono'          => ""
                 ,'codigo'           => ""
                 ,'direccion'        => ""
-                ,'curp'             => ""               
+                ,'curp'             => ""
                 ,'cargo'            => ""
                 ,'descripcion'      => ""
                 ,'id_state'         => 9
@@ -91,7 +91,7 @@ class DetailCandidateController extends MasterController
                 ,'photo'            => ( isset($response[0]->photo) && $response[0]->photo)? $response[0]->photo : 'images/profile/profile.png'
             ];
         }
-            $fields['name']             =  $data['name']; 
+            $fields['name']             =  $data['name'];
             $fields['first_surname']    =  $data['first_surname'] ;
             $fields['second_surname']   =  $data['second_surname'] ;
             $fields['email']            =  $data['email'] ;
@@ -127,11 +127,11 @@ class DetailCandidateController extends MasterController
         #debuger($request->input('confirmed_nss'));
         if ( $request->confirmed_nss == 1 ) {
             $blm_nss = self::$_model::show_model( [], ['id_users' => Session::get('id')], new BlmNssModel);
-            
+
             if ( !$blm_nss ) {
                 return message(false,[],'¡Debe de Agregar al menos un NSS!');
             }
-            
+
         }
         $claves_users = ['name','first_surname','second_surname','email','confirmed_nss'];
         $claves_details = ['name','first_surname','second_surname','email','password','nss','confirmed_nss'];
@@ -147,14 +147,14 @@ class DetailCandidateController extends MasterController
             }
             if ($key == "password" && $value != false) {
                 $request_users[$key] = sha1($value);
-                
+
             }
             if( !in_array($key, $claves_details) ){
                 $blm_details[$key] = $value;
             }
             if (in_array($key, $claves_upper)) {
                 $blm_details[$key] = strtoupper($value);
-            }           
+            }
 
         }
         $request_users['confirmed_nss'] = ($request_users['confirmed_nss'] == 1)? $request_users['confirmed_nss'] : 0;
@@ -183,28 +183,28 @@ class DetailCandidateController extends MasterController
 
             if ( !$select_details ) {
                 $insert = self::$_model::create_model([$blm_details],new DetailCandidateModel);
-                
+
                 if ( $insert) {
                     return message(true,$insert[0],"¡Transaccion Exitosa!");
                 }else{
-                    return message(false,[],"¡Ocurrio un error, favor de verificar.!"); 
+                    return message(false,[],"¡Ocurrio un error, favor de verificar.!");
                 }
-                
+
             }
                 return message(false,[],"¡Ya existe la CURP que intenta agregar!");
 
         }
-        
+
 
     }
     /**
-     *Metodo para hacer la consulta de la vacante 
+     *Metodo para hacer la consulta de la vacante
      *@access private
      *@param $request [Description]
      *@return void
      */
     private static function _postulaciones( $request ){
-        
+
         $postulacion = [];
         if ( !$request ) {
             return $postulacion;
@@ -217,7 +217,7 @@ class DetailCandidateController extends MasterController
 
     }
     /**
-     *Metodo para hacer la consulta de la vacante 
+     *Metodo para hacer la consulta de la vacante
      *@access public
      *@param $request [Description]
      *@return void
@@ -226,8 +226,8 @@ class DetailCandidateController extends MasterController
 
         $files = $request->file('file');
         $archivo = "";
-        for ($i=0; $i < count($files) ; $i++) { 
-            
+        for ($i=0; $i < count($files) ; $i++) {
+
             $nombre_temp    = $files[$i]->getClientOriginalName();
             $extension      = strtolower($files[$i]->getClientOriginalExtension());
             $archivo        = Session::get('id').".".$extension;

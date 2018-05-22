@@ -55,8 +55,8 @@ return [
         ],
         'blm_mysql' => [
             'driver' => 'mysql',
-            'host' => env('DB_HOST', '127.0.0.1'),
-            'port' => env('DB_PORT', '3306'),
+            'host' => env('BURO_HOST', 'forge'),
+            'port' => env('BURO_DATABASE', 'forge'),
             'database' => env('BURO_DATABASE', 'forge'),
             'username' => env('BURO_USERNAME', 'forge'),
             'password' => env('BURO_PASSWORD', ''),

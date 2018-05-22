@@ -32,8 +32,8 @@
 				<div id="vue-serch">
 					<!-- Company Searrch Filter End -->
 					<h2>Hemos encontrado {{ $count }} resultados de vacantes</h2>
-					@if(count($name))
-					@foreach ($name as $data) 
+					@if( $count )
+					@foreach ($name as $data)
 
 					<!-- <div href="{{ url('detalle/'.$data->id) }}" class="item-click" > -->
 					<div class="item-click" style="cursor: pointer;" id_vacante="{{ $data->id }}" v-on:click.prevent="details_vacante({{ $data->id }})">
@@ -47,17 +47,24 @@
 								<div class="col-md-6 col-sm-5">
 									<div class="brows-job-position">
 										<h3>{{ $data->name }}</h3>
-										<p><span>{{ $data->title}}</span><span class="brows-job-sallery"><i class="fa fa-money"></i>${{ $data->salary_min }} - {{ $data->salary_max }}</span></p>
+										<p><span>{{ $data->accounts[0]->name}}</span>
+											<span class="brows-job-sallery"><i class="fa fa-money"></i>
+												@if($data->salary_min || $data->salary_max)
+													$ {{ $data->salary_min }} - {{ $data->salary_max }}
+												@else
+													Salario No Mostrado.
+												@endif
+											</span></p>
 									</div>
 								</div>
 								<div class="col-md-3 col-sm-3">
 									<div class="brows-job-location">
-										<p><i class="fa fa-map-marker"></i>QBL Park, C40</p>
+										<p><i class="fa fa-map-marker"></i>{{ $data->estados[0]->nombre}}</p>
 									</div>
 								</div>
 								<div class="col-md-2 col-sm-2">
 									<div class="brows-job-type">
-										<span class="full-time">Full Time</span>
+										<span class="full-time">{{ $data->contractType[0]->name}}</span>
 									</div>
 								</div>
 							</div>
@@ -74,23 +81,23 @@
 					{{ $name->links() }}
 
 				</div>
-					
+
 					<!--
 					<div class="row">
 						<ul class="pagination">
 							<li><a href="#">&laquo;</a></li>
 							<li class="active"><a href="#">1</a></li>
 							<li><a href="#">2</a></li>
-							<li><a href="#">&raquo;</a></li> 
+							<li><a href="#">&raquo;</a></li>
 						</ul>
 					</div>
 					-->
-					
+
 				</div>
 			</section>
 			<!-- ========== Begin: Brows job Category End ===============  -->
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-3-typeahead/4.0.1/bootstrap3-typeahead.min.js"></script>  
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-3-typeahead/4.0.1/bootstrap3-typeahead.min.js"></script>
 
 <script type="text/javascript">
     var path = "autocomplete";
@@ -138,6 +145,3 @@ new Vue ({
 </script>
 
 @endpush
-
-
-

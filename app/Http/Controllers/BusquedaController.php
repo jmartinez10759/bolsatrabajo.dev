@@ -19,63 +19,79 @@ class BusquedaController extends MasterController
         $edo        = isset($request->edo)? $request->edo : false;
         $modulo     = isset($request->utilisateur)? $request->utilisateur : false;
         $values = ([ 'name'=> $vacantes ,'state_id' => $edo ]);
-
-          if ( Session::get('id') && !$modulo ) {
-
+        $where = ['is_active' => 1, 'is_published' => null];
+        if ( Session::get('id') && !$modulo ) {
             $cookie= BlmCookieSerchModel::create([
                 'id_users'      => Session::get('id')
                 ,'vacante'      => $vacantes
             ]);
-
         }
 
         if ( $values['state_id'] ) {
-            
-            $consulta = Listado::where( 'name','LIKE',"%".$values['name']."%" )
-                            ->where('state_id','=',$values['state_id'] )              
-                            ->orderBy('id', 'DESC')
-                            ->paginate(5);
+          $consulta =  Listado::with('accounts','contractType','workingtimetype','estados')
+                                      ->where( $where )
+                                      ->where( 'name','LIKE',"%".$values['name']."%" )
+                                      ->where('state_id','=',$values['state_id'] )
+                                      ->orderBy('id', 'DESC')
+                                      ->paginate(5);
+              #debuger($consulta->data);
+            // $consulta = Listado::where($where)->where( 'name','LIKE',"%".$values['name']."%" )
+            //                 ->where('state_id','=',$values['state_id'] )
+            //                 ->orderBy('id', 'DESC')
+            //                 ->paginate(5);
 
             if ( count($consulta) == 0 ) {
-                
-                $consulta = Listado::where( 'name','LIKE',"%".$values['name']."%" )
-                            ->orwhere('state_id','=', $values['state_id'] )              
-                            ->orderBy('id', 'DESC')
-                            ->paginate(5);   
+
+              $consulta = Listado::with('accounts','contractType','workingtimetype','estados')
+                                          ->where( $where )
+                                          #->where( 'name','LIKE',"%".$values['name']."%" )
+                                          ->where('state_id','=',$values['state_id'] )
+                                          ->orderBy('id', 'DESC')
+                                          ->paginate(5);
+                // $consulta = Listado::where($where)->where( 'name','LIKE',"%".$values['name']."%" )
+                //             ->orwhere('state_id','=', $values['state_id'] )
+                //             ->orderBy('id', 'DESC')
+                //             ->paginate(5);
             }
 
         }else{
-
-             $consulta =  Listado::where( 'name','LIKE',"%".$values['name']."%" )
+          /*$consulta = Listado::with('accounts','contractType','workingtimetype','estados')
+                                      ->where( $where )
+                                      ->where( 'name','LIKE',"%".$values['name']."%" )
+                                      ->orderBy('id', 'DESC')
+                                      ->paginate(5);*/
+             $consulta =  Listado::where($where)->where( 'name','LIKE',"%".$values['name']."%" )
                             ->orderBy('id', 'DESC')
                             ->paginate(5);
         }
 
         $response = $consulta;
         $response->appends($request->only('vacantes'));
+        #debuger(  $response[0] );
+        return view("busqueda.busqueda", ["name" => $response, 'count' => count($response) ] );
 
-        return view("busqueda.busqueda", ["name" => $response, 'count' => count($response)] );
 
-      
 
 
     }
 
     public function index(Request $request)
-    {        
+    {
         return view('busqueda.form');
     }
 
     public function show($id)
 	{
-
+      $where = ['id' => $id,'is_active' => 1, 'is_published' => null ];
 	    $response = Listado::where( 'id',$id)->get();
 	    return view("busqueda.detalle", ["datos" => $response ]);
 	}
     public function autocomplete(Request $request)
     {
+        $where = ['is_active' => 1, 'is_published' => null ];
         $term = $request->input('query');
         $data = Listado::select('name')
+                        ->where( $where )
                         ->where( 'name', 'LIKE', "%".$term."%" )
                         ->groupBy('name')
                         ->get();
