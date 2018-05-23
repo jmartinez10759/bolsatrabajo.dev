@@ -37,7 +37,7 @@ class DetailsJobsController extends MasterController
     public static function show( Request $request ){
     	#$where = ['id' => $request->id_vacante ];
     	#$response = self::$_model::show_model([],$where, new Listado );
-      $where = ['id' => $request->id_vacante, 'is_active' => 1, 'is_published' => null];
+      $where = ['id' => $request->id_vacante, 'is_active' => 1, 'is_published' => 1];
       $response = array_to_object(Listado::with('accounts','contractType','workingtimetype','estados')->where( $where )->get()->toArray());
       $accounts = ( isset( $response[0] ) && isset( $response[0]->accounts[0] ) )? $response[0]->accounts[0] : [];
       $contract_type = ( isset( $response[0] ) && isset( $response[0]->contract_type[0] ) )? $response[0]->contract_type[0] : [];
@@ -58,7 +58,7 @@ class DetailsJobsController extends MasterController
     			,'is_active' 			       => $response[0]->is_active
     			,'salary_max' 			     => $response[0]->salary_max
     			,'salary_min' 			     => $response[0]->salary_min
-    			,'salario' 			         => ($response[0]->salary_min || $response[0]->salary_max)? "$ ".$response[0]->salary_min."-".$response[0]->salary_max :"Salario no Mostrado"
+    			,'salario' 			         => ($response[0]->salary_min && $response[0]->salary_max)? "$ ".$response[0]->salary_min."-".$response[0]->salary_max :"Salario no Mostrado"
     			,'state_id' 			       => $response[0]->state_id
     			,'account_id' 			     => $accounts->id
     			,'account_name' 		     => $accounts->name

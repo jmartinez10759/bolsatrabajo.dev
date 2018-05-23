@@ -166,9 +166,13 @@ new Vue({
         var fields = {};
         axios.get(url,fields).then( response => {
 
-          this.datos = response.data.result;
-          this.pagination = response.data.result.pagination;
-          console.log( this.datos );
+          if( response.data.success == true){
+            this.datos = response.data.result;
+            this.pagination = response.data.result.pagination;
+            console.log( this.datos );
+          }else{
+              toastr.error( response.data.message, "Ningun Registro Encontrado" );
+          }
 
         });
 

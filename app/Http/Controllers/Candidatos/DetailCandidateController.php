@@ -238,8 +238,8 @@ class DetailCandidateController extends MasterController
          $url = public_path().'/images/profile/'.$archivo;
          #verificamos si el archivo existe y lo retornamos
          if ( file_exists( $url) ){
-            Session::put( ['profile' => "/images/profile/".$archivo ] );
-           return message( true, ['url_file' => "/images/profile/".$archivo ],"¡Trasaccion Exitosa.!" );
+            Session::put( ['profile' => "images/profile/".$archivo ] );
+           return message( true, ['url_file' => "images/profile/".$archivo ],"¡Trasaccion Exitosa.!" );
          }else{
            return message( false,[],"¡Ocurrio un error al subir el archivo.!" );
          }

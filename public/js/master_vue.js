@@ -18,7 +18,11 @@ var mixins = {
 
             axios.get( url, { params: fields }, csrf_token ).then(response => {
                 console.log( response.data.result );
-                this.datos = response.data.result;
+                if( response.data.success == true ){
+                  this.datos = response.data.result;
+                }else{
+                  toastr.error( response.data.message, "Ningun Registro Encontrado" );
+                }
 
             }).catch(error => {
                 toastr.error( error, expired );
@@ -60,7 +64,7 @@ var mixins = {
 
         },
         update_general: function( uri, url, modal ) {
-            
+
             axios.put(uri, this.fillKeep, csrf_token ).then(response => {
 
                 this.get_general(url,params, csrf_token );

@@ -22,7 +22,7 @@ class RequestUserModel extends Model
 		,'confirmed_code'
 		,'confirmed_nss'
     ];
-    
+
     public function description(){
         return $this->hasMany('App\Model\DetailCandidateModel','id_users','id');
     }

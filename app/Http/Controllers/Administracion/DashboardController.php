@@ -24,13 +24,14 @@ class DashboardController extends MasterController
     public static function index(){
 
     	$candidatos = array_to_object(RequestUserModel::with('description')->where(['id_rol' => 2])->get()->toArray());
-    	$data = [ 
-    		'menu' 			=> self::menus( [ 'id_rol' => Session::get('id_rol'), 'id_users' => Session::get('id') ] )
+      #debuger($candidatos);
+    	$data = [
+    		'menu' 			    => self::menus( [ 'id_rol' => Session::get('id_rol'), 'id_users' => Session::get('id') ] )
     		,'candidatos' 	=> count($candidatos)
     		#,'detalles'		=> $candidatos
     	];
     	return View( 'administracion.dashboard', $data );
-        
+
 	}
 	/**
 	 * Metodo para la consulta de los datos de trabajos
@@ -38,22 +39,28 @@ class DashboardController extends MasterController
 	 * @return json
 	 */
 	public static function show(){
-		
-		$trabajos =  JobsOffersModel::orderBy('id', 'DESC')->paginate(5);		
-		$detalles =  RequestUserModel::where( ['id_rol' => 2 ] )->orderBy('id', 'DESC')->paginate(4);
+
+    $where = ['is_active' => 1, 'is_published' => 1];
+		$trabajos =  JobsOffersModel::where( $where )->orderBy('id', 'DESC')->paginate(5);
+    #$trabajos = array_to_object(Listado::with('accounts','contractType','workingtimetype','estados')->where( $where )->orderBy('id', 'DESC')->paginate(5)->toArray() );
+    #debuger($trabajos);
+		#$detalles =  RequestUserModel::where( ['id_rol' => 2 ] )->orderBy('id', 'DESC')->paginate(4);
+		$detalles = array_to_object(RequestUserModel::with('description')->where(['id_rol' => 2])->paginate(4)->toArray());
+    #debuger( $detalles->data );
 		$fields['trabajos'] = data_march($trabajos);
-		$fields['detalles'] = data_march($detalles);
+		$fields['detalles'] = $detalles->data;
 		$fields['pagination']       =  [
-			'total'         => $trabajos->total()
-			,'current_page'  => $trabajos->currentPage()
-			,'per_page'      => $trabajos->perPage()
-			,'last_page'     => $trabajos->lastPage()
-			,'from'          => $trabajos->firstItem()
-			,'to'            => $trabajos->lastItem()
-        ];
+      			'total'          => $trabajos->total()
+      			,'current_page'  => $trabajos->currentPage()
+      			,'per_page'      => $trabajos->perPage()
+      			,'last_page'     => $trabajos->lastPage()
+      			,'from'          => $trabajos->firstItem()
+      			,'to'            => $trabajos->lastItem()
+      ];
+      #debuger($fields['detalles']);
     	return message( true,$fields,self::$message_success );
 
 	}
-	
+
 
 }

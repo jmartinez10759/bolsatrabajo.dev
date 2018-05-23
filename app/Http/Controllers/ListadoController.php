@@ -8,18 +8,24 @@ use App\Model\BlmEstadosModel;
 class ListadoController extends Controller
 {
 
+
+    private $_where;
+
+    public function __construct(){
+        $this->_where = ['is_active' => 1, 'is_published' => 1];
+    }
     /**
      *Metodo donde hace la consulta del listado de las vacantes
      *@access public
      *@param Request $request [ Description ]
      *@return void [ Description ]
      */
-    public function index(Request $request)
+    public function index( Request $request )
     {
         #SE REALIZA LA CONSULTA PARA LAS VACANTES.
-        $where = ['is_active' => 1, 'is_published' => null];
-        $tasks = Listado::where( $where )->orderBy('id', 'DESC')->paginate(3);
-        $response = array_to_object(Listado::with('accounts','contractType','workingtimetype','estados')->where( $where )->orderBy('id', 'DESC')->paginate(3)->toArray());
+        #$where = ['is_active' => 1, 'is_published' => null];
+        $tasks = Listado::where( $this->_where )->orderBy('id', 'DESC')->paginate(3);
+        $response = array_to_object(Listado::with('accounts','contractType','workingtimetype','estados')->where( $this->_where )->orderBy('id', 'DESC')->paginate(3)->toArray());
         #debuger($response);
         return [
             'pagination' => [

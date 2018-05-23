@@ -2,7 +2,7 @@
 
 @section('content')
 			<div class="clearfix"></div>
-			
+
 			<!-- Title Header Start -->
 			<section class="inner-header-title" style="background-image:url(http://via.placeholder.com/1920x850);">
 				<div class="container">
@@ -11,7 +11,7 @@
 			</section>
 			<div class="clearfix"></div>
 			<!-- Title Header End -->
-		
+
 		<!-- Candidate Profile Start -->
         <section class="detail-desc advance-detail-pr gray-bg">
             <div class="container white-shadow">
@@ -25,7 +25,7 @@
                     </div>
                     <div class="detail-status"><span>{{ $activo }}</span></div>
                 </div>
-				
+
                 <div class="row bottom-mrg">
                     <div class="col-md-12 col-sm-12">
                         <div class="advance-detail detail-desc-caption">
@@ -39,7 +39,7 @@
                         </div>
                     </div>
                 </div>
-				
+
                 <div class="row no-padd">
                     <div class="detail pannel-footer">
                         <div class="col-md-5 col-sm-5">
@@ -65,7 +65,7 @@
                         </div>
                     </div>
                 </div>
-				
+
             </div>
         </section>
         <section class="full-detail-description full-detail gray-bg">
@@ -90,7 +90,7 @@
 									<p>@{{datos.descripcion}}</p>
 								</div>
 								<!-- End About Sec -->
-								
+
 								<!-- Start Address Sec -->
 								<div id="address" class="tab-pane fade">
 									<h3>Detalles </h3>
@@ -106,7 +106,7 @@
 									</ul>
 								</div>
 								<!-- End Address Sec -->
-								
+
 								<!-- Start Job List -->
 								<div id="post-job" class="tab-pane fade">
 									<h3>Estas Postulado en {{$postulaciones}} Empleos</h3>
@@ -116,22 +116,22 @@
 												<div class="col-md-2 col-sm-2">
 													<div class="mng-company-pic"><img src="" class="img-responsive" alt=""></div>
 												</div>
-												
+
 												<div class="col-md-5 col-sm-5">
 													<div class="mng-company-name">
 														<h4>@{{postulacion.title}} -<span class="cmp-tagline"> @{{postulacion.name}}</span></h4><span class="cmp-time">10 Hour Ago</span></div>
 												</div>
-												
+
 												<div class="col-md-4 col-sm-4">
 													<div class="mng-company-location">
 														<p><i class="fa fa-map-marker"></i> </p>
 													</div>
 												</div>
-												
+
 												<!-- <div class="col-md-1 col-sm-1">
 													<div class="mng-company-action"><a href="#"><i class="fa fa-edit"></i></a><a href="#"><i class="fa fa-trash-o"></i></a></div>
 												</div> -->
-												
+
 											</div>
 											<span class="tg-themetag tg-featuretag">Premium</span>
 										</article>
@@ -163,7 +163,7 @@
 
 								</div>
 								<!-- End Job List -->
-								
+
 								<!-- Start Friend List -->
 								<!-- <div id="friends" class="tab-pane fade">
 									<div class="row">
@@ -177,7 +177,7 @@
 												</div><a href="#" title="" class="cndt-profile-btn">View Profile</a>
 											</div>
 										</div>
-										
+
 										<div class="col-md-4 col-sm-4">
 											<div class="manage-cndt">
 												<div class="cndt-status available">Available</div>
@@ -188,7 +188,7 @@
 												</div><a href="#" title="" class="cndt-profile-btn">View Profile</a>
 											</div>
 										</div>
-										
+
 										<div class="col-md-4 col-sm-4">
 											<div class="manage-cndt">
 												<div class="cndt-status pending">Pending</div>
@@ -199,7 +199,7 @@
 												</div><a href="#" title="" class="cndt-profile-btn">View Profile</a>
 											</div>
 										</div>
-										
+
 										<div class="col-md-4 col-sm-4">
 											<div class="manage-cndt">
 												<div class="cndt-status pending">Pending</div>
@@ -210,7 +210,7 @@
 												</div><a href="#" title="" class="cndt-profile-btn">View Profile</a>
 											</div>
 										</div>
-										
+
 										<div class="col-md-4 col-sm-4">
 											<div class="manage-cndt">
 												<div class="cndt-status available">Available</div>
@@ -221,7 +221,7 @@
 												</div><a href="#" title="" class="cndt-profile-btn">View Profile</a>
 											</div>
 										</div>
-										
+
 										<div class="col-md-4 col-sm-4">
 											<div class="manage-cndt">
 												<div class="cndt-status pending">Pending</div>
@@ -232,7 +232,7 @@
 												</div><a href="#" title="" class="cndt-profile-btn">View Profile</a>
 											</div>
 										</div>
-										
+
 										<div class="col-md-4 col-sm-4">
 											<div class="manage-cndt">
 												<div class="cndt-status pending">Pending</div>
@@ -243,7 +243,7 @@
 												</div><a href="#" title="" class="cndt-profile-btn">View Profile</a>
 											</div>
 										</div>
-										
+
 										<div class="col-md-4 col-sm-4">
 											<div class="manage-cndt">
 												<div class="cndt-status available">Available</div>
@@ -254,7 +254,7 @@
 												</div><a href="#" title="" class="cndt-profile-btn">View Profile</a>
 											</div>
 										</div>
-										
+
 										<div class="col-md-4 col-sm-4">
 											<div class="manage-cndt">
 												<div class="cndt-status pending">Pending</div>
@@ -265,7 +265,7 @@
 												</div><a href="#" title="" class="cndt-profile-btn">View Profile</a>
 											</div>
 										</div>
-										
+
 										<div class="row">
 											<ul class="pagination">
 												<li><a href="#">«</a></li>
@@ -280,7 +280,7 @@
 									</div>
 								</div> -->
 								<!-- End Friend List -->
-								
+
 								<!-- Start Message -->
 								<!-- <div id="messages" class="tab-pane fade">
 									<div class="inbox-body inbox-widget">
@@ -310,7 +310,7 @@
 												</div>
 											</div>
 										</div>
-										
+
 										<div class="mail-card unread">
 											<header class="card-header cursor-pointer collapsed" data-toggle="collapse" data-target="#meaages-2" aria-expanded="false">
 												<div class="card-title flexbox">
@@ -337,7 +337,7 @@
 												</div>
 											</div>
 										</div>
-										
+
 										<div class="mail-card">
 											<header class="card-header cursor-pointer collapsed" data-toggle="collapse" data-target="#meaages-3" aria-expanded="false">
 												<div class="card-title flexbox">
@@ -364,7 +364,7 @@
 												</div>
 											</div>
 										</div>
-										
+
 										<div class="mail-card">
 											<header class="card-header cursor-pointer collapsed" data-toggle="collapse" data-target="#meaages-4" aria-expanded="false">
 												<div class="card-title flexbox">
@@ -391,7 +391,7 @@
 												</div>
 											</div>
 										</div>
-										
+
 										<div class="mail-card unread">
 											<header class="card-header cursor-pointer collapsed" data-toggle="collapse" data-target="meaages-5" aria-expanded="false">
 												<div class="card-title flexbox">
@@ -418,7 +418,7 @@
 												</div>
 											</div>
 										</div>
-										
+
 										<div class="mail-card">
 											<header class="card-header cursor-pointer">
 												<div class="card-title flexbox">
@@ -490,28 +490,17 @@
 									</div>
 								</div> -->
 								<!-- End Message -->
-								
+
 								<!-- Start Settings -->
 								<div id="settings" class="tab-pane fade in active">
 									<div class="row no-mrg">
 										<div class="col-sm-12">
 											<h3>Editar Perfil</h3>
-											<!--<h1 v-if="datos.confirmed_nss == 0">fuck you</h1>
-   										<h1 v-else>jaja ;) :) xD</h1>-->
 
-											<div align="right" v-if="datos.confirmed_nss == 1">
-								                <label class="">¿Cuenta con NSS ?</label>
-								                    <input id="confirmed_nss" type="checkbox" v-model="datos.confirmed_nss" class="fantasma" checked >
-								            </div>
-								            <div align="right" v-else>
-								                <label class="">¿Cuenta con NSS ?</label>
-								                    <input id="confirmed_nss" type="checkbox" v-model="datos.confirmed_nss" class="fantasma" >
-								            </div>
 										</div>
-										
+
 										<!-- <div class="col-sm-6"></div> -->
 										<!-- text-transform: lowercase; -->
-
 										<div class="edit-pro">
 											<div class="col-md-4 col-sm-6">
 												<label>Nombre</label>
@@ -545,7 +534,7 @@
 												<label>Curp*</label>
 												<input type="text" id="curp" class="form-control" v-model="datos.curp" style="text-transform: uppercase;">
 											</div>
-											
+
 											<div class="col-md-4 col-sm-6">
 												<label>Cargo</label>
 												<input type="text" id="cargo" class="form-control" v-model="datos.cargo" style="text-transform: uppercase;">
@@ -559,14 +548,20 @@
 												<select class="form-control" v-model="datos.id_state">
 													<option v-for="estado in datos.estados" :value="estado.id">@{{estado.nombre}}</option>
 												</select>
-											</div> 
-										
+											</div>
+
 											<div class="col-md-4 col-sm-6">
 												<label>Nuevo Password</label>
 												<input type="password" class="form-control" v-model="datos.password">
 											</div>
-									
-											<div id="dvOcultar">
+
+											<div class="col-md-4 col-sm-6">
+												<label class="form-label">¿NUMERO DE SEGURO SOCIAL (NSS) ?</label>
+												<input v-if="datos.confirmed_nss == 1" id="confirmed_nss" type="checkbox" v-model="datos.confirmed_nss" class="fantasma" checked >
+												<input v-else id="confirmed_nss" type="checkbox" v-model="datos.confirmed_nss" class="fantasma" >
+											</div>
+
+											<!-- <div id="dvOcultar"> -->
 											<div class="col-md-4 col-sm-6" style="overflow-y:scroll; height:130px;" v-show="datos.confirmed_nss">
 												<table class="table table-responsive" id="table-nss">
 													<thead>
@@ -596,12 +591,25 @@
 												</table>
 
 											</div>
-										</div>
+										<!-- </div> -->
 
-											<div class="col-md-4 col-sm-6">
+											<div class="col-md-6 col-sm-6">
 												<label>Acerca de </label>
 												<textarea class="form-control" id="descripcion" v-model="datos.descripcion"></textarea>
 											</div>
+
+
+
+												<!-- <div align="right" class="">
+															<label class="checkbox-inline">
+
+																¿NUMERO DE SEGURO SOCIAL (NSS) ?
+																<input v-if="datos.confirmed_nss == 1" id="confirmed_nss" type="checkbox" v-model="datos.confirmed_nss" class="fantasma" checked >
+																<input v-else id="confirmed_nss" type="checkbox" v-model="datos.confirmed_nss" class="fantasma" >
+
+															</label>
+
+												</div> -->
 											<!-- <div class="col-md-4 col-sm-6">
 												<label>Subir Foto de Perfil</label>
 												<form action="/upload-target" class="dropzone dz-clickable profile-pic">
@@ -611,7 +619,7 @@
 													</div>
 												</form>
 											</div> -->
-											
+
 											<!-- <div class="col-md-4 col-sm-6">
 												<label>Upload Profile Cover</label>
 												<form action="/upload-target" class="dropzone dz-clickable profile-cover">
@@ -640,7 +648,7 @@
 									        </button>
 									      </div>
 									      <div class="modal-body">
-									        	
+
 									        	<form class="form-horizontal">
 									        		<div class="form-group">
 										                <label for="" class="col-md-4 control-label">NSS</label>
@@ -671,7 +679,7 @@
 									        </button>
 									      </div>
 									      <div class="modal-body">
-									        	
+
 									        	<form class="form-horizontal">
 									        		<div class="form-group">
 										                <label for="" class="col-md-4 control-label">NSS</label>
@@ -712,11 +720,11 @@
 									      </div>
 									    </div>
 									  </div>
-									</div>										
+									</div>
 
 							</div>
 							<!-- Start All Sec -->
-						</div>  
+						</div>
                     </div>
                 </div>
             </div>
@@ -734,9 +742,7 @@
 <script type="text/javascript" src="{{asset('js/candidatos/details_candidate.js')}}" ></script>
 <script type="text/javascript">
 
-
-	$(function(){
-		
+  $().ready(function(){
 
 		$('.fantasma').change(function(){
 	  	if(!$(this).prop('checked')){
@@ -744,9 +750,10 @@
 	    }else{
 	    	$('#dvOcultar').show();
 	    }
-	  
-	  })
 
-	})
+	  });
+
+	});
+
 </script>
 @endpush

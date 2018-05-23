@@ -2,9 +2,9 @@
 @section('content')
 @push('styles')
 @endpush
-		  
+
 <div id="wrapper" class="vue_candidate_admin">
-	
+
 	<div id="page-wrapper" >
 		 <div class="row bg-title">
 			<div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
@@ -17,7 +17,7 @@
 				</ol>
 			</div>
 			<!-- /.col-lg-12 -->
-	</div>              
+	</div>
 		 <!-- /. ROW  -->
 		<div id="page-inner">
 		   <div class="row">
@@ -38,9 +38,9 @@
 									</div>
 								</div>
 							</div>
-							
+
 							<div class="row no-ext-mrg">
-								
+
 								<div class="col-sm-offset-9">
 									<button type="button" class="btn btn-success btn-lg" data-toggle="modal" data-target="#modal_insert"> Agregar Candidato </button>
 								</div>
@@ -55,7 +55,7 @@
 											</div>
 										</div>
 										<div class="candidate-img"  >
-											<img src="" class="img-circle img-responsive" alt="">
+											<img :src="detalle.photo" class="img-circle img-responsive" alt="">
 										</div>
 										<div class="candidate-caption">
 											<h4>@{{ detalle.name }} @{{ detalle.first_surname }} @{{ detalle.second_surname }} </h4>
@@ -63,15 +63,15 @@
 
 										</div>
 										<div class="candidate-footer">
-											<span class="can-status" v-if="detalle.status == 1"> 
+											<span class="can-status" v-if="detalle.status == 1">
 											Activo</span>
-											<span class="can-status" v-else> 
+											<span class="can-status" v-else>
 											Desactivado</span>
 											<!-- <span class="can-type"><b>92%</b> Match</span> -->
 										</div>
 									</div>
 								</div>
-								
+
 								<!--<div class="row">
 										<ul class="pagination">
 											<li v-if="pagination.current_page > 1 ">
@@ -103,8 +103,8 @@
 						</div>
 					</div>
 				</div>
-			</div>       
-			 <!-- /. ROW  -->           
+			</div>
+			 <!-- /. ROW  -->
 		</div>
 		 <!-- /. PAGE INNER  -->
 	</div>
@@ -122,10 +122,10 @@
         </button>
       </div>
       <div class="modal-body">
-       
+
 
       	<form>
-		  
+
 		  <div class="form-group col-sm-6">
 		    <label for="">Nombre</label>
 		    <input type="text" class="form-control" id="name" v-model="newKeep.name" style="text-transform: uppercase;">
@@ -185,9 +185,9 @@
 		  <div class="form-group ">
 			  	<label for="">Acerca de </label>
 			  	<textarea class="form-control" id="description" v-model="newKeep.descripcion" ></textarea>
-                
+
           </div>
-		
+
 		</form>
 
       </div>

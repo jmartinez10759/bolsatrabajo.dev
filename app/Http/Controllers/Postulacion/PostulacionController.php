@@ -58,6 +58,7 @@ class PostulacionController extends MasterController
         $insert_nss                 = self::store_social_security_numbers( $insert_persons, $nss_bolsa, $list_vacantes );
         $account_person_insert      = self::store_accounts_persons($insert_persons,$list_vacantes,$users_cv,$desc_users );
         $insert_candidate           = self::store_candidates( $account_person_insert );
+        debuger($insert_candidate);
         $insert_candidate_jobs      = self::_store_candidate_jobs_offers( $insert_candidate, $request );
         $insert_persons_employments = self::_insert_persons_employments( $jobs_candidatos,$insert_persons, $users_cv );
         $data = ['id_users' => Session::get('id'), 'id_vacante' => $request->id_vacante];
@@ -210,20 +211,19 @@ class PostulacionController extends MasterController
   public static function store_candidates( $account_person_insert ){
 
         	$data_candidate = [
-    			'account_person_id'		=> $account_person_insert->id
-    			,'user_id'				=> null
-    			,'assigned_to_user_id'	=> null
-    			,'candidate_source_id'	=> null
-    			,'mark_id'				=> null
-    			,'photo_dir'			=> null
-    			,'photo'				=> null
-    			,'score'				=> null
-    			,'is_filed'				=> null
-    			,'deleted'				=> null
-    			,'created'				=> null
-    			,'modified'				=> null
+    			'account_person_id'		   => $account_person_insert->id
+    			,'user_id'				       => null
+    			,'assigned_to_user_id'	 => null
+    			,'candidate_source_id'	 => null
+    			,'mark_id'				       => null
+    			,'photo_dir'			       => null
+    			,'photo'				         => null
+    			,'score'				         => null
+    			,'is_filed'				       => null
+    			,'deleted'				       => null
+    			,'created'				       => null
+    			,'modified'				       => null
     		];
-    		#$data_employee = [];
     		return self::$_model::insert_model([$data_candidate], new CandidatoModel)[0];
 
     }
@@ -237,7 +237,7 @@ class PostulacionController extends MasterController
   private static function _store_candidate_jobs_offers( $insert_candidate, $request ){
 
     	$data_candidate_offers = [
-          'candidate_id'			       	 => $insert_candidate->id
+          'candidate_id'			       	=> $insert_candidate->id
           ,'job_offer_id'			        => $request->id_vacante
           ,'recruitment_stage_id'	    => null
           ,'created_by_user_id'	      => null

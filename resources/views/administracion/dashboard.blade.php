@@ -2,7 +2,7 @@
 @section('content')
 @push('styles')
 @endpush
-			
+
 <div id="page-wrapper" class="vue_dashboard">
 
 	<div class="row bg-title">
@@ -15,11 +15,11 @@
 			</ol>
 		</div>
 		<!-- /.col-lg-12 -->
-	</div>              
+	</div>
 	 <!-- /. ROW  -->
 	<div id="page-inner">
 	    <div class="row bott-wid">
-			
+
 			<div class="col-md-3 col-sm-6">
 				<div class="widget unique-widget">
 					<div class="row">
@@ -132,24 +132,25 @@
 					<div class="full-followers" v-for="details in datos.detalles ">
 
 						<a href="">
-							<div class="user-img">
-								<img src="assets/img/img-1.jpg" alt="user" class="img-circle">
+							<div class="user-img" v-for="description in details.description">
+								<img :src="description.photo" alt="user" class="img-circle" v-if="description.photo">
+								<img src="images/profile/profile.png" alt="user" class="img-circle" v-else>
 								<span class="profile-status online pull-right"></span>
 								<i class="fa fa-circle active" aria-hidden="true"></i>
 							</div>
 							<div class="message-content">
 							<h5>@{{ details.name }} @{{ details.first_surname }} @{{ details.second_surname }} </h5>
-							
+
 							<span class="mail-desc" v-for="description in details.description">@{{ description.cargo }}</span>
-							
-							<span class="time">@{{details.status}}</span>
+							<span class="time" v-if="details.status">ACTIVO</span>
+							<span class="time" v-else>DESACTIVADO</span>
 							</div>
 						</a>
 					</div>
 				</div>
 			</div>
 
-			
+
 		</div>
 
 		<div class="row">
@@ -180,7 +181,7 @@
 	</div>
 </div>
  <!-- /. PAGE WRAPPER  -->
-			
+
 @stop
 @push('scripts')
 	<script type="text/javascript" src="{{asset('js/candidatos/admin_dashboard.js')}}" ></script>
