@@ -139,15 +139,14 @@ new Vue({
         var url = domain('details/show');
         var fields = {};
         axios.get(url,fields).then( response => {
-
           //console.log( response.data.result );return;
           this.datos = response.data.result;
           this.pagination = response.data.result.pagination;
-          if (response.data.result.nss.length > 0   ) {
-              $('#dvOcultar').show();
-          }else {
-              $('#dvOcultar').hide();
-          }
+          // if (response.data.result.nss.length > 0   ) {
+          //     $('#dvOcultar').show();
+          // }else {
+          //     $('#dvOcultar').hide();
+          // }
         });
 
     },

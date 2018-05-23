@@ -21,7 +21,7 @@ var mixins = {
                 if( response.data.success == true ){
                   this.datos = response.data.result;
                 }else{
-                  toastr.error( response.data.message, "Ningun Registro Encontrado" );
+                    //toastr.error( response.data.message, "Ningun Registro Encontrado" );
                 }
 
             }).catch(error => {

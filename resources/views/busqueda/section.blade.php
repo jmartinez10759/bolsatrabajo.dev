@@ -13,14 +13,14 @@
 									<input type="text" ame="localidad" class="form-control" placeholder="Ubicación">
 								</div>
 								<div class="col-md-3 col-sm-3">
-									  <select class="form-control" name="edo" required>
-											    <option selected disabled>Seleccione su ciudad</option>
-											    @forelse(App\Model\BlmEstadosModel::all() as $edo)
-						                        <option value="{!! $edo->id !!}">{!! $edo->nombre !!}</option>
-						                        @empty
-						                        <option value="" selected disabled>No hay registros</option>
-						                        @endforelse
-						                    </select>
+									  <select class="form-control" name="edo">
+										    <option selected disabled>Seleccione su ciudad</option>
+										    @forelse(App\Model\BlmEstadosModel::all() as $edo)
+                        <option value="{!! $edo->id !!}">{!! $edo->nombre !!}</option>
+                        @empty
+                        <option value="" selected disabled>No hay registros</option>
+                        @endforelse
+			              </select>
 								</div>
 								<input type="hidden" name="utilisateur" value="{{ Session::get('id')}}">
 								<div class="col-md-2 col-sm-2">

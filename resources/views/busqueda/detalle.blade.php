@@ -149,6 +149,7 @@
 	           <input type="hidden" id="curp" v-model="newKeep.curp">
 	           <input type="hidden" id="nss" v-model="newKeep.nss"> -->
         	</div>
+					<button type="button" class="btn btn-danger" data-dismiss="modal"> Cancelar </button>
         	<button type="button" class="btn btn-success" v-on:click.prevent="postulacion()" id="btn_condiciones">Aceptar Terminos</button>
         </div>
       </div>
