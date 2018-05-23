@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Candidatos;
 
+use App\Listado; #tabla buro
 use App\Model\BlmNssModel;
 use Illuminate\Http\Request;
 use App\Model\BlmEstadosModel;
@@ -54,11 +55,12 @@ class DetailCandidateController extends MasterController
 
         $where = ['id_users' => Session::get('id')];
         $response       =  self::$_model::show_model( [], $where, new DetailCandidateModel);
-        $postulaciones  =  BlmPostulateCandidateModel::where($where)->paginate(3);
+        #$postulaciones  =  BlmPostulateCandidateModel::where( $where )->paginate(3);
+        $postulaciones  =  BlmPostulateCandidateModel::with('usuarios','vacantes')->where( $where )->paginate(3);
         $candidato      =  self::$_model::show_model( [], ['id' => Session::get('id')], new RequestUserModel);
         $estados        =  self::$_model::show_model( [], [], new BlmEstadosModel);
         $blm_nss        =  self::$_model::show_model( [], $where, new BlmNssModel);
-        #debuger($postulaciones);
+        #debuger($postulaciones[0]->vacantes);
         $data = [
             'name'              =>  Session::get('name')
             ,'first_surname'    =>  Session::get('first_surname')
@@ -100,6 +102,7 @@ class DetailCandidateController extends MasterController
             $fields['estados']          =  $estados;
             $fields['nss']              =  $blm_nss;
             $fields['postulaciones']    =  self::_postulaciones( $postulaciones );
+            #$fields['postulaciones']    =  $postulaciones;
             $fields['pagination']       =  [
                  'total'         => $postulaciones->total()
                 ,'current_page'  => $postulaciones->currentPage()
@@ -211,7 +214,7 @@ class DetailCandidateController extends MasterController
         }
         for ($i=0; $i < count( $request ); $i++) {
             $where = ['id' => $request[$i]->id_vacante];
-            $postulacion[] = self::$_model::show_model([],$where,new JobsOffersModel)[0];
+            $postulacion[] = self::$_model::show_model([],$where,new Listado)[0];
         }
         return $postulacion;
 

@@ -126,9 +126,8 @@
 </section>
 <!-- Job full detail End -->
 <!-- Modal -->
-  <div class="modal fade" id="terminos" role="dialog">
+  <div class="modal fade" id="terminos" role="dialog" data-backdrop="static" data-keyboard="false" >
     <div class="modal-dialog modal-lg">
-
       <!-- Modal content-->
       <div class="modal-content">
         <div class="modal-header">

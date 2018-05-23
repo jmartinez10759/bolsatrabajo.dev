@@ -119,7 +119,7 @@
 
 												<div class="col-md-5 col-sm-5">
 													<div class="mng-company-name">
-														<h4>@{{postulacion.title}} -<span class="cmp-tagline"> @{{postulacion.name}}</span></h4><span class="cmp-time">10 Hour Ago</span></div>
+														<h4>@{{postulacion.name}}<span class="cmp-tagline"></span></h4><span class="cmp-time"></span></div>
 												</div>
 
 												<div class="col-md-4 col-sm-4">

@@ -16,7 +16,7 @@ use App\Http\Controllers\Auth\AuthController;
 
 class CandidatosController extends MasterController
 {
-    
+
 
 	public function __construct(){
 		#parent::__construct();
@@ -33,7 +33,7 @@ class CandidatosController extends MasterController
 
 	}
 	/**
-	 *Se crea un metodo donde se realiza la parte de inserccion 
+	 *Se crea un metodo donde se realiza la parte de inserccion
 	 *@access public
 	 *@param Request $request
 	 *@return void
@@ -74,7 +74,7 @@ class CandidatosController extends MasterController
 			#envio de correo para validar si existe el correo antes ingresado.
 		    Mail::send('emails.confirmation_code', $data, function($message) use ($data) {
 		        $message->to($data['email'], $data['name'])
-		        		->from('jorge.martinez@burolaboralmexico.com','Buro Laboral Mexico')
+		        		->from('notificaciones@burolaboralmexico.com.mx','Buro Laboral México')
 		        		->subject('Por favor confirma tu correo');
 		    });
 
@@ -97,12 +97,12 @@ class CandidatosController extends MasterController
 		foreach ($request as $key => $value) {
 
 			if ($key == 'pass' || $key == "passwordConfirm") {
-				
+
 				if ( $request['pass'] != $request['passwordConfirm']) {
 					 echo message(false,[],'Password');
 					 die();
 				}
-				
+
 				if ( strlen($request[$key]) < 6 ) {
 					echo message(false,[],'La longitud del password debe de ser mayor a 6');
 					die();
@@ -112,7 +112,7 @@ class CandidatosController extends MasterController
 
 		}
 		return true;
-	
+
 	}
 
 

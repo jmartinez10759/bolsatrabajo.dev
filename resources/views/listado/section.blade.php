@@ -125,7 +125,9 @@
 									<div class="col-md-6 col-sm-5">
 										<div class="brows-job-position">
 											<h3>@{{ data.name }}</h3>
-											<p><span>@{{ data.accounts[0].name }}</span><span class="brows-job-sallery"><i class="fa fa-money"></i>$@{{ data.salary_min }} - @{{ data.salary_max }}</span></p>
+											<p><span>@{{ data.accounts[0].name }}</span>
+												<span class="brows-job-sallery"><i class="fa fa-money"></i>$@{{ data.salary_min }} - @{{ data.salary_max }}</span>
+											</p>
 										</div>
 									</div>
 

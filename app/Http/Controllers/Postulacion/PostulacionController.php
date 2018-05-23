@@ -50,7 +50,7 @@ class PostulacionController extends MasterController
     	$response_curp = self::$_model::show_model([],['curp' => $desc_users[0]->curp], new PersonModel);
     	$list_vacantes = self::$_model::show_model([],['id' => $request->id_vacante], new Listado);
     	$jobs_candidatos = self::$_model::show_model([],['id_cv' => $users_cv[0]->id], new BlmJobsModel);
-    	#debuger($jobs_candidatos);
+    	#debuger($response_curp);
       $error = null;
       DB::beginTransaction();
       try {
@@ -58,7 +58,7 @@ class PostulacionController extends MasterController
         $insert_nss                 = self::store_social_security_numbers( $insert_persons, $nss_bolsa, $list_vacantes );
         $account_person_insert      = self::store_accounts_persons($insert_persons,$list_vacantes,$users_cv,$desc_users );
         $insert_candidate           = self::store_candidates( $account_person_insert );
-        debuger($insert_candidate);
+        #debuger($insert_candidate);
         $insert_candidate_jobs      = self::_store_candidate_jobs_offers( $insert_candidate, $request );
         $insert_persons_employments = self::_insert_persons_employments( $jobs_candidatos,$insert_persons, $users_cv );
         $data = ['id_users' => Session::get('id'), 'id_vacante' => $request->id_vacante];
@@ -114,8 +114,8 @@ class PostulacionController extends MasterController
         	$data_table_person['state_id'] = $desc_users[0]->id_state;
         	#debuger($response_curp);
         	if ($response_curp) {
-        		$where = ['id' => $response_curp[0]->id];
-    			return self::$_model::update_model( $where ,$data_table_person ,new PersonModel)[0];
+        		   $where = ['id' => $response_curp[0]->id];
+    			     return self::$_model::update_model( $where ,$data_table_person ,new PersonModel)[0];
         	}
     		return self::$_model::insert_model( [$data_table_person] ,new PersonModel)[0];
 
@@ -171,33 +171,39 @@ class PostulacionController extends MasterController
      *@return array [Description]
      */
   public static function store_accounts_persons( $insert_persons, $list_vacantes, $users_cv, $desc_users ){
-    		#se realiza la inserccion a la tabla de accounts_persons
+        $where = [ 'person_id' => $insert_persons->id, 'account_id' => $list_vacantes[0]->account_id ];
+        $select_account_persons = self::$_model::show_model( [], $where, new AccountsPersonsModel);
+        #debuger($select_account_persons[0]);
+        if ($select_account_persons) {
+           return $select_account_persons[0];
+        }
+        #se realiza la inserccion a la tabla de accounts_persons
     		$data_accounts_persons = [
-    			'person_id' 			=> $insert_persons->id
-    			,'account_id' 			=> $list_vacantes[0]->account_id
-    			,'type_id' 				=> null
-    			,'blood_type_id' 		=> null
-    			,'state_id' 			=> $users_cv[0]->id_state
-    			,'marital_status_id' 	=> null
-    			,'image_file_name' 		=> null
-    			,'phone_number' 		=> $users_cv[0]->telefono
-    			,'mobile_phone_number' 	=> $users_cv[0]->telefono
-    			,'street' 				=> null
-    			,'neighborhood' 		=> null
-    			,'municipality' 		=> null
-    			,'postal_code' 			=> $desc_users[0]->codigo
-    			,'email' 				=> $users_cv[0]->email
-    			,'is_wrong_email' 		=> null
-    			,'website_url' 			=> null
-    			,'facebook_url' 		=> null
-    			,'linkedin_url' 		=> null
-    			,'googleplus_url' 		=> null
-    			,'skype_url' 			=> null
-    			,'twitter_url' 			=> null
-    			,'youtube_url' 			=> null
-    			,'is_deleted' 			=> null
-    			,'created' 				=> null
-    			,'modified' 			=> null
+    			'person_id' 			        => $insert_persons->id
+    			,'account_id' 			      => $list_vacantes[0]->account_id
+    			,'type_id' 				        => null
+    			,'blood_type_id' 		      => null
+    			,'state_id' 			        => $users_cv[0]->id_state
+    			,'marital_status_id' 	    => null
+    			,'image_file_name' 		    => null
+    			,'phone_number' 		      => $users_cv[0]->telefono
+    			,'mobile_phone_number' 	  => $users_cv[0]->telefono
+    			,'street' 				        => null
+    			,'neighborhood' 		      => null
+    			,'municipality' 		      => null
+    			,'postal_code' 			      => $desc_users[0]->codigo
+    			,'email' 				          => $users_cv[0]->email
+    			,'is_wrong_email' 		    => null
+    			,'website_url' 			      => null
+    			,'facebook_url' 		      => null
+    			,'linkedin_url' 		      => null
+    			,'googleplus_url' 		    => null
+    			,'skype_url' 			        => null
+    			,'twitter_url' 			      => null
+    			,'youtube_url' 			      => null
+    			,'is_deleted' 			      => null
+    			,'created' 				        => null
+    			,'modified' 			        => null
     		];
     		return self::$_model::insert_model([$data_accounts_persons],new AccountsPersonsModel)[0];
 
@@ -209,20 +215,20 @@ class PostulacionController extends MasterController
      *@return array [Description]
      */
   public static function store_candidates( $account_person_insert ){
-
+          #debuger($account_person_insert);
         	$data_candidate = [
-    			'account_person_id'		   => $account_person_insert->id
-    			,'user_id'				       => null
-    			,'assigned_to_user_id'	 => null
-    			,'candidate_source_id'	 => null
-    			,'mark_id'				       => null
-    			,'photo_dir'			       => null
-    			,'photo'				         => null
-    			,'score'				         => null
-    			,'is_filed'				       => null
-    			,'deleted'				       => null
-    			,'created'				       => null
-    			,'modified'				       => null
+        			'account_person_id'		   => $account_person_insert->id
+        			,'user_id'				       => null
+        			,'assigned_to_user_id'	 => null
+        			,'candidate_source_id'	 => null
+        			,'mark_id'				       => null
+        			,'photo_dir'			       => null
+        			,'photo'				         => null
+        			,'score'				         => null
+        			,'is_filed'				       => null
+        			,'deleted'				       => null
+        			,'created'				       => date('Y-m-d')
+        			,'modified'				       => date('Y-m-d')
     		];
     		return self::$_model::insert_model([$data_candidate], new CandidatoModel)[0];
 

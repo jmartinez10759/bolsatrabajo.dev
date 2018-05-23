@@ -15,7 +15,7 @@ class PasswordController extends MasterController
         parent::__construct();
     }
     /**
-     *Metodo para obtener la vista y cargar los datos 
+     *Metodo para obtener la vista y cargar los datos
      *@access public
      *@param Request $request [Description]
      *@return void
@@ -32,10 +32,10 @@ class PasswordController extends MasterController
      */
     public static function show( Request $request ){
 
-        
+
     }
     /**
-     *Metodo para 
+     *Metodo para
      *@access public
      *@param Request $request [Description]
      *@return void
@@ -51,11 +51,11 @@ class PasswordController extends MasterController
     		$update_response = self::$_model::update_model($where,$data, new RequestUserModel);
     		if ($update_response) {
     			$send_response = object_to_array($update_response[0]);
-    			$send_response['new_password'] = $new_password;	
+    			$send_response['new_password'] = $new_password;
 	    		#envio de correo para validar si existe el correo antes ingresado.
 			    Mail::send('emails.reset_password', $send_response, function($message) use ( $send_response ) {
 			        $message->to( $send_response['email'], $send_response['name'] )
-			        		->from('jorge.martinez@burolaboralmexico.com','Buro Laboral Mexico')
+			        		->from('notificaciones@burolaboralmexico.com.mx','Buro Laboral México')
 			        		->subject('Cambio de Contraseña');
 			    });
 	    		return message(true,$response_token,"¡Su cambio de contraseña se le envio a su correo!");
@@ -65,7 +65,7 @@ class PasswordController extends MasterController
     	}
 
     	return message(false,[],"¡Ocurrio un error, favor de verificar el correo.!");
-        
+
 
     }
     /**
@@ -87,7 +87,7 @@ class PasswordController extends MasterController
 
     	return redirect("/");*/
 
-        
+
     }
     /**
      *Metodo para la actualizacion de los registros
@@ -97,7 +97,7 @@ class PasswordController extends MasterController
      */
     public static function update( Request $request){
 
-        
+
     }
     /**
      *Metodo para borrar el registro
@@ -107,6 +107,6 @@ class PasswordController extends MasterController
      */
     public static function destroy( $id ){
 
-        
+
     }
 }
