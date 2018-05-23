@@ -557,8 +557,9 @@
 
 											<div class="col-md-4 col-sm-6">
 												<label class="form-label">¿NUMERO DE SEGURO SOCIAL (NSS) ?</label>
-												<input v-if="datos.confirmed_nss == 1" id="confirmed_nss" type="checkbox" v-model="datos.confirmed_nss" class="fantasma" checked >
-												<input v-else id="confirmed_nss" type="checkbox" v-model="datos.confirmed_nss" class="fantasma" >
+												<input id="confirmed_nss" type="checkbox" v-model="datos.confirmed_nss" class="">
+												<!-- <input v-if="datos.confirmed_nss == 1" id="confirmed_nss" type="checkbox" v-model="datos.confirmed_nss" class="fantasma"> -->
+												<!-- <input v-else id="confirmed_nss" type="checkbox" v-model="datos.confirmed_nss" class="fantasma"> -->
 											</div>
 
 											<!-- <div id="dvOcultar"> -->
@@ -741,19 +742,17 @@
 @push('scripts')
 <script type="text/javascript" src="{{asset('js/candidatos/details_candidate.js')}}" ></script>
 <script type="text/javascript">
-
-  $().ready(function(){
-
-		$('.fantasma').change(function(){
-	  	if(!$(this).prop('checked')){
-	    	$('#dvOcultar').hide();
-	    }else{
-	    	$('#dvOcultar').show();
-	    }
-
-	  });
-
-	});
-
+  // $().ready(function(){
+	//
+	// 	$('.fantasma').change(function(){
+	//   	if(!$(this).prop('checked')){
+	//     	$('#dvOcultar').hide();
+	//     }else{
+	//     	$('#dvOcultar').show();
+	//     }
+	//
+	//   });
+	//
+	// });
 </script>
 @endpush
