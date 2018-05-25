@@ -88,13 +88,28 @@ new Vue({
         //console.log(this.newKeep);return;
         this.newKeep.photo = $('#url_file').val();
         //console.log(this.newKeep);return;
+        if ( this.newKeep.descripcion == "") {
+            toastr.error( validate ,"Descripcion Vacia" );
+            $('#descripcion').parent().addClass('has-error');
+            return;
+        }
+
         if ( !curpValida( convert_letters( this.newKeep.curp,'UPPER') ) ) {
             toastr.error( validate ,"Curp Incorrecto" );
             $('#curp').parent().addClass('has-error');
             return;
         }
+
         this.insert_general(url, refresh, function( object ){
           $('#upload_cv').show('slow');
+          $('#btn_update_candidato').hide();
+          $('#btn_editar_candidato').show();
+          $('#btn_cancel_candidato').hide();
+          var inputs = ['nombre','primer_apellido','segundo_apellido','telefono','codigo','direccion','curp','estados','contraseña','confirmed_nss','descripcion'];
+          for (var i = 0; i < inputs.length; i++) {
+              $('#'+inputs[i]).attr('disabled',true);
+          }
+
         },function(){ });
 
     },
@@ -135,18 +150,12 @@ new Vue({
     },
     consulta_general: function(){
 
-        //var url = ('details/show');
         var url = domain('details/show');
         var fields = {};
         axios.get(url,fields).then( response => {
           //console.log( response.data.result );return;
           this.datos = response.data.result;
           this.pagination = response.data.result.pagination;
-          // if (response.data.result.nss.length > 0   ) {
-          //     $('#dvOcultar').show();
-          // }else {
-          //     $('#dvOcultar').hide();
-          // }
         });
 
     },
@@ -192,7 +201,39 @@ new Vue({
 //se realiza la carga de la foto del candidato.
 var upload_url = domain('details/upload');
 upload_file('',upload_url,1,'.jpg,.png',function( object ){
-    $('#url_file').val( object.result.url_file );
-    $('#modal-upload').modal('hide');
-    //redirect('details');
+    $('#url_file').val( domain(object.result.url_file) );
+    //$('#imagen').attr('src',false);
+    //$('#imagen').attr('src', domain(object.result.url_file) );
+    //$('#modal-upload').modal('hide');
+    //alert(  domain(object.result.url_file) );
+    redirect('details');
 });
+
+$('#btn_editar_candidato').click(function(){
+    $('#btn_update_candidato').show();
+    $('#btn_cancel_candidato').show();
+    $(this).hide();
+    var inputs = ['nombre','primer_apellido','segundo_apellido','telefono','codigo','direccion','curp','estados','contraseña','confirmed_nss','descripcion'];
+    for (var i = 0; i < inputs.length; i++) {
+        $('#'+inputs[i]).attr('disabled',false);
+    }
+});
+
+$('#btn_cancel_candidato').click(function(){
+    $('#btn_update_candidato').hide();
+    $('#btn_editar_candidato').show();
+    $(this).hide();
+    var inputs = ['nombre','primer_apellido','segundo_apellido','telefono','codigo','direccion','curp','estados','contraseña','confirmed_nss','descripcion'];
+    for (var i = 0; i < inputs.length; i++) {
+        $('#'+inputs[i]).attr('disabled',true);
+    }
+});
+
+
+  $('#btn_update_candidato').hide();
+  $('#btn_cancel_candidato').hide();
+  $('#btn_editar_candidato').show();
+  var inputs = ['nombre','primer_apellido','segundo_apellido','telefono','codigo','direccion','curp','estados','contraseña','confirmed_nss','descripcion'];
+  for (var i = 0; i < inputs.length; i++) {
+    $('#'+inputs[i]).attr('disabled',true);
+  }

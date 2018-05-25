@@ -26,7 +26,6 @@ class DetailCandidateController extends MasterController
      *@return void
      */
     public static function index(){
-
         #$where = ['id_users' => Session::get('id') ];
         $users          =  RequestUserModel::find( Session::get('id') );
         $details        = data_march( $users->description );
@@ -39,6 +38,7 @@ class DetailCandidateController extends MasterController
             ,'activo'         =>  ( Session::get('status') != false )? "Activo": "Desactivado"
             ,'postulaciones'  =>  count($postulaciones)
             ,'curriculum'     =>  ( $details || count($curriculum) )? 'style=display:block' : 'style=display:none'
+            ,'leyenda'        =>  ( count($curriculum) )? 'Editar Curriculum' : 'Crear Curriculum'
             ,'administrador'  =>  ( $users->id_rol == 1 ) ? 'style=display:block' : 'style=display:none'
         ];
 
@@ -55,7 +55,7 @@ class DetailCandidateController extends MasterController
 
         $where = ['id_users' => Session::get('id')];
         $response       =  self::$_model::show_model( [], $where, new DetailCandidateModel);
-        #$postulaciones  =  BlmPostulateCandidateModel::where( $where )->paginate(3);
+        $curriculum     =  self::$_model::show_model( [], $where, new BlmCurriculumModel);
         $postulaciones  =  BlmPostulateCandidateModel::with('usuarios','vacantes')->where( $where )->paginate(3);
         $candidato      =  self::$_model::show_model( [], ['id' => Session::get('id')], new RequestUserModel);
         $estados        =  self::$_model::show_model( [], [], new BlmEstadosModel);
@@ -102,7 +102,7 @@ class DetailCandidateController extends MasterController
             $fields['estados']          =  $estados;
             $fields['nss']              =  $blm_nss;
             $fields['postulaciones']    =  self::_postulaciones( $postulaciones );
-            #$fields['postulaciones']    =  $postulaciones;
+            $fields['curriculum']       =  count($curriculum);
             $fields['pagination']       =  [
                  'total'         => $postulaciones->total()
                 ,'current_page'  => $postulaciones->currentPage()
@@ -235,7 +235,7 @@ class DetailCandidateController extends MasterController
             $extension      = strtolower($files[$i]->getClientOriginalExtension());
             $archivo        = Session::get('id').".".$extension;
             $path           = public_path()."/images/profile/";
-            #chmod( $path,0755 );
+            #chmod( $path,0775 );
             $files[$i]->move($path,$archivo);
         }
          $url = public_path().'/images/profile/'.$archivo;

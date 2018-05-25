@@ -16,12 +16,11 @@
         <section class="detail-desc advance-detail-pr gray-bg">
             <div class="container white-shadow">
                 <div class="row">
-                    <div class="detail-pic"><img src="{{ $photo_profile }}" class="img" alt="" />
-                    	<a data-toggle="modal" data-target="#modal-upload"  style="cursor: pointer;" class="detail-edit" title="Cargar foto">
-                    		<i class="fa fa-pencil"></i>
-                    	</a>
-
-
+                    <div class="detail-pic">
+												<img src="{{ $photo_profile }}" class="img" alt="img" id="imagen"/>
+	                    	<a data-toggle="modal" data-target="#modal-upload"  style="cursor: pointer;" class="detail-edit" title="Cargar foto">
+	                    		<i class="fa fa-pencil"></i>
+	                    	</a>
                     </div>
                     <div class="detail-status"><span>{{ $activo }}</span></div>
                 </div>
@@ -53,20 +52,20 @@
                         </div>
                         <div class="col-md-12 col-sm-12">
 														<div class="detail-pannel-footer-btn pull-right">
-															<a href="{{ route('dashboard') }}" class=" footer-btn btn btn-primary" title="" {{ $administrador }}>
+															<a href="{{ route('dashboard') }}" class=" footer-btn btn btn-warning btn-lg " title="" {{ $administrador }}>
                            			Portal Administracion
                            		</a>
                         		</div>
                            <div class="detail-pannel-footer-btn pull-right"><!--<a href="javascript:void(0)" data-toggle="modal" data-target="#apply-job" class="footer-btn grn-btn" title="">Edit Now</a>-->
-                           		<a href="{{ route('upload_cv') }}" id="upload_cv" class="footer-btn blu-btn" title="" {{ $curriculum }}>
-                           			Crear Curriculum
+                           		<a href="{{ route('upload_cv') }}" id="upload_cv" class=" footer-btn btn btn-info btn-lg" title="" {{ $curriculum }}>
+                           			{{$leyenda}}
                            		</a>
                            </div>
 
 													 <div class="detail-pannel-footer-btn pull-right"><!--<a href="javascript:void(0)" data-toggle="modal" data-target="#apply-job" class="footer-btn grn-btn" title="">Edit Now</a>-->
-                           		<a href="{{ route('get_searchh') }}" class="footer-btn blu-btn" title="">
+                           		<a href="{{ route('get_searchh') }}" class="btn btn-success btn-lg" title="">
 																<img src="" alt="">
-                           			Listado vacantes
+                           			Consultar vacantes
                            		</a>
                            </div>
 
@@ -107,7 +106,7 @@
 										<li><span>Primer Apellido:</span>@{{ datos.first_surname  }}</li>
 										<li><span>CURP:</span>@{{ datos.curp  }}</li>
 										<!-- <li><span>NSS:</span>@{{ datos.nss  }}</li> -->
-										<li><span>Cargo:</span>@{{ datos.cargo  }}</li>
+										<!-- <li><span>Cargo:</span>@{{ datos.cargo  }}</li> -->
 										<li><span>C.P:</span>@{{ datos.codigo }}</li>
 										<li><span>Telefono:</span>@{{ datos.telefono }}</li>
 										<li><span>Email:</span>@{{ datos.email}}</li>
@@ -503,7 +502,7 @@
 								<div id="settings" class="tab-pane fade in active">
 									<div class="row no-mrg">
 										<div class="col-sm-12">
-											* Campos Requeridos
+											<font size="6" color="red">* </font>ESTIMADO <strong>@{{ datos.name }}</strong> PARA PODER CONTINUAR EN EL PROCESO, CAMPOS REQUERIDOS EN ASTERISCO.
 											<h3>Editar Perfil</h3>
 										</div>
 
@@ -512,15 +511,15 @@
 										<div class="edit-pro">
 											<div class="col-md-4 col-sm-6">
 												<label>Nombre</label>
-												<input type="text" class="form-control" v-model="datos.name" style="text-transform: uppercase;">
+												<input type="text" id="nombre" class="form-control" v-model="datos.name" style="text-transform: uppercase;">
 											</div>
 											<div class="col-md-4 col-sm-6">
 												<label>Primer Apellido</label>
-												<input type="text" class="form-control" v-model="datos.first_surname" style="text-transform: uppercase;">
+												<input type="text" id="primer_apellido" class="form-control" v-model="datos.first_surname" style="text-transform: uppercase;">
 											</div>
 											<div class="col-md-4 col-sm-6">
 												<label>Segundo Apellido</label>
-												<input type="text" class="form-control" v-model="datos.second_surname" style="text-transform: uppercase;">
+												<input type="text" id="segundo_apellido" class="form-control" v-model="datos.second_surname" style="text-transform: uppercase;">
 											</div>
 											<div class="col-md-4 col-sm-6">
 												<label>Email</label>
@@ -539,7 +538,8 @@
 												<input type="text" id="direccion" class="form-control" v-model="datos.direccion" style="text-transform: uppercase;">
 											</div>
 											<div class="col-md-4 col-sm-6">
-												<label>Curp *</label>
+												<!-- <label>CURP *</label> -->
+												CURP <font size="5" color="red">*</font>
 												<input type="text" id="curp" class="form-control" v-model="datos.curp" style="text-transform: uppercase;">
 											</div>
 
@@ -553,21 +553,19 @@
 											</div>-->
 											<div class="col-md-4 col-sm-6">
 												<label>Estado</label>
-												<select class="form-control" v-model="datos.id_state">
+												<select class="form-control" v-model="datos.id_state" id="estados">
 													<option v-for="estado in datos.estados" :value="estado.id">@{{estado.nombre}}</option>
 												</select>
 											</div>
 
 											<div class="col-md-4 col-sm-6">
 												<label>Nuevo Password</label>
-												<input type="password" class="form-control" v-model="datos.password">
+												<input type="password" class="form-control" v-model="datos.password" id="contraseña">
 											</div>
 
 											<div class="col-md-4 col-sm-6">
 												<label class="form-label">¿NUMERO DE SEGURO SOCIAL (NSS) ?</label>
 												<input id="confirmed_nss" type="checkbox" v-model="datos.confirmed_nss" class="">
-												<!-- <input v-if="datos.confirmed_nss == 1" id="confirmed_nss" type="checkbox" v-model="datos.confirmed_nss" class="fantasma"> -->
-												<!-- <input v-else id="confirmed_nss" type="checkbox" v-model="datos.confirmed_nss" class="fantasma"> -->
 											</div>
 
 											<!-- <div id="dvOcultar"> -->
@@ -607,8 +605,8 @@
 										<!-- </div> -->
 
 											<div class="col-md-6 col-sm-6">
-												<label>Cuentanos acerca de ti </label>
-												<textarea class="form-control" id="descripcion" v-model="datos.descripcion" placeholder="descripcion breve"></textarea>
+												<label>Cuentanos acerca de ti </label><font size="6" color="red">* </font>
+												<textarea class="form-control" id="descripcion" v-model="datos.descripcion" placeholder="Describe brevemente tu experiencia laboral y tu personalidad; esta informacion sera visualizada por empresas contratantes."></textarea>
 											</div>
 
 
@@ -642,10 +640,18 @@
 													</div>
 												</form>
 											</div> -->
-											<div class="col-sm-12">
-												<button type="button" class="update-btn" v-on:click.prevent="insert()">Actualizar
+											<div class="col-sm-offset-5 col-sm-12 ">
+												<button type="button" class="btn btn-info btn-lg" v-on:click.prevent="insert()" id="btn_update_candidato">
+														Actualizar
+												</button>
+												<button type="button" class="btn btn-danger btn-lg" id="btn_cancel_candidato">
+														Cancelar
+												</button>
+												<button type="button" class="btn btn-success btn-lg" id="btn_editar_candidato" >
+														Editar Informacion
 												</button>
 											</div>
+
 										</div>
 									</div>
 								</div>
@@ -674,7 +680,7 @@
 									        	</form>
 									      </div>
 									      <div class="modal-footer">
-									        <button type="button" class="btn btn-warning" data-dismiss="modal">Cancelar</button>
+									        <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
 									        <button type="button" class="btn btn-success" v-on:click.prevent="insert_nss()">Guardar</button>
 									      </div>
 									    </div>
@@ -726,10 +732,10 @@
 									        	<div class="col-sm-12">
 									      			<div id="div_dropzone_file"></div>
 									        	</div>
-									        	<input type="hidden" id="url_file" v-model="datos.photo">
+									        	<input type="hidden" id="url_file" value="{{ $photo_profile }}">
 									      </div>
 									      <div class="modal-footer">
-									        <button type="button" class="btn btn" data-dismiss="modal">Aceptar</button>
+									        <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
 									      </div>
 									    </div>
 									  </div>
@@ -753,18 +759,4 @@
 
 @push('scripts')
 <script type="text/javascript" src="{{asset('js/candidatos/details_candidate.js')}}" ></script>
-<script type="text/javascript">
-  // $().ready(function(){
-	//
-	// 	$('.fantasma').change(function(){
-	//   	if(!$(this).prop('checked')){
-	//     	$('#dvOcultar').hide();
-	//     }else{
-	//     	$('#dvOcultar').show();
-	//     }
-	//
-	//   });
-	//
-	// });
-</script>
 @endpush

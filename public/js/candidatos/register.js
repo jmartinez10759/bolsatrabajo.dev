@@ -9,7 +9,6 @@ new Vue({
     datos: [],
     newKeep: {
          'name': ''
-        ,'id_rol': 2
         //,'first_surname': ''
         //,'second_surname': ''
         ,'correo': ''
@@ -21,7 +20,6 @@ new Vue({
     },
     fillKeep: {
         'id': ''
-        ,'id_rol': 2
         ,'name': ''
         //,'first_surname': ''
         //,'second_surname': ''
@@ -52,6 +50,7 @@ new Vue({
                 $('#'+key).parent().parent().removeClass('has-error');
             });
             $('#signup').modal('hide');
+            buildSweetAlert('Candidato registrado','Favor de verificar su correo electronico para continuar','success',3000);
             //redirect( ('details') );
         },function(){
 

@@ -395,11 +395,13 @@ function buildToast(mensaje, clase, tiempo, completeCallBack) {
  *@param {mensaje} [type][description]
  *@param {clase} [type][description]
  */
-function buildSweetAlert(titulo, mensaje, clase) {
+function buildSweetAlert(titulo, mensaje, clase, tiempo) {
+    var timer =  (tiempo)? tiempo:"";
     swal(
         titulo,
         mensaje,
-        clase
+        clase,
+        timer
     );
 }
 /**
@@ -790,7 +792,7 @@ function check_status_xhr(status, title, text, type, accept) {
                             maxFiles: maxfile,
                             paramName: "file",
                             acceptedFiles: type_file,
-                            dictDefaultMessage: "Favor de Cargar o arrastrar archivo",
+                            dictDefaultMessage: "Dar Click aqui o arrastrar archivo",
                             dictFallbackMessage: "layoutLang['mjs_navegador']",
                             dictFileTooBig: "layoutLang['file_size']",
                             dictInvalidFileType: "archivo incorrecto",

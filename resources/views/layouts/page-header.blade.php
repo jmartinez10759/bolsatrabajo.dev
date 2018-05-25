@@ -1,13 +1,13 @@
 
 <nav class="navbar navbar-default navbar-fixed navbar-transparent white bootsnav">
 
-                <div class="container">            
+                <div class="container">
                     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-menu">
                         <i class="fa fa-bars"></i>
                     </button>
                     <!-- Start Header Navigation -->
                     <div class="navbar-header">
-                        <a href="{{ url('/') }}" class="navbar-brand" href="index.html">
+                        <a href="{{ url('/') }}" class="navbar-brand" title="Listado de Vacantes">
                             <img src="{{ asset('images/img/logo.png') }}" class="logo logo-display" alt="">
                             <img src="{{ asset('images/img/logo-white.png') }}" class="logo logo-scrolled" alt="">
                         </a>
@@ -49,7 +49,7 @@
                                                         <li><a href="manage-jobs.html">Manage Jobs</a></li>
                                                         <li><a href="job-detail.html">Job Detail</a></li>
                                                         <li><a href="browse-jobs-grid.html">Job In Grid</a></li>
-                                                        <li><a href="candidate-profile.html">Candidate Profile</a></li>                                                         
+                                                        <li><a href="candidate-profile.html">Candidate Profile</a></li>
                                                     </ul>
                                                 </div>
                                             </div>
@@ -67,7 +67,7 @@
                                                         <li><a href="employer-profile.html">Employer Profile</a></li>
                                                     </ul>
                                                 </div>
-                                            </div>    
+                                            </div>
                                             <div class="col-menu col-md-3">
                                                 <h6 class="title">Extra Pages</h6>
                                                 <div class="content">
@@ -90,15 +90,19 @@
                         </ul>
                         <ul class="nav navbar-nav navbar-right" data-in="fadeInDown" data-out="fadeOutUp">
                             <!-- <li><a href="{{route('details')}}">Bienvenid@ {{ Session::get('name') }}</a></li> -->
-                            <li><!-- <a href="pricing.html"><i class="fa fa-sign-in" aria-hidden="true"></i>Paquetes</a> --></li>
+                            <!--<li> <a href="pricing.html"><i class="fa fa-sign-in" aria-hidden="true"></i>Paquetes</a> </li>-->
+
                             @if( !Session::has('name') )
                                 <li class="left-br">
-                                    <a data-toggle="modal" data-target="#signup" class="signin" style="cursor: pointer;">Acceso Usuarios</a>
+                                    <a tabs="register" data-toggle="modal" data-target="#signup" class="signin" style="cursor: pointer;">Registrate</a>
+                                </li>
+                                <li class="left-br">
+                                    <a tabs="start" data-toggle="modal" data-target="#signup" class="signin" style="cursor: pointer;">Iniciar Sesión</a>
                                 </li>
                             @else
                                 <li class="">
-                                    <a href="{{route('details')}}">Bienvenid@ {{ Session::get('name') }} {{ Session::get('first_surname') }}</a>
-                                </li> 
+                                    <a href="{{route('details')}}" title="Detalles del Candidato">Bienvenid@ {{ Session::get('name') }} {{ Session::get('first_surname') }}</a>
+                                </li>
                                 <li class="left-br">
                                     <a href="{{ route('logout') }}" onclick="event.preventDefault();
                                      document.getElementById('logout-form').submit();" class="signin">
@@ -111,11 +115,7 @@
                             @endauth
                         </ul>
                     </div><!-- /.navbar-collapse -->
-                </div>   
+                </div>
             </nav>
             <!-- End Navigation -->
             <div class="clearfix"></div>
-
-
-
-

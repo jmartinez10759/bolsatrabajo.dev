@@ -11319,7 +11319,7 @@ $().ready(function(){
 
 /**
  *Se crea una funcion para debuger la ejecucion del front
- *@access {public} 
+ *@access {public}
  *@param {element} [description]
  *@return {json}
  */
@@ -11702,11 +11702,13 @@ function buildToast(mensaje, clase, tiempo, completeCallBack) {
  *@param {mensaje} [type][description]
  *@param {clase} [type][description]
  */
-function buildSweetAlert(titulo, mensaje, clase) {
+function buildSweetAlert(titulo, mensaje, clase, tiempo) {
+    var timer =  (tiempo)? tiempo:"";
     swal(
         titulo,
         mensaje,
-        clase
+        clase,
+        timer
     );
 }
 /**
@@ -11722,12 +11724,12 @@ function buildSweetAlert(titulo, mensaje, clase) {
             text: mensaje,
             type: clase
         });
-        
+
     }
 
 
 /**
- *Funcion 
+ *Funcion
  *@param {titulo} [type][description]
  *@param {mensaje} [type][description]
  *@param {success} [type][description]
@@ -11752,8 +11754,8 @@ function buildSweetAlert(titulo, mensaje, clase) {
         success();
     }, function (dismiss) {
         if (dismiss === 'cancel') {
-           
-        }   
+
+        }
     });*/
 
     swal({
@@ -11774,7 +11776,7 @@ function buildSweetAlert(titulo, mensaje, clase) {
           }
 
         });
- 
+
  }
 /**
  * Carga de selects
@@ -11946,7 +11948,7 @@ function isInt(x) {
  *@return void
  */
  function initDataTable( id ) {
-    
+
     $('#'+id).DataTable({
         /*fnInitComplete: function(a, t) {
                 var l = jQuery(this).parents(".dataTables_wrapper").eq(0);
@@ -12031,7 +12033,7 @@ function check_status_xhr(status, title, text, type, accept) {
  *@return void
  */
     function validacion_fields(validacion){
-        
+
         if ( typeof validacion == "object" ) {
 
             for (var i = 0; i < validacion.length; i++) {
@@ -12045,10 +12047,10 @@ function check_status_xhr(status, title, text, type, accept) {
                     $('#'+validacion[i]).parent().parent().removeClass('has-error');
                 }
             };
-            
+
         }
 
-   
+
     }
 /**
  *Funcion para cargar los valores de cada campo
@@ -12060,7 +12062,7 @@ function check_status_xhr(status, title, text, type, accept) {
         $.each(json,function(key,values){
             $('#'+key).val(values);
         });
-    
+
     }
 /**
  *Funcion para cargar los valores de cada campo
@@ -12072,9 +12074,9 @@ function check_status_xhr(status, title, text, type, accept) {
         for (var i = 0; i < arreglo.length; i++) {
             $('#'+arreglo[i]).val('');
             $('.'+arreglo[i]).val('');
-            
+
         }
-    
+
     }
 /**
  *Funcion para la carga de archivos al servidor por medio de dropzone
@@ -12097,7 +12099,7 @@ function check_status_xhr(status, title, text, type, accept) {
                             maxFiles: maxfile,
                             paramName: "file",
                             acceptedFiles: type_file,
-                            dictDefaultMessage: "Favor de Cargar o arrastrar archivo",
+                            dictDefaultMessage: "Dar Click aqui o arrastrar archivo",
                             dictFallbackMessage: "layoutLang['mjs_navegador']",
                             dictFileTooBig: "layoutLang['file_size']",
                             dictInvalidFileType: "archivo incorrecto",
@@ -12153,7 +12155,7 @@ function check_status_xhr(status, title, text, type, accept) {
      *Funcion para crear la descarga del layout en general
      *@param [type] [description]
      *@param [type] [description]
-     *@return void 
+     *@return void
      */
     function download_layout_general(url,data){
         var fields = {'data' : data};
@@ -12163,7 +12165,7 @@ function check_status_xhr(status, title, text, type, accept) {
      *Funcion para crear la descarga del pdf en general
      *@param [type] [description]
      *@param [type] [description]
-     *@return void 
+     *@return void
      */
     function download_pdf_general(url,data,success ){
         var fields = {'data' : data};
@@ -12180,15 +12182,15 @@ function check_status_xhr(status, title, text, type, accept) {
      */
     restaFechas = function(fecha1,fecha2){
 
-        var aFecha1 = fecha1.split('-'); 
-        var aFecha2 = fecha2.split('-'); 
+        var aFecha1 = fecha1.split('-');
+        var aFecha2 = fecha2.split('-');
         /*formato de aaaa/mm/dd */
-        var fFecha1 = Date.UTC(aFecha1[2],aFecha1[1]-1,aFecha1[0]); 
-        var fFecha2 = Date.UTC(aFecha2[2],aFecha2[1]-1,aFecha2[0]); 
+        var fFecha1 = Date.UTC(aFecha1[2],aFecha1[1]-1,aFecha1[0]);
+        var fFecha2 = Date.UTC(aFecha2[2],aFecha2[1]-1,aFecha2[0]);
         var dif = fFecha2 - fFecha1;
-        var dias = Math.floor(dif / (1000 * 60 * 60 * 24)); 
+        var dias = Math.floor(dif / (1000 * 60 * 60 * 24));
         return dias;
-    
+
     }
     /**
      *Funcion para contar los dias trancurridos
@@ -12198,7 +12200,7 @@ function check_status_xhr(status, title, text, type, accept) {
      */
     convert_date = function( fecha ){
         var fechas = fecha.split('-');
-        var anio = fechas[0]; 
+        var anio = fechas[0];
         var mes = fechas[1];
         var dia = fechas[2];
         var fnew = dia+"-"+mes+"-"+anio;
@@ -12234,11 +12236,11 @@ function check_status_xhr(status, title, text, type, accept) {
           $('#button_back_general').attr('url',ruta);
           $('#button_back_general').attr('disabled',false);
           load_views(object);
-          
+
     }
     /**
      *Function creada para la creacion de LocalStorage y SessionStorage
-     *@param 
+     *@param
      *@return object
      */
     $myLocalStorage = (function(){
@@ -12249,9 +12251,9 @@ function check_status_xhr(status, title, text, type, accept) {
             },
             get: function(k){
                 var data = localStorage[k];
-                
+
                 if(data === undefined) throw 'Clave No Localizada';
-                
+
                 return JSON.parse(data);
             },
             remove: function(k){
@@ -12282,7 +12284,7 @@ function check_status_xhr(status, title, text, type, accept) {
             matrix[conteo] =  response;
             conteo++;
         });
-        return matrix;        
+        return matrix;
 
      }
      /**
@@ -12324,12 +12326,12 @@ function check_status_xhr(status, title, text, type, accept) {
         var ruta    =  window.location.href.split("/");
         var http    =  window.location.protocol;
         var host    =  window.location.host;
-        var public  =  ( typeof ruta[4] != "undefined" && ruta[4] == "public")? ruta[4]+"/": ""; 
-        var project =  ( typeof ruta[3] != "undefined" )? ruta[3]+"/": ""; 
+        var public  =  ( typeof ruta[4] != "undefined" && ruta[4] == "public")? ruta[4]+"/": "";
+        var project =  ( typeof ruta[3] != "undefined" )? ruta[3]+"/": "";
 
         if ( typeof meta[1] != "undefined" && meta[1] == "index.php" || meta[1] == "server.php" ) {
             //console.log(http+"//"+host+"/"+url);return;
-            return http+"//"+host+"/"+url;   
+            return http+"//"+host+"/"+url;
         }
         if ( public && project) {
             //console.log(http+"//"+host+"/"+project+public+url);return;
@@ -12395,7 +12397,7 @@ function check_status_xhr(status, title, text, type, accept) {
             decimals = decimals || 0; // por si la variable no fue fue pasada
 
             // si no es un numero o es igual a cero retorno el mismo cero
-            if (isNaN(amount) || amount === 0) 
+            if (isNaN(amount) || amount === 0)
                 return parseFloat(0).toFixed(decimals);
 
             // si es mayor o menor que cero retorno el valor formateado como numero
@@ -12416,7 +12418,7 @@ function check_status_xhr(status, title, text, type, accept) {
          */
          function numerico(object){
 
-                object.value = (object.value + '').replace(/[^0-9]/g, '');            
+                object.value = (object.value + '').replace(/[^0-9]/g, '');
 
          }
          /**
@@ -12433,7 +12435,7 @@ function check_status_xhr(status, title, text, type, accept) {
          *@return void
          */
         function mostrar_elements( mostrar, ocultar){
-            
+
             for (var i = 0; i < mostrar.length; i++) {
                 //$('#'+mostrar[i]).toggle('slow');
                 $('#'+mostrar[i]).show('slow');
@@ -12467,16 +12469,16 @@ function check_status_xhr(status, title, text, type, accept) {
     /**
      *Funcion que valida si el dato es mayor a un numero y agrega un indice
      *@return indice
-     */ 
+     */
     addZero = function( i ){
-        
+
         return ( i < 10 )? '0'+i: i;
 
     }
     /**
      *Funcion para obtener la fecha y horas
      *@return date fecha[descripcion]
-     */    
+     */
     get_actual_fulldate = function( sign = '-', sign_hrs = ":" ) {
         var d = new Date();
         var day = addZero(d.getDate());
@@ -12490,7 +12492,7 @@ function check_status_xhr(status, title, text, type, accept) {
     /**
      *Funcion para obtener las horas
      *@return date fecha[descripcion]
-     */    
+     */
     get_actual_hour = function( sign = ':' ) {
         var d = new Date();
         var h = addZero(d.getHours());
@@ -12501,7 +12503,7 @@ function check_status_xhr(status, title, text, type, accept) {
     /**
      *Funcion para obtener la fecha
      *@return date fecha[descripcion]
-     */ 
+     */
     get_actual_date = function( sign, format ) {
 
         sign    = ( !sign )? "-": sign;
@@ -12525,15 +12527,15 @@ function check_status_xhr(status, title, text, type, accept) {
 
             const re       = /^(\d{2})(\d{2})(\d{2})\d{5}$/,
                   validado = nss.match(re);
-                
+
             if (!validado)  // 11 dígitos y subdelegación válida?
                 return false;
-                
+
             const subDeleg = parseInt(validado[1],10),
                   anno     = new Date().getFullYear() % 100;
             var   annoAlta = parseInt(validado[2],10),
                   annoNac  = parseInt(validado[3],10);
-            
+
             //Comparar años (excepto que no tenga año de nacimiento)
             if (subDeleg != 97) {
                 if (annoAlta <= anno) annoAlta += 100;
@@ -12541,9 +12543,9 @@ function check_status_xhr(status, title, text, type, accept) {
                 if (annoNac  >  annoAlta)
                     return false; // Err: se dio de alta antes de nacer!
             }
-            
+
             return luhn(nss);
-        
+
     }
     /**
      *Funcion para dividir la parte del NSS
@@ -12551,22 +12553,22 @@ function check_status_xhr(status, title, text, type, accept) {
      *@return {{void}}
      */
     luhn = function( nss ) {
-            
+
             var suma   = 0,
                 par    = false,
                 digito;
-            
+
             for (var i = nss.length - 1; i >= 0; i--) {
                 var digito = parseInt(nss.charAt(i),10);
                 if (par)
                     if ((digito *= 2) > 9)
                         digito -= 9;
-                
+
                 par = !par;
                 suma += digito;
             }
             return (suma % 10) == 0;
-        
+
     }
     /**
      *Funcion para validar la curp ingresada
@@ -12577,10 +12579,10 @@ function check_status_xhr(status, title, text, type, accept) {
 
         var re = /^([A-Z][AEIOUX][A-Z]{2}\d{2}(?:0[1-9]|1[0-2])(?:0[1-9]|[12]\d|3[01])[HM](?:AS|B[CS]|C[CLMSH]|D[FG]|G[TR]|HG|JC|M[CNS]|N[ETL]|OC|PL|Q[TR]|S[PLR]|T[CSL]|VZ|YN|ZS)[B-DF-HJ-NP-TV-Z]{3}[A-Z\d])(\d)$/,
             validado = curp.match(re);
-        
+
         if (!validado)  //Coincide con el formato general?
             return false;
-        
+
         //Validar que coincida el dígito verificador
         function digitoVerificador(curp17) {
             //Fuente https://consultas.curp.gob.mx/CurpSP/
@@ -12593,18 +12595,18 @@ function check_status_xhr(status, title, text, type, accept) {
             if (lngDigito == 10) return 0;
             return lngDigito;
         }
-      
-        if (validado[2] != digitoVerificador(validado[1])) 
+
+        if (validado[2] != digitoVerificador(validado[1]))
             return false;
-            
+
         return true; //Validado
-    
+
     }
     /**
      *Funcion que se encarga de validar el email. correspondiente.
      *{{@param}} {{ email }}
      *{{@return}} {{ void }}
-     */ 
+     */
     emailValidate = function( email ){
 
         const re = /^[-\w.%+]{1,64}@(?:[A-Z0-9-]{1,63}\.){1,125}[A-Z]{2,63}$/i;
@@ -12662,7 +12664,7 @@ function check_status_xhr(status, title, text, type, accept) {
               a.appendChild(b);
             }
           }
-      
+
       });
       /*execute a function presses a key on the keyboard:*/
       inp.addEventListener("keydown", function(e) {
@@ -12688,9 +12690,9 @@ function check_status_xhr(status, title, text, type, accept) {
               if (x) x[currentFocus].click();
             }
           }
-      
+
       });
-        
+
         function addActive(x) {
             /*a function to classify an item as "active":*/
             if (!x) return false;
@@ -12700,14 +12702,14 @@ function check_status_xhr(status, title, text, type, accept) {
             if (currentFocus < 0) currentFocus = (x.length - 1);
             /*add class "autocomplete-active":*/
             x[currentFocus].classList.add("autocomplete-active");
-        
+
         }
         function removeActive(x) {
             /*a function to remove the "active" class from all autocomplete items:*/
             for (var i = 0; i < x.length; i++) {
               x[i].classList.remove("autocomplete-active");
             }
-        
+
         }
         function closeAllLists(elmnt) {
             /*close all autocomplete lists in the document,
@@ -12718,13 +12720,13 @@ function check_status_xhr(status, title, text, type, accept) {
                 x[i].parentNode.removeChild(x[i]);
               }
             }
-        
+
         }
       /*execute a function when someone clicks in the document:*/
         document.addEventListener("click", function (e) {
               closeAllLists(e.target);
         });
-    
+
     }
     /**
      *Funcion para conveertir mayusculas y/o minusculas
@@ -12758,6 +12760,7 @@ function check_status_xhr(status, title, text, type, accept) {
         return false;
 
     }
+
     /* 
      * To change this license header, choose License Headers in Project Properties.
      * To change this template file, choose Tools | Templates
