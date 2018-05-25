@@ -11,5 +11,8 @@ class NivelAcademicoModel extends Model
     	'id'
 		,'nombre'
     ];
+    public function categorias(){
+        return $this->hasMany('App\Model\CategoriasEducativasModel','id_nivel','id');
+    }
 
 }

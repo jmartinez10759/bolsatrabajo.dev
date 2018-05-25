@@ -62,6 +62,13 @@
                            			Crear Curriculum
                            		</a>
                            </div>
+
+													 <div class="detail-pannel-footer-btn pull-right"><!--<a href="javascript:void(0)" data-toggle="modal" data-target="#apply-job" class="footer-btn grn-btn" title="">Edit Now</a>-->
+                           		<a href="{{ route('/') }}" class="footer-btn blu-btn" title="">
+                           			Listado vacantes
+                           		</a>
+                           </div>
+
                         </div>
                     </div>
                 </div>
@@ -495,8 +502,8 @@
 								<div id="settings" class="tab-pane fade in active">
 									<div class="row no-mrg">
 										<div class="col-sm-12">
+											* Campos Requeridos
 											<h3>Editar Perfil</h3>
-
 										</div>
 
 										<!-- <div class="col-sm-6"></div> -->
@@ -531,14 +538,14 @@
 												<input type="text" id="direccion" class="form-control" v-model="datos.direccion" style="text-transform: uppercase;">
 											</div>
 											<div class="col-md-4 col-sm-6">
-												<label>Curp*</label>
+												<label>Curp *</label>
 												<input type="text" id="curp" class="form-control" v-model="datos.curp" style="text-transform: uppercase;">
 											</div>
 
-											<div class="col-md-4 col-sm-6">
+											<!-- <div class="col-md-4 col-sm-6">
 												<label>Cargo</label>
 												<input type="text" id="cargo" class="form-control" v-model="datos.cargo" style="text-transform: uppercase;">
-											</div>
+											</div> -->
 											<!-- <div class="col-md-4 col-sm-6">
 												<label>Ciudad</label>
 												<input type="text" class="form-control" v-model="datos.ciudad">
@@ -563,14 +570,18 @@
 											</div>
 
 											<!-- <div id="dvOcultar"> -->
-											<div class="col-md-4 col-sm-6" style="overflow-y:scroll; height:130px;" v-show="datos.confirmed_nss">
+											<!-- <div class="col-md-4 col-sm-6" style="overflow-y:scroll; height:130px;" v-show="datos.confirmed_nss"> -->
+											<div class="col-md-4 col-sm-6" style="overflow-y:scroll; height:130px;">
 												<table class="table table-responsive" id="table-nss">
 													<thead>
 														<tr>
 															<th>#</th>
 															<th>NSS</th>
 															<th>
-																<button type="button" class="btn btn-success" data-toggle="modal" data-target="#modal-nss" data-toggle="tooltip" title="Agregar NSS">
+																<button type="button" class="btn btn-success" data-toggle="modal" data-target="#modal-nss" data-toggle="tooltip" title="Agregar NSS" v-if="datos.confirmed_nss">
+																	<i class="fa fa-plus-circle"></i>
+																</button>
+																<button type="button" class="btn btn-success" data-toggle="modal" data-target="#modal-nss" data-toggle="tooltip" title="Agregar NSS" v-else disabled>
 																	<i class="fa fa-plus-circle"></i>
 																</button>
 															</th>
@@ -595,8 +606,8 @@
 										<!-- </div> -->
 
 											<div class="col-md-6 col-sm-6">
-												<label>Acerca de </label>
-												<textarea class="form-control" id="descripcion" v-model="datos.descripcion"></textarea>
+												<label>Cuentanos acerca de ti </label>
+												<textarea class="form-control" id="descripcion" v-model="datos.descripcion" placeholder="descripcion breve"></textarea>
 											</div>
 
 
