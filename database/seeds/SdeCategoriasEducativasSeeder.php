@@ -12,7 +12,7 @@ class SdeCategoriasEducativasSeeder extends Seeder
     public function run()
     {
         $niveles = [1,2,3,4];
-        
+
         $doctorado = [
           #Doctorado
           'Arqueología Clásica'
@@ -89,6 +89,7 @@ class SdeCategoriasEducativasSeeder extends Seeder
           ,'Derecho, Ciencia y Tecnología (LAST-JD)'
           ,'Informática'
           ,'Ingeniería Electrónica y de Telecomunicación'
+          ,'Otro'
         ];
         $maestria = [
           #maestrias
@@ -115,6 +116,7 @@ class SdeCategoriasEducativasSeeder extends Seeder
            ,'Impuestos'
            ,'Periodismo y Ciencias de la Información'
            ,'Recursos Humanos - RRHH'
+           ,'Otro'
         ];
         $licenciatura = [
           #catalogo de licenciaturas
@@ -144,10 +146,12 @@ class SdeCategoriasEducativasSeeder extends Seeder
           ,'Ingeniería en Construcción'
           ,'Ingeniería en Prevención de Riesgos'
           ,'Ingeniería en Computación e Informática'
+          ,'Ingeniería en Sistemas'
           ,'Ingeniería en Geomensura y Cartografía'
           ,'Administración Publica'
           ,'Química y Farmacia'
           ,'Enfermería'
+          ,'Otro'
         ];
         $bachillerato = [
               #carreras tecnicas
@@ -171,6 +175,7 @@ class SdeCategoriasEducativasSeeder extends Seeder
               ,'Técnico en Contabilidad General'
               ,'Técnico Agente o Visitador Médico'
               ,'Técnico en Comercio Exterior'
+              ,'Otro'
 
         ];
 

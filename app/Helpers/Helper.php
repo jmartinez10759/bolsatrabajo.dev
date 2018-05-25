@@ -494,9 +494,9 @@
     		}
 
         $datos = [
-          'nombre' => strtoupper($nombre)
-          ,'first_surname' => isset($apellido[0] ) ? strtoupper($apellido[0]) : ""
-          ,'second_surname' => isset($apellido[1] ) ? strtoupper($apellido[1]) : ""
+          'nombre' => trim(strtoupper($nombre))
+          ,'first_surname' => isset($apellido[0] ) ? trim(strtoupper($apellido[0])) : ""
+          ,'second_surname' => isset($apellido[1] ) ? trim(strtoupper($apellido[1])) : ""
         ];
           return $datos;
 

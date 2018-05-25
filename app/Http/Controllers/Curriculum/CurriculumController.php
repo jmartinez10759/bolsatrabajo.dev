@@ -12,7 +12,9 @@ use App\Model\RequestUserModel;
 use App\Model\BlmCurriculumModel;
 use App\Model\NivelAcademicoModel;
 use App\Model\DetailCandidateModel;
+use App\Model\SdeEstatusAcademicoModel;
 use Illuminate\Support\Facades\Session;
+use App\Model\CategoriasEducativasModel;
 use App\Http\Controllers\MasterController;
 
 class CurriculumController extends MasterController
@@ -46,14 +48,20 @@ class CurriculumController extends MasterController
     	$categorias 	= self::$_model::show_model( [], [] , new CategoriaModel );
     	$nivel 			  = self::$_model::show_model( [], [] , new NivelAcademicoModel );
     	$estados 			= self::$_model::show_model( [], [] , new BlmEstadosModel );
-    	#debuger($detalles);
+
+      $doctorado    = self::$_model::show_model( [], ['id_nivel' => 1] , new CategoriasEducativasModel );
+      $maestria     = self::$_model::show_model( [], ['id_nivel' => 2] , new CategoriasEducativasModel );
+      $licenciatura = self::$_model::show_model( [], ['id_nivel' => 3] , new CategoriasEducativasModel );
+      $bachillerato = self::$_model::show_model( [], ['id_nivel' => 4] , new CategoriasEducativasModel );
+
+      $estatus_academico = self::$_model::show_model( [], [] , new SdeEstatusAcademicoModel );
+    	#debuger($licenciatura);
     	$where = ['id_users' => Session::get('id')];
     	$curriculum = self::$_model::show_model([],$where, new BlmCurriculumModel);
     	$data = [];
     	if ( $curriculum ) {
 
     		$fields = ['nombre','puesto','descripcion'];
-
     		for ($i=0; $i < count($curriculum); $i++) {
 
     			foreach ($curriculum[$i] as $key => $value) {
@@ -70,7 +78,7 @@ class CurriculumController extends MasterController
 	    	$jobs 			= self::$_model::show_model( [], $where , new BlmJobsModel,[ 'jobs_orden' => 'ASC'] );
 	    	$skills 		= self::$_model::show_model( [], $where , new BlmSkillModel,[ 'skill_orden' => 'ASC'] );
 
-    		    $data['status'] 		= 1;
+    		    $data['status'] 		    = 1;
             $data['id_nivel']       = 3;
             $data['id_cv']          = $data['id'];
             $data['study']          = self::_nivel_educativo( $study );
@@ -120,8 +128,15 @@ class CurriculumController extends MasterController
         $data['porcentaje'] 		= "";
         $data['skill_orden'] 		= "";
 
-        $data['estados'] 			= $estados;
-    	#debuger($data);
+        $data['estados'] 			      = $estados;
+        #categorias academicas
+        $data['doctorado'] 			    = $doctorado;
+        $data['maestria'] 			    = $maestria;
+        $data['licenciatura'] 			= $licenciatura;
+        $data['bachillerato'] 			= $bachillerato;
+        #estatus academicos
+        $data['estatus_academico'] = $estatus_academico;
+    	  #debuger($data);
         return message( true, $data ,self::$message_success );
 
   }
@@ -137,18 +152,42 @@ class CurriculumController extends MasterController
     	$curriculum = self::$_model::show_model([],$where, new BlmCurriculumModel);
     	if ( count($curriculum) > 0 ) {
     		$register = [];
+        $values_details_curriculm = ['nombre','puesto','direccion'];
     		foreach ($request->all() as $key => $value) {
-    			if ($value != null) {
-    				$register[$key] = $value;
-    			}
+          #debuger($key);
+              if ($value != null) {
+                $register[$key] = $value;
+              }
+              if ( in_array( $key ,$values_details_curriculm ) ) {
+                $register[$key] = strtoupper($value);
+              }
+
     		}
-    		#debuger($register);
+        #debuger($register);
     		$where = ['id' => $curriculum[0]->id ];
     		$response = self::$_model::update_model( $where, $register, new BlmCurriculumModel );
-    		if (count($response) > 0) {
-	    		return message(true,$response,self::$message_success);
+        #actualizo la tabla de detalles
+        $data_details = [
+          'id_state'      => isset($register['id_state'])? $register['id_state']: null
+          ,'direccion'    => isset($register['direccion'])? $register['direccion']: null
+          ,'cargo'        => isset($register['puesto'])? $register['puesto']: null
+          ,'descripcion'  => isset($register['descripcion'])? $register['descripcion']: null
+          ,'telefono'  => isset($register['telefono'])? $register['telefono']: null
+        ];
+    		$response_details = self::$_model::update_model( ['id_users' => $curriculum[0]->id_users ], $data_details, new DetailCandidateModel );
+        #debuger($response_details);
+    		if ( count($response) > 0 ) {
+            $nombre_completo = parse_name($response[0]->nombre);
+            #debuger($nombre_completo);
+            $data = [
+              'name'              => $nombre_completo['nombre']
+              ,'first_surname'    => $nombre_completo['first_surname']
+              ,'second_surname'   => $nombre_completo['second_surname']
+            ];
+             $update_users = self::$_model::update_model($where,$data, new RequestUserModel);
+	    		   return message(true,$update_users,self::$message_success);
 	    	}else{
-	    		return message(false,[],self::$message_error);
+	    		   return message(false,[],self::$message_error);
 	    	}
 
 
@@ -171,7 +210,7 @@ class CurriculumController extends MasterController
 
     	}
 
-  }
+    }
     /**
      *Metodo para niveles academicos
      *@access private
@@ -197,7 +236,7 @@ class CurriculumController extends MasterController
      		}
      		return $nivel;
 
-  }
+    }
 
 
 

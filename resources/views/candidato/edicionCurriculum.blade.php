@@ -13,7 +13,7 @@
 						  <div class="form-group">
 						    <label class="control-label col-sm-2">Escuela</label>
 						    <div class="col-sm-10">
-						      <input type="text" class="form-control" placeholder="Nombre de la escuela" v-model="fillKeep.escuela">
+						      <input type="text" class="form-control" placeholder="Nombre de la escuela" v-model="fillKeep.escuela" style="text-transform: uppercase;">
 						    </div>
 						  </div>
 
@@ -37,7 +37,7 @@
 						    </div>
 						  </div>
 
-					</form> 
+					</form>
 
 
                 </div>
@@ -49,7 +49,7 @@
 
             </div>
         </div>
-    </div>   
+    </div>
     <!-- End Sign Up Window -->
 
 <!-- Sign Up Window Code -->
@@ -62,31 +62,31 @@
 		    </div>
 
             <div class="modal-body ">
-               	
+
                	<form class="form-horizontal" >
 					  <div class="form-group">
 					    <label class="control-label col-sm-2" >Empresa</label>
 					    <div class="col-sm-10">
-					      <input type="text" name="jobs_empresa" class="form-control" placeholder="Nombre de la Empresa" v-model="fillKeep.jobs_empresa">
+					      <input type="text" name="jobs_empresa" class="form-control" placeholder="Nombre de la Empresa" v-model="fillKeep.jobs_empresa" style="text-transform: uppercase;">
 					    </div>
 					  </div>
 
 					  <div class="form-group">
 					    <label class="control-label col-sm-2" >Puesto</label>
 					    <div class="col-sm-10">
-					      <input type="text" name="jobs_puesto" class="form-control" placeholder="Puesto Desempeñado" v-model="fillKeep.jobs_puesto">
+					      <input type="text" name="jobs_puesto" class="form-control" placeholder="Puesto Desempeñado" v-model="fillKeep.jobs_puesto" style="text-transform: uppercase;">
 					    </div>
 					  </div>
 					   <div class="form-group">
 					    <label class="control-label col-sm-2" >Jefe Inmediato</label>
 					    <div class="col-sm-10">
-					      <input type="text" name="jobs_jefe_inmediato" class="form-control" placeholder="Nombre" v-model="fillKeep.jobs_jefe_inmediato">
+					      <input type="text" name="jobs_jefe_inmediato" class="form-control" placeholder="Nombre" v-model="fillKeep.jobs_jefe_inmediato" style="text-transform: uppercase;">
 					    </div>
 					  </div>
 						  <div class="form-group">
 						    <label class="control-label col-sm-2" >Telefono</label>
 						    <div class="col-sm-10">
-						      <input type="number" name="jobs_telefono" class="form-control" placeholder="5533356593" v-model="fillKeep.jobs_telefono">
+						      <input type="text" name="jobs_telefono" class="form-control" placeholder="Lada + 10 digitos" v-model="fillKeep.jobs_telefono">
 						    </div>
 						  </div>
 
@@ -101,21 +101,21 @@
 					    </div>
 					  </div>
 
-					   <div class="form-group">
+					   <!-- <div class="form-group">
 						    <label class="control-label col-sm-2" for="">Posicion</label>
 						    <div class="col-sm-2">
 						      <input type="text" class="form-control" placeholder="" v-model="fillKeep.jobs_orden">
 						    </div>
-					  </div>
+					  </div> -->
 
 					   <div class="form-group">
 					    <label class="control-label col-sm-2" for="pwd">Notas</label>
 					    <div class="col-sm-10">
-					      <textarea class="form-control" name="jobs_descripcion" placeholder="Notas" v-model="fillKeep.jobs_descripcion"></textarea>
+					      <textarea class="form-control" name="jobs_descripcion" placeholder="Notas" v-model="fillKeep.jobs_descripcion" style="text-transform: uppercase;"></textarea>
 					    </div>
 					  </div>
-					  
-				</form> 
+
+				</form>
 
             </div>
 
@@ -126,7 +126,7 @@
 
         </div>
     </div>
-</div>   
+</div>
 <!-- End Sign Up Window -->
 
 
@@ -141,7 +141,7 @@
 			    </div>
 
                 <div class="modal-body ">
-                   	
+
                    	<form class="form-horizontal" >
 						  <div class="form-group">
 						    <label class="control-label col-sm-2">Habilidad</label>
@@ -164,7 +164,7 @@
 							    </div>
 						  </div>
 
-					</form> 
+					</form>
 
                 </div>
 
@@ -175,7 +175,5 @@
 
             </div>
         </div>
-    </div>   
+    </div>
     <!-- End Sign Up Window -->
-
-  

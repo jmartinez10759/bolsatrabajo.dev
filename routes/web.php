@@ -181,7 +181,7 @@ Route::group(['middleware' => ['auth.session']], function() {
         ,'as'       => 'study.update'
     ]);
 
-    Route::delete('study/delete/{id}', [
+    Route::get('study/delete/{id}', [
         'uses'      => 'Curriculum\StudyController@destroy'
         ,'as'       => 'study.delete'
     ]);
@@ -196,7 +196,7 @@ Route::group(['middleware' => ['auth.session']], function() {
         ,'as'       => 'jobs.update'
     ]);
 
-    Route::delete('jobs/delete/{id}', [
+    Route::get('jobs/delete/{id}', [
         'uses'      => 'Curriculum\JobController@destroy'
         ,'as'       => 'jobs.delete'
     ]);

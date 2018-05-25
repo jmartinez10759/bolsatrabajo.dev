@@ -71,7 +71,7 @@ new Vue ({
     insert_detalles: function(){
 
         var url = domain('cv/insert');
-        var uri = domain('cv/show');
+        var refresh = domain('cv/show');
 
         this.newKeep.id_state     = this.datos.id_state;
         this.newKeep.id_categoria = this.datos.id_categoria;
@@ -83,7 +83,7 @@ new Vue ({
         this.newKeep.telefono     = this.datos.telefono;
         this.newKeep.direccion    = this.datos.direccion;
 
-        this.insert_general(url,uri,function(json){
+        this.insert_general( url,refresh,function(json){
           $('#seccion-cv').show('slow');
         },function(json){
           $('#seccion-cv').hide('slow');
@@ -91,7 +91,6 @@ new Vue ({
 
     },
     insert_study: function(){
-
       var url = domain('study/insert');
       var refresh = domain('cv/show');
       //setter las propiedades para enviarlas.
@@ -102,9 +101,12 @@ new Vue ({
       this.newKeep.fecha_final  = this.datos.fecha_final;
 
        this.insert_general(url,refresh,function(json){
-          $('#modal-educacion').modal('hide');
+          buildSweetAlertOptions("¡Registro agregado.!", "¿Desea seguir agregando registros?", function(){
+            $('#modal-educacion').modal('hide');
+          }, 'success', true );
+
         },function(json){
-          $('#modal-educacion').modal('hide');
+          //$('#modal-educacion').modal('hide');
         });
 
     },
@@ -123,9 +125,13 @@ new Vue ({
       this.newKeep.jobs_telefono        = this.datos.jobs_telefono;
 
        this.insert_general(url,uri,function(json){
-          $('#modal-experiencia').modal('hide');
+
+            buildSweetAlertOptions("¡Registro agregado.!", "¿Desea seguir agregando registros?", function(){
+                $('#modal-experiencia').modal('hide');
+            }, 'success', true );
+
         },function(json){
-          $('#modal-experiencia').modal('hide');
+            $('#modal-experiencia').modal('hide');
         });
 
     },
@@ -139,7 +145,11 @@ new Vue ({
       this.newKeep.porcentaje           = this.datos.porcentaje;
 
        this.insert_general(url,uri,function(json){
-          $('#modal-skill').modal('hide');
+
+          buildSweetAlertOptions("¡Registro agregado.!", "¿Desea seguir agregando registros?", function(){
+              $('#modal-skill').modal('hide');
+          }, 'success', true );
+
         },function(json){
           $('#modal-skill').modal('hide');
         });
