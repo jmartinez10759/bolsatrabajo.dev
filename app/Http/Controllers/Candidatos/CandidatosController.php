@@ -40,40 +40,47 @@ class CandidatosController extends MasterController
 	 */
 	public static function create( Request $request ){
 
-		#debuger($request->all());
 		if ( !self::validaciones( $request->all() ) ) {
 			return self::validaciones( $request->all() );
 		}
 		$where['email'] = $request->correo;
 		#se realiza la consulta para verificar si existen ese candidato en la base de datos
 		$consulta = MasterModel::show_model([], $where , new RequestUserModel );
-		#debuger($consulta);
 		if( count( $consulta ) > 0 ){
 			return message(false,[],"Registro del candidato existente");
 		}
 		$data = [];
-		$claves = ['passwordConfirm','pass','correo'];
+		$claves = ['passwordConfirm','pass','correo','name',];
 		foreach ($request->all() as $key => $value) {
-			#if ($key != "passwordConfirm" && $key != "pass" && $key != "correo") {
 			if ( !in_array( $key, $claves ) ) {
 				$data[$key] = $value;
 			}
 		}
-		$data['remember_token'] = str_random(50);
-		$data['api_token'] 		= str_random(50);
-		$data['email'] 			= $request->correo;
-		$data['password'] 		= sha1( $request->pass );
-		$data['status'] 		= 1;
-		$data['confirmed'] 		= false;
-		$data['confirmed_code'] = str_random(50);
-		$data['confirmed_nss']  = !is_null($request->confirmed_nss)? $request->confirmed_nss :false;
+		$name_complete = parse_name( $request->name );
+		if (!$name_complete) {
+			return message(false,[],"¡Favor de Ingresar al menos un apellido.!");
+		}
+
+		$data['name'] 						= $name_complete['nombre'];
+		$data['id_rol'] 					= 2;
+		$data['first_surname'] 		= $name_complete['first_surname'];
+		$data['second_surname'] 	= $name_complete['second_surname'];
+		$data['remember_token'] 	= str_random(50);
+		$data['api_token'] 				= str_random(50);
+		$data['email'] 						= $request->correo;
+		$data['password'] 				= sha1( $request->pass );
+		$data['status'] 					= 1;
+		$data['confirmed'] 				= false;
+		$data['confirmed_code'] 	= str_random(50);
+		$data['confirmed_nss']  	= !is_null($request->confirmed_nss)? $request->confirmed_nss :false;
 		#se realiza la inserccion.
 		$response = MasterModel::create_model( [ $data ], new RequestUserModel);
 
 		if ( count( $response ) > 0 ) {
 			#envio de correo para validar si existe el correo antes ingresado.
+			$data['nombre_completo'] = $request->name;
 		    Mail::send('emails.confirmation_code', $data, function($message) use ($data) {
-		        $message->to($data['email'], $data['name'])
+		        $message->to($data['email'], $data['nombre_completo'])
 		        		->from('notificaciones@burolaboralmexico.com.mx','Buro Laboral México')
 		        		->subject('Por favor confirma tu correo');
 		    });

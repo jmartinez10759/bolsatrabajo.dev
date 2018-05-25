@@ -7,28 +7,28 @@ new Vue({
   },
   data: {
     datos: [],
-    newKeep: { 
+    newKeep: {
          'name': ''
         ,'id_rol': 2
-        ,'first_surname': ''
-        ,'second_surname': ''
+        //,'first_surname': ''
+        //,'second_surname': ''
         ,'correo': ''
         ,'pass': ''
-        ,'passwordConfirm': '' 
+        ,'passwordConfirm': ''
         ,'confirmed_nss': false
         ,'email': ''
         ,'password': ''
     },
-    fillKeep: { 
+    fillKeep: {
         'id': ''
         ,'id_rol': 2
         ,'name': ''
-        ,'first_surname': ''
-        ,'second_surname': ''
+        //,'first_surname': ''
+        //,'second_surname': ''
         ,'correo': ''
         ,'pass': ''
-        ,'passwordConfirm': '' 
-        ,'confirmed_nss': false 
+        ,'passwordConfirm': ''
+        ,'confirmed_nss': false
         ,'email': ''
         ,'password': ''
     },
@@ -36,26 +36,25 @@ new Vue({
   },
   mixins:[mixins],
   methods:{
-    
+
     insertar: function(){
 
         var url = domain("register/insert");
-
+        var refresh = "";
         if ( !emailValidate(this.newKeep.correo) ) {
             toastr.error( validate ,"Correo Incorrecto" );
             $('#correo').parent().parent().addClass('has-error');
             return;
         }
         //se manda a llamar la funcion de insertar de vue master_vue.js
-        this.insert_general( url, '' ,function(json){
-
+        this.insert_general( url, refresh ,function( object ){
             $.each(this.newKeep,function(key, value){
                 $('#'+key).parent().parent().removeClass('has-error');
             });
             $('#signup').modal('hide');
             //redirect( ('details') );
         },function(){
-            
+
             $.each(this.newKeep,function(key, value){
                 if (key == "password" || key == "passwordConfirm") {
                     $('#'+key).parent().parent().addClass('has-error');

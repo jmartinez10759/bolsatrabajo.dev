@@ -3,28 +3,28 @@
         <form class="form-horizontal">
 
             <div class="form-group">
-                <label for="name" class="col-md-4 control-label">Nombre *</label>
+                <label for="name" class="col-md-4 control-label">Nombre Completo*</label>
 
                 <div class="col-md-6">
-                    <input id="name" type="text" class="form-control" v-model="newKeep.name" required autofocus>
+                    <input id="name" type="text" class="form-control" v-model="newKeep.name" required autofocus style="text-transform: uppercase;">
                 </div>
             </div>
 
-             <div class="form-group">
+             <!-- <div class="form-group">
                 <label for="first_surname" class="col-md-4 control-label">Primer Apellido *</label>
 
                 <div class="col-md-6">
                     <input id="first_surname" type="text" class="form-control" v-model="newKeep.first_surname" required autofocus>
                 </div>
-            </div>
+            </div> -->
 
-             <div class="form-group">
+             <!-- <div class="form-group">
                 <label for="second_surname" class="col-md-4 control-label">Segundo Apellido</label>
 
                 <div class="col-md-6">
                     <input id="second_surname" type="text" class="form-control" v-model="newKeep.second_surname">
                 </div>
-            </div>
+            </div> -->
             <!-- <div class="form-group">
                 <label for="curp" class="col-md-4 control-label">Curp *</label>
                 <div class="col-sm-6">
@@ -40,7 +40,7 @@
             </div>
 
             <div class="form-group">
-                <label for="pass" class="col-md-4 control-label">Password *</label>
+                <label for="pass" class="col-md-4 control-label">Contraseña *</label>
 
                 <div class="col-md-6">
                     <input id="pass" type="password" class="form-control" v-model="newKeep.pass" required>
@@ -48,13 +48,13 @@
             </div>
 
             <div class="form-group">
-                <label for="passwordConfirm" class="col-md-4 control-label">Confirmar Password *</label>
+                <label for="passwordConfirm" class="col-md-4 control-label">Confirmar Contraseña *</label>
 
                 <div class="col-md-6">
                     <input id="passwordConfirm" type="password" class="form-control" v-model="newKeep.passwordConfirm" required>
                 </div>
             </div>
-            
+
             <div class="form-group" style="display: none">
                 <label class="col-md-4 control-label">¿Cuenta con NSS ?</label>
                 <div class="col-md-6">
@@ -62,7 +62,7 @@
                 </div>
             </div>
 
-            
+
 
             <!-- <div class="form-group">
                 <label for="nss" class="col-md-4 control-label">NSS *</label>

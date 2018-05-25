@@ -1,5 +1,5 @@
 <?php
-    
+
 
     function checkPermission($name){
         if(Session::has('rol')){
@@ -33,7 +33,7 @@
 	    	return date('Y-m-d H:i:s');
 	    }
 	}
-	
+
 	if(!function_exists('format_decimal')){
 		function format_decimal($number=0, $separador=''){
 			return number_format($number, 3, '.', $separador);
@@ -91,7 +91,7 @@
             $select = '';
             if( $data ){
                 foreach ($data as $key => $values) {
-                
+
                     $option_selected='';
                     if($selected){
                             $option_selected = (in_array($values->$value,$selected))?'selected':'';
@@ -110,9 +110,9 @@
                       </select>';
             }
             return $opc;
-        
+
         }
-    
+
     }
 
     if(!function_exists('incCss')){
@@ -162,7 +162,7 @@
             $html_result .= $tbody;
             $html_result .='</table>';
             return $html_result;
-        
+
         }
     }
 
@@ -220,7 +220,7 @@
             $html_result .='</table>';
 
             return $html_result;
-        
+
         }
     }
 
@@ -243,7 +243,7 @@
             }
 
     }
-    
+
     if (!function_exists('build_acciones')) {
 
         function build_acciones($u = array(), $event= false, $texto = false, $color = false, $icon = false, $attr = false) {
@@ -272,7 +272,7 @@
             if ( $json ) {
                 return json_decode($json);
             }
-        
+
         }
 
     }
@@ -283,7 +283,7 @@
             if ( is_array( $array ) ) {
                 return  json_decode( json_encode($array) );
             }
-       
+
         }
 
     }
@@ -294,7 +294,7 @@
             if ( $json ) {
                 return  json_decode( $json, TRUE );
             }
-       
+
         }
 
     }
@@ -305,7 +305,7 @@
             if ( $object ) {
                 return  json_decode( json_encode( $object ), TRUE );
             }
-       
+
         }
 
     }
@@ -316,8 +316,8 @@
     if (!function_exists('build_icon')) {
 
         function build_icon($u = array(), $event= false, $icon = false, $attr = false) {
-                
-                $event = ($event)? "onclick = ".$event."(".json_encode($u).")": false;                
+
+                $event = ($event)? "onclick = ".$event."(".json_encode($u).")": false;
                 $icon =  ($icon)?   $icon:false;
                 $attr =  ($attr)?   $attr:false;
 
@@ -327,7 +327,7 @@
                 $acciones .= '</span>';
                 $acciones .= '</div>';
                 return $acciones;
-                
+
             }
 
     }
@@ -335,8 +335,8 @@
     if (!function_exists('build_img')) {
 
         function build_img($u = array(), $event= false, $icon = false, $attr = false) {
-                
-                $event = ($event)? "onclick = ".$event."(".json_encode($u).")": false;                
+
+                $event = ($event)? "onclick = ".$event."(".json_encode($u).")": false;
                 $icon =  ($icon)?   $icon:false;
                 $attr =  ($attr)?   $attr:false;
 
@@ -345,7 +345,7 @@
                 $acciones .= '</img>';
                 $acciones .= '</div>';
                 return $acciones;
-                
+
             }
 
     }
@@ -353,20 +353,20 @@
      *Funcion para crear una vista en particular, en proyecto de travel
      */
     if (!function_exists('build_vista')) {
-        
+
         function build_vista( $event = array(), $images = array(), $titulos = array() ){
 
             $html = '';
             $col = 12 / count( $titulos );
-            for ($i=0; $i < count($titulos); $i++) { 
-                #$event = ($event)? "onclick = ".$event[$i]: false;  
+            for ($i=0; $i < count($titulos); $i++) {
+                #$event = ($event)? "onclick = ".$event[$i]: false;
                 $html .= '<div class="col-sm-'.$col.' panel_menu" >';
                     $html .= '<div class="about-item scrollpoint sp-effect1">';
                         $html .= '<p><div onclick="'.$event[$i].'" style="cursor: pointer;"><img src="'.$images[$i].'" alt=""></div></p>';
                         $html .= '<h3 class="font_menu">'.$titulos[$i].'</h3>';
                     $html .= '</div>';
                 $html .= '</div>';
-                
+
             }
             return $html;
 
@@ -376,7 +376,7 @@
     }
 
     if (!function_exists('message')) {
-        
+
         function message( $success = true,$register = array(), $message = false ){
 
             $arreglo = [
@@ -385,7 +385,7 @@
                 ,'message'  => $message
             ];
             return json_encode( $arreglo );
-        
+
         }
 
     }
@@ -396,7 +396,7 @@
      *@return object
      */
     if (!function_exists('data_march')) {
-        
+
         function data_march( $data = array() ){
 
             $response = [];
@@ -415,12 +415,12 @@
 
     }
     /**
-     *Verificar si estan correctamente los valores ingresados de la fecha 
+     *Verificar si estan correctamente los valores ingresados de la fecha
      *@param $fecha string  [description]
      *@return array
      */
     if (!function_exists('schema_date')) {
-        
+
         function schema_date( $fecha = false ){
 
             if ( $fecha ) {
@@ -431,9 +431,9 @@
                     }
                 }
                 return ['success' => false,'message' => "Fecha incorrecta"];
-            
+
             }
-            
+
         }
 
     }
@@ -443,7 +443,7 @@
      *@return array
      */
     if (!function_exists('domain')) {
-        
+
         function domain(){
 
             $http = $_SERVER['REQUEST_SCHEME'];
@@ -463,7 +463,43 @@
             }
 
             return $http."://".$domain."/".$project.$public;
-            
+
         }
 
     }
+  /**
+   *Realiza un parseo de un string
+   *@param $name_complete string  [description]
+   *@return array
+   */
+   if (!function_exists('parse_name')) {
+
+      function parse_name( $name_complete ){
+
+        $nombre_completo = explode(" ", $name_complete );
+        #debuger(count( $nombre_completo ) );
+    		$nombre = "";
+    		$apellido = [];
+        if ( count( $nombre_completo ) < 2 ) { return false; }
+
+        $count_name = ( count( $nombre_completo ) > 1 && count( $nombre_completo ) < 3 )? count($nombre_completo) - 1 : count($nombre_completo) - 2;
+
+    		for ($i=0; $i < $count_name ; $i++) {
+    				$nombre .= $nombre_completo[$i]." ";
+    		}
+        $j = $count_name;
+    		for ($i= count($nombre_completo); $i > $count_name ; $i--) {
+    				$apellido [] = $nombre_completo[$j]." ";
+    				$j ++;
+    		}
+
+        $datos = [
+          'nombre' => strtoupper($nombre)
+          ,'first_surname' => isset($apellido[0] ) ? strtoupper($apellido[0]) : ""
+          ,'second_surname' => isset($apellido[1] ) ? strtoupper($apellido[1]) : ""
+        ];
+          return $datos;
+
+      }
+
+   }

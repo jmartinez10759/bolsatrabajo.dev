@@ -1,8 +1,4 @@
 <?php
-#print_r(phpinfo());exit();
-#$_SESSION['php_self'] = $_SERVER['PHP_SELF'];
-#print_r( $_SESSION );exit();
-#print_r( $_SERVER['PHP_SELF'] );exit();
 /**
  * Laravel - A PHP Framework For Web Artisans
  *

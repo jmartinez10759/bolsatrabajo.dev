@@ -1,14 +1,14 @@
     <form class="form-horizontal" method="POST" v-on:submit.prevent="inicio_sesion()">
 
         <div class="form-group">
-            <label for="email" class="col-md-4 control-label">Correo</label>
+            <label for="email" class="col-md-4 control-label">Correo:</label>
             <div class="col-md-6">
                 <input id="email" type="email" class="form-control" name="email" required autofocus v-model="newKeep.email">
             </div>
         </div>
 
         <div class="form-group">
-            <label for="password" class="col-md-4 control-label">Password</label>
+            <label for="password" class="col-md-4 control-label">Contraseña:</label>
             <div class="col-md-6">
                 <input id="password" type="password" class="form-control" name="password" required v-model="newKeep.password">
             </div>
@@ -40,5 +40,5 @@
 
 
 @push('scripts')
-    
+
 @endpush
