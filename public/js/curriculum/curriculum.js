@@ -17,13 +17,20 @@ new Vue ({
         ,'telefono': ''
         ,'direccion': ''
         ,'id_cv': ''
+        //seccion de escuela
         ,'escuela': ''
         ,'id_nivel': ''
+        ,'id_categorias_educativas':''
+        ,'otros':''
+        ,'id_estatus_academico':''
+        ,'cedula':''
         ,'fecha_inicio': ''
         ,'fecha_final': ''
+        //seccion de skill
         ,'habilidad': ''
         ,'porcentaje': ''
         ,'skill_orden': ''
+        //seccion de trabajos
         ,'jobs_empresa' : ''
         ,'jobs_puesto' : ''
         ,'jobs_descripcion': ''
@@ -46,13 +53,20 @@ new Vue ({
         ,'telefono': ''
         ,'direccion': ''
         ,'id_cv': ''
+        //seccion de estudios
         ,'escuela': ''
         ,'id_nivel': ''
+        ,'id_categorias_educativas':''
+        ,'otra_categoria':''
+        ,'id_estatus_academico':''
+        ,'cedula':''
         ,'fecha_inicio': ''
         ,'fecha_final': ''
+        //seccion de skills
         ,'habilidad': ''
         ,'porcentaje': ''
         ,'skill_orden': ''
+        //seccion de trabajos
         ,'jobs_empresa' : ''
         ,'jobs_puesto' : ''
         ,'jobs_descripcion': ''
@@ -61,6 +75,7 @@ new Vue ({
         ,'jobs_fecha_final': ''
         ,'jobs_jefe_inmediato': ''
         ,'jobs_telefono': ''
+        ,'jobs_sucursal' : ''
         //,'url_cv': ''
     },
 
@@ -84,9 +99,9 @@ new Vue ({
         this.newKeep.direccion    = this.datos.direccion;
 
         this.insert_general( url,refresh,function(json){
-          $('#seccion-cv').show('slow');
+          jQuery('#seccion-cv').show('slow');
         },function(json){
-          $('#seccion-cv').hide('slow');
+          jQuery('#seccion-cv').hide('slow');
         });
 
     },
@@ -94,19 +109,24 @@ new Vue ({
       var url = domain('study/insert');
       var refresh = domain('cv/show');
       //setter las propiedades para enviarlas.
-      this.newKeep.id_cv        = this.datos.id_cv;
-      this.newKeep.escuela      = this.datos.escuela;
-      this.newKeep.id_nivel     = this.datos.id_nivel;
-      this.newKeep.fecha_inicio = this.datos.fecha_inicio;
-      this.newKeep.fecha_final  = this.datos.fecha_final;
+      this.newKeep.id_cv                  = this.datos.id_cv;
+      this.newKeep.escuela                = this.datos.escuela;
+      this.newKeep.id_nivel               = this.datos.id_nivel;
+      this.newKeep.id_categorias_educativas  = this.datos.id_categorias_educativas;
+      this.newKeep.otra_categoria         = this.datos.otra_categoria;
+      this.newKeep.id_estatus_academico   = this.datos.id_estatus_academico;
+      this.newKeep.cedula                 = this.datos.cedula;
+      this.newKeep.fecha_inicio           = jQuery('#fecha_inicio').val();
+      this.newKeep.fecha_final            = jQuery('#fecha_final').val();
+
 
        this.insert_general(url,refresh,function(json){
           buildSweetAlertOptions("¡Registro agregado.!", "¿Desea seguir agregando registros?", function(){
-            $('#modal-educacion').modal('hide');
+            jQuery('#modal-educacion').modal('hide');
           }, 'success', true );
 
         },function(json){
-          //$('#modal-educacion').modal('hide');
+          //jQuery('#modal-educacion').modal('hide');
         });
 
     },
@@ -119,19 +139,20 @@ new Vue ({
       this.newKeep.jobs_empresa         = this.datos.jobs_empresa;
       this.newKeep.jobs_puesto          = this.datos.jobs_puesto;
       this.newKeep.jobs_descripcion     = this.datos.jobs_descripcion;
-      this.newKeep.jobs_fecha_inicio    = this.datos.jobs_fecha_inicio;
-      this.newKeep.jobs_fecha_final     = this.datos.jobs_fecha_final;
+      this.newKeep.jobs_fecha_inicio    = jQuery('#jobs_fecha_inicio').val();
+      this.newKeep.jobs_fecha_final     = jQuery('#jobs_fecha_final').val();;
       this.newKeep.jobs_jefe_inmediato  = this.datos.jobs_jefe_inmediato;
       this.newKeep.jobs_telefono        = this.datos.jobs_telefono;
+      this.newKeep.jobs_sucursal        = this.datos.jobs_sucursal;
 
        this.insert_general(url,uri,function(json){
 
             buildSweetAlertOptions("¡Registro agregado.!", "¿Desea seguir agregando registros?", function(){
-                $('#modal-experiencia').modal('hide');
+                jQuery('#modal-experiencia').modal('hide');
             }, 'success', true );
 
         },function(json){
-            $('#modal-experiencia').modal('hide');
+            jQuery('#modal-experiencia').modal('hide');
         });
 
     },
@@ -147,11 +168,11 @@ new Vue ({
        this.insert_general(url,uri,function(json){
 
           buildSweetAlertOptions("¡Registro agregado.!", "¿Desea seguir agregando registros?", function(){
-              $('#modal-skill').modal('hide');
+              jQuery('#modal-skill').modal('hide');
           }, 'success', true );
 
         },function(json){
-          $('#modal-skill').modal('hide');
+          jQuery('#modal-skill').modal('hide');
         });
 
     },
@@ -164,7 +185,7 @@ new Vue ({
           for( var i in this.newKeep ){
               this.newKeep[i] = "";
           }
-          $('#'+modal).modal('hide');
+          jQuery('#'+modal).modal('hide');
           toastr.info(update,title);
       }).catch(error => {
           toastr.error( error, expired );
@@ -181,7 +202,7 @@ new Vue ({
           for( var i in this.newKeep ){
               this.newKeep[i] = "";
           }
-          $('#'+modal).modal('hide');
+          jQuery('#'+modal).modal('hide');
           toastr.info(update,title);
       }).catch(error => {
           toastr.error( error, expired );
@@ -199,7 +220,7 @@ new Vue ({
           for( var i in this.newKeep ){
               this.newKeep[i] = "";
           }
-          $('#'+modal).modal('hide');
+          jQuery('#'+modal).modal('hide');
           toastr.info(update,title);
       }).catch(error => {
           toastr.error( error, expired );
@@ -207,7 +228,7 @@ new Vue ({
       //this.update_general( url,uri,'modal-edit-skill' );
 
     },
-    delete_study( keep ){
+    delete_study:function( keep ){
       var url = domain('study/delete/'+keep.id);
       var refresh = domain('cv/show');
       axios.get( url, csrf_token ).then(response => {
@@ -219,7 +240,7 @@ new Vue ({
       });
       //this.delete_general(url,uri, keep.id );
     },
-    delete_jobs( keep ){
+    delete_jobs:function( keep ){
       var url = domain('jobs/delete/'+keep.id);
       var refresh = domain('cv/show');
       axios.get( url, csrf_token ).then(response => {
@@ -232,7 +253,7 @@ new Vue ({
       //this.delete_general(url,uri, keep.id );
 
     },
-    delete_skills( keep ){
+    delete_skills:function( keep ){
       var url = domain('skills/delete/'+keep.id);
       var refresh = domain('cv/show');
       axios.get( url, csrf_token ).then(response => {
@@ -252,7 +273,37 @@ new Vue ({
 
 });
 
-/*var empresa = ['BLA','BURO LABORAL MEXICO','CPA VISION', 'BGT SISTEMAS', 'NETZEN', 'INDUSTRIAS IDEAL','PAE MEXICO','INTELEGIS','AGUA DE MEXICO','STO CONSULTING','CESCIJUC','ICSI COMERCIAL'];
+function nivel_academico(obj){
+  var $this = jQuery(obj);
+  jQuery('.div_otros').hide('slow');
+}
 
-autocomplete("jobs_empresa", empresa);
-autocomplete("jobs_puesto", empresa);*/
+function estatus_academico(object){
+
+  var id_estatus_academico = jQuery(object).val();
+  if(id_estatus_academico == 4){
+      jQuery('.div_cedula').show('slow');
+  }else{
+      jQuery('.div_cedula').hide('slow');
+  }
+
+}
+
+function categorias_educativas(object){
+
+  var $this = jQuery(object);
+  var select = jQuery(object).val();
+  var options = $this.children();
+  for (var i = 0; i < options.length; i++) {
+      if( options[i].value == select ){
+
+        if( options[i].innerHTML == "Otro"){
+          jQuery('.div_otros').show('slow');
+        }else{
+          jQuery('.div_otros').hide('slow');
+        }
+
+      }
+  }
+
+}

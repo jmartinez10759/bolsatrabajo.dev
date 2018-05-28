@@ -23,7 +23,7 @@ class JobController extends MasterController
     	$data = [];
         foreach ($request->all() as $key => $value) {
             if ( $value != null ) {
-                $data[$key] = $value;
+                $data[$key] = strtoupper($value);
             }
         }
         // $url            = self::$_domain."/api/bolsa/jobs";
@@ -35,6 +35,7 @@ class JobController extends MasterController
         // $datos['data']  = $data;
         // $method         = 'post';
         // $response       = self::endpoint($url, $headers, $datos,$method);
+        #debuger($data);
         $response = self::$_model::create_model( [$data] ,new BlmJobsModel);
         if ( $response ) {
             return message(true,$response[0],self::$message_success);
@@ -61,8 +62,14 @@ class JobController extends MasterController
       //   $fields['data']  = $request->all();
       //   $method          = 'put';
       //   $response        = self::endpoint($url, $headers, $fields,$method);
+      $data = [];
+      foreach ($request->all() as $key => $value) {
+          if ( $value != null ) {
+              $data[$key] = strtoupper($value);
+          }
+      }
       $where = ['id' => $request->id];
-      $response = self::$_model::update_model( $where,$request->all(), new BlmJobsModel);
+      $response = self::$_model::update_model( $where, $data , new BlmJobsModel);
       if ( $response ) {
           return message(true,$response[0],self::$message_success);
       }else{

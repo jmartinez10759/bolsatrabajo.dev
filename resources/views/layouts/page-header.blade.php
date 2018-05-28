@@ -93,11 +93,11 @@
                             <!--<li> <a href="pricing.html"><i class="fa fa-sign-in" aria-hidden="true"></i>Paquetes</a> </li>-->
 
                             @if( !Session::has('name') )
-                                <li class="left-br">
-                                    <a tabs="register" data-toggle="modal" data-target="#signup" class="signin" style="cursor: pointer;">Registrate</a>
+                                <li class="">
+                                    <a tabs="register" data-toggle="modal" data-target="#signup" class="signin" style="cursor: pointer;">Crear Cuenta</a>
                                 </li>
                                 <li class="left-br">
-                                    <a tabs="start" data-toggle="modal" data-target="#signup" class="signin" style="cursor: pointer;">Iniciar Sesión</a>
+                                    <a tabs="start" data-toggle="modal" data-target="#signup" class="signin" style="cursor: pointer;"> Ingresar </a>
                                 </li>
                             @else
                                 <li class="">

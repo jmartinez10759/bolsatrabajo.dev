@@ -24,7 +24,7 @@ class SkillController extends MasterController
     	$data = [];
         foreach ($request->all() as $key => $value) {
             if ( $value != null ) {
-                $data[$key] = $value;
+                $data[$key] = strtoupper($value);
             }
         }
         // $url            = self::$_domain."/api/bolsa/skills";
@@ -63,9 +63,14 @@ class SkillController extends MasterController
         // $fields['data']  = $request->all();
         // $method          = 'put';
         // $response        = self::endpoint($url, $headers, $fields,$method);
-
+        $data = [];
+        foreach ($request->all() as $key => $value) {
+            if ( $value != null ) {
+                $data[$key] = strtoupper($value);
+            }
+        }
         $where = ['id' => $request->id];
-        $response = self::$_model::update_model( $where,$request->all(), new BlmSkillModel);
+        $response = self::$_model::update_model( $where, $data , new BlmSkillModel);
         if ( $response ) {
             return message(true,$response[0],self::$message_success);
         }else{

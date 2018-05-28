@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class CandidateJobOffersModel extends Model
 {
-    
+
 	protected $connection = "blm_mysql";
 	protected $table = "candidates_job_offers";
 	public $timestamps = false;
@@ -21,6 +21,7 @@ class CandidateJobOffersModel extends Model
 		,'rating'
 		,'disqualified'
 		,'disqualify_reason_id'
+		,'is_from_sde'
 		,'created'
 		,'modified'
     ];

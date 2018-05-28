@@ -216,6 +216,11 @@ class PostulacionController extends MasterController
      */
   public static function store_candidates( $account_person_insert ){
           #debuger($account_person_insert);
+          $select_candidates = self::$_model::show_model( [], ['account_person_id' => $account_person_insert->id], new CandidatoModel);
+          #debuger($select_candidates[0]);
+          if ($select_candidates) {
+             return $select_candidates[0];
+          }
         	$data_candidate = [
         			'account_person_id'		   => $account_person_insert->id
         			,'user_id'				       => null
@@ -252,6 +257,7 @@ class PostulacionController extends MasterController
           ,'rating'				       	    => null
           ,'disqualified'			        => null
           ,'disqualify_reason_id'	    => null
+          ,'is_from_sde'	            => true
           ,'created'				        	=> null
           ,'modified'				       	  => null
 		   ];

@@ -298,7 +298,11 @@
         }
 
     }
-
+    /**
+     *Funcion donde se convierte un objeto en arreglo.
+     *@param $object
+     *@return array 
+     */
     if (!function_exists('object_to_array')) {
 
         function object_to_array ( $object = false ) {
@@ -309,9 +313,6 @@
         }
 
     }
-
-
-
 
     if (!function_exists('build_icon')) {
 
@@ -374,7 +375,12 @@
 
 
     }
-
+    /**
+     *Funcion donde se crea un mesaje general
+     *@param $success [Description]
+     *@param $data [Description]
+     *@param $message  [Description]
+     */
     if (!function_exists('message')) {
 
         function message( $success = true,$register = array(), $message = false ){

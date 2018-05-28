@@ -24,7 +24,7 @@ class StudyController extends MasterController
         $data = [];
         foreach ($request->all() as $key => $value) {
             if ( $value != null ) {
-                $data[$key] = $value;
+                $data[$key] = strtoupper($value);
             }
         }
         // $url            = self::$_domain."/api/bolsa/study";
@@ -36,6 +36,7 @@ class StudyController extends MasterController
         // $datos['data']  = $data;
         // $method         = 'post';
         // $response       = self::endpoint($url, $headers, $datos,$method);
+        #debuger($data);
         $response = self::$_model::create_model( [$data] ,new BlmStudyModel);
 
         if ( $response ) {
@@ -63,8 +64,14 @@ class StudyController extends MasterController
       //   $method          = 'put';
       //   $response        = self::endpoint($url, $headers, $fields,$method);
       #debuger($request->all());
+        $data = [];
+        foreach ($request->all() as $key => $value) {
+            if ( $value != null ) {
+                $data[$key] = strtoupper($value);
+            }
+        }
         $where = ['id' => $request->id];
-        $response = self::$_model::update_model( $where,$request->all(), new BlmStudyModel);
+        $response = self::$_model::update_model( $where, $data , new BlmStudyModel);
         if ( $response ) {
             return message(true,$response[0],self::$message_success);
         }else{

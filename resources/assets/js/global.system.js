@@ -1084,66 +1084,66 @@ function check_status_xhr(status, title, text, type, accept) {
        */
         number_format = function(amount, decimals) {
 
-            amount += ''; // por si pasan un numero en vez de un string
-            amount = parseFloat(amount.replace(/[^0-9\.]/g, '')); // elimino cualquier cosa que no sea numero o punto
+              amount += ''; // por si pasan un numero en vez de un string
+              amount = parseFloat(amount.replace(/[^0-9\.]/g, '')); // elimino cualquier cosa que no sea numero o punto
 
-            decimals = decimals || 0; // por si la variable no fue fue pasada
+              decimals = decimals || 0; // por si la variable no fue fue pasada
 
-            // si no es un numero o es igual a cero retorno el mismo cero
-            if (isNaN(amount) || amount === 0)
-                return parseFloat(0).toFixed(decimals);
+              // si no es un numero o es igual a cero retorno el mismo cero
+              if (isNaN(amount) || amount === 0)
+                  return parseFloat(0).toFixed(decimals);
 
-            // si es mayor o menor que cero retorno el valor formateado como numero
-            amount = '' + amount.toFixed(decimals);
+              // si es mayor o menor que cero retorno el valor formateado como numero
+              amount = '' + amount.toFixed(decimals);
 
-            var amount_parts = amount.split('.'),
-                regexp = /(\d+)(\d{3})/;
+              var amount_parts = amount.split('.'),
+                  regexp = /(\d+)(\d{3})/;
 
-            while (regexp.test(amount_parts[0]))
-                amount_parts[0] = amount_parts[0].replace(regexp, '$1' + ',' + '$2');
+              while (regexp.test(amount_parts[0]))
+                  amount_parts[0] = amount_parts[0].replace(regexp, '$1' + ',' + '$2');
 
-            return amount_parts.join('.');
+              return amount_parts.join('.');
         }
-        /**
-         *Funcion de Jquery donde impide utilizar letras en campos de numero
-         *@param array [description]
-         *@return
-         */
-         function numerico(object){
+      /**
+       *Funcion de Jquery donde impide utilizar letras en campos de numero
+       *@param array [description]
+       *@return
+       */
+       function numerico(object){
 
-                object.value = (object.value + '').replace(/[^0-9]/g, '');
+              object.value = (object.value + '').replace(/[^0-9]/g, '');
 
-         }
-         /**
-          *Funcion de jquery para colocar un valor predeterminado
-          *@param
-          */
-        function value_inputs( object ){
-            $(object).val('');
-        }
-        /**
-         *Metodo para mostrar y/o ocultar secciones
-         *@param mostrar [descritption]
-         *@param ocultar [description]
-         *@return void
-         */
-        function mostrar_elements( mostrar, ocultar){
+       }
+       /**
+        *Funcion de jquery para colocar un valor predeterminado
+        *@param
+        */
+      function value_inputs( object ){
+          $(object).val('');
+      }
+    /**
+     *Metodo para mostrar y/o ocultar secciones
+     *@param mostrar [descritption]
+     *@param ocultar [description]
+     *@return void
+     */
+    function mostrar_elements( mostrar, ocultar){
 
-            for (var i = 0; i < mostrar.length; i++) {
-                //$('#'+mostrar[i]).toggle('slow');
-                $('#'+mostrar[i]).show('slow');
-                $('.'+mostrar[i]).show('slow');
-
-            }
-            for (var i = 0; i < ocultar.length; i++) {
-                console.log(ocultar[i]);
-                //$('#'+ocultar[i]).toggle('slow');
-                $('#'+ocultar[i]).hide('slow');
-                $('.'+ocultar[i]).hide('slow');
-
-            }
+        for (var i = 0; i < mostrar.length; i++) {
+            //$('#'+mostrar[i]).toggle('slow');
+            $('#'+mostrar[i]).show('slow');
+            $('.'+mostrar[i]).show('slow');
 
         }
+        for (var i = 0; i < ocultar.length; i++) {
+            console.log(ocultar[i]);
+            //$('#'+ocultar[i]).toggle('slow');
+            $('#'+ocultar[i]).hide('slow');
+            $('.'+ocultar[i]).hide('slow');
+
+        }
+
+    }
     /**
      *Metodo para mostrar y/o ocultar secciones
      *@param mostrar [descritption]
@@ -1172,7 +1172,7 @@ function check_status_xhr(status, title, text, type, accept) {
      *Funcion para obtener la fecha y horas
      *@return date fecha[descripcion]
      */
-    get_actual_fulldate = function( sign = '-', sign_hrs = ":" ) {
+     get_actual_fulldate = function( sign = '-', sign_hrs = ":" ) {
         var d = new Date();
         var day = addZero(d.getDate());
         var month = addZero(d.getMonth()+1);
@@ -1181,7 +1181,7 @@ function check_status_xhr(status, title, text, type, accept) {
         var m = addZero(d.getMinutes());
         var s = addZero(d.getSeconds());
         return day + sign + month + sign + year + " (" + h + sign_hrs + m + sign_hrs + s + ")";
-    }
+     }
     /**
      *Funcion para obtener las horas
      *@return date fecha[descripcion]
@@ -1453,3 +1453,93 @@ function check_status_xhr(status, title, text, type, accept) {
         return false;
 
     }
+    /**
+     * ChangeType
+     * Changes the default type of an element in another given one
+     *
+     * Related: passUnmask
+     *
+     * @see     passUnmask
+     * @param   {object}    ele     The jQuery element that will be changed.
+     * @param   {string}    type    The new type for the input selected.
+     * @return  {object}
+     */
+     changeType = function ( ele, type ) {
+        if ( ele.prop( 'type' ) === type ) {
+            return ele;
+        }
+
+        try {
+            return ele.prop( 'type', type ); //Stupid IE security will not allow this
+        } catch ( e ) {
+            // Try re-creating the element (yep... this sucks)
+            // jQuery has no html() method for the element, so we have to put into a div first
+            var html = $( '<div>' ).append( ele.clone() ).html(),
+                regex = /type=(")?([^"\s]+)(")?/, //matches type=text or type="text"
+
+                //If no match, we add the type attribute to the end; otherwise, we replace
+                tmp = $( html.match( regex ) === null ?
+                    html.replace( '>', ' type="' + type + '">' ) :
+                    html.replace( regex, 'type="' + type + '"' ) ),
+                events,
+                cb;
+
+            //Copy data from old element
+            tmp.data( 'type', ele.data( 'type' ) );
+            events = ele.data( 'events' );
+
+            cb = function ( events ) {
+                return function () {
+                    //Bind all prior events
+                    for ( var i in events ) {
+                        var y = events[ i ];
+                        for ( var j in y ) {
+                            tmp.bind( i, y[ j ].handler );
+                        }
+                    }
+                };
+            } ( events );
+
+            ele.replaceWith( tmp );
+            setTimeout( cb, 10 ); // Wait a bit to call function
+
+            return tmp;
+        }
+    }
+    /**
+     * passUnmask
+     * Reveals a password input changing its type to text.
+     *
+     * @return  void
+     */
+     passUnmask = function ( input, obj ) {
+       $(input).each( function () {
+           var $self = $( this );
+           //changeType( $self, $self.attr( 'type' ) === 'password' ? 'text' : 'password' );
+           changeTypes( $self, obj );
+       } );
+
+     };
+     /**
+      * changeTypes
+      * Reveals a password input changing its type to text.
+      *
+      * @return  void
+      */
+     changeTypes = function( self, obj ){
+          var $this = self;
+          if ($this.attr('type') === "password") {
+            jQuery(obj).mousedown(function(){
+              $this.attr('type','text');
+            });
+
+          }else{
+              jQuery(obj).mouseup(function(){
+                $this.attr('type','password');
+              });
+
+          }
+
+
+
+     }

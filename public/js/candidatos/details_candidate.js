@@ -90,13 +90,13 @@ new Vue({
         //console.log(this.newKeep);return;
         if ( this.newKeep.descripcion == "") {
             toastr.error( validate ,"Descripcion Vacia" );
-            $('#descripcion').parent().addClass('has-error');
+            jQuery('#descripcion').parent().addClass('has-error');
             return;
         }
 
         if ( !curpValida( convert_letters( this.newKeep.curp,'UPPER') ) ) {
             toastr.error( validate ,"Curp Incorrecto" );
-            $('#curp').parent().addClass('has-error');
+            jQuery('#curp').parent().addClass('has-error');
             return;
         }
 
@@ -107,7 +107,7 @@ new Vue({
           $('#btn_cancel_candidato').hide();
           var inputs = ['nombre','primer_apellido','segundo_apellido','telefono','codigo','direccion','curp','estados','contraseña','confirmed_nss','descripcion'];
           for (var i = 0; i < inputs.length; i++) {
-              $('#'+inputs[i]).attr('disabled',true);
+              jQuery('#'+inputs[i]).attr('disabled',true);
           }
 
         },function(){ });
@@ -119,7 +119,7 @@ new Vue({
            //se realiza las validaciones de los datos de NSS
             if ( !nssValido(this.newKeep.nss) ) {
                 toastr.error( validate ,"NSS Incorrecto" );
-                $('#nss').parent().parent().addClass('has-error');
+                jQuery('#nss').parent().parent().addClass('has-error');
                 return;
             }
         }else{
@@ -201,39 +201,39 @@ new Vue({
 //se realiza la carga de la foto del candidato.
 var upload_url = domain('details/upload');
 upload_file('',upload_url,1,'.jpg,.png',function( object ){
-    $('#url_file').val( domain(object.result.url_file) );
-    //$('#imagen').attr('src',false);
-    //$('#imagen').attr('src', domain(object.result.url_file) );
-    //$('#modal-upload').modal('hide');
+    jQuery('#url_file').val( domain( object.result.url_file ) );
+    $('#imagen').attr('src',false);
+    $('#imagen').attr('src', domain(object.result.url_file) );
+    $('#modal-upload').modal('hide');
     //alert(  domain(object.result.url_file) );
     redirect('details');
 });
 
 $('#btn_editar_candidato').click(function(){
-    $('#btn_update_candidato').show();
-    $('#btn_cancel_candidato').show();
-    $(this).hide();
+    jQuery('#btn_update_candidato').show();
+    jQuery('#btn_cancel_candidato').show();
+    jQuery(this).hide();
     var inputs = ['nombre','primer_apellido','segundo_apellido','telefono','codigo','direccion','curp','estados','contraseña','confirmed_nss','descripcion'];
     for (var i = 0; i < inputs.length; i++) {
-        $('#'+inputs[i]).attr('disabled',false);
+        jQuery('#'+inputs[i]).attr('disabled',false);
     }
 });
 
 $('#btn_cancel_candidato').click(function(){
-    $('#btn_update_candidato').hide();
-    $('#btn_editar_candidato').show();
-    $(this).hide();
+    jQuery('#btn_update_candidato').hide();
+    jQuery('#btn_editar_candidato').show();
+    jQuery(this).hide();
     var inputs = ['nombre','primer_apellido','segundo_apellido','telefono','codigo','direccion','curp','estados','contraseña','confirmed_nss','descripcion'];
     for (var i = 0; i < inputs.length; i++) {
-        $('#'+inputs[i]).attr('disabled',true);
+        jQuery('#'+inputs[i]).attr('disabled',true);
     }
 });
 
 
-  $('#btn_update_candidato').hide();
-  $('#btn_cancel_candidato').hide();
-  $('#btn_editar_candidato').show();
+  jQuery('#btn_update_candidato').hide();
+  jQuery('#btn_cancel_candidato').hide();
+  jQuery('#btn_editar_candidato').show();
   var inputs = ['nombre','primer_apellido','segundo_apellido','telefono','codigo','direccion','curp','estados','contraseña','confirmed_nss','descripcion'];
   for (var i = 0; i < inputs.length; i++) {
-    $('#'+inputs[i]).attr('disabled',true);
+    jQuery('#'+inputs[i]).attr('disabled',true);
   }

@@ -17,7 +17,11 @@ class CreateStudyCandidates extends Migration
             $table->increments('id');
             $table->integer('id_cv');
             $table->integer('id_nivel')->nullable();
+            $table->integer('id_categorias_educativas')->nullable();
+            $table->integer('id_estatus_academico')->nullable();
             $table->string('escuela')->nullable();
+            $table->string('cedula')->nullable();
+            $table->string('otra_categoria')->nullable();
             $table->date('fecha_inicio')->nullable();
             $table->date('fecha_final')->nullable();
             $table->timestamps();

@@ -9,11 +9,11 @@
 
         <div class="form-group">
             <label for="password" class="col-md-4 control-label">Contraseña:</label>
+            <a style="cursor:pointer;" title="Mostrar Contraseña" onmouseup="passUnmask('#password',this)"><i class="fa fa-eye"></i></a>
             <div class="col-md-6">
                 <input id="password" type="password" class="form-control" name="password" required v-model="newKeep.password">
             </div>
         </div>
-
         <!-- <div class="form-group">
             <div class="col-md-6 col-md-offset-4">
                 <div class="checkbox">

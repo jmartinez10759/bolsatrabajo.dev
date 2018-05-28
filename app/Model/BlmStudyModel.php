@@ -11,9 +11,13 @@ class BlmStudyModel extends Model
     	'id'
         ,'id_cv'
         ,'id_nivel'
+        ,'id_categorias_educativas'
+        ,'id_estatus_academico'
         ,'escuela'
+        ,'otra_categoria'
+        ,'cedula'
         ,'fecha_inicio'
         ,'fecha_final'
     ];
-    
+
 }

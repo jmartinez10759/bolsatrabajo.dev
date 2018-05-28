@@ -4,7 +4,7 @@ var error_mgs   = "Ocurrio un error, Favor de verificar";
 var title_error = "Registros Incorrectos";
 var update      = "Registro actualizado corretamente.";
 var validate    = "Favor de Verificar los campos color Rojo";
-var expired     = "Sesion Expirada.";
+var expired     = "Ocurrio un Error, Favor de Verificar";
 //var csrf_token  = { 'X-CSRF-TOKEN': document.getElementsByTagName("META")['3'].content }
 var _method     = 'ORIGIN';
 var csrf_token  = { 'X-CSRF-TOKEN': meta('csrf-token'),'Access-Control-Request-Method':_method };
@@ -35,7 +35,7 @@ var mixins = {
             for ( var i in this.fillKeep){
                 this.fillKeep[i] = obj[i];
             }
-            $('#'+modal).modal('show');
+            jQuery('#'+modal).modal('show');
 
         },
         insert_general: function( uri, url, function_success , function_errors ) {
@@ -48,7 +48,7 @@ var mixins = {
                     for( var i in this.newKeep ){
                         this.newKeep[i] = "";
                     }
-                    $('#create_form').modal('hide');
+                    jQuery('#create_form').modal('hide');
                     toastr.success( response.data.message , title );
                     function_success( response.data );
 
@@ -71,7 +71,7 @@ var mixins = {
                 for( var i in this.newKeep ){
                     this.newKeep[i] = "";
                 }
-                $('#'+modal).modal('hide');
+                jQuery('#'+modal).modal('hide');
                 toastr.info(update,title);
 
             }).catch(error => {
@@ -98,7 +98,7 @@ var mixins = {
 
             $.each(this.newKeep,function(key, value){
                 if (value == "" || value == false) {
-                    $('#'+key).parent().parent().addClass('has-error');
+                    jQuery('#'+key).parent().parent().addClass('has-error');
                     return;
                 }
             });

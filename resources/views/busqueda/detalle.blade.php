@@ -143,8 +143,8 @@
         </div>
         <div class="modal-footer">
         	<div class="pull-left">
-	           <label>¿Acepta terminos y Condiciones?</label>
-	           <input type="checkbox" id="terminos_condiciones" v-model="newKeep.terminos_condiciones">
+						 <input type="checkbox" id="terminos_condiciones" v-model="newKeep.terminos_condiciones">
+	           <label>He leído y acepto el Aviso de Privacidad y los Términos y Condiciones de Uso.</label>
 	           <!-- <input type="hidden" id="confirmed_nss" v-model="newKeep.confirmed_nss">
 	           <input type="hidden" id="curp" v-model="newKeep.curp">
 	           <input type="hidden" id="nss" v-model="newKeep.nss"> -->

@@ -7,7 +7,7 @@
                 <!-- Nav tabs -->
                 <ul class="nav nav-tabs" role="tablist">
                     <li role="presentation" class="active" id="start_sesion"><a href="#login" role="tab" data-toggle="tab">Ingresar</a></li>
-                    <li role="presentation" id="registrate"><a href="#register" role="tab" data-toggle="tab">Registrarse</a></li>
+                    <li role="presentation" id="registrate"><a href="#register" role="tab" data-toggle="tab">Crear cuenta</a></li>
                 </ul>
                 <!-- Tab panes -->
                 <div class="tab-content" id="myModalLabel2">

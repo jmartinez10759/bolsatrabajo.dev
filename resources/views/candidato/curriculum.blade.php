@@ -265,7 +265,7 @@
 											<tr v-for="(skills,key) in datos.skills">
 												<td> @{{ key + 1}} </td>
 												<td> @{{ skills.habilidad }} </td>
-												<td> @{{ skills.porcentaje }} </td>
+												<td> @{{ skills.porcentaje }} % </td>
 												<td>
 													<button class="btn btn-info" type="button" v-on:click.prevent="edit_general(skills,'modal-edit-skill')" data-toggle="tooltip" title="Editar Registro">
 														<i class="fa fa-edit"></i>
@@ -297,7 +297,6 @@
 <input type="hidden" name="" v-model="datos.id_cv">
 
 <!-- SE CREA LA PARTE DE LOS MODALES -->
-
   <!-- Sign Up Window Code -->
     <div class="modal fade" id="modal-educacion" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog modal-lg">
@@ -307,10 +306,8 @@
 			        <h4 class="modal-title">Educación</h4>
 			    </div>
 
-                <div class="modal-body ">
-
-                   	<form class="form-horizontal" >
-
+      <div class="modal-body ">
+         	<form class="form-horizontal" >
 						  <div class="form-group">
 						    <label class="control-label col-sm-2" for="">Escuela</label>
 						    <div class="col-sm-10">
@@ -321,8 +318,8 @@
 						  <div class="form-group">
 						    <label class="control-label col-sm-2" for="">Nivel Academico</label>
 						    <div class="col-sm-10">
-						      <select class="form-control" v-model="datos.id_nivel">
-						      	 <option v-for="nivel in datos.niveles" :value="nivel.id">@{{nivel.nombre}}</option>
+						      <select class="form-control" v-model="datos.id_nivel" onchange="nivel_academico(this)">
+						      	 <option v-for="nivel in datos.niveles" :value="nivel.id" >@{{nivel.nombre}}</option>
 						      </select>
 						    </div>
 						  </div>
@@ -330,7 +327,7 @@
 							<div class="form-group" v-if="datos.id_nivel == 3">
 						    <label class="control-label col-sm-2" for=""> Carreras </label>
 						    <div class="col-sm-10">
-						      <select class="form-control categorias_educativas" onchange="categorias_educativas(this)">
+						      <select class="form-control" id="select_licenciatura" onchange="categorias_educativas(this)" v-model="datos.id_categorias_educativas">
 						      	 <option v-for="licenciatura in datos.licenciatura" :value="licenciatura.id">@{{licenciatura.nombre}}</option>
 						      </select>
 						    </div>
@@ -339,7 +336,7 @@
 							<div class="form-group" v-if="datos.id_nivel == 1">
 						    <label class="control-label col-sm-2" for=""> Carreras </label>
 						    <div class="col-sm-10">
-						      <select class="form-control categorias_educativas" onchange="categorias_educativas(this)">
+						      <select class="form-control" id="select_doctorado" onchange="categorias_educativas(this)" v-model="datos.id_categorias_educativas">
 						      	 <option v-for="doctorado in datos.doctorado" :value="doctorado.id">@{{doctorado.nombre}}</option>
 						      </select>
 						    </div>
@@ -348,7 +345,7 @@
 							<div class="form-group" v-if="datos.id_nivel == 2">
 						    <label class="control-label col-sm-2" for=""> Carreras </label>
 						    <div class="col-sm-10">
-						      <select class="form-control" onchange="categorias_educativas(this)">
+						      <select class="form-control" id="select_mestria" onchange="categorias_educativas(this)" v-model="datos.id_categorias_educativas">
 						      	 <option v-for="maestria in datos.maestria" :value="maestria.id">@{{maestria.nombre}}</option>
 						      </select>
 						    </div>
@@ -357,29 +354,29 @@
 							<div class="form-group" v-if="datos.id_nivel == 4">
 						    <label class="control-label col-sm-2" for=""> Carreras </label>
 						    <div class="col-sm-10">
-						      <select class="form-control" onchange="categorias_educativas(this)">
+						      <select class="form-control" id="select_bachillerato" onchange="categorias_educativas(this)" v-model="datos.id_categorias_educativas">
 						      	 <option v-for="bachillerato in datos.bachillerato" :value="bachillerato.id">@{{bachillerato.nombre}}</option>
 						      </select>
 						    </div>
 						  </div>
 
-							<div class="form-group">
+							<div class="form-group div_otros" style="display:none;" id="div_otros">
 						    <label class="control-label col-sm-2" >Nombre de la Carrera</label>
 						    <div class="col-sm-10">
-						      <input type="text" id="otros" class="form-control" placeholder="" v-model="datos.otros">
+						      <input type="text" id="otros" class="form-control" placeholder="" v-model="datos.otra_categoria">
 						    </div>
 						  </div>
 
 							<div class="form-group">
 						    <label class="control-label col-sm-2" for=""> Estatus Academico </label>
 						    <div class="col-sm-10">
-						      <select class="form-control" onchange="estatus_academico(this)">
+						      <select class="form-control" onchange="estatus_academico(this)" v-model="datos.id_estatus_academico">
 						      	 <option v-for="estatus_academico in datos.estatus_academico" :value="estatus_academico.id">@{{estatus_academico.nombre}}</option>
 						      </select>
 						    </div>
 						  </div>
 
-							<div class="form-group" style="display:none;" id="div_cedula">
+							<div class="form-group div_cedula" style="display:none;" id="div_cedula">
 						    <label class="control-label col-sm-2" >Cedula</label>
 						    <div class="col-sm-10">
 						      <input type="text" id="cedula" class="form-control" placeholder="" v-model="datos.cedula">
@@ -389,12 +386,12 @@
 						  <div class="form-group">
 						    <label class="control-label col-sm-2" >Fecha Inicio</label>
 						    <div class="col-sm-4">
-						      <input type="text" id="fecha_inicio" class="form-control" placeholder="" v-model="datos.fecha_inicio">
+						      <input type="text" id="fecha_inicio" class="form-control dateDropper" placeholder="" v-model="datos.fecha_inicio">
 						    </div>
 
 						    <label class="control-label col-sm-2" >Fecha Final</label>
 						    <div class="col-sm-4">
-						      <input type="date" id="fecha_final" class="form-control" placeholder="" v-model="datos.fecha_final">
+						      <input type="date" id="fecha_final" class="form-control dateDropper" placeholder="" v-model="datos.fecha_final">
 						    </div>
 						  </div>
 
@@ -464,11 +461,11 @@
 						  <div class="form-group">
 						    <label class="control-label col-sm-2" >Fecha Inicio</label>
 						    <div class="col-sm-4">
-						      <input type="text" name="jobs_fecha_inicio" class="form-control" placeholder="" v-model="datos.jobs_fecha_inicio">
+						      <input type="text" id="jobs_fecha_inicio" class="form-control dateDropper" placeholder="" v-model="datos.jobs_fecha_inicio">
 						    </div>
 						    <label class="control-label col-sm-2" >Fecha Final</label>
 						    <div class="col-sm-4">
-						      <input type="text" name="jobs_fecha_inicio" class="form-control" placeholder="" v-model="datos.jobs_fecha_final">
+						      <input type="text" id="jobs_fecha_final" class="form-control dateDropper" placeholder="" v-model="datos.jobs_fecha_final">
 						    </div>
 						  </div>
 
@@ -540,7 +537,7 @@
 
                 <div class="modal-footer">
 			        <button type="button" class="btn btn-success" v-on:click.prevent="insert_skills()">Agregar</button>
-			        <button type="button" class="btn btn-warning" data-dismiss="modal">Cancelar</button>
+			        <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
 			    </div>
 
             </div>
@@ -567,44 +564,16 @@
 <script type="text/javascript" src="{{ asset('plugins/date-dropper/datedropper.js') }}"></script>
 <!-- <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script> -->
 <script type="text/javascript">
-/*	var formato = {
-		format: 'y-m-d', // Formato de la fecha 2016-16-01
-        lang: 'es',
-        placeholder: 'Haz click aquí',
-        minYear: '2016',
-        animation: 'bounce' // La opciones son: fadeIn, dropdown y bounce
-	}*/
-
-	/*$('#dob').dateDropper();
-	$('#exp-start').dateDropper();
-	$('#exp-end').dateDropper();
-	$('#edu-start').dateDropper();
-	$('#edu-end').dateDropper();*/
-	//$('#fecha_inicio').datepicker();
-	function estatus_academico(object){
-		var id_estatus_academico = $(object).val();
-		if(id_estatus_academico == 4){
-				$('#div_cedula').show('slow');
-		}else{
-				$('#div_cedula').hide('slow');
-		}
-	}
-
-	function categorias_educativas(object){
-			alert($(object).html());
-	}
-
-
-
+ $.noConflict();
+ jQuery( document ).ready(function( $ ) {
+	 	jQuery('.dateDropper').attr('data-lang','es');
+	 	jQuery('.dateDropper').attr('data-format','Y-m-d');
+	 	//jQuery('.dateDropper').attr('data-modal','true');
+		jQuery('.dateDropper').dateDropper();
+});
 
 </script>
 
 <script type="text/javascript" src="{{asset('js/curriculum/curriculum.js')}}" ></script>
-<script type="text/javascript">
-
-
-
-
-</script>
 
 @endpush
