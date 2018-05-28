@@ -60,7 +60,7 @@ class DetailCandidateController extends MasterController
         $candidato      =  self::$_model::show_model( [], ['id' => Session::get('id')], new RequestUserModel);
         $estados        =  self::$_model::show_model( [], [], new BlmEstadosModel);
         $blm_nss        =  self::$_model::show_model( [], $where, new BlmNssModel);
-        #debuger($postulaciones[0]->vacantes);
+        #debuger($response);
         $data = [
             'name'              =>  Session::get('name')
             ,'first_surname'    =>  Session::get('first_surname')

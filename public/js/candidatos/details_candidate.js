@@ -206,7 +206,7 @@ upload_file('',upload_url,1,'.jpg,.png',function( object ){
     jQuery('#imagen').attr('src', domain(object.result.url_file) );
     jQuery('#modal-upload').modal('hide');
     //alert(  domain(object.result.url_file) );
-    redirect( domain('details') );
+    //redirect( domain('details') );
     redirect('details');
 });
 
