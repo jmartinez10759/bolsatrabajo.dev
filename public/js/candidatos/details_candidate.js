@@ -202,10 +202,11 @@ new Vue({
 var upload_url = domain('details/upload');
 upload_file('',upload_url,1,'.jpg,.png',function( object ){
     jQuery('#url_file').val( domain( object.result.url_file ) );
-    $('#imagen').attr('src',false);
-    $('#imagen').attr('src', domain(object.result.url_file) );
-    $('#modal-upload').modal('hide');
+    jQuery('#imagen').attr('src',false);
+    jQuery('#imagen').attr('src', domain(object.result.url_file) );
+    jQuery('#modal-upload').modal('hide');
     //alert(  domain(object.result.url_file) );
+    redirect( domain('details') );
     redirect('details');
 });
 
