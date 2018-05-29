@@ -6,13 +6,12 @@ use Illuminate\Http\Request;
 
 class MenuController extends Controller
 {
-	
+
 	private static $_base_url;
 
 	public function __construct(){
-
 		self::$_base_url = domain();
-	} 
+	}
     /**
      *Metodo donde crea la estrutura del menu
      *@access public
@@ -37,7 +36,7 @@ class MenuController extends Controller
                 }
             }
             return $menu;
-      
+
       }
     /**
      *Metodo para crear el seubmenu de cada menu padre
@@ -47,7 +46,7 @@ class MenuController extends Controller
      *@return [type] [description]
      */
     private static function _submenus( $data= array(), $id_menu = false ){
-        
+
         if ($id_menu && $data) {
             $submenus = "";
             foreach ($data as $submenu) {

@@ -3,14 +3,16 @@
 <head>
    @include('layouts.admin.includes-header')
 </head>
-<body>
-    <div id="wrapper" class="container-fluid">
-        @include('layouts.admin.page-header')
+<body class="nav-md footer_fixed">
+    <!-- <div id="wrapper" class="container-fluid"> -->
+    <div class="container body">
+      <div class="main_container">
         @include('layouts.admin.page-left')
-        <main class="container-fluid">
-            @yield('content')
-        </main>
+        @include('layouts.admin.page-header')
+        @include('layouts.admin.page-content')
         @include('layouts.admin.page-footer')
+          <!-- <main class="container-fluid"> --> <!-- </main> -->
+      </div>
     </div>
     @include('layouts.admin.includes-footer')
 </body>

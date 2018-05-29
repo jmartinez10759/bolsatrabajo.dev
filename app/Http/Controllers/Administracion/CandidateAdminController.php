@@ -21,16 +21,16 @@ class CandidateAdminController extends MasterController
      *@return void
      */
     public function index(){
-    	$candidatos = array_to_object(RequestUserModel::with('description')->where(['id_rol' => 2])->get()->toArray());
-    	$estados =  self::$_model::show_model( [], [], new BlmEstadosModel);
-    	$data = [
-    		'menu' 		     => self::menus( [ 'id_rol' => Session::get('id_rol'), 'id_users' => Session::get('id') ] )
-    		,'detalles'    => $candidatos
-    		,'total'       => count($candidatos)
-    		,'estados'     => $estados
-    	];
 
-    	return view('administracion.candidatosAdmin',$data);
+    	$candidatos = array_to_object(RequestUserModel::with('description')->where(['id_rol' => 2])->get()->toArray());
+    	$data = [
+        'page_title' 	    => "Candidatos"
+        ,'title' 	        => "Dashboard"
+    		,'subtitle' 	    => "Candidatos"
+        ,'detalles'       => $candidatos
+    		,'total'          => count($candidatos)
+    	];
+      return self::_load_view( 'administracion.candidatosAdmin',$data );
 
     }
     /**
@@ -41,25 +41,26 @@ class CandidateAdminController extends MasterController
      */
     public static function show(){
 
+        #$usuarios  =  RequestUserModel::where(['id_rol' => 2])->paginate(4);
         $candidatos = RequestUserModel::with('description')->where(['id_rol' => 2])->get();
-        $usuarios  =  RequestUserModel::where(['id_rol' => 2])->paginate(4);
-        #debuger($candidatos[0]->description);
+        $estados =  self::$_model::show_model( [], [], new BlmEstadosModel);
       	$fields = [];
+        $fields['estados'] = $estados;
+        $fields['id_state'] = 9;
+
       	if ( $candidatos ) {
       		#mandar aqui toda la informacion detalles y usuarios
       		$claves_users = ['id','id_rol' ,'name','first_surname','second_surname','email'];
       		$claves_details = ['id_users','created_at','updated_at'];
 
       		foreach ( $candidatos as $candidato ) {
-      			$fields[] = [
+      			$fields['candidate'][] = [
                   'id'				        => $candidato->id
                   ,'id_rol' 			    => $candidato->id_rol
-                  ,'name' 			      => $candidato->name
-                  ,'first_surname' 	  => $candidato->first_surname
-                  ,'second_surname' 	=> $candidato->second_surname
+                  ,'name' 			      => $candidato->name." ".$candidato->first_surname." ".$candidato->second_surname
                   ,'email'	    	    => $candidato->email
                   ,'status'			      => $candidato->status
-                  ,'id_state'			    => isset($candidato->description[0]->id_state)?$candidato->description[0]->id_state :""
+                  ,'id_state'			    => isset($candidato->description[0]->id_state)?$candidato->description[0]->id_state : ""
                   ,'telefono'			    => isset($candidato->description[0]->telefono)?$candidato->description[0]->telefono :""
                   ,'codigo'			      => isset($candidato->description[0]->codigo)?$candidato->description[0]->codigo :""
                   ,'direccion'		    => isset($candidato->description[0]->direccion)?$candidato->description[0]->direccion :""
@@ -67,14 +68,13 @@ class CandidateAdminController extends MasterController
                   ,'cargo'			      => isset($candidato->description[0]->cargo)?$candidato->description[0]->cargo :""
                   ,'descripcion'		  => isset($candidato->description[0]->descripcion)?$candidato->description[0]->descripcion :""
                   ,'photo'			      => isset($candidato->description[0]->photo)?$candidato->description[0]->photo : asset('images/profile/profile.png')
-
       			];
 
       		}
           #debuger($fields);
       		return message( true,$fields,self::$message_success );
       	}
-      	return message( false,[],self::$message_error );
+      	return message( false, $fields , self::$message_error );
 
     }
     /**
@@ -85,6 +85,7 @@ class CandidateAdminController extends MasterController
      */
     public static function create( Request $request ){
 
+        #debuger($request->all());
         $request_users = [];
         $blm_details = [];
         #se realiza la validacion si existe el email
@@ -109,7 +110,7 @@ class CandidateAdminController extends MasterController
 
             if ( in_array($key, $claves_users) ) {
                 if ($key == "email") {
-                    $request_users[$key] = $value;
+                    $request_users[$key] = strtolower($value);
                 }else{
                     $request_users[$key] = strtoupper($value);
                 }
@@ -127,14 +128,14 @@ class CandidateAdminController extends MasterController
 
         }
         $request_users['remember_token'] 	= str_random(50);
-    		$request_users['api_token'] 		= str_random(50);
-    		$request_users['id_rol'] 			= 2;
-    		$request_users['password'] 			= sha1( $request->password );
-    		$request_users['status'] 			= 1;
-    		$request_users['confirmed'] 		= true;
+    		$request_users['api_token'] 		  = str_random(50);
+    		$request_users['id_rol'] 			    = 2;
+    		$request_users['password'] 			  = sha1( $request->password );
+    		$request_users['status'] 			    = 1;
+    		$request_users['confirmed'] 		  = true;
     		$request_users['confirmed_code'] 	= null;
     		$request_users['confirmed_nss']  	= !is_null($request->confirmed_nss)? $request->confirmed_nss : 0;
-
+        #se realiza la consulta de los datos de la tabla de usuarios de detalle
         $select_details = self::$_model::show_model([],['curp' => $blm_details['curp'] ], new DetailCandidateModel);
 
         if ( !$select_details ) {

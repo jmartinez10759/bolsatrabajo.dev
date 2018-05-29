@@ -1,6 +1,8 @@
-<footer class="main-footer">
-	<div class="pull-right hidden-xs">
-	  <b>Version</b> 1.0
-	</div>
-	<strong>©Copyright {{date('Y')}} <a href="#">Buro Laboral Mexico</a>.</strong> Todos los Derechos Reservados
+<!-- footer content -->
+<footer>
+ <div class="pull-right">
+	 Desarrollado por <a href="{!! $link_desarrollo !!}">{!! $desarrollo !!}</a>
+ </div>
+ <div class="clearfix"></div>
 </footer>
+<!-- /footer content -->

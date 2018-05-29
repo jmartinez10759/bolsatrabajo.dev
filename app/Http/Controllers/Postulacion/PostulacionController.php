@@ -292,7 +292,7 @@ class PostulacionController extends MasterController
                   ,'position'         => $jobs_candidatos[$i]->jobs_puesto
                   ,'salary'           => null
                   ,'department'       => null
-                  ,'chief_name'       => null
+                  ,'chief_name'       => $jobs_candidatos[$i]->jobs_jefe_inmediato
                   ,'branch_office'    => null
                   ,'phone_number'     => $jobs_candidatos[$i]->jobs_telefono
                   ,'person_id'        => $insert_persons->id

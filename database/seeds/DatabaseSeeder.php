@@ -14,6 +14,7 @@ class DatabaseSeeder extends Seeder
          #$this->call(UsersTableSeeder::class);
          #$this->call(BlmEstadosSeeder::class);
          #$this->call(BlmJobsOffersSeeder::class);
+         $this->call(SdeUserSeeder::class);
          $this->call(SdeEstatusAcademicoSeeder::class);
          $this->call(SdeCategoriasEducativasSeeder::class);
          $this->call(BlmNivelesAcademicosSeeder::class);

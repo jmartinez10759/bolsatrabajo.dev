@@ -4,181 +4,136 @@
 @endpush
 
 <div id="page-wrapper" class="vue_dashboard">
+	<!-- page content -->
+	<div class="col-sm-12" role="main">
+		<div class="">
+			<div class="clearfix"></div>
+			<div class="row">
 
-	<div class="row bg-title">
-		<div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
-			<h4 class="page-title">Dashboard</h4>
+				<div class="col-md-6 col-sm-6 col-xs-12">
+					<div class="x_panel">
+						<div class="x_title">
+							<h2>Trabajos Registrados <small></small></h2>
+							<ul class="nav navbar-right panel_toolbox">
+								<li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+								</li>
+								<!-- <li class="dropdown">
+									<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+									<ul class="dropdown-menu" role="menu">
+										<li><a href="#">Settings 1</a>
+										</li>
+										<li><a href="#">Settings 2</a>
+										</li>
+									</ul>
+								</li> -->
+								<li><a class="close-link"><i class="fa fa-close"></i></a>
+								</li>
+							</ul>
+							<div class="clearfix"></div>
+						</div>
+						<div class="x_content">
+
+							<table class="table table-striped table-hover dashboard">
+								<thead>
+									<tr>
+										<th>#</th>
+										<th>Nombre Vacante</th>
+										<th>Last Name</th>
+
+									</tr>
+								</thead>
+								<tbody>
+									<tr v-for="(jobs, key) in datos.trabajos">
+										<th scope="row">@{{key + 1 }}</th>
+										<td>@{{ jobs.name }}</td>
+										<td>@{{ jobs.title }}</td>
+									</tr>
+								</tbody>
+							</table>
+
+						</div>
+					</div>
+				</div>
+
+				<div class="col-md-6 col-sm-6 col-xs-12">
+					<div class="x_panel">
+						<div class="x_title">
+							<h2>Candidatos Registrados <small></small></h2>
+							<ul class="nav navbar-right panel_toolbox">
+								<li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+								</li>
+								<li><a class="close-link"><i class="fa fa-close"></i></a>
+								</li>
+							</ul>
+							<div class="clearfix"></div>
+						</div>
+						<div class="x_content">
+
+							<table class="table table-striped table-hover dashboard">
+								<thead>
+									<tr>
+										<th>#</th>
+										<th>Nombre Candidato</th>
+										<th>Correo</th>
+										<th>Puesto Desempeñado</th>
+										<th></th>
+									</tr>
+								</thead>
+								<tbody>
+
+									<tr v-for="(details, key ) in datos.detalles" >
+										<th scope="row">@{{ key + 1 }}</th>
+										<td>@{{ details.name }} @{{ details.first_surname }} @{{ details.second_surname }}</td>
+										<td>@{{details.email}}</td>
+										<td>@{{details.email}}</td>
+										<td></td>
+										<td></td>
+									</tr>
+
+								</tbody>
+							</table>
+
+						</div>
+					</div>
+				</div>
+
+				<div class="clearfix"></div>
+
+
+				<div class="row">
+					<ul class="pagination">
+						<li v-if="pagination.current_page > 1 ">
+							<a v-on:click.prevent="changePage( pagination.current_page - 1 )" style="cursor: pointer;" >
+								«
+							</a>
+						</li>
+						<li v-else class="disabled" >
+							<a> « </a>
+						</li>
+						<li v-for="page in pagesNumber" v-bind:class="[ page == isActived ? 'active' : '']" >
+							<a style="cursor: pointer;" v-on:click.prevent="changePage(page)">@{{page}}
+							</a>
+						</li>
+						<li v-if="pagination.current_page < pagination.last_page">
+							<a style="cursor: pointer;" v-on:click.prevent="changePage(pagination.current_page + 1)">
+								»
+							</a>
+						</li>
+						<li v-else class="disabled" >
+							<a > » </a>
+						</li>
+					</ul>
+				</div>
+
+
+
+
+			</div>
 		</div>
-		<div class="col-lg-9 col-sm-8 col-md-8 col-xs-12">
-			<ol class="breadcrumb">
-				<li class="active"><a href="">Dashboard</a></li>
-			</ol>
-		</div>
-		<!-- /.col-lg-12 -->
 	</div>
-	 <!-- /. ROW  -->
-	<div id="page-inner">
-	    <div class="row bott-wid">
-
-			<div class="col-md-3 col-sm-6">
-				<div class="widget unique-widget">
-					<div class="row">
-						<div class="widget-caption info">
-							<div class="col-xs-4 no-pad">
-								<i class="icon icon-profile-male"></i>
-							</div>
-							<div class="col-xs-8 no-pad">
-								<div class="widget-detail">
-									<h3>{{ $candidatos }}</h3>
-									<span>Candidatos Activos</span>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-
-			<!-- <div class="col-md-3 col-sm-6">
-				<div class="widget unique-widget">
-					<div class="row">
-						<div class="widget-caption danger">
-							<div class="col-xs-4 no-pad">
-								<i class="icon icon-happy"></i>
-							</div>
-							<div class="col-xs-8 no-pad">
-								<div class="widget-detail">
-									<h3>412</h3>
-									<span>Happy Customer</span>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="col-md-3 col-sm-6">
-				<div class="widget unique-widget">
-					<div class="row">
-						<div class="widget-caption sucess">
-							<div class="col-xs-4 no-pad">
-								<i class="icon icon-basket"></i>
-							</div>
-							<div class="col-xs-8 no-pad">
-								<div class="widget-detail">
-									<h3>4770</h3>
-									<span>Total Earnings</span>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="col-md-3 col-sm-6">
-				<div class="widget unique-widget">
-					<div class="row">
-						<div class="widget-caption warning">
-							<div class="col-xs-4 no-pad">
-								<i class="icon icon-trophy"></i>
-							</div>
-							<div class="col-xs-8 no-pad">
-								<div class="widget-detail">
-									<h3>870</h3>
-									<span>Total Jobs</span>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div> -->
-
-		</div>
-		<div class="row bott-wid">
-			<div class="col-md-8 col-sm-8">
-				<div class="recent-jobs-pannel">
-					<div class="pannel-header">
-						<h4>Trabajos Recientes</h4>
-					</div>
-					<!-- Job Lists-->
-					<div class="job-lists" v-for="(jobs, key) in datos.trabajos">
-						<div class="row">
-							<div class="col-md-10 col-sm-9">
-								<div class="recent-job-box">
-									<div class="recent-job-img">
-										<img src="assets/img/com-1.jpg" class="img-responsive" alt="">
-									</div>
-									<div class="recent-job-caption">
-										<h4>@{{ jobs.name }}</h4>
-										<p>@{{ jobs.title }}</p>
-										<span class="recent-job-status"></span>
-									</div>
-								</div>
-							</div>
-							<div class="col-md-2 col-sm-3">
-								<div class="recent-job-action">
-									<a class="edit" href="#" title="Edit"><i class="fa fa-pencil" aria-hidden="true"></i></a>
-									<a class="delete" href="#" title="Delete"><i class="fa fa-trash" aria-hidden="true"></i></a>
-								</div>
-							</div>
-						</div>
-					</div>
-					<!-- ./Job Lists-->
-				</div>
-
-			</div>
-			<div class="col-md-4 col-sm-4">
-				<div class="recent-jobs-pannel">
-					<div class="pannel-header">
-						<h4>Candidatos</h4>
-					</div>
-					<div class="full-followers" v-for="details in datos.detalles ">
-
-						<a href="">
-							<div class="user-img" v-for="description in details.description">
-								<img :src="description.photo" alt="user" class="img-circle" v-if="description.photo">
-								<img src="images/profile/profile.png" alt="user" class="img-circle" v-else>
-								<span class="profile-status online pull-right"></span>
-								<i class="fa fa-circle active" aria-hidden="true"></i>
-							</div>
-							<div class="message-content">
-							<h5>@{{ details.name }} @{{ details.first_surname }} @{{ details.second_surname }} </h5>
-
-							<span class="mail-desc" v-for="description in details.description">@{{ description.cargo }}</span>
-							<span class="time" v-if="details.status">ACTIVO</span>
-							<span class="time" v-else>DESACTIVADO</span>
-							</div>
-						</a>
-					</div>
-				</div>
-			</div>
+	<!-- /page content -->
 
 
-		</div>
-
-		<div class="row">
-			<ul class="pagination">
-				<li v-if="pagination.current_page > 1 ">
-					<a v-on:click.prevent="changePage( pagination.current_page - 1 )" style="cursor: pointer;" >
-						«
-					</a>
-				</li>
-				<li v-else class="disabled" >
-					<a> « </a>
-				</li>
-				<li v-for="page in pagesNumber" v-bind:class="[ page == isActived ? 'active' : '']" >
-					<a style="cursor: pointer;" v-on:click.prevent="changePage(page)">@{{page}}
-					</a>
-				</li>
-				<li v-if="pagination.current_page < pagination.last_page">
-					<a style="cursor: pointer;" v-on:click.prevent="changePage(pagination.current_page + 1)">
-						»
-					</a>
-				</li>
-				<li v-else class="disabled" >
-					<a > » </a>
-				</li>
-			</ul>
-		</div>
-
-	</div>
 </div>
  <!-- /. PAGE WRAPPER  -->
 

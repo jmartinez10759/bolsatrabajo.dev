@@ -1,19 +1,19 @@
 <?php
 
 
-    function checkPermission($name){
-        if(Session::has('rol')){
-            foreach (Session::get('rol')->permisos as $per)
-            {
-                if($per->name_holder == $name){
-                    return true;
-                }
-            }
-        }
-        return false;
-    }
-   /**
-	* imprime un arreglo formateado para debug
+  function checkPermission($name){
+      if(Session::has('rol')){
+          foreach (Session::get('rol')->permisos as $per)
+          {
+              if($per->name_holder == $name){
+                  return true;
+              }
+          }
+      }
+      return false;
+  }
+ /**
+	* Imprime un arreglo formateado para debug
 	* y detiene la ejecucion del script
 	* @return array $array
 	*/
@@ -276,8 +276,12 @@
         }
 
     }
-
-    if (!function_exists('array_to_object')) {
+/**
+ *Funcion que convierte el arreglo  en objecto
+ *@param $json [Descrption]
+ *@return array
+ **/
+  if (!function_exists('array_to_object')) {
 
         function array_to_object ( $array = array() ) {
             if ( is_array( $array ) ) {
@@ -287,53 +291,67 @@
         }
 
     }
-
-    if (!function_exists('json_to_array')) {
+/**
+ *Funcion que convierte el json a arreglo .
+ *@param $json [Descrption]
+ *@return array
+ **/
+  if (!function_exists('json_to_array')) {
 
         function json_to_array ( $json = false ) {
             if ( $json ) {
                 return  json_decode( $json, TRUE );
             }
-
         }
-
     }
-    /**
-     *Funcion donde se convierte un objeto en arreglo.
-     *@param $object
-     *@return array 
-     */
-    if (!function_exists('object_to_array')) {
+/**
+ *Funcion donde se convierte un objeto en arreglo.
+ *@param $object [Descrption]
+ *@return array
+ **/
+  if (!function_exists('object_to_array')) {
 
-        function object_to_array ( $object = false ) {
-            if ( $object ) {
-                return  json_decode( json_encode( $object ), TRUE );
-            }
+      function object_to_array ( $object = false ) {
+          if ( $object ) {
+              return  json_decode( json_encode( $object ), TRUE );
+          }
 
-        }
+      }
 
-    }
+  }
+  /**
+   *Funcion para la creacion de los iconos en una tabla
+   *@param $u      [Descrption]
+   *@param $event  [Descrption]
+   *@param $icon   [Descrption]
+   *@param $attr   [Descrption]
+   **/
+  if (!function_exists('build_icon')) {
 
-    if (!function_exists('build_icon')) {
+      function build_icon($u = array(), $event= false, $icon = false, $attr = false) {
 
-        function build_icon($u = array(), $event= false, $icon = false, $attr = false) {
+              $event = ($event)? "onclick = ".$event."(".json_encode($u).")": false;
+              $icon =  ($icon)?   $icon:false;
+              $attr =  ($attr)?   $attr:false;
 
-                $event = ($event)? "onclick = ".$event."(".json_encode($u).")": false;
-                $icon =  ($icon)?   $icon:false;
-                $attr =  ($attr)?   $attr:false;
+              $acciones = '<div class="btn-group" style="cursor: pointer;" '.$event.' '.$attr.' >';
+              $acciones .= '<span class ="'.$icon.' element-viatico">';
+              $acciones .= '<span class="path1"></span><span class="path2"></span><span class="path3"></span><span class="path4"></span><span class="path5"></span><span class="path6"></span><span class="path7"></span><span class="path8"></span><span class="path9"></span><span class="path10"></span><span class="path11"></span>';
+              $acciones .= '</span>';
+              $acciones .= '</div>';
+              return $acciones;
 
-                $acciones = '<div class="btn-group" style="cursor: pointer;" '.$event.' '.$attr.' >';
-                $acciones .= '<span class ="'.$icon.' element-viatico">';
-                $acciones .= '<span class="path1"></span><span class="path2"></span><span class="path3"></span><span class="path4"></span><span class="path5"></span><span class="path6"></span><span class="path7"></span><span class="path8"></span><span class="path9"></span><span class="path10"></span><span class="path11"></span>';
-                $acciones .= '</span>';
-                $acciones .= '</div>';
-                return $acciones;
+          }
 
-            }
-
-    }
-
-    if (!function_exists('build_img')) {
+  }
+  /**
+   *Funcion para la creacion de imagenes dentro de un boton
+   *@param $u      [Descrption]
+   *@param $event  [Descrption]
+   *@param $icon   [Descrption]
+   *@param $attr   [Descrption]
+   **/
+  if (!function_exists('build_img')) {
 
         function build_img($u = array(), $event= false, $icon = false, $attr = false) {
 
@@ -350,10 +368,13 @@
             }
 
     }
-    /**
-     *Funcion para crear una vista en particular, en proyecto de travel
-     */
-    if (!function_exists('build_vista')) {
+  /**
+   *Funcion para crear una vista dinamica pero en el proyecto de travel de CPA VISION
+   *@param $event      [Descrption]
+   *@param $images  [Descrption]
+   *@param $titulos   [Descrption]
+   **/
+  if (!function_exists('build_vista')) {
 
         function build_vista( $event = array(), $images = array(), $titulos = array() ){
 
@@ -375,33 +396,31 @@
 
 
     }
-    /**
-     *Funcion donde se crea un mesaje general
-     *@param $success [Description]
-     *@param $data [Description]
-     *@param $message  [Description]
-     */
-    if (!function_exists('message')) {
+  /**
+   *Funcion donde se crea un mesaje general
+   *@param $success [Description]
+   *@param $data [Description]
+   *@param $message  [Description]
+   */
+  if (!function_exists('message')) {
 
         function message( $success = true,$register = array(), $message = false ){
-
             $arreglo = [
                 'success'   => $success
                 ,'result'   => $register
                 ,'message'  => $message
             ];
             return json_encode( $arreglo );
-
         }
 
     }
-    /**
-     *recorre cualquier objeto o arreglo para enviar los datos deseados particular consultas ELOQUENT
-     *@access public
-     *@param $data instace [Description]
-     *@return object
-     */
-    if (!function_exists('data_march')) {
+  /**
+   *Recorre cualquier objeto o arreglo para enviar los datos deseados particular consultas ELOQUENT
+   *@access public
+   *@param $data instace [Description]
+   *@return object
+   */
+  if (!function_exists('data_march')) {
 
         function data_march( $data = array() ){
 
@@ -420,12 +439,12 @@
         }
 
     }
-    /**
-     *Verificar si estan correctamente los valores ingresados de la fecha
-     *@param $fecha string  [description]
-     *@return array
-     */
-    if (!function_exists('schema_date')) {
+  /**
+   *Verificar si estan correctamente los valores ingresados de la fecha
+   *@param $fecha string  [description]
+   *@return array
+   */
+  if (!function_exists('schema_date')) {
 
         function schema_date( $fecha = false ){
 
@@ -443,12 +462,12 @@
         }
 
     }
-    /**
-     *Realiza un parseo de la ruta si existe un dominio y un nombre del proyecto
-     *@param $fecha string  [description]
-     *@return array
-     */
-    if (!function_exists('domain')) {
+  /**
+   *Realiza un parseo de la ruta si existe un dominio y un nombre del proyecto
+   *@access public
+   *@return array
+   */
+  if (!function_exists('domain')) {
 
         function domain(){
 
@@ -478,7 +497,7 @@
    *@param $name_complete string  [description]
    *@return array
    */
-   if (!function_exists('parse_name')) {
+  if (!function_exists('parse_name')) {
 
       function parse_name( $name_complete ){
 

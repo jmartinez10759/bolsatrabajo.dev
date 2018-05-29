@@ -82,14 +82,16 @@ new Vue({
 
         var url = domain("candidate/insert");
         var refresh = domain('candidate/show');
-
         if ( !curpValida( convert_letters( this.newKeep.curp,'UPPER') ) ) {
             toastr.error( validate ,"Curp Incorrecto" );
             $('#curp').parent().addClass('has-error');
             return;
         }
+        //setter los datos.
+        this.newKeep.id_state = this.datos.id_state;
+
         this.insert_general(url, refresh, function( object ){
-            $('#modal_insert').modal('hide');
+            jQuery('#modal_insert').modal('hide');
         },function(){ });
 
     },
@@ -103,7 +105,7 @@ new Vue({
           for( var i in this.newKeep ){
               this.newKeep[i] = "";
           }
-          $('#'+modal).modal('hide');
+          jQuery('#'+modal).modal('hide');
           toastr.info(update,title);
       }).catch(error => {
           toastr.error( error, expired );

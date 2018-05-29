@@ -24,13 +24,14 @@ class DashboardController extends MasterController
     public static function index(){
 
     	$candidatos = array_to_object(RequestUserModel::with('description')->where(['id_rol' => 2])->get()->toArray());
-      #debuger($candidatos);
+
     	$data = [
-    		'menu' 			    => self::menus( [ 'id_rol' => Session::get('id_rol'), 'id_users' => Session::get('id') ] )
-    		,'candidatos' 	=> count($candidatos)
-    		#,'detalles'		=> $candidatos
+    		'candidatos' 	    => count($candidatos)
+    		,'page_title' 	  => "Dashboard"
+    		,'title' 	        => "Dashboard"
+    		,'subtitle' 	    => ""
     	];
-    	return View( 'administracion.dashboard', $data );
+      return self::_load_view( 'administracion.dashboard', $data );
 
 	}
 	/**

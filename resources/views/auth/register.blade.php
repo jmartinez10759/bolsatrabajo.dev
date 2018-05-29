@@ -67,6 +67,10 @@
                 </div>
             </div>
 
+            <div class="form-group pull-right">
+                <font color="red" size="5">*</font> Campos Obligatorios
+            </div>
+
             <!-- <div class="form-group">
                 <label for="nss" class="col-md-4 control-label">NSS *</label>
                 <div class="col-sm-6">
@@ -84,6 +88,7 @@
                     </a>
                 </div>
             </div> -->
+
 
             <div class="form-group">
                 <div class="col-md-6 col-md-offset-4">

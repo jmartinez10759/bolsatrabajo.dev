@@ -6,7 +6,8 @@ use App\Model\MasterModel;
 use GuzzleHttp\Client;
 use App\Model\SdeRolMenuModel;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
+#use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Session;
 use App\Http\Controllers\MenuController;
 
 class MasterController extends MenuController
@@ -136,13 +137,10 @@ class MasterController extends MenuController
 	 *@param array $data [ Description ]
 	 *@return void
 	 */
-	protected static function menus( $data = [] ){
+	protected static function menus( $response ){
 
-		$response = array_to_object(SdeRolMenuModel::with('menu','permisos')->where( $data )->get()->toArray());
-        #debuger($response);
         $menus_array = [];
         $permisos = [];
-
         for ($i=0; $i < count( $response ); $i++) {
             for ($j=0; $j < count( $response[$i]->menu ); $j++) {
                $menus_array[] = $response[$i]->menu[$j];
@@ -151,6 +149,37 @@ class MasterController extends MenuController
         }
         #self::$menu = self::build_menu( $menus_array );
         return self::build_menu( $menus_array );
+
+	}
+	/**
+ *Metodo para cargar la vista general de la platilla que se va a utilizar
+ *@access protected
+ *@param string $view [Description]
+ *@param array  $data [Description]
+ *@return void
+ */
+	protected static function _load_view( $view = false, $parse = []){
+
+				$where = [ 'id_rol' => Session::get('id_rol'), 'id_users' => Session::get('id') ];
+				$response = array_to_object(SdeRolMenuModel::with('menu','permisos','roles')->where( $where )->get()->toArray());
+
+				$parse['MENU_DESKTOP'] 			= self::menus( $response );
+				$parse['APPTITLE'] 					= utf8_decode('Solicitud de Empleo - BLM' );
+        $parse['IMG_PATH']  				= domain().'images/';
+				$parse['anio']							= date('Y');
+				$parse['base_url']					= domain();
+				$parse['nombre_completo']		= Session::get('name')." ".Session::get('first_surname');
+				$parse['desarrollo'] 				= "Buro Laboral Mexico S.A C.V";
+				$parse['link_desarrollo'] 	= "www.burolaboralmexico.com";
+				$parse['welcome'] 					= "Bienvenid@";
+				$parse['rol'] 							= isset($response[0]->roles[0]->perfil)? $response[0]->roles[0]->perfil : "Perfil";
+
+				$parse['page_title'] 				= isset($parse['page_title'])? $parse['page_title']: " ";
+				$parse['title'] 						= isset($parse['title'])? $parse['title'] : "";
+				$parse['subtitle'] 					= isset($parse['subtitle'])? $parse['subtitle'] : "";
+
+				#debuger($parse);
+				return View( $view , $parse );
 
 	}
 
