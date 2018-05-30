@@ -171,7 +171,7 @@ class MasterController extends MenuController
 				$parse['desarrollo'] 				= "Buro Laboral Mexico S.A C.V";
 				$parse['link_desarrollo'] 	= "www.burolaboralmexico.com";
 				$parse['welcome'] 					= "Bienvenid@";
-				$parse['photo_profile'] 		= ($response[0]->detalles[0]->photo)? $response[0]->detalles[0]->photo : asset('images/profile/profile.png');
+				$parse['photo_profile'] 		= isset($response[0]->detalles[0]->photo)? $response[0]->detalles[0]->photo : asset('images/profile/profile.png');
 				$parse['rol'] 							= isset($response[0]->roles[0]->perfil)? $response[0]->roles[0]->perfil : "Perfil";
 
 				$parse['page_title'] 				= isset($parse['page_title'])? $parse['page_title']: " ";
