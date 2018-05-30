@@ -2,6 +2,9 @@
 @section('content')
 @push('styles')
 	<link href="{{ asset('plugins/date-dropper/datedropper.css') }}" rel="stylesheet">
+	<!-- <link href="https://cdnjs.cloudflare.com/ajax/libs/datepicker/0.6.5/datepicker.css" rel="stylesheet">
+	<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.1/themes/base/jquery-ui.css" /> -->
+
 @endpush
 
 	<div class="clearfix"></div>
@@ -412,7 +415,7 @@
     <!-- End Sign Up Window -->
 
     <!-- Sign Up Window Code -->
-    <div class="modal fade" id="modal-experiencia" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal fade" id="modal-experiencia" tabindex="-1" role="dialog" aria-hidden="false" visiblity = "true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
             	<div class="modal-header">
@@ -562,14 +565,25 @@
 @stop
 @push('scripts')
 <script type="text/javascript" src="{{ asset('plugins/date-dropper/datedropper.js') }}"></script>
-<!-- <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script> -->
+<!-- <script src="http://code.jquery.com/ui/1.10.1/jquery-ui.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/datepicker/0.6.5/datepicker.js"></script> -->
+
 <script type="text/javascript">
  $.noConflict();
  jQuery( document ).ready(function( $ ) {
-	 	jQuery('.dateDropper').attr('data-lang','es');
-	 	jQuery('.dateDropper').attr('data-format','Y-m-d');
-	 	//jQuery('.dateDropper').attr('data-modal','true');
-		jQuery('.dateDropper').dateDropper();
+
+	 	 jQuery('.dateDropper').attr('data-lang','es');
+	 	 jQuery('.dateDropper').attr('data-format','Y-m-d');
+		 jQuery('.dateDropper').attr('data-fx',true);
+		 jQuery('.dateDropper').attr('data-fx-mobile',true);
+		 jQuery('.dateDropper').attr('data-init-set',true);
+		 jQuery('.dateDropper').attr('data-large-mode',true);
+		 jQuery('.dateDropper').attr('data-large-default',false);
+		 jQuery('.dateDropper').attr('data-lock',false);
+		 jQuery('.dateDropper').attr('data-theme','my-style');
+		 jQuery('.dateDropper').attr('data-modal',true);
+		 jQuery('.dateDropper').attr('data-jump',2);
+		 jQuery('.dateDropper').dateDropper();
 });
 
 </script>

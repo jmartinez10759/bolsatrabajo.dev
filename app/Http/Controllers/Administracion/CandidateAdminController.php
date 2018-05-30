@@ -85,7 +85,7 @@ class CandidateAdminController extends MasterController
      */
     public static function create( Request $request ){
 
-        #debuger($request->all());
+        #debuger( $request->all() );
         $request_users = [];
         $blm_details = [];
         #se realiza la validacion si existe el email
@@ -103,8 +103,8 @@ class CandidateAdminController extends MasterController
                 }
 
             }*/
-        $claves_users = ['name','first_surname','second_surname','email','confirmed_nss'];
-        $claves_details = ['name','first_surname','second_surname','email','password','nss','confirmed_nss'];
+        $claves_users = ['name','email','confirmed_nss'];
+        $claves_details = ['name','email','password','nss','confirmed_nss'];
         $claves_upper = ['direccion','cargo','curp'];
         foreach ( $request->all() as $key => $value ) {
 
@@ -127,7 +127,15 @@ class CandidateAdminController extends MasterController
             }
 
         }
-        $request_users['remember_token'] 	= str_random(50);
+        $name_complete = parse_name( $request->name );
+    		if (!$name_complete) {
+    			return message(false,[],"¡Favor de Ingresar al menos un apellido.!");
+    		}
+
+        $request_users['name'] 	          = $name_complete['nombre'];
+        $request_users['first_surname'] 	= $name_complete['first_surname'];
+        $request_users['second_surname'] 	= $name_complete['second_surname'];
+        $request_users['remember_token']  = str_random(50);
     		$request_users['api_token'] 		  = str_random(50);
     		$request_users['id_rol'] 			    = 2;
     		$request_users['password'] 			  = sha1( $request->password );
@@ -141,10 +149,9 @@ class CandidateAdminController extends MasterController
         if ( !$select_details ) {
         		$insert_users = self::$_model::create_model( [$request_users],new RequestUserModel );
 	        if ( $insert_users ) {
-	        	$blm_details['id_state'] = 1;
+	        	    $blm_details['id_state'] = $request->id_state;
                 $blm_details['id_users'] = $insert_users[0]->id;
-                $insert_details = self::$_model::create_model([$blm_details],new DetailCandidateModel);
-                #debuger($insert_details);
+                $insert_details = self::$_model::create_model( [$blm_details],new DetailCandidateModel );
         		if( $insert_details ){
 	            	return message(true,$insert_details[0],self::$message_success );
         		}else{
@@ -166,18 +173,17 @@ class CandidateAdminController extends MasterController
      *@return json
      */
     public static function update( Request $request ){
-
-    	#debuger( $request->all() );
+    	  #debuger( $request->all() );
       	$request_users = [];
       	$blm_details = [];
-      	$claves_users = ['id', 'name','first_surname','second_surname','email','confirmed_nss'];
-        $claves_details = ['name','first_surname','second_surname','email','password','nss','confirmed_nss'];
+        $claves_users = ['name','email','confirmed_nss'];
+        $claves_details = ['name','email','password','nss','confirmed_nss'];
         $claves_upper = ['direccion','cargo','curp'];
         foreach ($request->all() as $key => $value) {
 
             if ( in_array($key, $claves_users) ) {
                 if ($key == "email") {
-                    $request_users[$key] = $value;
+                    $request_users[$key] = strtolower($value);
                 }else{
                     $request_users[$key] = strtoupper($value);
                 }
@@ -192,24 +198,33 @@ class CandidateAdminController extends MasterController
             if (in_array($key, $claves_upper)) {
                 $blm_details[$key] = strtoupper($value);
             }
-
         }
-        $where = [ 'id' => $request_users['id'] ];
+
+        $name_complete = parse_name( $request->name );
+    		if (!$name_complete) {
+    			return message(false,[],"¡Favor de Ingresar al menos un apellido.!");
+    		}
+        $request_users['name']              = $name_complete['nombre'];
+        $request_users['first_surname']     = $name_complete['first_surname'];
+        $request_users['second_surname']    = $name_complete['second_surname'];
+        #debuger($request_users);
+        $where = [ 'id' => $request->id ];
         $response_users = self::$_model::update_model( $where ,$request_users , new RequestUserModel);
-        #debuger($response_details);
+        #debuger($blm_details);
         if( $response_users ){
             $where = ['id_users' => $response_users[0]->id ];
             $select_details = self::$_model::show_model([],$where, new DetailCandidateModel);
-            if($select_details){
+            if( $select_details ){
                 $response_details = self::$_model::update_model( ['id_users' => $blm_details['id']],$blm_details , new DetailCandidateModel);
             }else{
+                $blm_details['id_state'] = 1;
                 $blm_details['id_users'] = $response_users[0]->id;
                 $response_details = self::$_model::create_model([$blm_details],new DetailCandidateModel);
             }
 
-        	return message(true,$response_details,"Actualizacion Exitosa");
+        	return message(true,$response_details,"Actualización Exitosa");
         }
-
+        return message(false,[],"Ocurrio un error favor de verificar informacion");
 
     }
     /**

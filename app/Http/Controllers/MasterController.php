@@ -161,8 +161,7 @@ class MasterController extends MenuController
 	protected static function _load_view( $view = false, $parse = []){
 
 				$where = [ 'id_rol' => Session::get('id_rol'), 'id_users' => Session::get('id') ];
-				$response = array_to_object(SdeRolMenuModel::with('menu','permisos','roles')->where( $where )->get()->toArray());
-
+				$response = array_to_object(SdeRolMenuModel::with('menu','permisos','roles','detalles')->where( $where )->get()->toArray());
 				$parse['MENU_DESKTOP'] 			= self::menus( $response );
 				$parse['APPTITLE'] 					= utf8_decode('Solicitud de Empleo - BLM' );
         $parse['IMG_PATH']  				= domain().'images/';
@@ -172,6 +171,7 @@ class MasterController extends MenuController
 				$parse['desarrollo'] 				= "Buro Laboral Mexico S.A C.V";
 				$parse['link_desarrollo'] 	= "www.burolaboralmexico.com";
 				$parse['welcome'] 					= "Bienvenid@";
+				$parse['photo_profile'] 		= ($response[0]->detalles[0]->photo)? $response[0]->detalles[0]->photo : asset('images/profile/profile.png');
 				$parse['rol'] 							= isset($response[0]->roles[0]->perfil)? $response[0]->roles[0]->perfil : "Perfil";
 
 				$parse['page_title'] 				= isset($parse['page_title'])? $parse['page_title']: " ";

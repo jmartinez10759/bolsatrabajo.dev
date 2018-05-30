@@ -29,6 +29,7 @@ class Listado extends Model
 		,'date_to'
 		,'is_active' #datos obligatorios
 		,'is_published' #datos obligatorios
+		,'highlight'
 		,'working_time_type_id' #datos obligatorios
 		,'priority'
 		,'quantity'

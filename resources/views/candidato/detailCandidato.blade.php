@@ -502,7 +502,7 @@
 								<div id="settings" class="tab-pane fade in active">
 									<div class="row no-mrg">
 										<div class="col-sm-12">
-											<font size="6" color="red">* </font>ESTIMADO <strong>@{{ datos.name }}</strong> PARA PODER CONTINUAR EN EL PROCESO, CAMPOS REQUERIDOS EN ASTERISCO.
+											<font size="6" color="red">* </font>ESTIMADO <strong>@{{ datos.name }}</strong> PARA PODER CONTINUAR EN EL PROCESO, INGRESE LOS CAMPOS EN ASTERISCO.
 											<h3>Editar Perfil</h3>
 										</div>
 

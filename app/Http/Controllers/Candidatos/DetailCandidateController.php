@@ -34,7 +34,7 @@ class DetailCandidateController extends MasterController
         $nss            = data_march( $users->numero_seguro_social);
         $data = [
             'nombre_completo' =>  Session::get('name')." ".Session::get('first_surname')
-            ,'photo_profile'  =>  ( isset($details[0]->photo) && $details[0]->photo )? asset( $details[0]->photo ) : asset('images/profile/profile.png')
+            ,'photo_profile'  =>  ( isset($details[0]->photo) && $details[0]->photo )?  $details[0]->photo : asset('images/profile/profile.png')
             ,'activo'         =>  ( Session::get('status') != false )? "Activo": "Desactivado"
             ,'postulaciones'  =>  count($postulaciones)
             ,'curriculum'     =>  ( $details || count($curriculum) )? 'style=display:block' : 'style=display:none'
@@ -137,7 +137,7 @@ class DetailCandidateController extends MasterController
 
         }
         $claves_users = ['name','first_surname','second_surname','email','confirmed_nss'];
-        $claves_details = ['name','first_surname','second_surname','email','password','nss','confirmed_nss'];
+        $claves_details = ['name','first_surname','second_surname','email','password','nss','confirmed_nss','photo'];
         $claves_upper = ['direccion','cargo','curp'];
         foreach ($request->all() as $key => $value) {
 
@@ -161,6 +161,7 @@ class DetailCandidateController extends MasterController
 
         }
         $request_users['confirmed_nss'] = ($request_users['confirmed_nss'] == 1)? $request_users['confirmed_nss'] : 0;
+        #debuger($blm_details);
         #debuger($request_users);
         #se realiza el actualizado de los datos de la tabla del request_users
         $where = ['id' => Session::get('id')];
@@ -188,7 +189,7 @@ class DetailCandidateController extends MasterController
                 $insert = self::$_model::create_model([$blm_details],new DetailCandidateModel);
 
                 if ( $insert) {
-                    return message(true,$insert[0],"¡Transaccion Exitosa!");
+                    return message(true,$insert[0],"¡Registros Correctos!");
                 }else{
                     return message(false,[],"¡Ocurrio un error, favor de verificar.!");
                 }
@@ -228,21 +229,21 @@ class DetailCandidateController extends MasterController
     public static function upload_file( Request $request ){
 
         $files = $request->file('file');
-        $archivo = "";
+        $archivo_base64 = "";
         for ($i=0; $i < count($files) ; $i++) {
-
+            $imagedata      = file_get_contents($files[$i]);
             $nombre_temp    = $files[$i]->getClientOriginalName();
             $extension      = strtolower($files[$i]->getClientOriginalExtension());
-            $archivo        = Session::get('id').".".$extension;
-            $path           = public_path()."/images/profile/";
-            #chmod( $path,0775 );
-            $files[$i]->move($path,$archivo);
+            $archivo_base64 = 'data:image/' . $extension . ';base64,'.base64_encode( $imagedata );
+            #$archivo        = Session::get('id').".".$extension;
+            #$path           = public_path()."/images/profile/";
+            #$files[$i]->move($path,$archivo);
         }
-         $url = public_path().'/images/profile/'.$archivo;
-         #verificamos si el archivo existe y lo retornamos
-         if ( file_exists( $url) ){
-            Session::put( ['profile' => "images/profile/".$archivo ] );
-           return message( true, ['url_file' => "images/profile/".$archivo ],"¡Trasaccion Exitosa.!" );
+        $where = [ 'id_users' => Session::get('id') ];
+        $data = [ 'photo' => $archivo_base64 ];
+        $update_photo = self::$_model::update_model( $where, $data, new DetailCandidateModel);
+         if ( $update_photo ){
+           return message( true, $update_photo[0],"¡Foto Cargada Correctamente.!" );
          }else{
            return message( false,[],"¡Ocurrio un error al subir el archivo.!" );
          }

@@ -8,10 +8,13 @@
 
     <link rel="icon" href="{{asset( 'images/logo.png' )}}" type="image/x-icon" />
     <link rel="shortcut icon" href="{{asset( 'images/logo.png' )}}" type="image/x-icon" />
-    
+
     <title>Solicitud de Empleo - BLM </title>
+
+    <link href="{{asset('templates/vendors/bootstrap/dist/css/bootstrap.min.css')}}" rel="stylesheet">
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+
     <!-- Icons -->
     <link href="{{ asset('plugins/font-awesome/font-awesome.css' )}}" rel="stylesheet">
     <link href="{{ asset('plugins/line-font/line-font.css')}}" rel="stylesheet">
@@ -19,7 +22,7 @@
     <link href="{{ asset('css/style.css') }}" rel="stylesheet">
     <link href="{{ asset('css/responsiveness.css') }}" rel="stylesheet">
     <style type="text/css">
-    
+
         .autocomplete-items {
           position: absolute;
           border: 3px solid #d4d4d4;
@@ -34,17 +37,17 @@
         .autocomplete-items div {
           padding: 10px;
           cursor: pointer;
-          background-color: #fff; 
-          border-bottom: 1px solid #d4d4d4; 
+          background-color: #fff;
+          border-bottom: 1px solid #d4d4d4;
         }
         .autocomplete-items div:hover {
           /*when hovering an item:*/
-          background-color: #e9e9e9; 
+          background-color: #e9e9e9;
         }
         .autocomplete-active {
           /*when navigating through the items using the arrow keys:*/
-          background-color: DodgerBlue !important; 
-          color: #ffffff; 
+          background-color: DodgerBlue !important;
+          color: #ffffff;
         }
     </style>
     <!-- estilos del desarrollador -->

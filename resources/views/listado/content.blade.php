@@ -13,7 +13,7 @@
 								</div>
 								<div class="col-md-3 no-padd">
 									 <div class="input-group">
-										 <input type="text" id="autocomplete" name="localidad" class="form-control right-bor" placeholder="Búsqueda por localidad">
+										 <input type="text" id="autocomplete" name="localidad" class="form-control right-bor" placeholder="Búsqueda por localidad" disabled>
 									 </div>
 								</div>
 

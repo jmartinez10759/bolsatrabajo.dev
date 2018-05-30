@@ -1,5 +1,11 @@
-	<!-- Scripts -->
-  <script src="{{ asset('js/app.js') }}"></script>
+<!-- jQuery -->
+<script src="{{asset('templates/vendors/jquery/dist/jquery.min.js')}}"></script>
+<!-- Bootstrap -->
+<script src="{{asset('templates/vendors/bootstrap/dist/js/bootstrap.min.js')}}"></script>
+
+<!-- Scripts -->
+<script src="{{ asset('js/app.js') }}"></script>
+
 	<!-- Custom Js -->
 	<script src="{{ asset('js/js/custom.js') }}"></script>
   <!-- script master vue -->

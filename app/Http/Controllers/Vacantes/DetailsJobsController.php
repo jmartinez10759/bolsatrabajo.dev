@@ -62,6 +62,7 @@ class DetailsJobsController extends MasterController
     			,'state_id' 			       => $response[0]->state_id
     			,'account_id' 			     => $accounts->id
     			,'account_name' 		     => $accounts->name
+    			,'logo' 		             => ($accounts->logo)? $accounts->logo : ""
     			,'account_postal_code' 	 => $accounts->postal_code
     			,'account_address' 	     => $accounts->street." ".$accounts->neighborhood." ".$accounts->municipality." ".$accounts->postal_code
     			,'estado' 	             => $estados->nombre

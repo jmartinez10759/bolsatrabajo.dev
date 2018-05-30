@@ -67,17 +67,21 @@ var mixins = {
 
             axios.put(uri, this.fillKeep, csrf_token ).then(response => {
 
-                this.get_general(url,params, csrf_token );
-                for( var i in this.newKeep ){
-                    this.newKeep[i] = "";
+                if ( response.data.success == true ) {
+
+                    this.get_general( url, params, csrf_token );
+                    for( var i in this.newKeep ){
+                        this.newKeep[i] = "";
+                    }
+                    jQuery('#'+modal).modal('hide');
+                    toastr.info( update,title );
+
+                }else{
+                    toastr.error( response.data.message,title_error );
                 }
-                jQuery('#'+modal).modal('hide');
-                toastr.info(update,title);
 
             }).catch(error => {
-
                 toastr.error( error, expired );
-
             });
 
         },

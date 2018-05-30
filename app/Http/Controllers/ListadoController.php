@@ -15,7 +15,7 @@ class ListadoController extends Controller
         $this->_where = ['is_active' => 1, 'is_published' => 1];
     }
     /**
-     *Metodo donde hace la consulta del listado de las vacantes
+     *Metodo donde hace la consulta del listado de las vacantes mediante las empresas.
      *@access public
      *@param Request $request [ Description ]
      *@return void [ Description ]
@@ -23,21 +23,34 @@ class ListadoController extends Controller
     public function index( Request $request )
     {
         #SE REALIZA LA CONSULTA PARA LAS VACANTES.
-        #$where = ['is_active' => 1, 'is_published' => null];
         $tasks = Listado::where( $this->_where )->orderBy('id', 'DESC')->paginate(3);
         $response = array_to_object(Listado::with('accounts','contractType','workingtimetype','estados')->where( $this->_where )->orderBy('id', 'DESC')->paginate(3)->toArray());
-        #debuger($response);
-        return [
-            'pagination' => [
-                'total'         => $tasks->total(),
-                'current_page'  => $tasks->currentPage(),
-                'per_page'      => $tasks->perPage(),
-                'last_page'     => $tasks->lastPage(),
-                'from'          => $tasks->firstItem(),
-                'to'            => $tasks->lastItem(),
-            ],
-            'tasks' => $response
+        $this->_where['highlight'] = 1;
+        $destacadas = array_to_object(Listado::with('accounts','contractType','workingtimetype','estados')->where( $this->_where )->orderBy('id', 'DESC')->get()->toArray());
+        #debuger( $destacadas );
+        #$response = Listado::with('accounts','contractType','workingtimetype','estados')->where( $this->_where )->orderBy('id', 'DESC')->get();
+        $data['pagination'] =  [
+            'total'         => $tasks->total(),
+            'current_page'  => $tasks->currentPage(),
+            'per_page'      => $tasks->perPage(),
+            'last_page'     => $tasks->lastPage(),
+            'from'          => $tasks->firstItem(),
+            'to'            => $tasks->lastItem(),
         ];
+        $data['vacantes'] = $response;
+        $data['destacadas'] = $destacadas;
+        return $data;
+        // return [
+        //     'pagination' => [
+        //         'total'         => $tasks->total(),
+        //         'current_page'  => $tasks->currentPage(),
+        //         'per_page'      => $tasks->perPage(),
+        //         'last_page'     => $tasks->lastPage(),
+        //         'from'          => $tasks->firstItem(),
+        //         'to'            => $tasks->lastItem(),
+        //     ]
+        //     ,'tasks' => ['vacantes' => $response,'destacadas' => $destacadas ]
+        // ];
 
     }
 
@@ -51,12 +64,12 @@ class ListadoController extends Controller
 	{
         #realiza la consulta del listado de vacantes disponibles.
         $response=Listado::all();
-
+        #debuger( $response );
         if ( count( $response ) > 0) {
-			return message(true,$response,"Datos correctos");
-		}else{
-			return message(false,[],"Ocurrio un error");
-		}
+    			return message( true, $response ,"Datos correctos");
+    		}else{
+    			return message( false, [] ,"Ocurrio un error");
+    		}
     }
 
 

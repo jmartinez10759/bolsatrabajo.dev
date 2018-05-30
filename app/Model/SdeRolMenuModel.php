@@ -29,6 +29,9 @@ class SdeRolMenuModel extends Model
     public function permisos(){
         return $this->hasMany('App\Model\SdePermisosModel','id_users','id_users');
     }
+    public function detalles(){
+        return $this->hasMany('App\Model\DetailCandidateModel','id_users','id_users');
+    }
 
 
 }

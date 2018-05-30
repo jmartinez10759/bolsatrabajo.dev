@@ -30,12 +30,12 @@ new Vue({
 				return [];
 			}
 
-			var from = this.pagination.current_page - this.offset; 
+			var from = this.pagination.current_page - this.offset;
 			if(from < 1){
 				from = 1;
 			}
 
-			var to = from + (this.offset * 2); 
+			var to = from + (this.offset * 2);
 			if(to >= this.pagination.last_page){
 				to = this.pagination.last_page;
 			}
@@ -47,11 +47,11 @@ new Vue({
 			}
 			return pagesArray;
 		}
-	
+
 	},
 	methods: {
 		get: function(uri,keep){
-			
+
 			var url = domain("details/vacante");
 			//se mete en localstorage el id de vacante para poder hacer la consulta.
 			$myLocalStorage.set('id_vacante', keep.id );
@@ -61,7 +61,8 @@ new Vue({
 		getKeeps: function(page) {
 			var urlKeeps = 'listado?page='+page;
 			axios.get(urlKeeps).then(response => {
-				this.keeps = response.data.tasks.data,
+				//console.log(response.data);return;
+				this.keeps = response.data;
 				this.pagination = response.data.pagination
 			});
 		},

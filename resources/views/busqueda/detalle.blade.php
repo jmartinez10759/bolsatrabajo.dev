@@ -22,7 +22,7 @@
 		<div class="row">
 
 			<div class="detail-pic">
-				<img src="http://via.placeholder.com/150x150" class="img" alt="" />
+				<img :src="datos.logo" class="img-responsive " alt="" />
 				<a href="#" class="detail-edit" title="edit" ><i class="fa fa-pencil"></i></a>
 			</div>
 

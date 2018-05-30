@@ -63,6 +63,7 @@ class PostulacionController extends MasterController
         $insert_persons_employments = self::_insert_persons_employments( $jobs_candidatos,$insert_persons, $users_cv );
         $data = ['id_users' => Session::get('id'), 'id_vacante' => $request->id_vacante];
         $insert_postulacion = self::$_model::create_model([$data], new BlmPostulateCandidateModel);
+
           $postulate = [
             'name'              => $persons[0]->name
             ,'email'            => $persons[0]->email
@@ -202,8 +203,8 @@ class PostulacionController extends MasterController
     			,'twitter_url' 			      => null
     			,'youtube_url' 			      => null
     			,'is_deleted' 			      => null
-    			,'created' 				        => null
-    			,'modified' 			        => null
+    			,'created' 				        => date("Y-m-d H:i:s")
+    			,'modified' 			        => date("Y-m-d H:i:s")
     		];
     		return self::$_model::insert_model([$data_accounts_persons],new AccountsPersonsModel)[0];
 
@@ -258,8 +259,8 @@ class PostulacionController extends MasterController
           ,'disqualified'			        => null
           ,'disqualify_reason_id'	    => null
           ,'is_from_sde'	            => true
-          ,'created'				        	=> null
-          ,'modified'				       	  => null
+          ,'created'				        	=> date("Y-m-d H:i:s")
+          ,'modified'				       	  => date("Y-m-d H:i:s")
 		   ];
 		     return self::$_model::insert_model([$data_candidate_offers], new CandidateJobOffersModel)[0];
 
@@ -298,8 +299,8 @@ class PostulacionController extends MasterController
                   ,'person_id'        => $insert_persons->id
                   ,'state_id'         => $users_cv[0]->id_state
                   ,'quit_reason'      => null
-                  ,'created'          => null
-                  ,'modified'         => null
+                  ,'created'          => date("Y-m-d H:i:s")
+                  ,'modified'         => date("Y-m-d H:i:s")
               ];
 
               $request_persons_employments[] = self::$_model::insert_model([$data_employments], new PersonsEmploymentsModel);

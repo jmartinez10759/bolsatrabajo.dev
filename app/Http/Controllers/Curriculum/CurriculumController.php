@@ -11,6 +11,7 @@ use App\Model\BlmEstadosModel;
 use App\Model\RequestUserModel;
 use App\Model\BlmCurriculumModel;
 use App\Model\NivelAcademicoModel;
+use Illuminate\Support\Facades\DB;
 use App\Model\DetailCandidateModel;
 use App\Model\SdeEstatusAcademicoModel;
 use Illuminate\Support\Facades\Session;
@@ -173,7 +174,7 @@ class CurriculumController extends MasterController
           ,'direccion'    => isset($register['direccion'])? $register['direccion']: null
           ,'cargo'        => isset($register['puesto'])? $register['puesto']: null
           ,'descripcion'  => isset($register['descripcion'])? $register['descripcion']: null
-          ,'telefono'  => isset($register['telefono'])? $register['telefono']: null
+          ,'telefono'     => isset($register['telefono'])? $register['telefono']: null
         ];
     		$response_details = self::$_model::update_model( ['id_users' => $curriculum[0]->id_users ], $data_details, new DetailCandidateModel );
         #debuger($response_details);
@@ -195,21 +196,61 @@ class CurriculumController extends MasterController
     	}else{
 
     		$data = [];
-	    	foreach ($request->all() as $key => $value) {
-	    		$data[$key] = $value;
+        $claves_data =  ['id_state','id_categoria','email','email2','nombre','puesto','descripcion','telefono','direccion'];
+        $claves_upper = ['nombre','puesto','descripcion','telefono','direccion'];
+	    	foreach ( $request->all() as $key => $value ) {
+          if( in_array($key,$claves_data) ){
+              $data[$key] = $value;
+          }
+          if( in_array($key,$claves_upper ) ){
+            $data[$key] = strtoupper($value);
+          }
 	    	}
-	    	$data['fecha_nacimiento'] = date('Y-m-d');
-	    	$data['url_cv'] 	= "ruta";
-	    	$data['id_users'] 	= Session::get('id');
+	    	$data['fecha_nacimiento']  = date('Y-m-d');
+	    	$data['url_cv'] 	         = "ruta";
+	    	$data['id_users'] 	       = Session::get('id');
 	    	#debuger($data);
-	    	$response = self::$_model::create_model([$data], new BlmCurriculumModel);
-	    	if (count($response) > 0) {
-	    		return message(true,$response,self::$message_success);
-	    	}else{
-	    		return message(false,[],self::$message_error);
-	    	}
+        #se realiza las inserccion y actualziacion de las tablas con Transaccion
+        #debuger($response_curp);
+        $error = null;
+        DB::beginTransaction();
+        try {
+
+          $where = [ 'id_users' => $data['id_users'] ];
+          $nombre_completo = parse_name( $data['nombre'] );
+          $data_details = [
+            'id_state'      => isset($data['id_state'])? $data['id_state']: null
+            ,'direccion'    => isset($data['direccion'])? $data['direccion']: null
+            ,'cargo'        => isset($data['puesto'])? $data['puesto']: null
+            ,'descripcion'  => isset($data['descripcion'])? $data['descripcion']: null
+            ,'telefono'     => isset($data['telefono'])? $data['telefono']: null
+          ];
+          $data_users = [
+            'name'              => $nombre_completo['nombre']
+            ,'first_surname'    => $nombre_completo['first_surname']
+            ,'second_surname'   => $nombre_completo['second_surname']
+          ];
+          #se realizan los querys.
+          $insert_curriculum  = self::$_model::create_model([$data], new BlmCurriculumModel);
+          $update_details     = self::$_model::update_model( $where ,$data_details ,new DetailCandidateModel);
+          $update_users       = self::$_model::update_model([ 'id' => $data['id_users'] ],$data_users, new RequestUserModel );
+
+          DB::commit();
+          $success = true;
+        } catch (\Exception $e) {
+            $success = false;
+            $error = $e->getMessage();
+            DB::rollback();
+        }
+
+        if ($success) {
+          return message(true,$insert_curriculum,"¡Registros correctos!");
+        }
+        return message( false, $error ,'¡Ocurrio un error , favor de verificar!');
 
     	}
+
+
 
     }
     /**

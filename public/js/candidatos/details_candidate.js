@@ -110,6 +110,13 @@ new Vue({
               jQuery('#'+inputs[i]).attr('disabled',true);
           }
 
+          if( object.result.photo == "images/profile/profile.png" || object.result.photo == null ){
+
+              buildSweetAlertOptions('¿Cargar Foto?','¿Desea cargar foto de su perfil?',function(){
+                jQuery('#modal-upload').modal('show');
+              },'success',true,['SI','NO']);
+          }
+
         },function(){ });
 
     },
@@ -206,8 +213,8 @@ upload_file('',upload_url,1,'.jpg,.png',function( object ){
     jQuery('#imagen').attr('src', domain(object.result.url_file) );
     jQuery('#modal-upload').modal('hide');
     //alert(  domain(object.result.url_file) );
-    //redirect( domain('details') );
-    redirect('details');
+    redirect( domain('details') );
+    //redirect('details');
 });
 
 $('#btn_editar_candidato').click(function(){

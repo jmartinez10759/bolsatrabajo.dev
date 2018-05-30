@@ -428,7 +428,7 @@ function buildSweetAlert(titulo, mensaje, clase, tiempo) {
  *@param {success} [type][description]
  *@return void
  */
- function buildSweetAlertOptions( titulo, mensaje, success, type_message, status_cancel_button ){
+ function buildSweetAlertOptions( titulo, mensaje, success, type_message, status_cancel_button, buttonText ){
 
     /*swal({
           title: titulo,
@@ -456,9 +456,9 @@ function buildSweetAlert(titulo, mensaje, clase, tiempo) {
           text: mensaje,
           type: type_message,
           showCancelButton: status_cancel_button,
-          confirmButtonClass: "btn btn-success",
-          confirmButtonText: "NO",
-          cancelButtonText: "SI",
+          confirmButtonClass: "btn btn-info",
+          confirmButtonText: buttonText[0],
+          cancelButtonText: buttonText[1],
           closeOnConfirm: true,
           closeOnCancel: true
         },

@@ -1,5 +1,6 @@
+<div id="vue-listado">
 			<!-- Top Features Section Start-->
-			<section class="first-feature" >
+			<!-- <section class="first-feature" >
 				<div class="container">
 					<div class="all-features">
 
@@ -99,12 +100,46 @@
 
 					</div>
 				</div>
+			</section> -->
+			<section class="testimonial" id="testimonial">
+				<div class="container">
+
+					<div class="row">
+						<div class="main-heading">
+							<p></p>
+							<h2>Vacantes <span>Destacadas </span></h2>
+						</div>
+					</div>
+					<!--/row-->
+					<div class="row">
+						<div id="client-testimonial-slider" class="owl-carousel">
+
+							<div class="client-testimonial" style="cursor:pointer;" v-for="destacadas in keeps.destacadas">
+								<div class="pic">
+									<img :src="destacadas.accounts[0].logo" alt="" class="img-responsive">
+								</div>
+								<p class="client-description">
+									@{{destacadas.name}}
+								</p>
+								<h3 class="client-testimonial-title">@{{destacadas.accounts[0].name}}</h3>
+								<!-- <ul class="client-testimonial-rating">
+									<li class="fa fa-star-o"></li>
+									<li class="fa fa-star-o"></li>
+									<li class="fa fa-star"></li>
+								</ul> -->
+							</div>
+
+						</div>
+					</div>
+
+				</div>
 			</section>
+
 			<div class="clearfix"></div>
 			<!-- Top Features Section End-->
 
 			<!-- ========== Begin: Brows job Category ===============  -->
-			<section class="brows-job-category" id="vue-listado">
+			<section class="brows-job-category">
 				<div class="container">
 					<div class="row">
 						<h2>Hemos encontrado @{{ pagination.total }} resultados de vacantes</h2>
@@ -113,12 +148,13 @@
 					<div class="row">
 
 
-						<div class="item-click" v-for="data in keeps" style="cursor: pointer;" >
+						<div class="item-click" v-for="data in keeps.vacantes.data" style="cursor: pointer;" >
+
 							<article  @click="get('detalle', data)">
 								<div class="brows-job-list">
 									<div class="col-md-1 col-sm-2 small-padding">
 										<div class="brows-job-company-img">
-											<img src="http://via.placeholder.com/150x150" class="img-responsive" alt="" />
+											<img :src="data.accounts[0].logo" class="img-responsive" alt="" />
 										</div>
 									</div>
 
@@ -145,6 +181,7 @@
 
 								</div>
 							</article>
+
 						</div>
 
 					</div>
@@ -168,10 +205,12 @@
 
 				</div>
 			</section>
+
+</div>
 			<!-- ========== Begin: Brows job Category End ===============  -->
 
 			<!-- testimonial section Start -->
-			<section class="testimonial" id="testimonial">
+			<!-- <section class="testimonial" id="testimonial">
 				<div class="container">
 					<div class="row">
 						<div class="main-heading">
@@ -244,8 +283,9 @@
 						</div>
 					</div>
 				</div>
-			</section>
+			</section> -->
 			<!-- testimonial section End -->
+
 @push('scripts')
 <script type="text/javascript" src="{{asset('js/listado/listado_vacantes.js')}}" ></script>
 <script>

@@ -123,7 +123,7 @@ new Vue ({
        this.insert_general(url,refresh,function(json){
           buildSweetAlertOptions("¡Registro agregado.!", "¿Desea seguir agregando registros?", function(){
             jQuery('#modal-educacion').modal('hide');
-          }, 'success', true );
+          }, 'success', true,['NO','SI'] );
 
         },function(json){
           //jQuery('#modal-educacion').modal('hide');
@@ -149,7 +149,7 @@ new Vue ({
 
             buildSweetAlertOptions("¡Registro agregado.!", "¿Desea seguir agregando registros?", function(){
                 jQuery('#modal-experiencia').modal('hide');
-            }, 'success', true );
+            }, 'success', true, ['NO','SI'] );
 
         },function(json){
             jQuery('#modal-experiencia').modal('hide');
@@ -169,7 +169,7 @@ new Vue ({
 
           buildSweetAlertOptions("¡Registro agregado.!", "¿Desea seguir agregando registros?", function(){
               jQuery('#modal-skill').modal('hide');
-          }, 'success', true );
+          }, 'success', true, ['NO','SI'] );
 
         },function(json){
           jQuery('#modal-skill').modal('hide');
