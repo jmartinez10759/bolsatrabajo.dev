@@ -325,15 +325,15 @@ class PostulacionController extends MasterController
   private static function _insert_notifications( $insert_persons, $list_vacantes ){
 
       $data = [
-        'title'                     => "Solicitud de Empleo"
-        ,'text'                     => "El candidato ".$insert_persons->name." ".$insert_persons->first_surname." ".$insert_persons->second_surname." se postulo exitosamente."
-        ,'created_by_user_id'       => $insert_persons->id
+        'title'                     => urlencode("Solicitud de Empleo")
+        ,'text'                     => urlencode("El candidato ".$insert_persons->name." ".$insert_persons->first_surname." ".$insert_persons->second_surname." se postulo exitosamente.")
+        ,'created_by_user_id'       => $list_vacantes[0]->created_by_user_id
         ,'delay'                    => null
         ,'allow_dismiss'            => 1
         ,'icon'                     => null
-        ,'position'                 => "toast-top-right"
+        ,'position'                 => urlencode("toast-top-right")
         ,'link'                     => null
-        ,'type_class'               => "info"
+        ,'type_class'               => urlencode("info")
         ,'animation'                => null
         ,'created'                  => date("Y-m-d H:i:s")
         ,'modified'                 => date("Y-m-d H:i:s")
@@ -360,8 +360,8 @@ class PostulacionController extends MasterController
       $data = [
           'growl_notification_id' => $insert_notifications->id
           ,'user_id'              => $insert_notifications->created_by_user_id
-          ,'viewed'               => 1
-          ,'date_viewed'          => date("Y-m-d")
+          ,'viewed'               => 0
+          ,'date_viewed'          => null
           ,'from_date'            => null
           ,'to_date'              => null
           ,'created'              => date("Y-m-d H:i:s")
