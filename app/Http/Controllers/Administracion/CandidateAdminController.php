@@ -60,6 +60,7 @@ class CandidateAdminController extends MasterController
                   ,'name' 			      => $candidato->name." ".$candidato->first_surname." ".$candidato->second_surname
                   ,'email'	    	    => $candidato->email
                   ,'status'			      => $candidato->status
+                  ,'confirmed'			  => $candidato->confirmed
                   ,'id_state'			    => isset($candidato->description[0]->id_state)?$candidato->description[0]->id_state : ""
                   ,'telefono'			    => isset($candidato->description[0]->telefono)?$candidato->description[0]->telefono :""
                   ,'codigo'			      => isset($candidato->description[0]->codigo)?$candidato->description[0]->codigo :""

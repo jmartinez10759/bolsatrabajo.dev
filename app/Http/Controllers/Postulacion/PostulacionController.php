@@ -11,11 +11,13 @@ use App\Model\BlmNssModel;
 use App\Model\BlmJobsModel;
 use App\Model\RequestUserModel;
 use App\Model\BlmCurriculumModel;
+use App\Model\NotificationsModel; #tabla buro
 use Illuminate\Support\Facades\DB;
 use App\Model\DetailCandidateModel;
 use App\Model\AccountsPersonsModel; #tabla buro
-use App\Model\PersonsEmploymentsModel; #tabla buro
 use Illuminate\Support\Facades\Mail;
+use App\Model\PersonsEmploymentsModel; #tabla buro
+use App\Model\NotificationsUsersModel; #tabla buro
 use App\Model\CandidateJobOffersModel; #tabla buro
 use Illuminate\Support\Facades\Session;
 use App\Model\SocialSecurityNumberModel; #tabla buro
@@ -61,9 +63,12 @@ class PostulacionController extends MasterController
         #debuger($insert_candidate);
         $insert_candidate_jobs      = self::_store_candidate_jobs_offers( $insert_candidate, $request );
         $insert_persons_employments = self::_insert_persons_employments( $jobs_candidatos,$insert_persons, $users_cv );
+        #se realiza la inserccion de las notificaciones
+        $insert_notifications       = self::_insert_notifications( $insert_persons, $list_vacantes );
+        $insert_users_notifications = self::_insert_users_notifications( $insert_notifications );
+        #envia los datos por correo
         $data = ['id_users' => Session::get('id'), 'id_vacante' => $request->id_vacante];
         $insert_postulacion = self::$_model::create_model([$data], new BlmPostulateCandidateModel);
-
           $postulate = [
             'name'              => isset($persons[0]->name)? $persons[0]->name :""
             ,'email'            => isset($persons[0]->email)? $persons[0]->email :""
@@ -91,11 +96,11 @@ class PostulacionController extends MasterController
       return message( false, $error ,'¡Ocurrio un error, favor de verificar!');
 
   }
-    /**
-     *Metodo para insertar los registros
-     *@access public
-     *@return array [Description]
-     */
+/**
+ *Metodo para insertar los registros
+ *@access public
+ *@return array [Description]
+ */
   public static function store_persons( $response_curp, $desc_users, $persons ){
         	#arreglo para almacenar los registros para la tabla de persons
         	$data_table_person = [];
@@ -121,11 +126,11 @@ class PostulacionController extends MasterController
     		return self::$_model::insert_model( [$data_table_person] ,new PersonModel)[0];
 
     }
-    /**
-     *Metodo para insertar los registros social_security_numbers
-     *@access public
-     *@return array [Description]
-     */
+/**
+ *Metodo para insertar los registros social_security_numbers
+ *@access public
+ *@return array [Description]
+ */
   public static function store_social_security_numbers( $insert_persons, $nss_bolsa, $list_vacantes ){
 
         	$result = [];
@@ -162,15 +167,15 @@ class PostulacionController extends MasterController
     		return $result;
 
     }
-    /**
-     *Metodo para insertar los registros accounts_persons
-     *@access public
-     *@param $insert_persons [description]
-     *@param $request [description]
-     *@param $users_cv [description]
-     *@param $desc_users [description]
-     *@return array [Description]
-     */
+/**
+ *Metodo para insertar los registros accounts_persons
+ *@access public
+ *@param $insert_persons [description]
+ *@param $request [description]
+ *@param $users_cv [description]
+ *@param $desc_users [description]
+ *@return array [Description]
+ */
   public static function store_accounts_persons( $insert_persons, $list_vacantes, $users_cv, $desc_users ){
         $where = [ 'person_id' => $insert_persons->id, 'account_id' => $list_vacantes[0]->account_id ];
         $select_account_persons = self::$_model::show_model( [], $where, new AccountsPersonsModel);
@@ -209,12 +214,12 @@ class PostulacionController extends MasterController
     		return self::$_model::insert_model([$data_accounts_persons],new AccountsPersonsModel)[0];
 
     }
-    /**
-     *Metodo para insertar los registros candidates
-     *@access public
-     *@param $request [description]
-     *@return array [Description]
-     */
+/**
+ *Metodo para insertar los registros candidates
+ *@access public
+ *@param $request [description]
+ *@return array [Description]
+ */
   public static function store_candidates( $account_person_insert ){
           #debuger($account_person_insert);
           $select_candidates = self::$_model::show_model( [], ['account_person_id' => $account_person_insert->id], new CandidatoModel);
@@ -239,13 +244,13 @@ class PostulacionController extends MasterController
     		return self::$_model::insert_model([$data_candidate], new CandidatoModel)[0];
 
     }
-    /**
-     *Metodo para insertar los registros candidates y ofertas
-     *@access private
-     *@param $insert_candidate [description]
-     *@param $request [description]
-     *@return array [description]
-     */
+/**
+ *Metodo para insertar los registros candidates y ofertas
+ *@access private
+ *@param $insert_candidate [description]
+ *@param $request [description]
+ *@return array [description]
+ */
   private static function _store_candidate_jobs_offers( $insert_candidate, $request ){
 
     	$data_candidate_offers = [
@@ -265,14 +270,14 @@ class PostulacionController extends MasterController
 		     return self::$_model::insert_model([$data_candidate_offers], new CandidateJobOffersModel)[0];
 
     }
-    /**
-     *Metodo para insertar los registros candidates y ofertas
-     *@access private
-     *@param $jobs_candidatos [datos de los trabajos postulados]
-     *@param $insert_persons [dato de la persona que se inserto]
-     *@param $users_cv [datos de la vacante que se postulo]
-     *@return array [description]
-     */
+/**
+ *Metodo para insertar los registros candidates y ofertas
+ *@access private
+ *@param $jobs_candidatos [datos de los trabajos postulados]
+ *@param $insert_persons [dato de la persona que se inserto]
+ *@param $users_cv [datos de la vacante que se postulo]
+ *@return array [description]
+ */
   private static function _insert_persons_employments( $jobs_candidatos, $insert_persons, $users_cv ){
 
           $request_persons_employments = [];
@@ -310,6 +315,62 @@ class PostulacionController extends MasterController
           return $request_persons_employments;
 
      }
+ /**
+  *Metodo donde crea la parte de notificaciones
+  *@access private
+  *@param $insert_persons [description]
+  *@param $list_vacantes [description]
+  *@return array
+  */
+  private static function _insert_notifications( $insert_persons, $list_vacantes ){
+
+      $data = [
+        'title'                     => "Solicitud de Empleo"
+        ,'text'                     => "El candidato ".$insert_persons->name." ".$insert_persons->first_surname." ".$insert_persons->second_surname." se postulo exitosamente."
+        ,'created_by_user_id'       => $insert_persons->id
+        ,'delay'                    => null
+        ,'allow_dismiss'            => 1
+        ,'icon'                     => null
+        ,'position'                 => "toast-top-right"
+        ,'link'                     => null
+        ,'type_class'               => "info"
+        ,'animation'                => null
+        ,'created'                  => date("Y-m-d H:i:s")
+        ,'modified'                 => date("Y-m-d H:i:s")
+      ];
+
+    return self::$_model::insert_model([$data], new NotificationsModel)[0];
+
+
+  }
+/**
+ *Metodo para insertar la relacion de notifiacion
+ *@access private
+ *@param $insert_notifications [description]
+ *@return array
+ */
+ private static function _insert_users_notifications( $insert_notifications ){
+
+    // $where = [ 'growl_notification_id' => $insert_notifications->id ];
+    // $select_users_notifications = self::$_model::show_model([],$where, new NotificationsUsersModel);
+    //
+    //   if( $select_users_notifications ){
+    //     return $select_users_notifications[0];
+    //   }
+      $data = [
+          'growl_notification_id' => $insert_notifications->id
+          ,'user_id'              => $insert_notifications->created_by_user_id
+          ,'viewed'               => 1
+          ,'date_viewed'          => date("Y-m-d")
+          ,'from_date'            => null
+          ,'to_date'              => null
+          ,'created'              => date("Y-m-d H:i:s")
+          ,'modified'             => date("Y-m-d H:i:s")
+      ];
+
+      return self::$_model::insert_model( [$data], new NotificationsUsersModel)[0];
+
+ }
 
 
 

@@ -75,6 +75,7 @@
 										<th>#</th>
 										<th>Nombre Candidato</th>
 										<th>Correo</th>
+										<th>Confirmado</th>
 										<th>Puesto Desempeñado</th>
 										<th></th>
 									</tr>
@@ -85,7 +86,8 @@
 										<th scope="row">@{{ key + 1 }}</th>
 										<td>@{{ details.name }} @{{ details.first_surname }} @{{ details.second_surname }}</td>
 										<td>@{{details.email}}</td>
-										<td>@{{details.email}}</td>
+										<td v-if="details.confirmed == 1">Correo Confirmado</td>
+										<td v-else>Correo no confimado</td>
 										<td></td>
 										<td></td>
 									</tr>
