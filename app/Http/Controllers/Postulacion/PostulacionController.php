@@ -65,10 +65,10 @@ class PostulacionController extends MasterController
         $insert_postulacion = self::$_model::create_model([$data], new BlmPostulateCandidateModel);
 
           $postulate = [
-            'name'              => $persons[0]->name
-            ,'email'            => $persons[0]->email
-            ,'name_vacante'     => $list_vacantes[0]->name
-            ,'name_company'     => $list_vacantes[0]->title
+            'name'              => isset($persons[0]->name)? $persons[0]->name :""
+            ,'email'            => isset($persons[0]->email)? $persons[0]->email :""
+            ,'name_vacante'     => isset($list_vacantes[0]->name)? $list_vacantes[0]->name :""
+            ,'name_company'     => isset($list_vacantes[0]->title)? $list_vacantes[0]->title :""
           ];
           #envio de correo para validar si existe el correo antes ingresado.
           Mail::send('emails.postulacion', $postulate, function($message) use ( $postulate ) {
@@ -86,9 +86,9 @@ class PostulacionController extends MasterController
       }
 
       if ($success) {
-        return message(true,$insert_postulacion,"¡Te has postulado exitosamente!");
+        return message(true,$insert_postulacion[0],"¡Te has postulado exitosamente!");
       }
-      return message( false, $error ,'¡Ocurrio un error persons, favor de verificar!');
+      return message( false, $error ,'¡Ocurrio un error, favor de verificar!');
 
   }
     /**
