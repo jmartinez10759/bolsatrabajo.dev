@@ -24,7 +24,7 @@ class CurriculumController extends MasterController
 
     public function __construct(){
     	parent::__construct();
-  }
+    }
     /**
      *Metodo para obtener la vista de los detalles del candidato que se registro al portal.
      *@access public
@@ -34,7 +34,7 @@ class CurriculumController extends MasterController
 
     	return view('candidato.curriculum');
 
-  }
+    }
     /**
      *Metodo para obtener datos del candidato registrado al portal.
      *@access public
@@ -141,7 +141,7 @@ class CurriculumController extends MasterController
     	  #debuger($data);
         return message( true, $data ,self::$message_success );
 
-  }
+     }
     /**
      *Metodo para insertar los datos del CV y generar un id para poder insertarlo en las demas tablas
      *@access public
@@ -197,7 +197,7 @@ class CurriculumController extends MasterController
 
     		$data = [];
         $claves_data =  ['id_state','id_categoria','email','email2','nombre','puesto','descripcion','telefono','direccion'];
-        $claves_upper = ['nombre','puesto','descripcion','telefono','direccion'];
+        $claves_upper = ['nombre','puesto','descripcion','direccion'];
 	    	foreach ( $request->all() as $key => $value ) {
           if( in_array($key,$claves_data) ){
               $data[$key] = $value;
@@ -205,11 +205,12 @@ class CurriculumController extends MasterController
           if( in_array($key,$claves_upper ) ){
             $data[$key] = strtoupper($value);
           }
+
 	    	}
 	    	$data['fecha_nacimiento']  = date('Y-m-d');
-	    	$data['url_cv'] 	         = "ruta";
+	    	$data['curriculum'] 	     = "ruta";
 	    	$data['id_users'] 	       = Session::get('id');
-	    	#debuger($data);
+	    	#debuger( $data );
         #se realiza las inserccion y actualziacion de las tablas con Transaccion
         #debuger($response_curp);
         $error = null;
@@ -219,11 +220,11 @@ class CurriculumController extends MasterController
           $where = [ 'id_users' => $data['id_users'] ];
           $nombre_completo = parse_name( $data['nombre'] );
           $data_details = [
-            'id_state'      => isset($data['id_state'])? $data['id_state']: null
-            ,'direccion'    => isset($data['direccion'])? $data['direccion']: null
-            ,'cargo'        => isset($data['puesto'])? $data['puesto']: null
-            ,'descripcion'  => isset($data['descripcion'])? $data['descripcion']: null
-            ,'telefono'     => isset($data['telefono'])? $data['telefono']: null
+            'id_state'      => isset($data['id_state'])? $data['id_state']: ""
+            ,'direccion'    => isset($data['direccion'])? $data['direccion']: ""
+            ,'cargo'        => isset($data['puesto'])? $data['puesto']: ""
+            ,'descripcion'  => isset($data['descripcion'])? $data['descripcion']: ""
+            ,'telefono'     => isset($data['telefono'])? $data['telefono']: ""
           ];
           $data_users = [
             'name'              => $nombre_completo['nombre']

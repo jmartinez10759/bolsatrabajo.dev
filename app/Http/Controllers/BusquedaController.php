@@ -84,13 +84,13 @@ class BusquedaController extends MasterController
         return view('busqueda.form');
     }
 
-    public function show($id)
-	{
-      #$where = ['id' => $id,'is_active' => 1, 'is_published' => null ];
-      $this->_where['id'] = $id;
-	    $response = Listado::where( $this->_where )->get();
-	    return view("busqueda.detalle", ["datos" => $response ]);
-	}
+  //   public function show($id)
+	// {
+  //     #$where = ['id' => $id,'is_active' => 1, 'is_published' => null ];
+  //     $this->_where['id'] = $id;
+	//     $response = Listado::where( $this->_where )->get();
+	//     return view("busqueda.detalle", ["datos" => $response ]);
+	// }
     public function autocomplete( Request $request )
     {
         #$where = ['is_active' => 1, 'is_published' => null ];

@@ -41,7 +41,7 @@
 							<div class="brows-job-list">
 								<div class="col-md-1 col-sm-2 small-padding">
 									<div class="brows-job-company-img">
-										<img src="http://via.placeholder.com/150x150" class="img-responsive" alt="" />
+										<img src="{{ $data->accounts[0]->logo}}" class="img-responsive" alt="" />
 									</div>
 								</div>
 								<div class="col-md-6 col-sm-5">

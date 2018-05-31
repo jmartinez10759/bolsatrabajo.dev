@@ -1,143 +1,53 @@
+<!-- Top Features Section Start-->
+<section class="testimonial" id="testimonial">
+	<div class="container">
+
+		<div class="row">
+			<div class="main-heading">
+				<p></p>
+				<h2>Vacantes <span>Destacadas </span></h2>
+			</div>
+		</div>
+		<!--/row-->
+		<div class="row">
+			<div id="client-testimonial-slider" class="owl-carousel">
+				@foreach( $destacadas as $destacada)
+					<div class="client-testimonial" style="cursor:pointer;" onclick="details_jobs( {{ $destacada->id }} )">
+						<div class="brows-job-company-img">
+							<img src="{{ $destacada->accounts[0]->logo }}" class="img-responsive" alt="" height="100%" width="100%">
+						</div>
+						<p class="client-description">
+							{{$destacada->name}}
+						</p>
+						<h3 class="client-testimonial-title">{{ $destacada->accounts[0]->name }}</h3>
+						@if( $destacada->salary_min && $destacada->salary_max )
+							<p class="client-description">$ {{ $destacada->salary_min }} - $ {{ $destacada->salary_max }}</p>
+						@else
+							<p class="client-description">Salario No Mostrado</p>
+						@endif
+						<p class="client-description">{{ $destacada->estados[0]->nombre }}</p>
+						<ul class="client-testimonial-rating">
+							<li class="fa fa-star"></li>
+							<li class="fa fa-star"></li>
+							<li class="fa fa-star"></li>
+							<li class="fa fa-star"></li>
+							<li class="fa fa-star"></li>
+							<li class="fa fa-star-o"></li>
+						</ul>
+				</div>
+				@endforeach
+
+
+			</div>
+		</div>
+
+	</div>
+</section>
+
 <div id="vue-listado">
-			<!-- Top Features Section Start-->
-			<!-- <section class="first-feature" >
-				<div class="container">
-					<div class="all-features">
-
-						<div class="col-md-3 col-sm-6 small-padding">
-							<div class="job-feature">
-								<div class="feature-icon">
-									<i class="fa fa-desktop"></i>
-								</div>
-								<div class="feature-caption">
-									<h5>DESARROLLADOR WEB</h5>
-									<p>At vero eos et accusamus et iusto odio dignissimos ducimus.</p>
-								</div>
-							</div>
-						</div>
-
-						<div class="col-md-3 col-sm-6 small-padding">
-							<div class="job-feature">
-								<div class="feature-icon">
-									<i class="fa fa-mobile"></i>
-								</div>
-								<div class="feature-caption">
-									<h5>DESARROLLADOR MÓVIL</h5>
-									<p>At vero eos et accusamus et iusto odio dignissimos ducimus.</p>
-								</div>
-							</div>
-						</div>
-						<div class="col-md-3 col-sm-6 small-padding">
-							<div class="job-feature">
-								<div class="feature-icon">
-									<i class="fa fa-lightbulb-o"></i>
-								</div>
-								<div class="feature-caption">
-									<h5>DISEÑADOR CREATIVO</h5>
-									<p>At vero eos et accusamus et iusto odio dignissimos ducimus.</p>
-								</div>
-							</div>
-						</div>
-
-						<div class="col-md-3 col-sm-6 small-padding">
-							<div class="job-feature">
-								<div class="feature-icon">
-									<i class="fa fa-file-text"></i>
-								</div>
-								<div class="feature-caption">
-									<h5>ESCRITOR DE CONTENIDO</h5>
-									<p>At vero eos et accusamus et iusto odio dignissimos ducimus.</p>
-								</div>
-							</div>
-						</div>
-
-						<div class="col-md-3 col-sm-6 small-padding">
-							<div class="job-feature">
-								<div class="feature-icon">
-									<i class="fa fa-hdd-o"></i>
-								</div>
-								<div class="feature-caption">
-									<h5>GERENTE</h5>
-									<p>At vero eos et accusamus et iusto odio dignissimos ducimus.</p>
-								</div>
-							</div>
-						</div>
-						<div class="col-md-3 col-sm-6 small-padding">
-							<div class="job-feature">
-								<div class="feature-icon">
-									<i class="fa fa-bullhorn"></i>
-								</div>
-								<div class="feature-caption">
-									<h5>VENTAS Y MARKETING</h5>
-									<p>At vero eos et accusamus et iusto odio dignissimos ducimus.</p>
-								</div>
-							</div>
-						</div>
-
-						<div class="col-md-3 col-sm-6 small-padding">
-							<div class="job-feature">
-								<div class="feature-icon">
-									<i class="fa fa-credit-card"></i>
-								</div>
-								<div class="feature-caption">
-									<h5>CONTADOR</h5>
-									<p>At vero eos et accusamus et iusto odio dignissimos ducimus.</p>
-								</div>
-							</div>
-						</div>
-
-						<div class="col-md-3 col-sm-6 small-padding">
-							<div class="job-feature">
-								<div class="feature-icon">
-									<i class="fa fa-user"></i>
-								</div>
-								<div class="feature-caption">
-									<h5>GERENCIA / RECURSOS HUMANOS</h5>
-									<p>At vero eos et accusamus et iusto odio dignissimos ducimus.</p>
-								</div>
-							</div>
-						</div>
-
-					</div>
-				</div>
-			</section> -->
-			<section class="testimonial" id="testimonial">
-				<div class="container">
-
-					<div class="row">
-						<div class="main-heading">
-							<p></p>
-							<h2>Vacantes <span>Destacadas </span></h2>
-						</div>
-					</div>
-					<!--/row-->
-					<div class="row">
-						<div id="client-testimonial-slider" class="owl-carousel">
-
-							<div class="client-testimonial" style="cursor:pointer;" v-for="destacadas in keeps.destacadas">
-								<div class="pic">
-									<img :src="destacadas.accounts[0].logo" alt="" class="img-responsive">
-								</div>
-								<p class="client-description">
-									@{{destacadas.name}}
-								</p>
-								<h3 class="client-testimonial-title">@{{destacadas.accounts[0].name}}</h3>
-								<!-- <ul class="client-testimonial-rating">
-									<li class="fa fa-star-o"></li>
-									<li class="fa fa-star-o"></li>
-									<li class="fa fa-star"></li>
-								</ul> -->
-							</div>
-
-						</div>
-					</div>
-
-				</div>
-			</section>
 
 			<div class="clearfix"></div>
 			<!-- Top Features Section End-->
-
 			<!-- ========== Begin: Brows job Category ===============  -->
 			<section class="brows-job-category">
 				<div class="container">
@@ -146,10 +56,7 @@
 					</div>
 					<!--/.row-->
 					<div class="row">
-
-
 						<div class="item-click" v-for="data in keeps.vacantes.data" style="cursor: pointer;" >
-
 							<article  @click="get('detalle', data)">
 								<div class="brows-job-list">
 									<div class="col-md-1 col-sm-2 small-padding">
@@ -162,7 +69,9 @@
 										<div class="brows-job-position">
 											<h3>@{{ data.name }}</h3>
 											<p><span>@{{ data.accounts[0].name }}</span>
-												<span class="brows-job-sallery"><i class="fa fa-money"></i>$@{{ data.salary_min }} - @{{ data.salary_max }}</span>
+												<span class="brows-job-sallery" v-if="data.salary_min == ''"><i class="fa fa-money"></i>Salario No Mostrado</span>
+												<span class="brows-job-sallery"v-else-if="data.salary_max == ''"><i class="fa fa-money"></i>Salario No Mostrado</span>
+												<span class="brows-job-sallery"v-else><i class="fa fa-money"></i>$@{{ data.salary_min }} - $ @{{ data.salary_max }}</span>
 											</p>
 										</div>
 									</div>
@@ -218,7 +127,6 @@
 							<h2>Tú puedes ser <span>una HISTORIA más de EXITO	...</span></h2>
 						</div>
 					</div>
-					<!--/row-->
 					<div class="row">
 						<div id="client-testimonial-slider" class="owl-carousel">
 							<div class="client-testimonial">

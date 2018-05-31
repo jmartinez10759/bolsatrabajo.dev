@@ -226,10 +226,10 @@ Route::group(['middleware' => ['auth.session']], function() {
 
 ###################################### GRUPO DE RUTAS SIN AUTH ############################
 
-Route::get('/', function () {
-    return view('listados.listado_busqueda');
-})->name('/');
-
+// Route::get('/', function () {
+//     return view('listados.listado_busqueda');
+// })->name('/');
+Route::get('/', 'ListadoController@main')->name('/');
 Route::get('/index', 'ListadoController@index')->name('carga');
 Route::get('/listado', 'ListadoController@index')->name('get_list');
 ############################ Busqueda de vacantes ##################################

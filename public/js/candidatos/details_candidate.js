@@ -207,17 +207,17 @@ new Vue({
 });
 //se realiza la carga de la foto del candidato.
 var upload_url = domain('details/upload');
-upload_file('',upload_url,1,'.jpg,.png',function( object ){
-    jQuery('#url_file').val( domain( object.result.url_file ) );
+upload_file('',upload_url,1,'.jpg,.png,.jpeg',function( object ){
+    //jQuery('#url_file').val( domain( object.result.url_file ) );
     jQuery('#imagen').attr('src',false);
-    jQuery('#imagen').attr('src', domain(object.result.url_file) );
+    jQuery('#imagen').attr('src', object.result.photo );
     jQuery('#modal-upload').modal('hide');
     //alert(  domain(object.result.url_file) );
-    redirect( domain('details') );
+    //redirect( domain('details') );
     //redirect('details');
 });
 
-$('#btn_editar_candidato').click(function(){
+jQuery('#btn_editar_candidato').click(function(){
     jQuery('#btn_update_candidato').show();
     jQuery('#btn_cancel_candidato').show();
     jQuery(this).hide();
@@ -227,7 +227,7 @@ $('#btn_editar_candidato').click(function(){
     }
 });
 
-$('#btn_cancel_candidato').click(function(){
+jQuery('#btn_cancel_candidato').click(function(){
     jQuery('#btn_update_candidato').hide();
     jQuery('#btn_editar_candidato').show();
     jQuery(this).hide();

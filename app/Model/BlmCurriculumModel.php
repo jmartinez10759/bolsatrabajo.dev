@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class BlmCurriculumModel extends Model
 {
-    
+
 	protected $table = "sde_curriculum";
     public $fillable = [
     	'id'
@@ -21,7 +21,7 @@ class BlmCurriculumModel extends Model
 		,'telefono'
 		,'direccion'
 		,'fecha_nacimiento'
-		,'url_cv'
+		,'curriculum'
     ];
 
     public function study(){
@@ -33,6 +33,6 @@ class BlmCurriculumModel extends Model
     public function skills(){
         return $this->hasMany('App\Model\BlmSkillModel','id_cv');
     }
-             
-            
+
+
 }

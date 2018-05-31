@@ -111,4 +111,17 @@ new Vue({
 
 
 	}
+
 });
+
+/**
+ *Funcion que se crea para enlazar con ajax la vista con el controller
+ *{{@return }} {{@void}}
+ */
+	function details_jobs( id_jobs ){
+			var url = domain("details/vacante");
+			//se mete en localstorage el id de vacante para poder hacer la consulta.
+			$myLocalStorage.set('id_vacante', id_jobs );
+			redirect( url );
+			
+	}

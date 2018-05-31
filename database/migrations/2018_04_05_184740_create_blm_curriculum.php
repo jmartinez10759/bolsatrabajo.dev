@@ -14,7 +14,7 @@ class CreateBlmCurriculum extends Migration
     public function up()
     {
         Schema::create('sde_curriculum', function (Blueprint $table) {
-            
+
             $table->increments('id');
             $table->integer('id_users');
             $table->integer('id_state');
@@ -23,11 +23,11 @@ class CreateBlmCurriculum extends Migration
             $table->string('email2')->nullable();
             $table->string('nombre')->nullable();
             $table->string('puesto')->nullable();
-            $table->string('descripcion')->nullable();
+            $table->mediumText('descripcion')->nullable();
             $table->bigInteger('telefono')->nullable();
             $table->string('direccion')->nullable();
             $table->date('fecha_nacimiento')->nullable();
-            $table->string('url_cv')->nullable();
+            $table->mediumText('curriculum')->nullable();
             $table->timestamps();
         });
     }

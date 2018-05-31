@@ -13,19 +13,19 @@
   <!-- activar class de login o registro -->
   <script type="text/javascript" >
 
-      $('.signin').click(function(){
+      jQuery('.signin').click(function(){
           var tab = $(this).attr('tabs');
           if( tab == "register"){
-            $('#registrate').attr('class','active');
-            $('#register').attr('class','tab-pane fade active in');
-            $('#login').attr('class','tab-pane fade');
-            $('#start_sesion').attr('class','');
+            jQuery('#registrate').attr('class','active');
+            jQuery('#register').attr('class','tab-pane fade active in');
+            jQuery('#login').attr('class','tab-pane fade');
+            jQuery('#start_sesion').attr('class','');
           }
           if( tab == "start"){
-            $('#registrate').attr('class','');
-            $('#register').attr('class','tab-pane fade');
-            $('#login').attr('class','tab-pane fade active in');
-            $('#start_sesion').attr('class','active');
+						jQuery('#registrate').attr('class','');
+            jQuery('#register').attr('class','tab-pane fade');
+            jQuery('#login').attr('class','tab-pane fade active in');
+            jQuery('#start_sesion').attr('class','active');
           }
 
       });

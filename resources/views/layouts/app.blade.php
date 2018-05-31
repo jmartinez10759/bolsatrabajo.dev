@@ -4,13 +4,13 @@
    @include('layouts.includes-header')
 </head>
 <body>
-    <div id="app" class="container-fluid">
+    <div id="app" class="wrapper">
         @include('layouts.page-header')
-        <main class="container-fluid col-sm-12">
+        <main >
             @yield('content')
         </main>
         @include('layouts.page-footer')
-    </div>
     @include('layouts.includes-footer')
+    </div>
 </body>
 </html>

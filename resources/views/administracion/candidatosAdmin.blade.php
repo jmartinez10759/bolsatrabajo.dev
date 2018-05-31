@@ -87,7 +87,7 @@
 											</ul>
 										</div>
 										<div class="right col-xs-5 text-center">
-											<img :src="detalle.photo" class="img-circle img-responsive" alt="">
+											<img :src="detalle.photo" class="img-circle" alt="" height="146px" width="146px">
 										</div>
 									</div>
 									<div class="col-xs-12 bottom text-center">

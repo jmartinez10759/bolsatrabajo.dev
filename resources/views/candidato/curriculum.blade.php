@@ -2,9 +2,6 @@
 @section('content')
 @push('styles')
 	<link href="{{ asset('plugins/date-dropper/datedropper.css') }}" rel="stylesheet">
-	<!-- <link href="https://cdnjs.cloudflare.com/ajax/libs/datepicker/0.6.5/datepicker.css" rel="stylesheet">
-	<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.1/themes/base/jquery-ui.css" /> -->
-
 @endpush
 
 	<div class="clearfix"></div>
@@ -99,7 +96,7 @@
 									<div class="col-md-6 col-sm-6">
 										<div class="input-group">
 											<span class="input-group-addon"><i class="fa fa-phone"></i></span>
-											<input type="text" class="form-control" placeholder="Telefono" v-model="datos.telefono" >
+											<input type="text" class="form-control" placeholder="Lada + 10 digitos" v-model="datos.telefono" >
 										</div>
 									</div>
 
