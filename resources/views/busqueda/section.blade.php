@@ -6,13 +6,13 @@
 						<div class="wrap-search-filter">
 							<form method="POST" action="{{URL::to('vacantes')}}">
 								{{ csrf_field() }}
-								<div class="col-md-4 col-sm-4">
+								<div class="col-md-5 col-sm-5">
 									<input type="text" name="vacantes" class="typeahead form-control" placeholder="Palabras clave" autocomplete="off" required>
 								</div>
-								<div class="col-md-3 col-sm-3">
+								<!-- <div class="col-md-3 col-sm-3">
 									<input type="text" ame="localidad" class="form-control" placeholder="Ubicación">
-								</div>
-								<div class="col-md-3 col-sm-3">
+								</div> -->
+								<div class="col-md-5 col-sm-5">
 									  <select class="form-control" name="edo">
 										    <option selected disabled>Seleccione su ciudad</option>
 										    @forelse(App\Model\BlmEstadosModel::all() as $edo)
@@ -74,8 +74,8 @@
 					@else
 							<div class="alert alert-dismissable alert-warning">
 							  <button type="button" class="close" data-dismiss="alert">×</button>
-							  <h4>Alerta!</h4>
-							  <p>No se encuentran registros.</p>
+							  <h4>¡ Ninguna Vacante !</h4>
+							  <p>No se encontro ninguna vacante, favor de realizar una nueva busqueda.</p>
 							</div>
 					@endif
 					{{ $name->links() }}

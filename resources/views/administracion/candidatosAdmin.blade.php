@@ -4,33 +4,6 @@
 @endpush
 
 <div id="wrapper" class="vue_candidate_admin">
-	 <!--<div class="row">
-			 <ul class="pagination">
-				 <li v-if="pagination.current_page > 1 ">
-					 <a v-on:click.prevent="changePage( pagination.current_page - 1 )" style="cursor: pointer;" >
-						 «
-					 </a>
-				 </li>
-				 <li v-else class="disabled" >
-					 <a> « </a>
-				 </li>
-				 <li v-for="page in pagesNumber" v-bind:class="[ page == isActived ? 'active' : '']" >
-					 <a style="cursor: pointer;" v-on:click.prevent="changePage(page)">@{{page}}
-					 </a>
-				 </li>
-				 <li v-if="pagination.current_page < pagination.last_page">
-					 <a style="cursor: pointer;" v-on:click.prevent="changePage(pagination.current_page + 1)">
-						 »
-					 </a>
-				 </li>
-				 <li v-else class="disabled" >
-					 <a > » </a>
-				 </li>
-			 </ul>
-		 </div>-->
-
-
-
 <!-- page content -->
 <!-- <div class="right_col" role="main"> -->
 <div class="col-sm-12" role="main">
@@ -57,7 +30,7 @@
 					<div class="x_content">
 						<div class="row">
 
-							<div class="col-md-12 col-sm-12 col-xs-12 text-center">
+							<!-- <div class="col-md-12 col-sm-12 col-xs-12 text-center">
 								<ul class="pagination pagination-split">
 									<li><a href="#">A</a></li>
 									<li><a href="#">B</a></li>
@@ -70,7 +43,7 @@
 									<li><a href="#">Y</a></li>
 									<li><a href="#">Z</a></li>
 								</ul>
-							</div>
+							</div> -->
 
 							<div class="clearfix"></div>
 
@@ -113,10 +86,37 @@
 									</div>
 								</div>
 							</div>
-
-
-
 						</div>
+
+						<!-- paginador -->
+
+						 <div class="row">
+							 <ul class="pagination">
+								 <li v-if="pagination.current_page > 1 ">
+									 <a v-on:click.prevent="change_page( pagination.current_page - 1 )" style="cursor: pointer;" >
+										 «
+									 </a>
+								 </li>
+								 <li v-else class="disabled" >
+									 <a> « </a>
+								 </li>
+								 <li v-for="page in pages_number" v-bind:class="[ page == is_actived ? 'active' : '']" >
+									 <a style="cursor: pointer;" v-on:click.prevent="change_page(page)">@{{page}}
+									 </a>
+								 </li>
+								 <li v-if="pagination.current_page < pagination.last_page">
+									 <a style="cursor: pointer;" v-on:click.prevent="change_page(pagination.current_page + 1)">
+										 »
+									 </a>
+								 </li>
+								 <li v-else class="disabled" >
+									 <a > » </a>
+								 </li>
+							 </ul>
+						 </div>
+
+
+
 					</div>
 				</div>
 			</div>

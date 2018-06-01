@@ -10,7 +10,7 @@
 			<div class="clearfix"></div>
 			<div class="row">
 
-				<div class="col-md-6 col-sm-6 col-xs-12">
+				<div class="col-md-6 col-sm-6 col-xs-12" id="vue_section_jobs">
 					<div class="x_panel">
 						<div class="x_title">
 							<h2>Trabajos Registrados <small></small></h2>
@@ -33,12 +33,12 @@
 						</div>
 						<div class="x_content">
 
-							<table class="table table-striped table-hover dashboard">
+							<table class="table table-striped table-hover dashboard table-responsive">
 								<thead>
 									<tr>
 										<th>#</th>
 										<th>Nombre Vacante</th>
-										<th>Last Name</th>
+										<th>Detalles</th>
 
 									</tr>
 								</thead>
@@ -51,11 +51,37 @@
 								</tbody>
 							</table>
 
+							<div class="row">
+
+								<ul class="pagination">
+									<li v-if="pagination.current_page > 1 ">
+										<a v-on:click.prevent="changePage( pagination.current_page - 1 )" style="cursor: pointer;" >
+											«
+										</a>
+									</li>
+									<li v-else class="disabled" >
+										<a> « </a>
+									</li>
+									<li v-for="page in pagesNumber" v-bind:class="[ page == isActived ? 'active' : '']" >
+										<a style="cursor: pointer;" v-on:click.prevent="changePage(page)">@{{page}}
+										</a>
+									</li>
+									<li v-if="pagination.current_page < pagination.last_page">
+										<a style="cursor: pointer;" v-on:click.prevent="changePage(pagination.current_page + 1)">
+											»
+										</a>
+									</li>
+									<li v-else class="disabled" >
+										<a > » </a>
+									</li>
+								</ul>
+							</div>
+
 						</div>
 					</div>
 				</div>
 
-				<div class="col-md-6 col-sm-6 col-xs-12">
+				<div class="col-md-6 col-sm-6 col-xs-12" id="vue_section_detalle">
 					<div class="x_panel">
 						<div class="x_title">
 							<h2>Candidatos Registrados <small></small></h2>
@@ -69,7 +95,7 @@
 						</div>
 						<div class="x_content">
 
-							<table class="table table-striped table-hover dashboard">
+							<table class="table table-striped table-hover dashboard table-responsive">
 								<thead>
 									<tr>
 										<th>#</th>
@@ -93,7 +119,42 @@
 									</tr>
 
 								</tbody>
-							</table>
+						</table>
+					<!-- pagination_detalles -->
+						<div class="row">
+							<ul class="pagination">
+								<li v-if="pagination_detalles.current_page > 1 ">
+									<a v-on:click.prevent="changePageDetalle( pagination_detalles.current_page - 1 )" style="cursor: pointer;" >
+										«
+									</a>
+								</li>
+								<li v-else class="disabled" >
+									<a> « </a>
+								</li>
+								<li v-for="page in pagesNumberDetalle" v-bind:class="[ page == isActiveded ? 'active' : '']" >
+									<a style="cursor: pointer;" v-on:click.prevent="changePageDetalle(page)">@{{page}}
+									</a>
+								</li>
+								<li v-if="pagination_detalles.current_page < pagination_detalles.last_page">
+									<a style="cursor: pointer;" v-on:click.prevent="changePageDetalle(pagination_detalles.current_page + 1)">
+										»
+									</a>
+								</li>
+								<li v-else class="disabled" >
+									<a > » </a>
+								</li>
+							</ul>
+						</div>
+
+		<!-- pagination_detalles -->
+
+
+
+
+
+
+
+
 
 						</div>
 					</div>
@@ -101,41 +162,10 @@
 
 				<div class="clearfix"></div>
 
-
-				<div class="row">
-					<ul class="pagination">
-						<li v-if="pagination.current_page > 1 ">
-							<a v-on:click.prevent="changePage( pagination.current_page - 1 )" style="cursor: pointer;" >
-								«
-							</a>
-						</li>
-						<li v-else class="disabled" >
-							<a> « </a>
-						</li>
-						<li v-for="page in pagesNumber" v-bind:class="[ page == isActived ? 'active' : '']" >
-							<a style="cursor: pointer;" v-on:click.prevent="changePage(page)">@{{page}}
-							</a>
-						</li>
-						<li v-if="pagination.current_page < pagination.last_page">
-							<a style="cursor: pointer;" v-on:click.prevent="changePage(pagination.current_page + 1)">
-								»
-							</a>
-						</li>
-						<li v-else class="disabled" >
-							<a > » </a>
-						</li>
-					</ul>
-				</div>
-
-
-
-
 			</div>
 		</div>
 	</div>
 	<!-- /page content -->
-
-
 </div>
  <!-- /. PAGE WRAPPER  -->
 

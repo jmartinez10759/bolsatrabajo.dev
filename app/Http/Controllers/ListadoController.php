@@ -19,8 +19,10 @@ class ListadoController extends Controller
      *@access public
      *@return void
      */
-    public static function main(){
-      $destacadas = array_to_object(Listado::with('accounts','contractType','workingtimetype','estados')->where( ['highlight' => 1 ] )->orderBy('id', 'DESC')->get()->toArray());
+    public function main(){
+
+      $this->_where['highlight'] = 1;
+      $destacadas = array_to_object(Listado::with('accounts','contractType','workingtimetype','estados')->where( $this->_where )->orderBy('id', 'DESC')->get()->toArray());
       $data['destacadas'] = $destacadas;
       return view('listados.listado_busqueda',$data);
     }
@@ -36,7 +38,7 @@ class ListadoController extends Controller
         $tasks = Listado::where( $this->_where )->orderBy('id', 'DESC')->paginate(3);
         $response = array_to_object(Listado::with('accounts','contractType','workingtimetype','estados')->where( $this->_where )->orderBy('id', 'DESC')->paginate(3)->toArray());
         $this->_where['highlight'] = 1;
-        $destacadas = array_to_object(Listado::with('accounts','contractType','workingtimetype','estados')->where( ['highlight' => 1 ] )->orderBy('id', 'DESC')->get()->toArray());
+        $destacadas = array_to_object(Listado::with('accounts','contractType','workingtimetype','estados')->where( $this->_where )->orderBy('id', 'DESC')->get()->toArray());
         #debuger( $destacadas );
         $data['pagination'] =  [
             'total'         => $tasks->total(),

@@ -9,18 +9,18 @@ class RequestUserModel extends Model
     protected $table = "sde_request_users";
     public $fillable = [
     	'id'
-		,'id_rol'
-		,'name'
-		,'first_surname'
-		,'second_surname'
-		,'email'
-		,'password'
-		,'remember_token'
-		,'api_token'
-		,'status'
-		,'confirmed'
-		,'confirmed_code'
-		,'confirmed_nss'
+  		,'id_rol'
+  		,'name'
+  		,'first_surname'
+  		,'second_surname'
+  		,'email'
+  		,'password'
+  		,'remember_token'
+  		,'api_token'
+  		,'status'
+  		,'confirmed'
+  		,'confirmed_code'
+  		,'confirmed_nss'
     ];
 
     public function description(){

@@ -57,8 +57,11 @@ new Vue({
                 $('#'+key).parent().parent().removeClass('has-error');
             });
             $('#signup').modal('hide');
-            buildSweetAlert('!Candidato registrado!','¡Favor de revisar su bandeja de entrada de su correo, dando click al enlace que aparece.!','success',3000);
-            $('#signup').modal('show');
+            //buildSweetAlert(,,'success',3000);
+            buildSweetAlertOptions('!Candidato registrado!','¡Favor de revisar su bandeja de entrada de su correo, dando click al enlace que aparece.!',function(){
+              $('#signup').modal('show');
+            },'success',false,['ACEPTAR','CANCELAR'] );
+            //$('#signup').modal('show');
             //redirect( ('details') );
         },function(){
 

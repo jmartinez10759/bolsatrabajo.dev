@@ -42,7 +42,7 @@ class CandidateAdminController extends MasterController
     public static function show(){
 
         #$usuarios  =  RequestUserModel::where(['id_rol' => 2])->paginate(4);
-        $candidatos = RequestUserModel::with('description')->where(['id_rol' => 2])->get();
+        $candidatos = RequestUserModel::with('description')->where(['id_rol' => 2])->paginate(4);
         $estados =  self::$_model::show_model( [], [], new BlmEstadosModel);
       	$fields = [];
         $fields['estados'] = $estados;
@@ -72,8 +72,16 @@ class CandidateAdminController extends MasterController
       			];
 
       		}
+          $fields['pagination'] = [
+              'total'          => $candidatos->total()
+              ,'current_page'  => $candidatos->currentPage()
+              ,'per_page'      => $candidatos->perPage()
+              ,'last_page'     => $candidatos->lastPage()
+              ,'from'          => $candidatos->firstItem()
+              ,'to'            => $candidatos->lastItem()
+          ];
           #debuger($fields);
-      		return message( true,$fields,self::$message_success );
+      		return message( true, $fields, self::$message_success );
       	}
       	return message( false, $fields , self::$message_error );
 

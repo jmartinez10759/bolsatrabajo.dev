@@ -46,10 +46,10 @@ class DashboardController extends MasterController
     #$trabajos = array_to_object(Listado::with('accounts','contractType','workingtimetype','estados')->where( $where )->orderBy('id', 'DESC')->paginate(5)->toArray() );
     #debuger($trabajos);
 		#$detalles =  RequestUserModel::where( ['id_rol' => 2 ] )->orderBy('id', 'DESC')->paginate(4);
-		$detalles = array_to_object(RequestUserModel::with('description')->where(['id_rol' => 2])->paginate(4)->toArray());
+		$detalles = RequestUserModel::with('description')->where(['id_rol' => 2])->paginate(4);
     #debuger( $detalles->data );
 		$fields['trabajos'] = data_march($trabajos);
-		$fields['detalles'] = $detalles->data;
+		$fields['detalles'] = data_march($detalles);
 		$fields['pagination']       =  [
       			'total'          => $trabajos->total()
       			,'current_page'  => $trabajos->currentPage()
@@ -58,7 +58,15 @@ class DashboardController extends MasterController
       			,'from'          => $trabajos->firstItem()
       			,'to'            => $trabajos->lastItem()
       ];
-      #debuger($fields['detalles']);
+      $fields['pagination_detalles']       =  [
+        			'total'          => $detalles->total()
+        			,'current_page'  => $detalles->currentPage()
+        			,'per_page'      => $detalles->perPage()
+        			,'last_page'     => $detalles->lastPage()
+        			,'from'          => $detalles->firstItem()
+        			,'to'            => $detalles->lastItem()
+        ];
+      #debuger($fields);
     	return message( true,$fields,self::$message_success );
 
 	}
