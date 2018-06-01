@@ -28,9 +28,15 @@ class CandidatosController extends MasterController
 	 *@return void
 	 */
 	public static function index(){
-
 		return View('auth.register');
-
+	}
+	/**
+	 *Metodo para mostrar los terminos y condiciones.
+	 *@access public
+	 *@return void
+	 */
+	public static function condiciones(){
+		return View('auth.condiciones');
 	}
 	/**
 	 *Se crea un metodo donde se realiza la parte de inserccion

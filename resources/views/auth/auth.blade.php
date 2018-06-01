@@ -3,7 +3,7 @@
         <div class="form-group">
             <label for="email" class="col-md-4 control-label">Correo:</label>
             <div class="col-md-6">
-                <input id="email" type="email" class="form-control" name="email" required autofocus v-model="newKeep.email">
+                <input id="email" type="email" class="form-control" name="email" required autofocus v-model="newKeep.email" style="text-transform: lowercase;">
             </div>
         </div>
 

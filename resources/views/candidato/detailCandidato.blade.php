@@ -4,9 +4,9 @@
 			<div class="clearfix"></div>
 
 			<!-- Title Header Start -->
-			<section class="inner-header-title" style="background-image:url(http://via.placeholder.com/1920x850);">
+			<section class="inner-header-title" style="background-image:url({{ asset('images/img/paper-3187096_1280.jpg') }});">
 				<div class="container">
-					<h1>Detalles del Candidato</h1>
+					<h1 style="color:blank;">Detalles del Candidato</h1>
 				</div>
 			</section>
 			<div class="clearfix"></div>

@@ -52,12 +52,28 @@ new Vue({
       this.newKeep.id_vacante     = $myLocalStorage.get('id_vacante');
 
       if (this.newKeep.terminos_condiciones == false) {
-          toastr.error( "Debe de aceptar los terminos y condiciones para continuar." , "Terminos y Condiciones" );
+          toastr.error( "Favor de aceptar los terminos y condiciones para continuar." , "Terminos y Condiciones" );
           return;
       }
       if (this.newKeep.confirmed_nss == null) {
         toastr.error( "Favor de Iniciar Sesion, para poder postularte a esta vacante" , "Iniciar Sesion" );
-        return;
+            var tab = jQuery('#signup').attr('tabs');
+            if( tab == "register"){
+              jQuery('#registrate').attr('class','active');
+              jQuery('#register').attr('class','tab-pane fade active in');
+              jQuery('#login').attr('class','tab-pane fade');
+              jQuery('#start_sesion').attr('class','');
+            }
+            if( tab == "start"){
+              jQuery('#registrate').attr('class','');
+              jQuery('#register').attr('class','tab-pane fade');
+              jQuery('#login').attr('class','tab-pane fade active in');
+              jQuery('#start_sesion').attr('class','active');
+            }
+            jQuery('#terminos').modal('hide');
+            jQuery('#signup').modal('show');
+            return;
+
       }
       // if (this.newKeep.email == null) {
       //    toastr.error( "Favor de Iniciar Sesion" , "Iniciar Sesion" );

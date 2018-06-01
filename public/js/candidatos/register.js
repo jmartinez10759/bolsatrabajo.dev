@@ -10,25 +10,25 @@ new Vue({
     newKeep: {
          'name': ''
         //,'first_surname': ''
-        //,'second_surname': ''
         ,'correo': ''
         ,'pass': ''
         ,'passwordConfirm': ''
         ,'confirmed_nss': false
         ,'email': ''
         ,'password': ''
+        ,'condiciones_site': true
     },
     fillKeep: {
         'id': ''
         ,'name': ''
         //,'first_surname': ''
-        //,'second_surname': ''
         ,'correo': ''
         ,'pass': ''
         ,'passwordConfirm': ''
         ,'confirmed_nss': false
         ,'email': ''
         ,'password': ''
+        ,'condiciones_site': true
     },
 
   },
@@ -39,8 +39,15 @@ new Vue({
 
         var url = domain("register/insert");
         var refresh = "";
-        if ( !emailValidate(this.newKeep.correo) ) {
-            toastr.error( validate ,"Correo Incorrecto" );
+        var correo = this.newKeep.correo.trim().toLowerCase();
+
+        //se realiza la validacion del correo.
+        if (this.newKeep.condiciones_site == false) {
+            toastr.error( "Favor de aceptar los terminos y condiciones." , "Aviso de Privacidad" );
+            return;
+        }
+        if ( !emailValidate( correo ) ) {
+            toastr.error( validate ,"¡Verificar Correo Electronico!" );
             $('#correo').parent().parent().addClass('has-error');
             return;
         }
@@ -50,7 +57,8 @@ new Vue({
                 $('#'+key).parent().parent().removeClass('has-error');
             });
             $('#signup').modal('hide');
-            buildSweetAlert('Candidato registrado','Favor de verificar su correo electronico para continuar','success',3000);
+            buildSweetAlert('!Candidato registrado!','¡Favor de revisar su bandeja de entrada de su correo, dando click al enlace que aparece.!','success',3000);
+            $('#signup').modal('show');
             //redirect( ('details') );
         },function(){
 

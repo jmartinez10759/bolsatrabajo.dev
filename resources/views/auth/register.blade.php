@@ -10,32 +10,11 @@
                 </div>
             </div>
 
-             <!-- <div class="form-group">
-                <label for="first_surname" class="col-md-4 control-label">Primer Apellido *</label>
-
-                <div class="col-md-6">
-                    <input id="first_surname" type="text" class="form-control" v-model="newKeep.first_surname" required autofocus>
-                </div>
-            </div> -->
-
-             <!-- <div class="form-group">
-                <label for="second_surname" class="col-md-4 control-label">Segundo Apellido</label>
-
-                <div class="col-md-6">
-                    <input id="second_surname" type="text" class="form-control" v-model="newKeep.second_surname">
-                </div>
-            </div> -->
-            <!-- <div class="form-group">
-                <label for="curp" class="col-md-4 control-label">Curp *</label>
-                <div class="col-sm-6">
-                    <input id="curp" type="text" class="form-control" v-model="newKeep.curp" required>
-                </div>
-            </div> -->
             <div class="form-group">
                 <label for="correo" class="col-md-4 control-label">Correo <font size="3" color="red">*</font></label>
 
                 <div class="col-md-6">
-                    <input id="correo" type="email  " class="form-control" v-model="newKeep.correo" required>
+                    <input id="correo" type="email  " class="form-control" v-model="newKeep.correo" required style="text-transform: lowercase;">
                 </div>
             </div>
 
@@ -60,15 +39,29 @@
                 </div>
             </div>
 
+            <div class="form-group pull-right">
+              <div class="col-sm-offset-7">
+                <font color="red" size="5">*</font> Campos Obligatorios
+              </div>
+            </div>
+
+            <div class="form-group">
+
+              <div class="col-sm-offset-2">
+                <input id="condiciones_site" type="checkbox" v-model="newKeep.condiciones_site">
+                <a href="{{ asset('condiciones') }}"  style="cursor: pointer;" target="_blank">
+                  Al hacer clic en REGISTRAR CANDIDATO, aceptas las Condiciones de uso y la Política de privacidad.
+                </a>
+
+              </div>
+            </div>
+
+
             <div class="form-group" style="display: none">
                 <label class="col-md-4 control-label">¿Cuenta con NSS ?</label>
                 <div class="col-md-6">
                     <input id="confirmed_nss" type="checkbox" v-model="newKeep.confirmed_nss">
                 </div>
-            </div>
-
-            <div class="form-group pull-right">
-                <font color="red" size="5">*</font> Campos Obligatorios
             </div>
 
             <!-- <div class="form-group">
@@ -78,18 +71,6 @@
                 </div>
             </div> -->
 
-            <!-- <div class="form-group">
-
-                <div class="col-sm-offset-4">
-
-                    <input id="terminos" type="checkbox" v-model="newKeep.terminos">
-                    <a data-toggle="modal" data-target="#myModal" style="cursor: pointer;">
-                        Terminos y Condiciones
-                    </a>
-                </div>
-            </div> -->
-
-
             <div class="form-group">
                 <div class="col-md-6 col-md-offset-4">
                     <button type="button" class="btn btn-primary" v-on:click.prevent="insertar()">
@@ -98,6 +79,8 @@
                 </div>
             </div>
     </form>
+
+<!-- seccion de modal -->
 
 <!-- </div> -->
 @push('scripts')

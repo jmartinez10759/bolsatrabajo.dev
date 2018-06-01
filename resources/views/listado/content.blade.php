@@ -6,18 +6,18 @@
 							<h1> Más de 5 mil empresas registradas</h1>
 							<form class="form-horizontal" method="POST" action="{{URL::to('vacantes')}}">
 								{{ csrf_field() }}
-								<div class="col-md-4 no-padd">
+								<div class="col-md-5 no-padd">
 									 <div class="input-group">
 										 <input type="text" name="vacantes" class="typeahead form-control right-bor" placeholder="Habilidades, Vacantes, Compañias" autocomplete="off" required title="dede">
 									 </div>
 								</div>
-								<div class="col-md-3 no-padd">
+								<!-- <div class="col-md-3 no-padd">
 									 <div class="input-group">
 										 <input type="text" id="autocomplete" name="localidad" class="form-control right-bor" placeholder="Búsqueda por localidad" disabled>
 									 </div>
-								</div>
+								</div> -->
 
-								<div class="col-md-3 no-padd">
+								<div class="col-md-5 no-padd">
 									 <div class="input-group">
 										<select class="form-control" name="edo" >
 											    <option value="" selected disabled>Seleccione su ciudad</option>
@@ -43,6 +43,7 @@
 
 			<div class="company-brand">
 				<div class="container">
+
 					<div id="company-brands" class="owl-carousel">
 						<div class="brand-img">
 							<img src="{{ asset('images/img/microsoft-home.png') }}" class="img-responsive" alt="" />
@@ -69,6 +70,7 @@
 							<img src="{{ asset('images/img/mothercare-home.png') }}" class="img-responsive" alt="" />
 						</div>
 					</div>
+
 				</div>
 			</div>
 

@@ -58,6 +58,11 @@ Route::post('/password/verify', [
         'uses'      => 'Auth\PasswordController@store'
         ,'as'       => 'password.verify'
     ]);
+Route::get('/condiciones', [
+        'uses'      => 'Candidatos\CandidatosController@condiciones'
+        ,'as'       => 'condiciones'
+    ]);
+
 /*Route::get('/password/reset/{code}', [
         'uses'      => 'Auth\PasswordController@create'
         ,'as'       => 'password.reset'

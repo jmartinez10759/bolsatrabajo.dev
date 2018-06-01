@@ -16,7 +16,7 @@
                             @include('auth.auth')
                     </div>
 
-                    <div role="tabpanel" class="tab-pane fade" id="register" style="overflow-y:scroll; height:530px;">
+                    <div role="tabpanel" class="tab-pane fade" id="register" style="overflow-y:scroll; height:610px;">
                     	<img src="{{ asset('images/img/logo.png') }}" class="img-responsive" alt="" />
                         @include('auth.register')
                     </div>
