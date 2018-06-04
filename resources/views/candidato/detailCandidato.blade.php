@@ -6,7 +6,7 @@
 			<!-- Title Header Start -->
 			<section class="inner-header-title" style="background-image:url({{ asset('images/img/paper-3187096_1280.jpg') }});">
 				<div class="container">
-					<h1 style="color:blank;">Detalles del Candidato</h1>
+					<h1>Detalles del Candidato</h1>
 				</div>
 			</section>
 			<div class="clearfix"></div>
@@ -18,7 +18,7 @@
                 <div class="row">
                     <div class="detail-pic">
 												<img src="{{ $photo_profile }}" class="img" alt="img" id="imagen"/>
-	                    	<a data-toggle="modal" data-target="#modal-upload"  style="cursor: pointer;" class="detail-edit" title="Cargar foto">
+	                    	<a id="upload_photo" data-toggle="modal" data-target="#modal-upload"  style="cursor: pointer;" class="detail-edit" title="Cargar foto">
 	                    		<i class="fa fa-pencil"></i>
 	                    	</a>
                     </div>
@@ -522,7 +522,7 @@
 												<input type="text" id="segundo_apellido" class="form-control" v-model="datos.second_surname" style="text-transform: uppercase;">
 											</div>
 											<div class="col-md-4 col-sm-6">
-												<label>Email</label>
+												<label>Correo</label>
 												<input type="email" class="form-control" v-model="datos.email" disabled="">
 											</div>
 											<div class="col-md-4 col-sm-6">
@@ -534,7 +534,7 @@
 												<input type="text" id="codigo" class="form-control" maxlength="5" v-model="datos.codigo">
 											</div>
 											<div class="col-md-4 col-sm-6">
-												<label>Direccion</label>
+												<label>Dirección</label>
 												<input type="text" id="direccion" class="form-control" v-model="datos.direccion" style="text-transform: uppercase;">
 											</div>
 											<div class="col-md-4 col-sm-6">
@@ -552,7 +552,7 @@
 												<input type="text" class="form-control" v-model="datos.ciudad">
 											</div>-->
 											<div class="col-md-4 col-sm-6">
-												<label>Estado</label>
+												<label>Estados</label>
 												<select class="form-control" v-model="datos.id_state" id="estados">
 													<option v-for="estado in datos.estados" :value="estado.id">@{{estado.nombre}}</option>
 												</select>
@@ -640,7 +640,7 @@
 													</div>
 												</form>
 											</div> -->
-											<div class="col-sm-offset-5 col-sm-12 ">
+											<div class="col-sm-offset-5 col-sm-7 ">
 												<button type="button" class="btn btn-info btn-lg" v-on:click.prevent="insert()" id="btn_update_candidato">
 														Actualizar
 												</button>

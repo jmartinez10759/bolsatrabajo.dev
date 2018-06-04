@@ -101,10 +101,10 @@ new Vue({
         }
 
         this.insert_general(url, refresh, function( object ){
-          $('#upload_cv').show('slow');
-          $('#btn_update_candidato').hide();
-          $('#btn_editar_candidato').show();
-          $('#btn_cancel_candidato').hide();
+          jQuery('#upload_cv').show('slow');
+          jQuery('#btn_update_candidato').hide();
+          jQuery('#btn_editar_candidato').show();
+          jQuery('#btn_cancel_candidato').hide();
           var inputs = ['nombre','primer_apellido','segundo_apellido','telefono','codigo','direccion','curp','estados','contraseña','confirmed_nss','descripcion'];
           for (var i = 0; i < inputs.length; i++) {
               jQuery('#'+inputs[i]).attr('disabled',true);
@@ -163,6 +163,13 @@ new Vue({
           //console.log( response.data.result );return;
           this.datos = response.data.result;
           this.pagination = response.data.result.pagination;
+          console.log(this.datos.curp);
+          if( !this.datos.curp ){
+              jQuery('#upload_photo').hide();
+          }else{
+             jQuery('#upload_photo').show();
+          }
+
         });
 
     },

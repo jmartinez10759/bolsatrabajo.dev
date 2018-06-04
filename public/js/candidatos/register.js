@@ -77,7 +77,11 @@ new Vue({
     inicio_sesion: function(){
 
         var url = domain( "login" );
-        this.insert_general(url,'',function( object ){
+        var refresh = "";
+        this.newKeep.email.trim().toLowerCase();
+        this.newKeep.password = sha1( this.newKeep.password.trim() );
+        //console.log(this.newKeep.password);
+        this.insert_general( url,refresh ,function( object ){
             if ( object.result.id_rol == admin ) {
                 redirect( domain('dashboard') );
                 return;
@@ -90,6 +94,7 @@ new Vue({
         },function(){
             $('#email').parent().parent().addClass('has-error');
             $('#password').parent().parent().addClass('has-error');
+            $('#password').val('');
 
         });
 

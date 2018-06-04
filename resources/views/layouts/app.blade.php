@@ -4,13 +4,13 @@
    @include('layouts.includes-header')
 </head>
 <body>
+  @include('layouts.page-header')
     <div id="app" class="wrapper">
-        @include('layouts.page-header')
         <main >
             @yield('content')
         </main>
-        @include('layouts.page-footer')
-    @include('layouts.includes-footer')
     </div>
+    @include('layouts.page-footer')
+    @include('layouts.includes-footer')
 </body>
 </html>

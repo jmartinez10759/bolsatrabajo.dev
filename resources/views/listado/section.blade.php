@@ -56,7 +56,7 @@
 					</div>
 					<!--/.row-->
 					<div class="row">
-						<div class="item-click" v-for="data in keeps.vacantes.data" style="cursor: pointer;" >
+						<div class="item-click" v-for="data in keeps.vacantes" style="cursor: pointer;" >
 							<article  @click="get('detalle', data)">
 								<div class="brows-job-list">
 									<div class="col-md-1 col-sm-2 small-padding">

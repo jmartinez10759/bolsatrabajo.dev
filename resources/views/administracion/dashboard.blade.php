@@ -5,12 +5,15 @@
 
 <div id="page-wrapper" class="vue_dashboard">
 	<!-- page content -->
+	<!-- <a href="https://api.whatsapp.com/send?phone=5215531385015">Envíanos un mensaje de WhatsApp</a> -->
+	<!-- <a href="https://m.me/100001595960798">Envíanos un mensaje de Facebook</a> -->
+	<!-- <a href="https://m.me/100000317226106">Envíanos un mensaje de Facebook</a> -->
 	<div class="col-sm-12" role="main">
 		<div class="">
 			<div class="clearfix"></div>
 			<div class="row">
 
-				<div class="col-md-6 col-sm-6 col-xs-12" id="vue_section_jobs">
+				<div class="col-md-6 col-sm-6 col-xs-12 table-responsive" id="vue_section_jobs">
 					<div class="x_panel">
 						<div class="x_title">
 							<h2>Trabajos Registrados <small></small></h2>
@@ -81,7 +84,7 @@
 					</div>
 				</div>
 
-				<div class="col-md-6 col-sm-6 col-xs-12" id="vue_section_detalle">
+				<div class="col-md-6 col-sm-6 col-xs-12 table-responsive" id="vue_section_detalle">
 					<div class="x_panel">
 						<div class="x_title">
 							<h2>Candidatos Registrados <small></small></h2>
@@ -95,7 +98,7 @@
 						</div>
 						<div class="x_content">
 
-							<table class="table table-striped table-hover dashboard table-responsive">
+							<table class="table table-striped table-hover dashboard">
 								<thead>
 									<tr>
 										<th>#</th>

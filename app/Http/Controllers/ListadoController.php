@@ -48,9 +48,9 @@ class ListadoController extends Controller
             'from'          => $tasks->firstItem(),
             'to'            => $tasks->lastItem(),
         ];
-        $data['vacantes'] = $response;
+        $data['vacantes'] = $response->data;
         $data['destacadas'] = $destacadas;
-        #debuger($data['destacadas']);
+        #debuger($data['vacantes']);
         return $data;
 
 

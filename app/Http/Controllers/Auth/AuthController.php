@@ -35,14 +35,16 @@ class AuthController extends MasterController
     public static function authLogin( Request $request ){
 
     	$where = [];
-		foreach ($request->all() as $key => $value) {
-			if ($key != "_token") {
-				$where[$key] = $value;
-			}
-			if ( $key == "password" ) {
-				$where[$key] = sha1($value);
-			}
-		}
+      $values_sesion = ['_token'];
+  		foreach ($request->all() as $key => $value) {
+  			if ( !in_array($key,$values_sesion ) ) {
+  				$where[$key] = $value;
+  			}
+  			// if ( $key == "password" ) {
+  			// 	$where[$key] = sha1($value);
+  			// }
+  		}
+      #debuger($where);
 		#se realiza la consulta para verificar si existen ese candidato en la base de datos
         return self::getData( array_to_object($where) );
 
